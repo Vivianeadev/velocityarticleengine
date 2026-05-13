@@ -9,52 +9,62 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cinzel:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <!-- Estilo dos portais discretos -->
+    <!-- Estilo luxuoso dos botões superiores (exatamente como solicitado) -->
     <style>
-        .portal-navigation {
+        /* Container dos botões */
+        .top-nav-buttons {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(184, 134, 11, 0.15);
-            border-radius: 14px;
-            margin: 0.4rem auto 1rem;
-            max-width: fit-content;
-            box-shadow: 0 4px 12px rgba(10, 49, 71, 0.04);
+            align-items: center;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 10px auto 5px;
+            padding: 10px 20px;
+            flex-wrap: wrap;
         }
-        .portal-link {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.5rem;
-            font-weight: 500;
+        /* Estilo base de cada botão */
+        .top-nav-btn {
+            font-family: var(--font-serif);   /* 'Cinzel', serif */
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: rgba(184, 134, 11, 0.8);
-            border: 1px solid rgba(184, 134, 11, 0.2);
-            border-radius: 20px;
-            padding: 4px 14px;
+            letter-spacing: 3px;
+            color: var(--aged-gold);          /* #b8860b */
             text-decoration: none;
-            transition: all 0.25s ease;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 24px;
+            border: 0.5px solid var(--gold-line); /* rgba(184, 134, 11, 0.18) */
+            background: transparent;
+            transition: all 0.4s ease;
             white-space: nowrap;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        .portal-link:hover {
-            color: #b8860b;
-            border-color: #b8860b;
-            background: rgba(184, 134, 11, 0.06);
-            box-shadow: 0 2px 8px rgba(184, 134, 11, 0.1);
-            transform: translateY(-1px);
+        /* Ícone dentro do botão */
+        .top-nav-btn i {
+            font-size: 0.7rem;
         }
-        /* Ajuste fino para o preview do Velocity */
-        #articlePreview .portal-navigation {
-            padding: 5px 14px;
-            margin: 0.2rem auto 0.8rem;
-            background: rgba(255, 255, 255, 0.06);
+        /* Efeito hover */
+        .top-nav-btn:hover {
+            background: rgba(184, 134, 11, 0.05);
+            border-color: var(--aged-gold);
+            color: var(--aged-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(184, 134, 11, 0.15);
         }
+        /* Responsivo – telas até 480px */
+        @media (max-width: 480px) {
+            .top-nav-buttons {
+                gap: 15px;
+                padding: 8px 10px;
+            }
+            .top-nav-btn {
+                font-size: 0.75rem;
+                padding: 6px 18px;
+                letter-spacing: 2px;
+            }
+        }
+        /* Removido o link "Início" antigo */
+        .back-home-link { display: none; }
     </style>
 </head>
 <body>
@@ -95,7 +105,7 @@
         </div>
     </div>
 
-    <!-- ========== VELOCITY ARTICLE ENGINE (original, com navegação discreta) ========== -->
+    <!-- ========== VELOCITY ARTICLE ENGINE (original, com barra de navegação luxuosa) ========== -->
     <div class="main-container">
         <div class="form-card">
             <h1>Velocity <span>Article Engine</span></h1>
@@ -307,16 +317,25 @@
         <div class="preview-panel" id="articlePreview">
             <header class="site-header">
                 <div class="header-inner">
-                    <a href="/" class="back-home-link" title="Voltar ao início"><i class="fas fa-arrow-left"></i> Início</a>
+                    <!-- Sem link "Início" -->
                     <a href="/" class="logo" id="prevLogo">Jardim<span>Secreto</span></a>
                     <div class="tagline" id="prevTagline">jardinagem · beleza · natureza</div>
                 </div>
             </header>
-            <!-- Navegação discreta entre os três portais -->
-            <div class="portal-navigation">
-                <a href="https://justica.pautazero.com" target="_blank" class="portal-link">Direito e Justiça</a>
-                <a href="https://teologia.pautazero.com" target="_blank" class="portal-link">Teologia e Arqueologia bíblica</a>
-                <a href="https://pautazero.com" target="_blank" class="portal-link">Página Principal</a>
+            <!-- Barra de navegação luxuosa (topo) -->
+            <div class="top-nav-buttons">
+                <a href="https://justica.pautazero.com" target="_blank" class="top-nav-btn">
+                    <i class="fas fa-balance-scale"></i> Direito e Justiça
+                </a>
+                <a href="https://teologia.pautazero.com" target="_blank" class="top-nav-btn">
+                    <i class="fas fa-book-bible"></i> Teologia e Arqueologia bíblica
+                </a>
+                <a href="https://negocios.pautazero.com" target="_blank" class="top-nav-btn">
+                    <i class="fas fa-briefcase"></i> Negócios
+                </a>
+                <a href="https://pautazero.com" target="_blank" class="top-nav-btn">
+                    <i class="fas fa-home"></i> Página Principal
+                </a>
             </div>
             <hr class="ethereal-divider" aria-hidden="true">
             <div class="context-toggle-bar" id="contextToggleBar">
@@ -1288,10 +1307,6 @@
         .logo { font-family: var(--font-serif); font-size: 2rem; letter-spacing: 6px; text-decoration: none; color: var(--petrol-blue); }
         .logo span { color: var(--aged-gold); font-weight: 700; }
         .tagline { font-family: var(--font-body); font-size: .65rem; text-transform: uppercase; letter-spacing: 5px; color: var(--aged-gold); opacity: .8; margin-top: 6px; }
-        .back-home-link { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); font-family: var(--font-sans); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.5px; color: var(--petrol-light); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; background: rgba(184,134,11,0.04); border: 1px solid transparent; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; z-index: 5; }
-        .back-home-link i { font-size: 0.7rem; color: var(--aged-gold); transition: transform 0.2s; }
-        .back-home-link:hover { background: rgba(184,134,11,0.08); border-color: var(--gold-line); color: var(--aged-gold); text-decoration: none; }
-        .back-home-link:hover i { transform: translateX(-2px); }
         .container { max-width: 1280px; margin: 0 auto; padding: 1.2rem 20px 1.8rem; }
         .breadcrumb { font-size: .6rem; text-transform: uppercase; letter-spacing: 1px; color: var(--aged-gold); margin-bottom: .8rem; }
         .breadcrumb a { color: var(--text-muted); text-decoration: none; }
@@ -1361,60 +1376,76 @@
             .article-body figure.body-image.size-md { max-width: 70%; }
             .article-body figure.body-image.size-lg { max-width: 85%; }
             .article-body figure.body-image.size-xl { max-width: 100%; }
-            .back-home-link { left: 10px; font-size: 0.6rem; padding: 4px 8px; }
         }
-        .portal-navigation {
+        .top-nav-buttons {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(184, 134, 11, 0.15);
-            border-radius: 14px;
-            margin: 0.4rem auto 1rem;
-            max-width: fit-content;
-            box-shadow: 0 4px 12px rgba(10, 49, 71, 0.04);
+            align-items: center;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 10px auto 5px;
+            padding: 10px 20px;
+            flex-wrap: wrap;
         }
-        .portal-link {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.5rem;
-            font-weight: 500;
+        .top-nav-btn {
+            font-family: var(--font-serif);
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: rgba(184, 134, 11, 0.8);
-            border: 1px solid rgba(184, 134, 11, 0.2);
-            border-radius: 20px;
-            padding: 4px 14px;
+            letter-spacing: 3px;
+            color: var(--aged-gold);
             text-decoration: none;
-            transition: all 0.25s ease;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 24px;
+            border: 0.5px solid var(--gold-line);
+            background: transparent;
+            transition: all 0.4s ease;
             white-space: nowrap;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        .portal-link:hover {
-            color: #b8860b;
-            border-color: #b8860b;
-            background: rgba(184, 134, 11, 0.06);
-            box-shadow: 0 2px 8px rgba(184, 134, 11, 0.1);
-            transform: translateY(-1px);
+        .top-nav-btn i {
+            font-size: 0.7rem;
+        }
+        .top-nav-btn:hover {
+            background: rgba(184, 134, 11, 0.05);
+            border-color: var(--aged-gold);
+            color: var(--aged-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(184, 134, 11, 0.15);
+        }
+        @media (max-width: 480px) {
+            .top-nav-buttons {
+                gap: 15px;
+                padding: 8px 10px;
+            }
+            .top-nav-btn {
+                font-size: 0.75rem;
+                padding: 6px 18px;
+                letter-spacing: 2px;
+            }
         }
     </style>
 </head>
 <body>
     <header class="site-header">
         <div class="header-inner">
-            <a href="/" class="back-home-link" title="Voltar ao início"><i class="fas fa-arrow-left"></i> Início</a>
             <a href="/" class="logo">${logoHTML}</a>
             <div class="tagline">${escapeHtml(slogan)}</div>
         </div>
     </header>
-    <div class="portal-navigation">
-        <a href="https://justica.pautazero.com" target="_blank" class="portal-link">Direito e Justiça</a>
-        <a href="https://teologia.pautazero.com" target="_blank" class="portal-link">Teologia e Arqueologia bíblica</a>
-        <a href="https://pautazero.com" target="_blank" class="portal-link">Página Principal</a>
+    <div class="top-nav-buttons">
+        <a href="https://justica.pautazero.com" target="_blank" class="top-nav-btn">
+            <i class="fas fa-balance-scale"></i> Direito e Justiça
+        </a>
+        <a href="https://teologia.pautazero.com" target="_blank" class="top-nav-btn">
+            <i class="fas fa-book-bible"></i> Teologia e Arqueologia bíblica
+        </a>
+        <a href="https://negocios.pautazero.com" target="_blank" class="top-nav-btn">
+            <i class="fas fa-briefcase"></i> Negócios
+        </a>
+        <a href="https://pautazero.com" target="_blank" class="top-nav-btn">
+            <i class="fas fa-home"></i> Página Principal
+        </a>
     </div>
     <div class="container">
         <div class="breadcrumb">
