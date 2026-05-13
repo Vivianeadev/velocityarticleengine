@@ -1338,22 +1338,25 @@
     try {
         let url;
         if (keyword.trim()) {
-            // Se há termo digitado, faz busca livre
             url = `${EIGEND_WORKER_URL}?q=${encodeURIComponent(keyword.trim())}`;
         } else {
-            // Sem termo, carrega o contexto fixo
             url = `${EIGEND_WORKER_URL}?context=${currentContext}`;
         }
         const resp = await fetch(url, {
             headers: { 'X-Api-Key': API_KEY }
         });
-        if (!resp.ok) throw new Error('Status ' + resp.status);
+        if (!resp.ok) {
+            // Exibe o status real e tenta ler o corpo para mais detalhes
+            let errorBody = '';
+            try { errorBody = await resp.text(); } catch (e) {}
+            throw new Error(`HTTP ${resp.status}${errorBody ? ': ' + errorBody : ''}`);
+        }
         let trends = await resp.json();
         currentTrends = trends;
         renderTrendsList();
     } catch (e) {
-        console.error(e);
-        trendsListEl.innerHTML = '<li class="empty-message">❌ Erro ao carregar tendências.</li>';
+        console.error('Fetch trends error:', e);
+        trendsListEl.innerHTML = `<li class="empty-message" style="color:#c0392b;">❌ Erro: ${escapeHtml(e.message)}</li>`;
     }
 }
 
