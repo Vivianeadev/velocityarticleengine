@@ -584,10 +584,10 @@
             TEOLOGIA: { worker: 'https://teologiapautazero.avizaecosystem.workers.dev/api/articles', domain: 'teologia.pautazero.com', portalName: 'Teologia PautaZero', slogan: 'fé · história · arqueologia' },
             JUSTICA: { worker: 'https://pautazero-justica.avizaecosystem.workers.dev/api/articles', domain: 'justica.pautazero.com', portalName: 'Justiça PautaZero', slogan: 'direito · segurança · cidadania' },
             GERAL: { worker: 'https://pautazero-worker.avizaecosystem.workers.dev/api/articles', domain: 'pautazero.com', portalName: 'PautaZero', slogan: 'análise · tecnologia' }
-        };
+         };
         const EIXO_SITE_MAP = {
-        'teologia': 'GERAL',              // ← redirecionado para o Worker Geral
-        'arqueologia-biblica': 'GERAL',
+        'teologia': 'TEOLOGIA',              // ✅ Agora envia para o Worker de Teologia
+        'arqueologia-biblica': 'TEOLOGIA',
         'direito-de-familia': 'JUSTICA',
         'direito-penal': 'JUSTICA',
         'crimes': 'JUSTICA',
