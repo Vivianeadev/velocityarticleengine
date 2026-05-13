@@ -1400,7 +1400,7 @@
             });
         }
 
-       fetchBtn.addEventListener('click', () => { fetchTrends(); });
+       fetchBtn.addEventListener('click', () => fetchTrends(keywordInput.value));
         keywordInput.addEventListener('keypress', e => { if (e.key === 'Enter') fetchTrends(); });
         generateBtn.addEventListener('click', generateContent);
         fillVelocityBtn.addEventListener('click', fillVelocityForm);
