@@ -586,8 +586,12 @@
             GERAL: { worker: 'https://pautazero-worker.avizaecosystem.workers.dev/api/articles', domain: 'pautazero.com', portalName: 'PautaZero', slogan: 'análise · tecnologia' }
         };
         const EIXO_SITE_MAP = {
-            'teologia': 'TEOLOGIA', 'arqueologia-biblica': 'TEOLOGIA',
-            'direito-de-familia': 'JUSTICA', 'direito-penal': 'JUSTICA', 'crimes': 'JUSTICA', 'policial': 'JUSTICA'
+        'teologia': 'GERAL',              // ← redirecionado para o Worker Geral
+        'arqueologia-biblica': 'GERAL',
+        'direito-de-familia': 'JUSTICA',
+        'direito-penal': 'JUSTICA',
+        'crimes': 'JUSTICA',
+        'policial': 'JUSTICA'
         };
         function getSiteForEixo(eixo) { const normalized = eixo.trim().toLowerCase(); return SITE_CONFIG[EIXO_SITE_MAP[normalized] || 'GERAL']; }
         let selectedDirectoryHandle = null;
