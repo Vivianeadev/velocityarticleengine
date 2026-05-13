@@ -1358,10 +1358,22 @@
 }
 
         function renderTrendsList() {
-            if (!currentTrends.length) { trendsListEl.innerHTML = '<li class="empty-message">Nenhum assunto encontrado.</li>'; return; }
-            trendsListEl.innerHTML = currentTrends.map((t, i) => `<li class="trend-item ${selectedTrend?.name === t.name ? 'selected' : ''}" data-index="${i}"><span class="trend-name">${escapeHtml(t.name)}</span><span class="trend-category">${escapeHtml(t.category)} · ${t.volume || 'N/A'}</span></li>`).join('');
-            document.querySelectorAll('.trend-item').forEach(item => item.addEventListener('click', () => selectTrend(parseInt(item.dataset.index))));
-        }
+    if (!currentTrends.length) {
+        trendsListEl.innerHTML = '<li class="empty-message">Nenhum assunto encontrado.</li>';
+        return;
+    }
+    trendsListEl.innerHTML = currentTrends.map((t, i) => {
+        const nome = escapeHtml(t.name);
+        const nomeHtml = t.url
+            ? `<a href="${escapeHtml(t.url)}" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;" title="Abrir fonte original">${nome} <i class="fas fa-external-link-alt" style="font-size:0.6rem; opacity:0.6;"></i></a>`
+            : nome;
+        return `<li class="trend-item ${selectedTrend?.name === t.name ? 'selected' : ''}" data-index="${i}">
+            <span class="trend-name">${nomeHtml}</span>
+            <span class="trend-category">${escapeHtml(t.category)} · ${t.volume || 'N/A'}</span>
+        </li>`;
+    }).join('');
+    document.querySelectorAll('.trend-item').forEach(item => item.addEventListener('click', () => selectTrend(parseInt(item.dataset.index))));
+}
 
         function selectTrend(idx) { selectedTrend = currentTrends[idx]; document.querySelectorAll('.trend-item').forEach(el => el.classList.toggle('selected', el.dataset.index == idx)); generateBtn.disabled = false; fillVelocityBtn.style.display = 'none'; copyEigendBtn.style.display = 'none'; generatedContentEl.innerHTML = '<span class="empty-message">Tópico selecionado. Escolha o gênero e clique em Gerar.</span>'; }
 
