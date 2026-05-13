@@ -1327,7 +1327,7 @@
             btn.addEventListener('click', () => {
                 currentContext = btn.dataset.context;
                 document.querySelectorAll('.context-btn').forEach(b => b.classList.toggle('selected', b.dataset.context === currentContext));
-                fetchTrends(keywordInput.value);
+                fetchTrends();
                 selectedTrend = null; generateBtn.disabled = true; fillVelocityBtn.style.display = 'none'; copyEigendBtn.style.display = 'none';
                 generatedContentEl.innerHTML = '<span class="empty-message">Contexto alterado. Busque ou selecione um tópico.</span>';
             });
@@ -1401,7 +1401,7 @@
         }
 
        fetchBtn.addEventListener('click', () => { fetchTrends(); });
-        keywordInput.addEventListener('keypress', e => { if (e.key === 'Enter') fetchTrends(keywordInput.value); });
+        keywordInput.addEventListener('keypress', e => { if (e.key === 'Enter') fetchTrends(); });
         generateBtn.addEventListener('click', generateContent);
         fillVelocityBtn.addEventListener('click', fillVelocityForm);
         copyEigendBtn.addEventListener('click', copyEigendToClipboard);
