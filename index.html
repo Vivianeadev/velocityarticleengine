@@ -354,7 +354,7 @@
             <button class="manual-btn" onclick="openManual()"><i class="fas fa-book"></i> Manual do usuário</button>
             <button class="terms-btn" onclick="openTerms()"><i class="fas fa-gavel"></i> Termos de uso</button>
             <button class="clear-cache-btn" onclick="clearCache()"><i class="fas fa-trash-alt"></i> Limpar cache</button>
-            <span>v10.2.0 · 3 workers · redimensionamento flexível de imagens</span>
+            <span>v10.3.0 · 3 workers · direcionamento editorial inteligente</span>
         </div>
     </footer>
     <div id="linkModal" class="modal">
@@ -527,7 +527,7 @@
                 <button class="modal-close" onclick="closeManual()"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-text">
-                <p style="font-size:1.1rem; font-family: var(--font-serif); color: var(--petrol-blue); margin-bottom: 1.5rem;"><strong>Bem‑vindo ao Velocity Editor Engine v10.2.0</strong> — sua central de criação e publicação de artigos com ciclo completo, do rascunho à página publicada (ou baixada), sem sair do navegador.</p>
+                <p style="font-size:1.1rem; font-family: var(--font-serif); color: var(--petrol-blue); margin-bottom: 1.5rem;"><strong>Bem‑vindo ao Velocity Editor Engine v10.3.0</strong> — sua central de criação e publicação de artigos com ciclo completo, do rascunho à página publicada (ou baixada), sem sair do navegador.</p>
                 <div style="background: var(--gradient-gold-subtle); padding: 1.2rem; border-radius: 16px; margin-bottom: 1.8rem;">
                     <h4 style="margin-top:0;"><i class="fas fa-compass"></i> Primeiros Passos</h4>
                     <ol style="margin-left:1.2rem;">
@@ -539,8 +539,8 @@
                 <h4><i class="fas fa-rocket"></i> Publicação via KV (3 Workers)</h4>
                 <p>O Velocity Article Engine está configurado para <strong>três sites/workers distintos</strong>:</p>
                 <ul>
-                    <li><strong>TEOLOGIA</strong> — teologia.pautazero.com (eixos: teologia, arqueologia-biblica)</li>
-                    <li><strong>JUSTIÇA</strong> — justica.pautazero.com (eixos: direito-de-familia, direito-penal, crimes, policial)</li>
+                    <li><strong>TEOLOGIA</strong> — teologia.pautazero.com (todos os eixos de teologia, arqueologia, escatologia, etc.)</li>
+                    <li><strong>JUSTIÇA</strong> — justica.pautazero.com (todos os eixos de direito, justiça, STF, etc.)</li>
                     <li><strong>GERAL</strong> — pautazero.com (todos os demais eixos)</li>
                 </ul>
                 <p>O worker correto é selecionado automaticamente com base no campo <strong>Eixo</strong> preenchido.</p>
@@ -568,7 +568,7 @@
                 <p><strong>Novidade v10.2.0:</strong> Clique em qualquer imagem inserida no corpo do artigo (figure.body-image) para alternar entre <strong>cinco tamanhos</strong>: muito pequeno (20%), pequeno (35%), médio (50%), grande (70%) e expandido (100%). Um indicador "🔍 Clique para redimensionar" aparece ao passar o mouse. Isso garante flexibilidade total e redução máxima quando necessário.</p>
                 <h4><i class="fas fa-fingerprint"></i> Marca d'água / Referência</h4>
                 <p>Use o campo <strong>"Marca d'água"</strong> para inserir um código pessoal de registro (ex: <code>0002-rosas</code>). Essa referência aparecerá discretamente no rodapé do artigo, funcionando como uma assinatura de origem.</p>
-                <p style="margin-top:1.5rem; text-align:right; color:var(--aged-gold);"><i class="fas fa-crown"></i> Velocity Editor Engine v10.2.0 · Robô de Publicação KV · Ciclo Completo</p>
+                <p style="margin-top:1.5rem; text-align:right; color:var(--aged-gold);"><i class="fas fa-crown"></i> Velocity Editor Engine v10.3.0 · Robô de Publicação KV · Ciclo Completo</p>
             </div>
             <button class="accept-btn" onclick="closeManual()"><i class="fas fa-check"></i> Entendi, fechar manual</button>
         </div>
@@ -584,16 +584,211 @@
             TEOLOGIA: { worker: 'https://teologiapautazero.avizaecosystem.workers.dev/api/articles', domain: 'teologia.pautazero.com', portalName: 'Teologia PautaZero', slogan: 'fé · história · arqueologia' },
             JUSTICA: { worker: 'https://pautazero-justica.avizaecosystem.workers.dev/api/articles', domain: 'justica.pautazero.com', portalName: 'Justiça PautaZero', slogan: 'direito · segurança · cidadania' },
             GERAL: { worker: 'https://pautazero-worker.avizaecosystem.workers.dev/api/articles', domain: 'pautazero.com', portalName: 'PautaZero', slogan: 'análise · tecnologia' }
-         };
-        const EIXO_SITE_MAP = {
-        'teologia': 'TEOLOGIA',              // ✅ Agora envia para o Worker de Teologia
-        'arqueologia-biblica': 'TEOLOGIA',
-        'direito-de-familia': 'JUSTICA',
-        'direito-penal': 'JUSTICA',
-        'crimes': 'JUSTICA',
-        'policial': 'JUSTICA'
         };
-        function getSiteForEixo(eixo) { const normalized = eixo.trim().toLowerCase(); return SITE_CONFIG[EIXO_SITE_MAP[normalized] || 'GERAL']; }
+
+        // =================================================================
+        // NOVO: SISTEMA COMPLETO DE DIRECIONAMENTO EDITORIAL — PAUTAZERO
+        // =================================================================
+
+        /**
+         * MAPEAMENTO OFICIAL DE PORTAIS
+         * Todos os eixos normalizados (lowercase, sem acentos, hifenizados)
+         * apontam para o portal correto.
+         */
+        const EIXO_SITE_MAP = {
+            // ─── TEOLOGIA ───
+            'teologia': 'TEOLOGIA',
+            'arqueologia-biblica': 'TEOLOGIA',
+            'arqueologia': 'TEOLOGIA',
+            'escatologia': 'TEOLOGIA',
+            'exegese-biblica': 'TEOLOGIA',
+            'exegese': 'TEOLOGIA',
+            'hermeneutica': 'TEOLOGIA',
+            'cristianismo': 'TEOLOGIA',
+            'cristianismo-primitivo': 'TEOLOGIA',
+            'historia-da-igreja': 'TEOLOGIA',
+            'filosofia-da-religiao': 'TEOLOGIA',
+            'manuscritos-antigos': 'TEOLOGIA',
+            'hebraico-biblico': 'TEOLOGIA',
+            'grego-koine': 'TEOLOGIA',
+            'profecia-biblica': 'TEOLOGIA',
+            'profecias-biblicas': 'TEOLOGIA',
+            'judaismo-antigo': 'TEOLOGIA',
+            'teologia-sistematica': 'TEOLOGIA',
+            'teologia-contemporanea': 'TEOLOGIA',
+            'patristica': 'TEOLOGIA',
+            'religioes-comparadas': 'TEOLOGIA',
+            'ia-e-espiritualidade': 'TEOLOGIA',
+            'cristianismo-e-ciencia': 'TEOLOGIA',
+            'fe-e-tecnologia': 'TEOLOGIA',
+            'neuroteologia': 'TEOLOGIA',
+            'bioetica-crista': 'TEOLOGIA',
+
+            // ─── JUSTIÇA ───
+            'justica': 'JUSTICA',
+            'direito': 'JUSTICA',
+            'stf': 'JUSTICA',
+            'stj': 'JUSTICA',
+            'constitucional': 'JUSTICA',
+            'penal': 'JUSTICA',
+            'direito-penal': 'JUSTICA',
+            'civil': 'JUSTICA',
+            'direito-civil': 'JUSTICA',
+            'trabalhista': 'JUSTICA',
+            'direito-trabalhista': 'JUSTICA',
+            'tributario': 'JUSTICA',
+            'direito-tributario': 'JUSTICA',
+            'empresarial': 'JUSTICA',
+            'direito-empresarial': 'JUSTICA',
+            'compliance': 'JUSTICA',
+            'investigacao': 'JUSTICA',
+            'ministerio-publico': 'JUSTICA',
+            'policia-federal': 'JUSTICA',
+            'seguranca-publica': 'JUSTICA',
+            'direitos-humanos': 'JUSTICA',
+            'jurisprudencia': 'JUSTICA',
+            'legislacao': 'JUSTICA',
+            'processo-penal': 'JUSTICA',
+            'processo-civil': 'JUSTICA',
+            'crimes-digitais': 'JUSTICA',
+            'lgpd': 'JUSTICA',
+            'cibercrime': 'JUSTICA',
+            'regulacao': 'JUSTICA',
+            'corrupcao': 'JUSTICA',
+            'transparencia-publica': 'JUSTICA',
+            'crimes': 'JUSTICA',
+            'policial': 'JUSTICA',
+            'direito-de-familia': 'JUSTICA'
+        };
+
+        /**
+         * Palavras-chave semânticas para fallback quando não há correspondência exata.
+         * Cada array contém radicais que, se encontrados no eixo, indicam o portal.
+         */
+        const SEMANTIC_KEYWORDS = {
+            TEOLOGIA: [
+                'teolog', 'bibl', 'igreja', 'crist', 'deus', 'jesus', 'fe', 'espiritual',
+                'religiao', 'religiosa', 'sagrad', 'oracao', 'culto', 'pastor', 'padre',
+                'profeta', 'profeci', 'arqueolog', 'manuscrit', 'hebraic', 'grego', 'koine',
+                'hermeneu', 'exegese', 'escatolog', 'patrist', 'sistematic', 'judaism',
+                'qumran', 'essenio', 'fariseu', 'saduceu', 'templo', 'tabernaculo',
+                'neuroteolog', 'bioetic'
+            ],
+            JUSTICA: [
+                'justic', 'direito', 'lei', 'jurid', 'judic', 'tribunal', 'juiz', 'ministro',
+                'stf', 'stj', 'penal', 'crime', 'criminos', 'policia', 'policial', 'delegado',
+                'processual', 'processo', 'sentenca', 'recurso', 'habeas', 'mandado',
+                'constituicao', 'constitucion', 'advogado', 'promotor', 'procurador',
+                'compliance', 'lgpd', 'cibercrime', 'corrupcao', 'transparencia',
+                'investigacao', 'seguranca', 'trabalhista', 'tributario', 'regulacao'
+            ]
+        };
+
+        /**
+         * Normaliza uma string para comparação:
+         * - lowercase
+         * - remove acentos
+         * - remove espaços extras
+         * - substitui espaços por hífens
+         * - remove caracteres especiais
+         * 
+         * @param {string} str - String a ser normalizada
+         * @returns {string} String normalizada
+         */
+        function normalizeString(str) {
+            if (!str) return '';
+            return str
+                .trim()
+                .toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '') // remove acentos
+                .replace(/[^a-z0-9\s-]/g, '')     // remove caracteres especiais
+                .replace(/\s+/g, '-')              // espaços → hífens
+                .replace(/-+/g, '-')               // múltiplos hífens → um só
+                .replace(/^-+|-+$/g, '');          // remove hífens das bordas
+        }
+
+        /**
+         * Verifica se o eixo normalizado contém palavras-chave do portal.
+         * Usado como fallback semântico.
+         * 
+         * @param {string} normalizedEixo - Eixo já normalizado
+         * @param {string} portalKey - Chave do portal ('TEOLOGIA' ou 'JUSTICA')
+         * @returns {boolean}
+         */
+        function matchesSemanticKeywords(normalizedEixo, portalKey) {
+            const keywords = SEMANTIC_KEYWORDS[portalKey] || [];
+            // Divide o eixo em partes (palavras) para verificação mais precisa
+            const partes = normalizedEixo.split('-');
+            // Também verifica a string completa
+            const fullString = normalizedEixo.replace(/-/g, '');
+            
+            return keywords.some(keyword => {
+                // Verifica se alguma parte contém a palavra-chave
+                return partes.some(parte => parte.includes(keyword)) ||
+                       fullString.includes(keyword);
+            });
+        }
+
+        /**
+         * Função principal de direcionamento editorial.
+         * Determina o portal correto baseado no eixo informado.
+         * 
+         * Algoritmo:
+         * 1. Normaliza o eixo
+         * 2. Busca correspondência exata no mapa
+         * 3. Se não encontrar, tenta correspondência semântica (fallback)
+         * 4. Se ainda não encontrar, retorna GERAL
+         * 
+         * @param {string} eixo - Eixo informado pelo editor
+         * @returns {Object} Configuração do site (worker, domain, portalName, slogan)
+         */
+        function getSiteForEixo(eixo) {
+            const normalized = normalizeString(eixo);
+            
+            // 1. Correspondência exata
+            if (EIXO_SITE_MAP[normalized]) {
+                const site = EIXO_SITE_MAP[normalized];
+                console.log(`🎯 [Direcionamento] Eixo "${eixo}" → ${site} (correspondência exata)`);
+                return SITE_CONFIG[site];
+            }
+            
+            // 2. Fallback semântico — verifica Teologia primeiro
+            if (matchesSemanticKeywords(normalized, 'TEOLOGIA')) {
+                console.log(`🔍 [Direcionamento] Eixo "${eixo}" → TEOLOGIA (correspondência semântica)`);
+                return SITE_CONFIG['TEOLOGIA'];
+            }
+            
+            // 3. Fallback semântico — Justiça
+            if (matchesSemanticKeywords(normalized, 'JUSTICA')) {
+                console.log(`🔍 [Direcionamento] Eixo "${eixo}" → JUSTICA (correspondência semântica)`);
+                return SITE_CONFIG['JUSTICA'];
+            }
+            
+            // 4. Fallback final — Portal Geral
+            console.log(`🌐 [Direcionamento] Eixo "${eixo}" → GERAL (fallback)`);
+            return SITE_CONFIG['GERAL'];
+        }
+
+        /**
+         * Função auxiliar para debug: exibe no console o mapeamento do eixo
+         * e retorna o domínio correspondente.
+         * Pode ser chamada a qualquer momento para verificar o direcionamento.
+         */
+        function verificarDirecionamento(eixo) {
+            const site = getSiteForEixo(eixo);
+            console.log(`📋 [PAUTAZERO] Eixo: "${eixo}" → Portal: ${site.portalName} → Domínio: ${site.domain}`);
+            return site;
+        }
+
+        // Expor para uso no console (debug)
+        window.verificarDirecionamento = verificarDirecionamento;
+        window.normalizeString = normalizeString;
+
+        // =================================================================
+        // FIM DO SISTEMA DE DIRECIONAMENTO EDITORIAL
+        // =================================================================
+
         let selectedDirectoryHandle = null;
         let autoSaveTimeout = null;
         const AUTOSAVE_KEY = 'velocity_autosave_form_state';
