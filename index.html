@@ -21,7 +21,6 @@
             padding: 4px 12px;
             flex-wrap: wrap;
         }
-        /* Botão minúsculo – sem borda arredondada */
         .top-nav-btn {
             font-family: var(--font-serif);
             font-size: 0.5rem;
@@ -48,8 +47,6 @@
             transform: translateY(-1px);
             box-shadow: 0 2px 8px rgba(184, 134, 11, 0.12);
         }
-
-        /* Carrossel discreto no canto direito superior em telas pequenas */
         @media (max-width: 768px) {
             .top-nav-buttons {
                 position: absolute;
@@ -68,7 +65,7 @@
                 backdrop-filter: blur(4px);
                 -webkit-backdrop-filter: blur(4px);
                 border-radius: 30px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
                 scrollbar-width: thin;
                 scrollbar-color: transparent transparent;
             }
@@ -89,12 +86,13 @@
                 font-size: 0.4rem;
             }
         }
-        /* O link "Início" antigo permanece removido */
-        .back-home-link { display: none; }
+        .back-home-link {
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <!-- ========== SUPER EIGEND (inalterado) ========== -->
+    <!-- ========== SUPER EIGEND ========== -->
     <div class="eigend-section">
         <h2><i class="fas fa-bolt"></i> Super Eigend <span style="font-weight: 400; color: var(--aged-gold);">· Tendências 24h</span></h2>
         <p class="subhead">Descubra os assuntos mais comentados e gere automaticamente título, subtítulo, eixo e tags para o Velocity Engine.</p>
@@ -131,7 +129,7 @@
         </div>
     </div>
 
-    <!-- ========== VELOCITY ARTICLE ENGINE (original, com barra de navegação minúscula) ========== -->
+    <!-- ========== VELOCITY ARTICLE ENGINE ========== -->
     <div class="main-container">
         <div class="form-card">
             <h1>Velocity <span>Article Engine</span></h1>
@@ -346,7 +344,6 @@
                     <a href="/" class="logo" id="prevLogo">Pauta<span>Zero</span></a>
                     <div class="tagline" id="prevTagline">jardinagem · beleza · natureza</div>
                 </div>
-                <!-- Barra de navegação minúscula – bordas retas -->
                 <div class="top-nav-buttons">
                 </div>
             </header>
@@ -383,11 +380,11 @@
                         <div class="share-bar">
                             <span class="share-label">Compartilhe:</span>
                             <div class="share-icons">
-                                <a onclick="shareArticle('facebook')"><i class="fab fa-facebook-f"></i></a>
-                                <a onclick="shareArticle('twitter')"><i class="fa-brands fa-x-twitter"></i></a>
-                                <a onclick="shareArticle('linkedin')"><i class="fab fa-linkedin-in"></i></a>
-                                <a onclick="shareArticle('whatsapp')"><i class="fab fa-whatsapp"></i></a>
-                                <a onclick="shareArticle('email')"><i class="far fa-envelope"></i></a>
+                                <a onclick="shareArticle('facebook')" title="Compartilhar no Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a onclick="shareArticle('x')" title="Compartilhar no X"><i class="fa-brands fa-x-twitter"></i></a>
+                                <a onclick="shareArticle('linkedin')" title="Compartilhar no LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a onclick="shareArticle('whatsapp')" title="Compartilhar no WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                                <a onclick="shareArticle('email')" title="Compartilhar por Email"><i class="far fa-envelope"></i></a>
                             </div>
                         </div>
                         <div class="article-body" id="prevContent">
@@ -662,7 +659,7 @@
 
     <script>
         // =================================================================
-        // VELOCITY ARTICLE ENGINE SCRIPTS (ORIGINAL, COMPLETO, INTOCADO)
+        // VELOCITY ARTICLE ENGINE SCRIPTS (COMPLETO, COM SHARE INTEGRADO)
         // =================================================================
         const API_KEY = 'minhasenha2011';
         const SITE_CONFIG = {
@@ -671,208 +668,56 @@
             GERAL: { worker: 'https://pautazero-worker.avizaecosystem.workers.dev/api/articles', domain: 'pautazero.com', portalName: 'PautaZero', slogan: 'análise · tecnologia' }
         };
 
-        // =================================================================
-        // NOVO: SISTEMA COMPLETO DE DIRECIONAMENTO EDITORIAL — PAUTAZERO
-        // =================================================================
-
-        /**
-         * MAPEAMENTO OFICIAL DE PORTAIS
-         * Todos os eixos normalizados (lowercase, sem acentos, hifenizados)
-         * apontam para o portal correto.
-         */
         const EIXO_SITE_MAP = {
-            // ─── TEOLOGIA ───
-            'teologia': 'TEOLOGIA',
-            'arqueologia-biblica': 'TEOLOGIA',
-            'arqueologia': 'TEOLOGIA',
-            'escatologia': 'TEOLOGIA',
-            'exegese-biblica': 'TEOLOGIA',
-            'exegese': 'TEOLOGIA',
-            'hermeneutica': 'TEOLOGIA',
-            'cristianismo': 'TEOLOGIA',
-            'cristianismo-primitivo': 'TEOLOGIA',
-            'historia-da-igreja': 'TEOLOGIA',
-            'filosofia-da-religiao': 'TEOLOGIA',
-            'manuscritos-antigos': 'TEOLOGIA',
-            'hebraico-biblico': 'TEOLOGIA',
-            'grego-koine': 'TEOLOGIA',
-            'profecia-biblica': 'TEOLOGIA',
-            'profecias-biblicas': 'TEOLOGIA',
-            'judaismo-antigo': 'TEOLOGIA',
-            'teologia-sistematica': 'TEOLOGIA',
-            'teologia-contemporanea': 'TEOLOGIA',
-            'patristica': 'TEOLOGIA',
-            'religioes-comparadas': 'TEOLOGIA',
-            'ia-e-espiritualidade': 'TEOLOGIA',
-            'cristianismo-e-ciencia': 'TEOLOGIA',
-            'fe-e-tecnologia': 'TEOLOGIA',
-            'neuroteologia': 'TEOLOGIA',
-            'bioetica-crista': 'TEOLOGIA',
-
-            // ─── JUSTIÇA ───
-            'justica': 'JUSTICA',
-            'direito': 'JUSTICA',
-            'stf': 'JUSTICA',
-            'stj': 'JUSTICA',
-            'constitucional': 'JUSTICA',
-            'penal': 'JUSTICA',
-            'direito-penal': 'JUSTICA',
-            'civil': 'JUSTICA',
-            'direito-civil': 'JUSTICA',
-            'trabalhista': 'JUSTICA',
-            'direito-trabalhista': 'JUSTICA',
-            'tributario': 'JUSTICA',
-            'direito-tributario': 'JUSTICA',
-            'empresarial': 'JUSTICA',
-            'direito-empresarial': 'JUSTICA',
-            'compliance': 'JUSTICA',
-            'investigacao': 'JUSTICA',
-            'ministerio-publico': 'JUSTICA',
-            'policia-federal': 'JUSTICA',
-            'seguranca-publica': 'JUSTICA',
-            'direitos-humanos': 'JUSTICA',
-            'jurisprudencia': 'JUSTICA',
-            'legislacao': 'JUSTICA',
-            'processo-penal': 'JUSTICA',
-            'processo-civil': 'JUSTICA',
-            'crimes-digitais': 'JUSTICA',
-            'lgpd': 'JUSTICA',
-            'cibercrime': 'JUSTICA',
-            'regulacao': 'JUSTICA',
-            'corrupcao': 'JUSTICA',
-            'transparencia-publica': 'JUSTICA',
-            'crimes': 'JUSTICA',
-            'policial': 'JUSTICA',
-            'direito-de-familia': 'JUSTICA'
+            'teologia': 'TEOLOGIA', 'arqueologia-biblica': 'TEOLOGIA', 'arqueologia': 'TEOLOGIA',
+            'escatologia': 'TEOLOGIA', 'exegese-biblica': 'TEOLOGIA', 'exegese': 'TEOLOGIA',
+            'hermeneutica': 'TEOLOGIA', 'cristianismo': 'TEOLOGIA', 'cristianismo-primitivo': 'TEOLOGIA',
+            'historia-da-igreja': 'TEOLOGIA', 'filosofia-da-religiao': 'TEOLOGIA', 'manuscritos-antigos': 'TEOLOGIA',
+            'hebraico-biblico': 'TEOLOGIA', 'grego-koine': 'TEOLOGIA', 'profecia-biblica': 'TEOLOGIA',
+            'profecias-biblicas': 'TEOLOGIA', 'judaismo-antigo': 'TEOLOGIA', 'teologia-sistematica': 'TEOLOGIA',
+            'teologia-contemporanea': 'TEOLOGIA', 'patristica': 'TEOLOGIA', 'religioes-comparadas': 'TEOLOGIA',
+            'ia-e-espiritualidade': 'TEOLOGIA', 'cristianismo-e-ciencia': 'TEOLOGIA', 'fe-e-tecnologia': 'TEOLOGIA',
+            'neuroteologia': 'TEOLOGIA', 'bioetica-crista': 'TEOLOGIA',
+            'justica': 'JUSTICA', 'direito': 'JUSTICA', 'stf': 'JUSTICA', 'stj': 'JUSTICA',
+            'constitucional': 'JUSTICA', 'penal': 'JUSTICA', 'direito-penal': 'JUSTICA', 'civil': 'JUSTICA',
+            'direito-civil': 'JUSTICA', 'trabalhista': 'JUSTICA', 'direito-trabalhista': 'JUSTICA',
+            'tributario': 'JUSTICA', 'direito-tributario': 'JUSTICA', 'empresarial': 'JUSTICA',
+            'direito-empresarial': 'JUSTICA', 'compliance': 'JUSTICA', 'investigacao': 'JUSTICA',
+            'ministerio-publico': 'JUSTICA', 'policia-federal': 'JUSTICA', 'seguranca-publica': 'JUSTICA',
+            'direitos-humanos': 'JUSTICA', 'jurisprudencia': 'JUSTICA', 'legislacao': 'JUSTICA',
+            'processo-penal': 'JUSTICA', 'processo-civil': 'JUSTICA', 'crimes-digitais': 'JUSTICA',
+            'lgpd': 'JUSTICA', 'cibercrime': 'JUSTICA', 'regulacao': 'JUSTICA', 'corrupcao': 'JUSTICA',
+            'transparencia-publica': 'JUSTICA', 'crimes': 'JUSTICA', 'policial': 'JUSTICA', 'direito-de-familia': 'JUSTICA'
         };
 
-        /**
-         * Palavras-chave semânticas para fallback quando não há correspondência exata.
-         * Cada array contém radicais que, se encontrados no eixo, indicam o portal.
-         */
         const SEMANTIC_KEYWORDS = {
-            TEOLOGIA: [
-                'teolog', 'bibl', 'igreja', 'crist', 'deus', 'jesus', 'fe', 'espiritual',
-                'religiao', 'religiosa', 'sagrad', 'oracao', 'culto', 'pastor', 'padre',
-                'profeta', 'profeci', 'arqueolog', 'manuscrit', 'hebraic', 'grego', 'koine',
-                'hermeneu', 'exegese', 'escatolog', 'patrist', 'sistematic', 'judaism',
-                'qumran', 'essenio', 'fariseu', 'saduceu', 'templo', 'tabernaculo',
-                'neuroteolog', 'bioetic'
-            ],
-            JUSTICA: [
-                'justic', 'direito', 'lei', 'jurid', 'judic', 'tribunal', 'juiz', 'ministro',
-                'stf', 'stj', 'penal', 'crime', 'criminos', 'policia', 'policial', 'delegado',
-                'processual', 'processo', 'sentenca', 'recurso', 'habeas', 'mandado',
-                'constituicao', 'constitucion', 'advogado', 'promotor', 'procurador',
-                'compliance', 'lgpd', 'cibercrime', 'corrupcao', 'transparencia',
-                'investigacao', 'seguranca', 'trabalhista', 'tributario', 'regulacao'
-            ]
+            TEOLOGIA: ['teolog', 'bibl', 'igreja', 'crist', 'deus', 'jesus', 'fe', 'espiritual', 'religiao', 'religiosa', 'sagrad', 'oracao', 'culto', 'pastor', 'padre', 'profeta', 'profeci', 'arqueolog', 'manuscrit', 'hebraic', 'grego', 'koine', 'hermeneu', 'exegese', 'escatolog', 'patrist', 'sistematic', 'judaism', 'qumran', 'essenio', 'fariseu', 'saduceu', 'templo', 'tabernaculo', 'neuroteolog', 'bioetic'],
+            JUSTICA: ['justic', 'direito', 'lei', 'jurid', 'judic', 'tribunal', 'juiz', 'ministro', 'stf', 'stj', 'penal', 'crime', 'criminos', 'policia', 'policial', 'delegado', 'processual', 'processo', 'sentenca', 'recurso', 'habeas', 'mandado', 'constituicao', 'constitucion', 'advogado', 'promotor', 'procurador', 'compliance', 'lgpd', 'cibercrime', 'corrupcao', 'transparencia', 'investigacao', 'seguranca', 'trabalhista', 'tributario', 'regulacao']
         };
 
-        /**
-         * Normaliza uma string para comparação:
-         * - lowercase
-         * - remove acentos
-         * - remove espaços extras
-         * - substitui espaços por hífens
-         * - remove caracteres especiais
-         * 
-         * @param {string} str - String a ser normalizada
-         * @returns {string} String normalizada
-         */
         function normalizeString(str) {
             if (!str) return '';
-            return str
-                .trim()
-                .toLowerCase()
-                .normalize('NFD')
-                .replace(/[\u0300-\u036f]/g, '') // remove acentos
-                .replace(/[^a-z0-9\s-]/g, '')     // remove caracteres especiais
-                .replace(/\s+/g, '-')              // espaços → hífens
-                .replace(/-+/g, '-')               // múltiplos hífens → um só
-                .replace(/^-+|-+$/g, '');          // remove hífens das bordas
+            return str.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '');
         }
 
-        /**
-         * Verifica se o eixo normalizado contém palavras-chave do portal.
-         * Usado como fallback semântico.
-         * 
-         * @param {string} normalizedEixo - Eixo já normalizado
-         * @param {string} portalKey - Chave do portal ('TEOLOGIA' ou 'JUSTICA')
-         * @returns {boolean}
-         */
         function matchesSemanticKeywords(normalizedEixo, portalKey) {
             const keywords = SEMANTIC_KEYWORDS[portalKey] || [];
-            // Divide o eixo em partes (palavras) para verificação mais precisa
             const partes = normalizedEixo.split('-');
-            // Também verifica a string completa
             const fullString = normalizedEixo.replace(/-/g, '');
-            
-            return keywords.some(keyword => {
-                // Verifica se alguma parte contém a palavra-chave
-                return partes.some(parte => parte.includes(keyword)) ||
-                       fullString.includes(keyword);
-            });
+            return keywords.some(keyword => partes.some(parte => parte.includes(keyword)) || fullString.includes(keyword));
         }
 
-        /**
-         * Função principal de direcionamento editorial.
-         * Determina o portal correto baseado no eixo informado.
-         * 
-         * Algoritmo:
-         * 1. Normaliza o eixo
-         * 2. Busca correspondência exata no mapa
-         * 3. Se não encontrar, tenta correspondência semântica (fallback)
-         * 4. Se ainda não encontrar, retorna GERAL
-         * 
-         * @param {string} eixo - Eixo informado pelo editor
-         * @returns {Object} Configuração do site (worker, domain, portalName, slogan)
-         */
         function getSiteForEixo(eixo) {
             const normalized = normalizeString(eixo);
-            
-            // 1. Correspondência exata
-            if (EIXO_SITE_MAP[normalized]) {
-                const site = EIXO_SITE_MAP[normalized];
-                console.log(`🎯 [Direcionamento] Eixo "${eixo}" → ${site} (correspondência exata)`);
-                return SITE_CONFIG[site];
-            }
-            
-            // 2. Fallback semântico — verifica Teologia primeiro
-            if (matchesSemanticKeywords(normalized, 'TEOLOGIA')) {
-                console.log(`🔍 [Direcionamento] Eixo "${eixo}" → TEOLOGIA (correspondência semântica)`);
-                return SITE_CONFIG['TEOLOGIA'];
-            }
-            
-            // 3. Fallback semântico — Justiça
-            if (matchesSemanticKeywords(normalized, 'JUSTICA')) {
-                console.log(`🔍 [Direcionamento] Eixo "${eixo}" → JUSTICA (correspondência semântica)`);
-                return SITE_CONFIG['JUSTICA'];
-            }
-            
-            // 4. Fallback final — Portal Geral
-            console.log(`🌐 [Direcionamento] Eixo "${eixo}" → GERAL (fallback)`);
-            return SITE_CONFIG['GERAL'];
+            if (EIXO_SITE_MAP[normalized]) { const site = EIXO_SITE_MAP[normalized]; console.log(`🎯 [Direcionamento] Eixo "${eixo}" → ${site} (correspondência exata)`); return SITE_CONFIG[site]; }
+            if (matchesSemanticKeywords(normalized, 'TEOLOGIA')) { console.log(`🔍 [Direcionamento] Eixo "${eixo}" → TEOLOGIA (correspondência semântica)`); return SITE_CONFIG['TEOLOGIA']; }
+            if (matchesSemanticKeywords(normalized, 'JUSTICA')) { console.log(`🔍 [Direcionamento] Eixo "${eixo}" → JUSTICA (correspondência semântica)`); return SITE_CONFIG['JUSTICA']; }
+            console.log(`🌐 [Direcionamento] Eixo "${eixo}" → GERAL (fallback)`); return SITE_CONFIG['GERAL'];
         }
 
-        /**
-         * Função auxiliar para debug: exibe no console o mapeamento do eixo
-         * e retorna o domínio correspondente.
-         * Pode ser chamada a qualquer momento para verificar o direcionamento.
-         */
-        function verificarDirecionamento(eixo) {
-            const site = getSiteForEixo(eixo);
-            console.log(`📋 [PAUTAZERO] Eixo: "${eixo}" → Portal: ${site.portalName} → Domínio: ${site.domain}`);
-            return site;
-        }
-
-        // Expor para uso no console (debug)
+        function verificarDirecionamento(eixo) { const site = getSiteForEixo(eixo); console.log(`📋 [PAUTAZERO] Eixo: "${eixo}" → Portal: ${site.portalName} → Domínio: ${site.domain}`); return site; }
         window.verificarDirecionamento = verificarDirecionamento;
         window.normalizeString = normalizeString;
-
-        // =================================================================
-        // FIM DO SISTEMA DE DIRECIONAMENTO EDITORIAL
-        // =================================================================
 
         let selectedDirectoryHandle = null;
         let autoSaveTimeout = null;
@@ -881,30 +726,17 @@
         function saveFormState() {
             try {
                 const state = {
-                    portalName: document.getElementById('portalName').value,
-                    portalSlogan: document.getElementById('portalSlogan').value,
-                    title: document.getElementById('title').value,
-                    subtitle: document.getElementById('subtitle').value,
-                    eixo: document.getElementById('eixo').value,
-                    tema: document.getElementById('tema').value,
-                    slug: document.getElementById('slug').value,
-                    publishDateTime: document.getElementById('publishDateTime').value,
-                    readTime: document.getElementById('readTime').value,
-                    author: document.getElementById('author').value,
-                    excerpt: document.getElementById('excerpt').value,
-                    tags: document.getElementById('tags').value,
-                    watermarkRef: document.getElementById('watermarkRef').value,
-                    authorBio: document.getElementById('authorBio').value,
-                    image: document.getElementById('image').value,
-                    imageCaption: document.getElementById('imageCaption').value,
-                    htmlContent: document.getElementById('htmlContent').value,
-                    rawTextInput: document.getElementById('rawTextInput').value,
-                    fullscreenContent: document.getElementById('fullscreenContent').value,
-                    references: document.getElementById('references').value,
-                    avatarBase64: avatarBase64,
-                    relatedLinks: getRelatedLinks(),
-                    contextMode: currentContextMode,
-                    savedAt: new Date().toISOString()
+                    portalName: document.getElementById('portalName').value, portalSlogan: document.getElementById('portalSlogan').value,
+                    title: document.getElementById('title').value, subtitle: document.getElementById('subtitle').value,
+                    eixo: document.getElementById('eixo').value, tema: document.getElementById('tema').value,
+                    slug: document.getElementById('slug').value, publishDateTime: document.getElementById('publishDateTime').value,
+                    readTime: document.getElementById('readTime').value, author: document.getElementById('author').value,
+                    excerpt: document.getElementById('excerpt').value, tags: document.getElementById('tags').value,
+                    watermarkRef: document.getElementById('watermarkRef').value, authorBio: document.getElementById('authorBio').value,
+                    image: document.getElementById('image').value, imageCaption: document.getElementById('imageCaption').value,
+                    htmlContent: document.getElementById('htmlContent').value, rawTextInput: document.getElementById('rawTextInput').value,
+                    fullscreenContent: document.getElementById('fullscreenContent').value, references: document.getElementById('references').value,
+                    avatarBase64: avatarBase64, relatedLinks: getRelatedLinks(), contextMode: currentContextMode, savedAt: new Date().toISOString()
                 };
                 localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(state));
             } catch (e) {}
@@ -912,8 +744,7 @@
         function triggerAutoSave() { if (autoSaveTimeout) clearTimeout(autoSaveTimeout); autoSaveTimeout = setTimeout(saveFormState, AUTOSAVE_DEBOUNCE_MS); }
         function restoreFormState() {
             try {
-                const saved = localStorage.getItem(AUTOSAVE_KEY);
-                if (!saved) return false;
+                const saved = localStorage.getItem(AUTOSAVE_KEY); if (!saved) return false;
                 const state = JSON.parse(saved);
                 if (state.portalName !== undefined) document.getElementById('portalName').value = state.portalName;
                 if (state.portalSlogan !== undefined) document.getElementById('portalSlogan').value = state.portalSlogan;
@@ -929,36 +760,22 @@
                 if (state.tags !== undefined) document.getElementById('tags').value = state.tags;
                 if (state.watermarkRef !== undefined) document.getElementById('watermarkRef').value = state.watermarkRef;
                 if (state.authorBio !== undefined) document.getElementById('authorBio').value = state.authorBio;
-                if (state.image !== undefined) {
-                    document.getElementById('image').value = state.image;
-                    if (state.image) { updatePreviewImage(state.image); dropZone.classList.add('has-image'); dropZone.querySelector('span').textContent = 'Imagem definida via URL'; }
-                }
+                if (state.image !== undefined) { document.getElementById('image').value = state.image; if (state.image) { updatePreviewImage(state.image); dropZone.classList.add('has-image'); dropZone.querySelector('span').textContent = 'Imagem definida via URL'; } }
                 if (state.imageCaption !== undefined) document.getElementById('imageCaption').value = state.imageCaption;
                 if (state.htmlContent !== undefined) document.getElementById('htmlContent').value = state.htmlContent;
                 if (state.rawTextInput !== undefined) document.getElementById('rawTextInput').value = state.rawTextInput;
                 if (state.fullscreenContent !== undefined) document.getElementById('fullscreenContent').value = state.fullscreenContent;
                 if (state.references !== undefined) document.getElementById('references').value = state.references;
-                if (state.avatarBase64) {
-                    avatarBase64 = state.avatarBase64;
-                    avatarPreviewImg.src = avatarBase64;
-                    avatarPreviewImg.style.display = 'block';
-                    avatarRemoveBtn.style.display = 'inline-flex';
-                }
-                if (state.relatedLinks && state.relatedLinks.length > 0) {
-                    relatedContainer.innerHTML = ''; linkCounter = 0;
-                    state.relatedLinks.forEach(link => addLinkField(link.slug, link.url));
-                }
+                if (state.avatarBase64) { avatarBase64 = state.avatarBase64; avatarPreviewImg.src = avatarBase64; avatarPreviewImg.style.display = 'block'; avatarRemoveBtn.style.display = 'inline-flex'; }
+                if (state.relatedLinks && state.relatedLinks.length > 0) { relatedContainer.innerHTML = ''; linkCounter = 0; state.relatedLinks.forEach(link => addLinkField(link.slug, link.url)); }
                 if (state.contextMode) setContextMode(state.contextMode);
-                updatePreview();
-                return true;
+                updatePreview(); return true;
             } catch (e) { return false; }
         }
         let currentContextMode = 'padrao';
         function setContextMode(mode) {
-            currentContextMode = mode;
-            const panel = document.getElementById('articlePreview');
-            const btnPadrao = document.getElementById('ctxBtnPadrao');
-            const btnRevista = document.getElementById('ctxBtnRevista');
+            currentContextMode = mode; const panel = document.getElementById('articlePreview');
+            const btnPadrao = document.getElementById('ctxBtnPadrao'); const btnRevista = document.getElementById('ctxBtnRevista');
             if (mode === 'revista') { panel.classList.add('revista-mode'); btnPadrao.classList.remove('active'); btnRevista.classList.add('active'); }
             else { panel.classList.remove('revista-mode'); btnPadrao.classList.add('active'); btnRevista.classList.remove('active'); }
             triggerAutoSave();
@@ -999,8 +816,7 @@
         const relatedContainer = document.getElementById('relatedLinksContainer');
         function addLinkField(titleSlug = '', url = '') {
             if (relatedContainer.querySelectorAll('.link-item').length >= MAX_LINKS) { showToast('Máximo de 5 links relacionados.', true); return; }
-            const id = linkCounter++;
-            const div = document.createElement('div'); div.className = 'link-item'; div.id = 'link-item-' + id;
+            const id = linkCounter++; const div = document.createElement('div'); div.className = 'link-item'; div.id = 'link-item-' + id;
             div.innerHTML = `<input type="text" placeholder="Slug (texto do link)" value="${escapeHtml(titleSlug)}" class="link-title-input"><input type="text" placeholder="Caminho interno: /artigo/eixo/slug.html" value="${escapeHtml(url)}" class="link-url-input"><button type="button" class="remove-link-btn"><i class="fas fa-trash-alt"></i></button>`;
             div.querySelector('.link-title-input').addEventListener('input', updatePreview);
             div.querySelector('.link-url-input').addEventListener('input', updatePreview);
@@ -1023,8 +839,7 @@
         window.closeLinkModal = () => linkModal.classList.remove('active');
         window.applyLinkFromModal = function() {
             const url = linkUrlInput.value.trim(); if (!url) { showToast('Insira uma URL.', true); return; }
-            const text = linkTextInput.value.trim() || url;
-            const finalUrl = /^https?:\/\//i.test(url) ? url : 'https://' + url;
+            const text = linkTextInput.value.trim() || url; const finalUrl = /^https?:\/\//i.test(url) ? url : 'https://' + url;
             const anchor = '<a href="' + finalUrl + '" target="_blank" rel="noopener">' + escapeHtml(text) + '</a>';
             if (linkTargetEditor === 'main') { const ta = document.getElementById('htmlContent'); insertAtCursor(ta, anchor); updatePreview(); }
             else if (linkTargetEditor === 'fullscreen') { const ta = document.getElementById('fullscreenContent'); insertAtCursor(ta, anchor); syncCodeToVisual(); }
@@ -1059,97 +874,52 @@
         };
         window.clearBodyImageFile = () => { resetBodyImageFile(); showToast('Imagem removida.'); };
         window.applyBodyImage = function() {
-            const caption = bodyImageCaptionInput.value.trim();
-            const alt = bodyImageAltInput.value.trim() || (caption || 'Imagem no corpo do artigo');
+            const caption = bodyImageCaptionInput.value.trim(); const alt = bodyImageAltInput.value.trim() || (caption || 'Imagem no corpo do artigo');
             let imageSrc = bodyImageBase64 || bodyImageUrlInput.value.trim();
             if (!imageSrc) { showToast('Selecione uma imagem do dispositivo ou insira uma URL.', true); return; }
             let figureHtml = '<figure class="body-image size-md"><img src="' + imageSrc + '" alt="' + escapeHtml(alt) + '" loading="lazy">';
             if (caption) figureHtml += '<figcaption>' + escapeHtml(caption) + '</figcaption>';
             figureHtml += '</figure>';
-            if (bodyImageTargetEditor === 'main') {
-                const ta = document.getElementById('htmlContent');
-                ta.focus();
-                insertAtCursor(ta, '\n' + figureHtml + '\n');
-                updatePreview();
-            } else if (bodyImageTargetEditor === 'fullscreen') {
-                const ta = document.getElementById('fullscreenContent');
-                ta.focus();
-                insertAtCursor(ta, '\n' + figureHtml + '\n');
-                syncCodeToVisual();
-            } else if (bodyImageTargetEditor === 'visual') {
-                const vis = document.getElementById('visualEditor');
-                vis.focus();
-                document.execCommand('insertHTML', false, figureHtml);
-                syncVisualToCode();
-            }
-            bodyImageModal.classList.remove('active');
-            resetBodyImageFile();
-            showToast('🖼️ Imagem inserida no corpo do artigo.');
+            if (bodyImageTargetEditor === 'main') { const ta = document.getElementById('htmlContent'); ta.focus(); insertAtCursor(ta, '\n' + figureHtml + '\n'); updatePreview(); }
+            else if (bodyImageTargetEditor === 'fullscreen') { const ta = document.getElementById('fullscreenContent'); ta.focus(); insertAtCursor(ta, '\n' + figureHtml + '\n'); syncCodeToVisual(); }
+            else if (bodyImageTargetEditor === 'visual') { const vis = document.getElementById('visualEditor'); vis.focus(); document.execCommand('insertHTML', false, figureHtml); syncVisualToCode(); }
+            bodyImageModal.classList.remove('active'); resetBodyImageFile(); showToast('🖼️ Imagem inserida no corpo do artigo.');
         };
         document.addEventListener('keydown', e => { if (e.key === 'Escape' && bodyImageModal.classList.contains('active')) { bodyImageModal.classList.remove('active'); resetBodyImageFile(); } });
-        document.getElementById('bodyImageModal').addEventListener('click', function(e) {
-            if (e.target === this) { this.classList.remove('active'); resetBodyImageFile(); }
-        });
-        document.getElementById('linkModal').addEventListener('click', function(e) {
-            if (e.target === this) this.classList.remove('active');
-        });
+        document.getElementById('bodyImageModal').addEventListener('click', function(e) { if (e.target === this) { this.classList.remove('active'); resetBodyImageFile(); } });
+        document.getElementById('linkModal').addEventListener('click', function(e) { if (e.target === this) this.classList.remove('active'); });
 
-        // ========== REDIMENSIONAMENTO DE IMAGENS (5 TAMANHOS) ==========
         function initImageResizeHandler() {
-            const previewContent = document.getElementById('prevContent');
-            if (!previewContent) return;
+            const previewContent = document.getElementById('prevContent'); if (!previewContent) return;
             previewContent.removeEventListener('click', imageResizeClickHandler);
             previewContent.addEventListener('click', imageResizeClickHandler);
         }
         function imageResizeClickHandler(e) {
-            const figure = e.target.closest('figure.body-image');
-            if (!figure) return;
+            const figure = e.target.closest('figure.body-image'); if (!figure) return;
             if (!e.target.closest('img') && !e.target.closest('figcaption')) return;
             e.preventDefault();
             const sizes = ['size-xs', 'size-sm', 'size-md', 'size-lg', 'size-xl'];
-            const labels = {
-                'size-xs': 'Muito pequeno (20%)',
-                'size-sm': 'Pequeno (35%)',
-                'size-md': 'Médio (50%)',
-                'size-lg': 'Grande (70%)',
-                'size-xl': 'Expandido (100%)'
-            };
-            let current = 'size-md';
-            for (const sz of sizes) {
-                if (figure.classList.contains(sz)) { current = sz; break; }
-            }
-            const currentIndex = sizes.indexOf(current);
-            const nextIndex = (currentIndex + 1) % sizes.length;
-            figure.classList.remove(...sizes);
-            figure.classList.add(sizes[nextIndex]);
+            const labels = { 'size-xs': 'Muito pequeno (20%)', 'size-sm': 'Pequeno (35%)', 'size-md': 'Médio (50%)', 'size-lg': 'Grande (70%)', 'size-xl': 'Expandido (100%)' };
+            let current = 'size-md'; for (const sz of sizes) { if (figure.classList.contains(sz)) { current = sz; break; } }
+            const currentIndex = sizes.indexOf(current); const nextIndex = (currentIndex + 1) % sizes.length;
+            figure.classList.remove(...sizes); figure.classList.add(sizes[nextIndex]);
             showToast('📐 Imagem: ' + labels[sizes[nextIndex]]);
             syncImageSizesToMainContent();
         }
         function syncImageSizesToMainContent() {
             const previewFigures = document.querySelectorAll('#prevContent figure.body-image');
-            const mainTA = document.getElementById('htmlContent');
-            let html = mainTA.value;
+            const mainTA = document.getElementById('htmlContent'); let html = mainTA.value;
             previewFigures.forEach(fig => {
-                const imgSrc = fig.querySelector('img')?.getAttribute('src');
-                if (!imgSrc) return;
+                const imgSrc = fig.querySelector('img')?.getAttribute('src'); if (!imgSrc) return;
                 const classes = Array.from(fig.classList).filter(c => c.startsWith('size-')).join(' ');
                 const escapedSrc = imgSrc.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
                 const regex = new RegExp('(<figure\\s+class="body-image)([^"]*)("\\s*>[\\s\\S]*?<img\\s+[^>]*src="' + escapedSrc + '"[^>]*>[\\s\\S]*?</figure>)', 'g');
-                html = html.replace(regex, (match, p1, p2, p3) => {
-                    let cleanClasses = p2.replace(/\bsize-\w+\b/g, '').replace(/\s+/g, ' ').trim();
-                    return '<figure class="body-image' + (cleanClasses ? ' ' + cleanClasses : '') + ' ' + classes + '"' + p3;
-                });
+                html = html.replace(regex, (match, p1, p2, p3) => { let cleanClasses = p2.replace(/\bsize-\w+\b/g, '').replace(/\s+/g, ' ').trim(); return '<figure class="body-image' + (cleanClasses ? ' ' + cleanClasses : '') + ' ' + classes + '"' + p3; });
             });
-            if (html !== mainTA.value) {
-                mainTA.value = html;
-                triggerAutoSave();
-            }
+            if (html !== mainTA.value) { mainTA.value = html; triggerAutoSave(); }
         }
         const originalUpdatePreview = updatePreview;
-        updatePreview = function() {
-            originalUpdatePreview();
-            initImageResizeHandler();
-        };
+        updatePreview = function() { originalUpdatePreview(); initImageResizeHandler(); };
 
         function addImageResizeScriptToArticle() {
             return `
@@ -1163,19 +933,13 @@
             if (!e.target.closest('img') && !e.target.closest('figcaption')) return;
             e.preventDefault();
             var current = 'size-md';
-            for (var i = 0; i < sizes.length; i++) {
-                if (fig.classList.contains(sizes[i])) { current = sizes[i]; break; }
-            }
-            var idx = sizes.indexOf(current);
-            var next = sizes[(idx + 1) % sizes.length];
-            fig.classList.remove.apply(fig.classList, sizes);
-            fig.classList.add(next);
+            for (var i = 0; i < sizes.length; i++) { if (fig.classList.contains(sizes[i])) { current = sizes[i]; break; } }
+            var idx = sizes.indexOf(current); var next = sizes[(idx + 1) % sizes.length];
+            fig.classList.remove.apply(fig.classList, sizes); fig.classList.add(next);
         });
         var label = document.createElement('div');
         label.style.cssText = 'position:absolute;bottom:-1.6rem;left:50%;transform:translateX(-50%);font-size:0.55rem;color:#b8860b;opacity:0;transition:opacity 0.3s ease;white-space:nowrap;pointer-events:none;font-family:Inter,sans-serif;letter-spacing:0.03em;text-align:center;';
-        label.textContent = '🔍 Clique para redimensionar';
-        fig.style.position = 'relative';
-        fig.appendChild(label);
+        label.textContent = '🔍 Clique para redimensionar'; fig.style.position = 'relative'; fig.appendChild(label);
         fig.addEventListener('mouseenter', function() { label.style.opacity = '1'; });
         fig.addEventListener('mouseleave', function() { label.style.opacity = '0'; });
     });
@@ -1233,14 +997,7 @@
             const links = getRelatedLinks();
             const today = new Date();
             let displayDate = today.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
-            if (publishAt) {
-                const parts = publishAt.split('T');
-                if (parts.length) {
-                    const d = new Date(parts[0] + 'T00:00:00');
-                    displayDate = d.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
-                    if (parts[1]) displayDate += ' às ' + parts[1].substring(0, 5);
-                }
-            }
+            if (publishAt) { const parts = publishAt.split('T'); if (parts.length) { const d = new Date(parts[0] + 'T00:00:00'); displayDate = d.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }); if (parts[1]) displayDate += ' às ' + parts[1].substring(0, 5); } }
             const logoHTML = portalName.replace(/(Secreto|SECRETO)/i, '<span>$1</span>');
             let relatedHTML = '';
             if (links.length > 0) {
@@ -1370,8 +1127,11 @@
         .same-theme-list a { color: var(--text-muted); text-decoration: none; font-size: .5rem; }
         .article-meta { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: .8rem; font-size: .7rem; color: var(--text-muted); border-bottom: 1px solid var(--gold-line); padding-bottom: .6rem; }
         .article-meta i { color: var(--aged-gold); margin-right: 5px; }
-        .share-bar { display: flex; align-items: center; gap: 10px; margin: 1.2rem 0 .8rem; padding: .4rem 0; border-top: 1px solid var(--gold-line); border-bottom: 1px solid var(--gold-line); font-size: .65rem; }
-        .share-label { font-family: var(--font-serif); font-size: .65rem; color: var(--aged-gold); text-transform: uppercase; letter-spacing: 2px; }
+        .share-bar { display: flex; align-items: center; gap: 10px; margin: 1.2rem 0 .8rem; padding: .4rem 0; border-top: 1px solid var(--gold-line); border-bottom: 1px solid var(--gold-line); font-size: .65rem; flex-wrap: wrap; }
+        .share-label { font-family: var(--font-serif); font-size: .65rem; color: var(--aged-gold); text-transform: uppercase; letter-spacing: 2px; white-space: nowrap; }
+        .share-icons { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+        .share-icons a { color: var(--petrol-blue); font-size: 1rem; transition: all 0.3s ease; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--gold-line); background: #fff; }
+        .share-icons a:hover { color: #fff; background: var(--aged-gold); border-color: var(--aged-gold); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(184,134,11,0.25); }
         .site-footer { background: var(--petrol-blue); color: #fff; padding: 1.5rem 0 1rem; text-align: center; font-size: .5rem; margin-top: 2rem; }
         .footer-two-cols { display: flex; justify-content: space-between; max-width: 1280px; margin: 0 auto; padding: 1rem 20px; border-top: 1px solid var(--gold-line); font-size: .6rem; flex-wrap: wrap; gap: .5rem; }
         .footer-right { text-align: right; font-style: italic; }
@@ -1389,81 +1149,19 @@
             .article-body figure.body-image.size-md { max-width: 70%; }
             .article-body figure.body-image.size-lg { max-width: 85%; }
             .article-body figure.body-image.size-xl { max-width: 100%; }
+            .share-bar { justify-content: center; }
+            .share-icons { justify-content: center; }
         }
-        .top-nav-buttons {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            max-width: 1400px;
-            margin: 6px auto 4px;
-            padding: 4px 12px;
-            flex-wrap: wrap;
-        }
-        .top-nav-btn {
-            font-family: var(--font-serif);
-            font-size: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--aged-gold);
-            text-decoration: none;
-            padding: 3px 10px;
-            border: 0.5px solid var(--gold-line);
-            background: transparent;
-            transition: all 0.4s ease;
-            white-space: nowrap;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .top-nav-btn i {
-            font-size: 0.45rem;
-        }
-        .top-nav-btn:hover {
-            background: rgba(184, 134, 11, 0.05);
-            border-color: var(--aged-gold);
-            color: var(--aged-gold);
-            transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(184, 134, 11, 0.12);
-        }
+        .top-nav-buttons { display: flex; justify-content: center; align-items: center; gap: 8px; max-width: 1400px; margin: 6px auto 4px; padding: 4px 12px; flex-wrap: wrap; }
+        .top-nav-btn { font-family: var(--font-serif); font-size: 0.5rem; text-transform: uppercase; letter-spacing: 2px; color: var(--aged-gold); text-decoration: none; padding: 3px 10px; border: 0.5px solid var(--gold-line); background: transparent; transition: all 0.4s ease; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; }
+        .top-nav-btn i { font-size: 0.45rem; }
+        .top-nav-btn:hover { background: rgba(184, 134, 11, 0.05); border-color: var(--aged-gold); color: var(--aged-gold); transform: translateY(-1px); box-shadow: 0 2px 8px rgba(184, 134, 11, 0.12); }
         @media (max-width: 768px) {
-            .top-nav-buttons {
-                position: absolute;
-                top: 6px;
-                right: 6px;
-                max-width: 220px;
-                width: auto;
-                margin: 0;
-                padding: 3px 6px;
-                justify-content: flex-start;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                white-space: nowrap;
-                gap: 6px;
-                background: rgba(255, 255, 255, 0.85);
-                backdrop-filter: blur(4px);
-                -webkit-backdrop-filter: blur(4px);
-                border-radius: 30px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-                scrollbar-width: thin;
-                scrollbar-color: transparent transparent;
-            }
-            .top-nav-buttons::-webkit-scrollbar {
-                height: 2px;
-            }
-            .top-nav-buttons::-webkit-scrollbar-thumb {
-                background: rgba(184, 134, 11, 0.25);
-                border-radius: 10px;
-            }
-            .top-nav-btn {
-                font-size: 0.45rem;
-                padding: 2px 8px;
-                letter-spacing: 1px;
-                gap: 3px;
-            }
-            .top-nav-btn i {
-                font-size: 0.4rem;
-            }
+            .top-nav-buttons { position: absolute; top: 6px; right: 6px; max-width: 220px; width: auto; margin: 0; padding: 3px 6px; justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; gap: 6px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border-radius: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); scrollbar-width: thin; scrollbar-color: transparent transparent; }
+            .top-nav-buttons::-webkit-scrollbar { height: 2px; }
+            .top-nav-buttons::-webkit-scrollbar-thumb { background: rgba(184, 134, 11, 0.25); border-radius: 10px; }
+            .top-nav-btn { font-size: 0.45rem; padding: 2px 8px; letter-spacing: 1px; gap: 3px; }
+            .top-nav-btn i { font-size: 0.4rem; }
         }
     </style>
 </head>
@@ -1475,18 +1173,10 @@
         </div>
     </header>
     <div class="top-nav-buttons">
-        <a href="https://justica.pautazero.com" target="_blank" class="top-nav-btn">
-            <i class="fas fa-balance-scale"></i> Direito e Justiça
-        </a>
-        <a href="https://teologia.pautazero.com" target="_blank" class="top-nav-btn">
-            <i class="fas fa-book-bible"></i> Teologia e Arqueologia bíblica
-        </a>
-        <a href="https://negocios.pautazero.com" target="_blank" class="top-nav-btn">
-            <i class="fas fa-briefcase"></i> Negócios
-        </a>
-        <a href="https://pautazero.com" target="_blank" class="top-nav-btn">
-            <i class="fas fa-home"></i> Página Principal
-        </a>
+        <a href="https://justica.pautazero.com" target="_blank" class="top-nav-btn"><i class="fas fa-balance-scale"></i> Direito e Justiça</a>
+        <a href="https://teologia.pautazero.com" target="_blank" class="top-nav-btn"><i class="fas fa-book-bible"></i> Teologia e Arqueologia bíblica</a>
+        <a href="https://negocios.pautazero.com" target="_blank" class="top-nav-btn"><i class="fas fa-briefcase"></i> Negócios</a>
+        <a href="https://pautazero.com" target="_blank" class="top-nav-btn"><i class="fas fa-home"></i> Página Principal</a>
     </div>
     <div class="container">
         <div class="breadcrumb">
@@ -1508,6 +1198,16 @@
                     <span><i class="far fa-calendar-alt"></i> ${displayDate}</span>
                     <span><i class="fas fa-tag"></i> ${escapeHtml(tema)}</span>
                     <span><i class="far fa-clock"></i> ${escapeHtml(readTime)}</span>
+                </div>
+                <div class="share-bar">
+                    <span class="share-label">Compartilhe:</span>
+                    <div class="share-icons">
+                        <a onclick="shareArticle('facebook')" title="Compartilhar no Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a onclick="shareArticle('x')" title="Compartilhar no X"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a onclick="shareArticle('linkedin')" title="Compartilhar no LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a onclick="shareArticle('whatsapp')" title="Compartilhar no WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a onclick="shareArticle('email')" title="Compartilhar por Email"><i class="far fa-envelope"></i></a>
+                    </div>
                 </div>
                 <div class="article-body">
                     ${htmlContentVal}
@@ -1531,14 +1231,51 @@
         ${tagsHTML}
         ${watermarkHTML}
     </footer>
-    ${addImageResizeScriptToArticle()}
+    <script>
+        function shareArticle(network) {
+            var u = window.location.href;
+            var t = document.title.replace(/ — .*$/, '');
+            var e = document.querySelector('meta[name="description"]')?.getAttribute('content') || '';
+            var eu = encodeURIComponent(u);
+            var et = encodeURIComponent(t);
+            var ee = encodeURIComponent(e);
+            var link = '';
+            switch(network) {
+                case 'facebook': link = 'https://www.facebook.com/sharer/sharer.php?u=' + eu; break;
+                case 'x': link = 'https://x.com/intent/post?text=' + et + '&url=' + eu; break;
+                case 'linkedin': link = 'https://www.linkedin.com/shareArticle?mini=true&url=' + eu + '&title=' + et + '&summary=' + ee; break;
+                case 'whatsapp': link = 'https://api.whatsapp.com/send?text=' + et + '%20' + eu; break;
+                case 'email': link = 'mailto:?subject=' + et + '&body=' + ee + '%0A%0A' + eu; break;
+            }
+            if (link) window.open(link, '_blank', 'width=600,height=400,noopener');
+        }
+        ${addImageResizeScriptToArticle()}
+    <\/script>
 </body>
 </html>`;
             return fullHTML;
         }
 
-        function shareArticle(network) { const u = getArticleUrl(); const t = document.getElementById('title').value.trim(); const e = document.getElementById('excerpt').value.trim(); const eu = encodeURIComponent(u); const et = encodeURIComponent(t); const ee = encodeURIComponent(e); let link = ''; switch(network) { case 'facebook': link = `https://www.facebook.com/sharer/sharer.php?u=${eu}`; break; case 'twitter': link = `https://twitter.com/intent/tweet?text=${et}&url=${eu}`; break; case 'linkedin': link = `https://www.linkedin.com/shareArticle?mini=true&url=${eu}&title=${et}&summary=${ee}`; break; case 'whatsapp': link = `https://api.whatsapp.com/send?text=${et}%20${eu}`; break; case 'email': link = `mailto:?subject=${et}&body=${ee}%0A%0A${eu}`; break; } if (link) window.open(link, '_blank', 'width=600,height=400,noopener'); showToast(`Compartilhando no ${network}...`); }
+        function shareArticle(network) {
+            const u = getArticleUrl();
+            const t = document.getElementById('title').value.trim();
+            const e = document.getElementById('excerpt').value.trim();
+            const eu = encodeURIComponent(u);
+            const et = encodeURIComponent(t);
+            const ee = encodeURIComponent(e);
+            let link = '';
+            switch (network) {
+                case 'facebook': link = `https://www.facebook.com/sharer/sharer.php?u=${eu}`; break;
+                case 'x': link = `https://x.com/intent/post?text=${et}&url=${eu}`; break;
+                case 'linkedin': link = `https://www.linkedin.com/shareArticle?mini=true&url=${eu}&title=${et}&summary=${ee}`; break;
+                case 'whatsapp': link = `https://api.whatsapp.com/send?text=${et}%20${eu}`; break;
+                case 'email': link = `mailto:?subject=${et}&body=${ee}%0A%0A${eu}`; break;
+            }
+            if (link) window.open(link, '_blank', 'width=600,height=400,noopener');
+            showToast(`Compartilhando no ${network === 'x' ? 'X (Twitter)' : network}...`);
+        }
         window.shareArticle = shareArticle;
+
         window.downloadArticleHTML = function() { const slug = document.getElementById('slug').value.trim() || 'artigo'; const html = generateFullHTML(); const blob = new Blob([html], { type: 'text/html;charset=UTF-8' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = slug + '.html'; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); showToast('✅ Artigo baixado.'); };
         async function selectLocalFolder() { if (!('showDirectoryPicker' in window)) { showToast('⚠️ API não suportada.', true); return; } try { selectedDirectoryHandle = await window.showDirectoryPicker({ mode: 'readwrite' }); updateFolderUI(); showToast('📁 Pasta selecionada: ' + selectedDirectoryHandle.name); } catch (err) { if (err.name !== 'AbortError') showToast('❌ Erro: ' + err.message, true); } }
         async function saveToSelectedFolder() { if (!selectedDirectoryHandle) { showToast('⚠️ Selecione uma pasta.', true); return; } const slug = document.getElementById('slug').value.trim() || 'artigo'; const html = generateFullHTML(); const name = slug + '.html'; try { if (selectedDirectoryHandle.queryPermission && (await selectedDirectoryHandle.queryPermission({ mode: 'readwrite' })) !== 'granted') { if (!await selectedDirectoryHandle.requestPermission({ mode: 'readwrite' })) { showToast('❌ Permissão negada.', true); return; } } const fh = await selectedDirectoryHandle.getFileHandle(name, { create: true }); const w = await fh.createWritable(); await w.write(html); await w.close(); showToast('✅ Salvo em ' + selectedDirectoryHandle.name); } catch (err) { showToast('❌ Erro: ' + err.message, true); } }
@@ -1585,12 +1322,7 @@
             const sigDiv = document.getElementById('prevAuthorSig');
             const avatarImg = document.getElementById('prevAuthorAvatar');
             const bioEl = document.getElementById('prevAuthorBio');
-            if (author) {
-                sigDiv.style.display = 'flex';
-                document.getElementById('prevAuthorName').textContent = author;
-                if (avatarBase64) { avatarImg.src = avatarBase64; avatarImg.style.display = 'block'; } else avatarImg.style.display = 'none';
-                if (authorBio) { bioEl.textContent = authorBio; bioEl.style.display = 'block'; } else bioEl.style.display = 'none';
-            } else { sigDiv.style.display = 'none'; bioEl.style.display = 'none'; avatarImg.style.display = 'none'; }
+            if (author) { sigDiv.style.display = 'flex'; document.getElementById('prevAuthorName').textContent = author; if (avatarBase64) { avatarImg.src = avatarBase64; avatarImg.style.display = 'block'; } else avatarImg.style.display = 'none'; if (authorBio) { bioEl.textContent = authorBio; bioEl.style.display = 'block'; } else bioEl.style.display = 'none'; } else { sigDiv.style.display = 'none'; bioEl.style.display = 'none'; avatarImg.style.display = 'none'; }
             const relatedDiv = document.getElementById('prevRelated');
             const relatedList = document.getElementById('prevRelatedList');
             const links = getRelatedLinks();
@@ -1627,29 +1359,11 @@
             if (!slug || !title) { showToast('⚠️ Preencha título e slug.', true); return; }
             saveEixoToNiches(eixo);
             const site = getSiteForEixo(eixo);
-            const payload = {
-                slug: slug,
-                title: title,
-                eixo: eixo,
-                tema: tema,
-                html: html,
-                excerpt: excerpt,
-                tags: tags,
-                author: author,
-                image: imageSrc,
-                portalName: site.portalName,
-                domain: site.domain,
-                publishAt: publishAt
-            };
+            const payload = { slug, title, eixo, tema, html, excerpt, tags, author, image: imageSrc, portalName: site.portalName, domain: site.domain, publishAt };
             try {
                 showToast('🚀 Enviando para ' + site.portalName + ' (' + site.domain + ')...');
-                const res = await fetch(site.worker, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'X-API-Key': API_KEY },
-                    body: JSON.stringify(payload)
-                });
-                let data; const textResponse = await res.text();
-                try { data = JSON.parse(textResponse); } catch (e) { data = { error: textResponse.trim() || 'Resposta inválida do servidor' }; }
+                const res = await fetch(site.worker, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-API-Key': API_KEY }, body: JSON.stringify(payload) });
+                let data; const textResponse = await res.text(); try { data = JSON.parse(textResponse); } catch (e) { data = { error: textResponse.trim() || 'Resposta inválida do servidor' }; }
                 if (res.ok) showToast('✅ Publicado com sucesso em ' + site.portalName + '!\n🔗 ' + (data.url || site.domain + '/artigo/' + encodeURIComponent(eixo) + '/' + encodeURIComponent(slug) + '.html'));
                 else showToast('❌ Erro: ' + (data.error || 'Falha ao publicar'), true);
             } catch (err) { showToast('❌ Erro de conexão: ' + err.message, true); }
@@ -1669,7 +1383,7 @@
 
     <script>
         // =================================================================
-        // SUPER EIGEND SCRIPTS (CONECTADO AO WORKER – CORRIGIDO)
+        // SUPER EIGEND SCRIPTS
         // =================================================================
         const EIGEND_WORKER_URL = 'https://trends.avizaecosystem.workers.dev';
         const CONTEXT_EIXO_MAP = { teologia: 'teologia', justica: 'direito-penal', geral: 'noticia' };
@@ -1679,7 +1393,6 @@
         const generatedContentEl = document.getElementById('generatedContent'), generateBtn = document.getElementById('generateBtn'), fillVelocityBtn = document.getElementById('fillVelocityBtn');
         const copyEigendBtn = document.getElementById('copyEigendBtn'), eixoSelect = document.getElementById('eixoSelect');
 
-        // Injeção dos botões de contexto
         (function() {
             const ctxDiv = document.createElement('div');
             ctxDiv.className = 'flex-row';
@@ -1689,7 +1402,6 @@
             eixoSelect.parentElement.parentElement.insertBefore(ctxDiv, eixoSelect.parentElement);
         })();
 
-        // Troca de contexto
         document.querySelectorAll('.context-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 currentContext = btn.dataset.context;
@@ -1701,49 +1413,29 @@
         });
 
         async function fetchTrends(keyword = '') {
-    trendsListEl.innerHTML = '<li class="empty-message">🔍 Buscando tendências...</li>';
-    try {
-        let url;
-        if (keyword.trim()) {
-            url = `${EIGEND_WORKER_URL}?q=${encodeURIComponent(keyword.trim())}`;
-        } else {
-            url = `${EIGEND_WORKER_URL}?context=${currentContext}`;
+            trendsListEl.innerHTML = '<li class="empty-message">🔍 Buscando tendências...</li>';
+            try {
+                let url;
+                if (keyword.trim()) { url = `${EIGEND_WORKER_URL}?q=${encodeURIComponent(keyword.trim())}`; }
+                else { url = `${EIGEND_WORKER_URL}?context=${currentContext}`; }
+                const resp = await fetch(url, { headers: { 'X-Api-Key': API_KEY } });
+                if (!resp.ok) { let errorBody = ''; try { errorBody = await resp.text(); } catch (e) {} throw new Error(`HTTP ${resp.status}${errorBody ? ': ' + errorBody : ''}`); }
+                let trends = await resp.json(); currentTrends = trends; renderTrendsList();
+            } catch (e) { console.error('Fetch trends error:', e); trendsListEl.innerHTML = `<li class="empty-message" style="color:#c0392b;">❌ Erro: ${escapeHtml(e.message)}</li>`; }
         }
-        const resp = await fetch(url, {
-            headers: { 'X-Api-Key': API_KEY }
-        });
-        if (!resp.ok) {
-            // Exibe o status real e tenta ler o corpo para mais detalhes
-            let errorBody = '';
-            try { errorBody = await resp.text(); } catch (e) {}
-            throw new Error(`HTTP ${resp.status}${errorBody ? ': ' + errorBody : ''}`);
-        }
-        let trends = await resp.json();
-        currentTrends = trends;
-        renderTrendsList();
-    } catch (e) {
-        console.error('Fetch trends error:', e);
-        trendsListEl.innerHTML = `<li class="empty-message" style="color:#c0392b;">❌ Erro: ${escapeHtml(e.message)}</li>`;
-    }
-}
 
         function renderTrendsList() {
-    if (!currentTrends.length) {
-        trendsListEl.innerHTML = '<li class="empty-message">Nenhum assunto encontrado.</li>';
-        return;
-    }
-    trendsListEl.innerHTML = currentTrends.map((t, i) => {
-        const nome = escapeHtml(t.name);
-        const nomeHtml = t.url
-            ? `<a href="${escapeHtml(t.url)}" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;" title="Abrir fonte original">${nome} <i class="fas fa-external-link-alt" style="font-size:0.6rem; opacity:0.6;"></i></a>`
-            : nome;
-        return `<li class="trend-item ${selectedTrend?.name === t.name ? 'selected' : ''}" data-index="${i}">
-            <span class="trend-name">${nomeHtml}</span>
-            <span class="trend-category">${escapeHtml(t.category)} · ${t.volume || 'N/A'}</span>
-        </li>`;
-    }).join('');
-    document.querySelectorAll('.trend-item').forEach(item => item.addEventListener('click', () => selectTrend(parseInt(item.dataset.index))));
-}
+            if (!currentTrends.length) { trendsListEl.innerHTML = '<li class="empty-message">Nenhum assunto encontrado.</li>'; return; }
+            trendsListEl.innerHTML = currentTrends.map((t, i) => {
+                const nome = escapeHtml(t.name);
+                const nomeHtml = t.url ? `<a href="${escapeHtml(t.url)}" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;" title="Abrir fonte original">${nome} <i class="fas fa-external-link-alt" style="font-size:0.6rem; opacity:0.6;"></i></a>` : nome;
+                return `<li class="trend-item ${selectedTrend?.name === t.name ? 'selected' : ''}" data-index="${i}">
+                    <span class="trend-name">${nomeHtml}</span>
+                    <span class="trend-category">${escapeHtml(t.category)} · ${t.volume || 'N/A'}</span>
+                </li>`;
+            }).join('');
+            document.querySelectorAll('.trend-item').forEach(item => item.addEventListener('click', () => selectTrend(parseInt(item.dataset.index))));
+        }
 
         function selectTrend(idx) { selectedTrend = currentTrends[idx]; document.querySelectorAll('.trend-item').forEach(el => el.classList.toggle('selected', el.dataset.index == idx)); generateBtn.disabled = false; fillVelocityBtn.style.display = 'none'; copyEigendBtn.style.display = 'none'; generatedContentEl.innerHTML = '<span class="empty-message">Tópico selecionado. Escolha o gênero e clique em Gerar.</span>'; }
 
@@ -1782,7 +1474,7 @@
             });
         }
 
-       fetchBtn.addEventListener('click', () => fetchTrends(keywordInput.value));
+        fetchBtn.addEventListener('click', () => fetchTrends(keywordInput.value));
         keywordInput.addEventListener('keypress', e => { if (e.key === 'Enter') fetchTrends(); });
         generateBtn.addEventListener('click', generateContent);
         fillVelocityBtn.addEventListener('click', fillVelocityForm);
