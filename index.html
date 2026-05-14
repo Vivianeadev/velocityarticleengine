@@ -994,7 +994,16 @@
         document.getElementById('visualEditor').addEventListener('input', syncVisualToCode);
         document.addEventListener('keydown', e => { if (e.key === 'Escape' && fullscreenActive) closeFullscreenEditor(); });
         function autoSlug() { const t = document.getElementById('title').value.trim(); const s = document.getElementById('slug'); if (!s.value || s.value === s.defaultValue) s.value = t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); }
-        function getArticleUrl() { const slug = document.getElementById('slug').value.trim(); const eixo = document.getElementById('eixo').value.trim(); if (slug && eixo) return `https://jardimsecreto.com/artigo/${encodeURIComponent(eixo)}/${encodeURIComponent(slug)}.html`; return window.location.href; }
+        function getArticleUrl() {
+            const slug = document.getElementById('slug').value.trim();
+            const eixo = document.getElementById('eixo').value.trim();
+            if (slug && eixo) {
+                const site = getSiteForEixo(eixo);
+                const domain = site ? site.domain : 'pautazero.com';
+                return `https://${domain}/artigo/${encodeURIComponent(eixo)}/${encodeURIComponent(slug)}.html`;
+            }
+            return window.location.href;
+        }
         function getPublishDateTime() { const val = document.getElementById('publishDateTime').value; return val ? new Date(val).toISOString() : undefined; }
 
         function generateFullHTML() {
