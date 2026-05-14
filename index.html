@@ -1643,63 +1643,7 @@
             };
             try {
                 showToast('🚀 Enviando para ' + site.portalName + ' (' + site.domain + ')...');
-                async function sendToKV() {
-    const html = generateFullHTML();
-    const slug = document.getElementById('slug').value.trim();
-    const eixo = document.getElementById('eixo').value.trim();
-    const title = document.getElementById('title').value.trim();
-    const tema = document.getElementById('tema').value.trim();
-    const excerpt = document.getElementById('excerpt').value.trim();
-    const tags = document.getElementById('tags').value.trim();
-    const author = document.getElementById('author').value.trim();
-    const imageSrc = document.getElementById('image').value.trim();
-    const publishAt = getPublishDateTime();
-
-    if (!slug || !title) { showToast('⚠️ Preencha título e slug.', true); return; }
-
-    saveEixoToNiches(eixo);
-
-    const payload = {
-        slug, title, eixo, tema,
-        html, excerpt, tags, author,
-        image: imageSrc,
-        publishAt
-    };
-
-    // Pede a senha de autor
-    const adminPass = prompt('Digite a senha de autor para publicar:');
-    if (!adminPass) {
-        showToast('❌ Publicação cancelada (senha não fornecida).', true);
-        return;
-    }
-
-    // ⚠️ SUBSTITUA PELA URL REAL DO SEU PROXY
-    const PROXY_URL = 'https://proxy-publicador.avizaecosystem.workers.dev/';
-
-    try {
-        showToast('🚀 Enviando para publicação...');
-        const res = await fetch(PROXY_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Author-Key': adminPass
-            },
-            body: JSON.stringify(payload)
-        });
-
-        const responseText = await res.text();
-        let data;
-        try { data = JSON.parse(responseText); } catch (e) { data = { error: responseText }; }
-
-        if (res.ok) {
-            showToast('✅ Publicado com sucesso!\n🔗 ' + (data.url || ''));
-        } else {
-            showToast('❌ Erro: ' + (data.error || 'Falha na publicação'), true);
-        }
-    } catch (err) {
-        showToast('❌ Erro de conexão: ' + err.message, true);
-    }
-}
+                const res = await fetch(site.worker, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'X-API-Key': API_KEY },
                     body: JSON.stringify(payload)
