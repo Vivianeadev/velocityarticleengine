@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cinzel:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <!-- Estilo luxuoso dos botões superiores (exatamente como solicitado) -->
     <style>
         /* Container dos botões */
         .top-nav-buttons {
@@ -24,14 +23,14 @@
         }
         /* Estilo base de cada botão */
         .top-nav-btn {
-            font-family: var(--font-serif);   /* 'Cinzel', serif */
+            font-family: var(--font-serif);
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            color: var(--aged-gold);          /* #b8860b */
+            color: var(--aged-gold);
             text-decoration: none;
             padding: 8px 24px;
-            border: 0.5px solid var(--gold-line); /* rgba(184, 134, 11, 0.18) */
+            border: 0.5px solid var(--gold-line);
             background: transparent;
             transition: all 0.4s ease;
             white-space: nowrap;
@@ -39,11 +38,9 @@
             align-items: center;
             gap: 8px;
         }
-        /* Ícone dentro do botão */
         .top-nav-btn i {
             font-size: 0.7rem;
         }
-        /* Efeito hover */
         .top-nav-btn:hover {
             background: rgba(184, 134, 11, 0.05);
             border-color: var(--aged-gold);
@@ -51,19 +48,52 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(184, 134, 11, 0.15);
         }
-        /* Responsivo – telas até 480px */
-        @media (max-width: 480px) {
+
+        /* Responsivo: transforma em carrossel discreto no canto superior direito */
+        @media (max-width: 768px) {
             .top-nav-buttons {
-                gap: 15px;
-                padding: 8px 10px;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                max-width: 280px;
+                width: auto;
+                margin: 0;
+                padding: 6px 8px;
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                white-space: nowrap;
+                gap: 12px;
+                background: rgba(255, 255, 255, 0.85);
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+                border-radius: 30px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                scrollbar-width: thin;
+                scrollbar-color: transparent transparent;
+            }
+            .top-nav-buttons::-webkit-scrollbar {
+                height: 3px;
+            }
+            .top-nav-buttons::-webkit-scrollbar-thumb {
+                background: rgba(184, 134, 11, 0.25);
+                border-radius: 10px;
             }
             .top-nav-btn {
                 font-size: 0.75rem;
-                padding: 6px 18px;
+                padding: 5px 14px;
                 letter-spacing: 2px;
+                gap: 5px;
+            }
+            .top-nav-btn i {
+                font-size: 0.65rem;
+            }
+            /* Ajuste do cabeçalho para não sobrepor */
+            .site-header {
+                position: relative;
             }
         }
-        /* Removido o link "Início" antigo */
+        /* O link "Início" antigo permanece removido */
         .back-home-link { display: none; }
     </style>
 </head>
@@ -105,7 +135,7 @@
         </div>
     </div>
 
-    <!-- ========== VELOCITY ARTICLE ENGINE (original, com barra de navegação luxuosa) ========== -->
+    <!-- ========== VELOCITY ARTICLE ENGINE (original) ========== -->
     <div class="main-container">
         <div class="form-card">
             <h1>Velocity <span>Article Engine</span></h1>
@@ -317,26 +347,25 @@
         <div class="preview-panel" id="articlePreview">
             <header class="site-header">
                 <div class="header-inner">
-                    <!-- Sem link "Início" -->
                     <a href="/" class="logo" id="prevLogo">Jardim<span>Secreto</span></a>
                     <div class="tagline" id="prevTagline">jardinagem · beleza · natureza</div>
                 </div>
+                <!-- Barra de navegação luxuosa (topo) -->
+                <div class="top-nav-buttons">
+                    <a href="https://justica.pautazero.com" target="_blank" class="top-nav-btn">
+                        <i class="fas fa-balance-scale"></i> Direito e Justiça
+                    </a>
+                    <a href="https://teologia.pautazero.com" target="_blank" class="top-nav-btn">
+                        <i class="fas fa-book-bible"></i> Teologia e Arqueologia bíblica
+                    </a>
+                    <a href="https://negocios.pautazero.com" target="_blank" class="top-nav-btn">
+                        <i class="fas fa-briefcase"></i> Negócios
+                    </a>
+                    <a href="https://pautazero.com" target="_blank" class="top-nav-btn">
+                        <i class="fas fa-home"></i> Página Principal
+                    </a>
+                </div>
             </header>
-            <!-- Barra de navegação luxuosa (topo) -->
-            <div class="top-nav-buttons">
-                <a href="https://justica.pautazero.com" target="_blank" class="top-nav-btn">
-                    <i class="fas fa-balance-scale"></i> Direito e Justiça
-                </a>
-                <a href="https://teologia.pautazero.com" target="_blank" class="top-nav-btn">
-                    <i class="fas fa-book-bible"></i> Teologia e Arqueologia bíblica
-                </a>
-                <a href="https://negocios.pautazero.com" target="_blank" class="top-nav-btn">
-                    <i class="fas fa-briefcase"></i> Negócios
-                </a>
-                <a href="https://pautazero.com" target="_blank" class="top-nav-btn">
-                    <i class="fas fa-home"></i> Página Principal
-                </a>
-            </div>
             <hr class="ethereal-divider" aria-hidden="true">
             <div class="context-toggle-bar" id="contextToggleBar">
                 <span class="label"><i class="fas fa-palette"></i> Contexto:</span>
@@ -1413,15 +1442,43 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(184, 134, 11, 0.15);
         }
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
             .top-nav-buttons {
-                gap: 15px;
-                padding: 8px 10px;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                max-width: 280px;
+                width: auto;
+                margin: 0;
+                padding: 6px 8px;
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                white-space: nowrap;
+                gap: 12px;
+                background: rgba(255, 255, 255, 0.85);
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+                border-radius: 30px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                scrollbar-width: thin;
+                scrollbar-color: transparent transparent;
+            }
+            .top-nav-buttons::-webkit-scrollbar {
+                height: 3px;
+            }
+            .top-nav-buttons::-webkit-scrollbar-thumb {
+                background: rgba(184, 134, 11, 0.25);
+                border-radius: 10px;
             }
             .top-nav-btn {
                 font-size: 0.75rem;
-                padding: 6px 18px;
+                padding: 5px 14px;
                 letter-spacing: 2px;
+                gap: 5px;
+            }
+            .top-nav-btn i {
+                font-size: 0.65rem;
             }
         }
     </style>
