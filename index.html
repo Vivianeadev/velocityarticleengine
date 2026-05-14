@@ -112,6 +112,47 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(184,134,11,0.25);
         }
+        /* Worker selector */
+        .worker-select-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0.6rem 0 0.8rem;
+            flex-wrap: wrap;
+            font-size: 0.7rem;
+            color: var(--aged-gold);
+        }
+        .worker-select-row select {
+            font-size: 0.7rem;
+            padding: 6px 12px;
+            border: 1px solid var(--gold-line);
+            background: #fff;
+            border-radius: 8px;
+            color: var(--petrol-blue);
+            font-family: var(--font-sans);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 180px;
+        }
+        .worker-select-row select:focus {
+            outline: none;
+            border-color: var(--aged-gold);
+            box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.06);
+        }
+        .worker-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            background: rgba(184, 134, 11, 0.04);
+            padding: 4px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+        .worker-indicator i {
+            color: var(--aged-gold);
+        }
     </style>
 </head>
 <body>
@@ -342,6 +383,20 @@
                 <label><i class="fas fa-book"></i> Referências</label>
                 <textarea id="references" rows="4" placeholder="Insira aqui as referências bibliográficas (HTML ou texto puro). Ex:&#10;BURLE MARX, R. Jardins e Rosas...&#10;LORENZI, H. Manual de Jardinagem..." oninput="updatePreview()"></textarea>
                 <div class="field-watermark">🔹 Aparecerá ao final do artigo, antes da assinatura do autor, separado por uma linha fina quase transparente. Texto em tamanho reduzido. URLs viram links automaticamente.</div>
+            </div>
+            <!-- ========== SELETOR DE WORKER (NOVO) ========== -->
+            <div class="worker-select-row">
+                <i class="fas fa-server"></i>
+                <span>Publicar no worker:</span>
+                <select id="workerSelect" onchange="onWorkerSelectChange()">
+                    <option value="auto">🤖 Automático (pelo eixo)</option>
+                    <option value="TEOLOGIA">📖 Teologia (teologia.pautazero.com)</option>
+                    <option value="JUSTICA">⚖️ Justiça (justica.pautazero.com)</option>
+                    <option value="GERAL">🌐 Geral (pautazero.com)</option>
+                </select>
+                <span class="worker-indicator" id="workerIndicator" style="display:none;">
+                    <i class="fas fa-check-circle"></i> <span id="workerIndicatorText"></span>
+                </span>
             </div>
             <button class="btn btn-full" onclick="sendToKV()"><i class="fas fa-rocket"></i> Publicar no KV</button>
             <div class="divider-or">também disponível</div>
@@ -648,7 +703,7 @@
                     <li><strong>JUSTIÇA</strong> — justica.pautazero.com (todos os eixos de direito, justiça, STF, etc.)</li>
                     <li><strong>GERAL</strong> — pautazero.com (todos os demais eixos)</li>
                 </ul>
-                <p>O worker correto é selecionado automaticamente com base no campo <strong>Eixo</strong> preenchido.</p>
+                <p>O worker correto é selecionado automaticamente com base no campo <strong>Eixo</strong> preenchido. <strong>Novidade:</strong> agora você também pode escolher manualmente o worker no seletor acima do botão "Publicar no KV", para casos em que deseja enviar para um portal específico independentemente do eixo.</p>
                 <h4><i class="fas fa-download"></i> Download e Salvamento Local</h4>
                 <p><strong>Baixar HTML:</strong> Faz o download do artigo completo como arquivo <code>.html</code> — funciona em qualquer navegador.</p>
                 <p><strong>Selecionar Pasta:</strong> Usa a File System Access API (Chrome/Edge) para escolher uma pasta no seu computador. Após selecionada, o botão <strong>"Salvar na Pasta"</strong> grava o artigo diretamente no disco, permitindo salvar múltiplos artigos em lote sem precisar selecionar a pasta novamente.</p>
@@ -742,6 +797,35 @@
         window.verificarDirecionamento = verificarDirecionamento;
         window.normalizeString = normalizeString;
 
+        // ========== FUNÇÃO AUXILIAR PARA OBTER O SITE SELECIONADO (RESPEITA O SELETOR DE WORKER) ==========
+        function getSelectedSite() {
+            const workerSelect = document.getElementById('workerSelect');
+            const selectedWorker = workerSelect ? workerSelect.value : 'auto';
+            const eixo = document.getElementById('eixo').value.trim();
+            
+            if (selectedWorker !== 'auto' && SITE_CONFIG[selectedWorker]) {
+                console.log(`📌 [Worker Manual] Usando worker forçado: ${selectedWorker} → ${SITE_CONFIG[selectedWorker].portalName}`);
+                return SITE_CONFIG[selectedWorker];
+            }
+            
+            // Modo automático: usa o eixo para determinar
+            return getSiteForEixo(eixo);
+        }
+
+        // Atualiza o indicador visual de worker quando o seletor muda
+        function onWorkerSelectChange() {
+            const site = getSelectedSite();
+            const indicator = document.getElementById('workerIndicator');
+            const indicatorText = document.getElementById('workerIndicatorText');
+            if (indicator && indicatorText) {
+                indicator.style.display = 'inline-flex';
+                indicatorText.textContent = site.portalName + ' (' + site.domain + ')';
+            }
+            // Atualiza a pré-visualização se necessário
+            updatePreview();
+        }
+        window.onWorkerSelectChange = onWorkerSelectChange;
+
         let selectedDirectoryHandle = null;
         let autoSaveTimeout = null;
         const AUTOSAVE_KEY = 'velocity_autosave_form_state';
@@ -759,7 +843,9 @@
                     image: document.getElementById('image').value, imageCaption: document.getElementById('imageCaption').value,
                     htmlContent: document.getElementById('htmlContent').value, rawTextInput: document.getElementById('rawTextInput').value,
                     fullscreenContent: document.getElementById('fullscreenContent').value, references: document.getElementById('references').value,
-                    avatarBase64: avatarBase64, relatedLinks: getRelatedLinks(), contextMode: currentContextMode, savedAt: new Date().toISOString()
+                    avatarBase64: avatarBase64, relatedLinks: getRelatedLinks(), contextMode: currentContextMode,
+                    workerSelect: document.getElementById('workerSelect') ? document.getElementById('workerSelect').value : 'auto',
+                    savedAt: new Date().toISOString()
                 };
                 localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(state));
             } catch (e) {}
@@ -792,6 +878,7 @@
                 if (state.avatarBase64) { avatarBase64 = state.avatarBase64; avatarPreviewImg.src = avatarBase64; avatarPreviewImg.style.display = 'block'; avatarRemoveBtn.style.display = 'inline-flex'; }
                 if (state.relatedLinks && state.relatedLinks.length > 0) { relatedContainer.innerHTML = ''; linkCounter = 0; state.relatedLinks.forEach(link => addLinkField(link.slug, link.url)); }
                 if (state.contextMode) setContextMode(state.contextMode);
+                if (state.workerSelect !== undefined) { const ws = document.getElementById('workerSelect'); if (ws) { ws.value = state.workerSelect; onWorkerSelectChange(); } }
                 updatePreview(); return true;
             } catch (e) { return false; }
         }
@@ -998,7 +1085,7 @@
             const slug = document.getElementById('slug').value.trim();
             const eixo = document.getElementById('eixo').value.trim();
             if (slug && eixo) {
-                const site = getSiteForEixo(eixo);
+                const site = getSelectedSite();
                 const domain = site ? site.domain : 'pautazero.com';
                 return `https://${domain}/artigo/${encodeURIComponent(eixo)}/${encodeURIComponent(slug)}.html`;
             }
@@ -1386,6 +1473,11 @@
         document.getElementById('rawTextInput').addEventListener('input', triggerAutoSave);
         document.getElementById('fullscreenContent').addEventListener('input', triggerAutoSave);
         document.getElementById('slug').addEventListener('input', triggerAutoSave);
+        // Listener para o seletor de worker
+        const workerSelectEl = document.getElementById('workerSelect');
+        if (workerSelectEl) {
+            workerSelectEl.addEventListener('change', () => { onWorkerSelectChange(); triggerAutoSave(); });
+        }
         updatePreview();
 
         async function sendToKV() {
@@ -1401,7 +1493,7 @@
             const publishAt = getPublishDateTime();
             if (!slug || !title) { showToast('⚠️ Preencha título e slug.', true); return; }
             saveEixoToNiches(eixo);
-            const site = getSiteForEixo(eixo);
+            const site = getSelectedSite();
             const payload = { slug, title, eixo, tema, html, excerpt, tags, author, image: imageSrc, portalName: site.portalName, domain: site.domain, publishAt };
             try {
                 showToast('🚀 Enviando para ' + site.portalName + ' (' + site.domain + ')...');
