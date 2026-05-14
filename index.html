@@ -10,87 +10,84 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Container dos botões */
+        /* Contêiner dos botões – minúsculo e discreto */
         .top-nav-buttons {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 30px;
+            gap: 8px;
             max-width: 1400px;
-            margin: 10px auto 5px;
-            padding: 10px 20px;
+            margin: 6px auto 4px;
+            padding: 4px 12px;
             flex-wrap: wrap;
         }
-        /* Estilo base de cada botão */
+        /* Botão minúsculo */
         .top-nav-btn {
             font-family: var(--font-serif);
-            font-size: 0.85rem;
+            font-size: 0.5rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             color: var(--aged-gold);
             text-decoration: none;
-            padding: 8px 24px;
+            padding: 3px 10px;
             border: 0.5px solid var(--gold-line);
             background: transparent;
             transition: all 0.4s ease;
             white-space: nowrap;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 4px;
+            border-radius: 20px;
         }
         .top-nav-btn i {
-            font-size: 0.7rem;
+            font-size: 0.45rem;
         }
         .top-nav-btn:hover {
             background: rgba(184, 134, 11, 0.05);
             border-color: var(--aged-gold);
             color: var(--aged-gold);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(184, 134, 11, 0.15);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(184, 134, 11, 0.12);
         }
 
-        /* Responsivo: transforma em carrossel discreto no canto superior direito */
+        /* Carrossel discreto no canto direito superior em telas pequenas */
         @media (max-width: 768px) {
             .top-nav-buttons {
                 position: absolute;
-                top: 10px;
-                right: 10px;
-                max-width: 280px;
+                top: 6px;
+                right: 6px;
+                max-width: 220px;
                 width: auto;
                 margin: 0;
-                padding: 6px 8px;
+                padding: 3px 6px;
                 justify-content: flex-start;
                 flex-wrap: nowrap;
                 overflow-x: auto;
                 white-space: nowrap;
-                gap: 12px;
+                gap: 6px;
                 background: rgba(255, 255, 255, 0.85);
                 backdrop-filter: blur(4px);
                 -webkit-backdrop-filter: blur(4px);
                 border-radius: 30px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
                 scrollbar-width: thin;
                 scrollbar-color: transparent transparent;
             }
             .top-nav-buttons::-webkit-scrollbar {
-                height: 3px;
+                height: 2px;
             }
             .top-nav-buttons::-webkit-scrollbar-thumb {
                 background: rgba(184, 134, 11, 0.25);
                 border-radius: 10px;
             }
             .top-nav-btn {
-                font-size: 0.75rem;
-                padding: 5px 14px;
-                letter-spacing: 2px;
-                gap: 5px;
+                font-size: 0.45rem;
+                padding: 2px 8px;
+                letter-spacing: 1px;
+                gap: 3px;
             }
             .top-nav-btn i {
-                font-size: 0.65rem;
-            }
-            /* Ajuste do cabeçalho para não sobrepor */
-            .site-header {
-                position: relative;
+                font-size: 0.4rem;
             }
         }
         /* O link "Início" antigo permanece removido */
@@ -135,7 +132,7 @@
         </div>
     </div>
 
-    <!-- ========== VELOCITY ARTICLE ENGINE (original) ========== -->
+    <!-- ========== VELOCITY ARTICLE ENGINE (original, com barra de navegação minúscula) ========== -->
     <div class="main-container">
         <div class="form-card">
             <h1>Velocity <span>Article Engine</span></h1>
@@ -350,7 +347,7 @@
                     <a href="/" class="logo" id="prevLogo">Jardim<span>Secreto</span></a>
                     <div class="tagline" id="prevTagline">jardinagem · beleza · natureza</div>
                 </div>
-                <!-- Barra de navegação luxuosa (topo) -->
+                <!-- Barra de navegação minúscula -->
                 <div class="top-nav-buttons">
                     <a href="https://justica.pautazero.com" target="_blank" class="top-nav-btn">
                         <i class="fas fa-balance-scale"></i> Direito e Justiça
@@ -1410,75 +1407,76 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 30px;
+            gap: 8px;
             max-width: 1400px;
-            margin: 10px auto 5px;
-            padding: 10px 20px;
+            margin: 6px auto 4px;
+            padding: 4px 12px;
             flex-wrap: wrap;
         }
         .top-nav-btn {
             font-family: var(--font-serif);
-            font-size: 0.85rem;
+            font-size: 0.5rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             color: var(--aged-gold);
             text-decoration: none;
-            padding: 8px 24px;
+            padding: 3px 10px;
             border: 0.5px solid var(--gold-line);
             background: transparent;
             transition: all 0.4s ease;
             white-space: nowrap;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 4px;
+            border-radius: 20px;
         }
         .top-nav-btn i {
-            font-size: 0.7rem;
+            font-size: 0.45rem;
         }
         .top-nav-btn:hover {
             background: rgba(184, 134, 11, 0.05);
             border-color: var(--aged-gold);
             color: var(--aged-gold);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(184, 134, 11, 0.15);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(184, 134, 11, 0.12);
         }
         @media (max-width: 768px) {
             .top-nav-buttons {
                 position: absolute;
-                top: 10px;
-                right: 10px;
-                max-width: 280px;
+                top: 6px;
+                right: 6px;
+                max-width: 220px;
                 width: auto;
                 margin: 0;
-                padding: 6px 8px;
+                padding: 3px 6px;
                 justify-content: flex-start;
                 flex-wrap: nowrap;
                 overflow-x: auto;
                 white-space: nowrap;
-                gap: 12px;
+                gap: 6px;
                 background: rgba(255, 255, 255, 0.85);
                 backdrop-filter: blur(4px);
                 -webkit-backdrop-filter: blur(4px);
                 border-radius: 30px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
                 scrollbar-width: thin;
                 scrollbar-color: transparent transparent;
             }
             .top-nav-buttons::-webkit-scrollbar {
-                height: 3px;
+                height: 2px;
             }
             .top-nav-buttons::-webkit-scrollbar-thumb {
                 background: rgba(184, 134, 11, 0.25);
                 border-radius: 10px;
             }
             .top-nav-btn {
-                font-size: 0.75rem;
-                padding: 5px 14px;
-                letter-spacing: 2px;
-                gap: 5px;
+                font-size: 0.45rem;
+                padding: 2px 8px;
+                letter-spacing: 1px;
+                gap: 3px;
             }
             .top-nav-btn i {
-                font-size: 0.65rem;
+                font-size: 0.4rem;
             }
         }
     </style>
