@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Negócios & Anunciantes · PautaZero</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Inter:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --petrol-blue: #0a3147;
+            --petrol-light: #1a4b6d;
+            --aged-gold: #b8860b;
+            --gold-line: rgba(184, 134, 11, 0.18);
+            --gold-line-strong: rgba(184, 134, 11, 0.35);
+            --text-muted: #5a7d91;
+            --font-sans: 'Inter', sans-serif;
+            --font-serif: 'Cinzel', serif;
+            --font-body: 'Marcellus', serif;
+            --transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+            --card-shadow-hover: 0 35px 65px -15px rgba(10, 49, 71, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--petrol-blue);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* ========== HEADER ========== */
+        header {
+            padding: 30px 0 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            background: rgb(255 255 255 / 0.98);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 0.5px solid var(--gold-line);
+        }
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 400;
+            letter-spacing: 8px;
+            text-decoration: none;
+            color: var(--petrol-blue);
+            display: block;
+        }
+        .logo span {
+            color: var(--aged-gold);
+            font-weight: 700;
+        }
+        .tagline {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--aged-gold);
+            opacity: 0.8;
+        }
+
+        /* ========== SEÇÃO DE NEGÓCIOS ========== */
+        .business-hero {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(to bottom, #fcfcfc, #ffffff);
+        }
+        .section-label {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--aged-gold);
+            margin-bottom: 20px;
+            display: block;
+        }
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            margin-bottom: 30px;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+        .hero-description {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* ========== GRID DE BENEFÍCIOS ========== */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        .benefit-card {
+            padding: 40px;
+            border: 1px solid var(--gold-line);
+            transition: var(--transition);
+            text-align: left;
+            background: #fff;
+        }
+        .benefit-card:hover {
+            border-color: var(--aged-gold);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(184, 134, 11, 0.05);
+        }
+        .benefit-card i {
+            font-size: 2rem;
+            color: var(--aged-gold);
+            margin-bottom: 20px;
+        }
+        .benefit-card h3 {
+            font-family: var(--font-serif);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* ========== EXEMPLO DE PÁGINA DO CONVIDADO ========== */
+        .guest-page-preview {
+            margin-top: 100px;
+            padding: 60px;
+            background: #fafafa;
+            border: 1px dashed var(--aged-gold);
+            position: relative;
+        }
+        .guest-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--aged-gold);
+            color: white;
+            padding: 5px 20px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: var(--font-sans);
+            white-space: nowrap;
+            z-index: 2;
+        }
+        .guest-content {
+            background: white;
+            padding: 60px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.05);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .guest-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .guest-invite-note {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        .guest-product-image {
+            width: 100%;
+            height: 400px;
+            background: #f9f7f2;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-serif);
+            color: #b8a87f;
+            border: 1px solid var(--gold-line);
+            position: relative;
+            overflow: hidden;
+        }
+        .guest-product-image .example-watermark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.7);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .guest-product-image .example-watermark i {
+            font-size: 6rem;
+            color: rgba(184, 134, 11, 0.25);
+            margin-bottom: 15px;
+        }
+        .guest-product-image .example-watermark span {
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.7rem;
+            color: var(--aged-gold);
+            font-weight: 500;
+            background: rgba(255,255,255,0.8);
+            padding: 6px 20px;
+            border: 1px solid var(--aged-gold);
+        }
+        .guest-product-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--petrol-blue);
+        }
+        .guest-product-desc {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #444;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--petrol-blue);
+            color: white;
+            text-decoration: none;
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-weight: 500;
+        }
+        .cta-button:hover {
+            background: var(--aged-gold);
+            transform: scale(1.05);
+        }
+
+        /* ========== MODAL DO CATÁLOGO (SHOPPING DE LUXO) ========== */
+        .catalog-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 49, 71, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.55s cubic-bezier(0.19, 1, 0.22, 1),
+                visibility 0.55s cubic-bezier(0.19, 1, 0.22, 1);
+            padding: 20px;
+        }
+        .catalog-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .catalog-modal {
+            background: #ffffff;
+            width: 100%;
+            max-width: 1300px;
+            max-height: 90vh;
+            border-radius: 2px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            box-shadow: 0 60px 120px rgba(0, 0, 0, 0.25);
+            transform: translateY(30px);
+            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            position: relative;
+            scroll-behavior: smooth;
+        }
+        .catalog-overlay.active .catalog-modal {
+            transform: translateY(0);
+        }
+        .catalog-modal-header {
+            position: sticky;
+            top: 0;
+            background: #ffffff;
+            z-index: 10;
+            padding: 35px 50px 20px;
+            border-bottom: 1px solid var(--gold-line);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .catalog-modal-title {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            color: var(--petrol-blue);
+            font-weight: 400;
+        }
+        .catalog-modal-title span {
+            color: var(--aged-gold);
+        }
+        .catalog-close-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid var(--gold-line);
+            background: #fff;
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: var(--petrol-blue);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .catalog-close-btn:hover {
+            background: var(--petrol-blue);
+            color: #fff;
+            border-color: var(--petrol-blue);
+            transform: rotate(90deg);
+        }
+        .catalog-subtitle {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: var(--aged-gold);
+            text-transform: uppercase;
+            width: 100%;
+            margin-top: 4px;
+        }
+        .catalog-grid-container {
+            padding: 40px 50px 60px;
+        }
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 35px;
+        }
+        .catalog-card {
+            background: #fff;
+            border: 1px solid var(--gold-line);
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            cursor: default;
+        }
+        .catalog-card:hover {
+            border-color: var(--aged-gold);
+            box-shadow: var(--card-shadow-hover);
+            transform: translateY(-6px);
+        }
+        .catalog-card-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--aged-gold);
+            color: #fff;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 5px 14px;
+            font-family: var(--font-sans);
+            font-weight: 500;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .catalog-card-image {
+            width: 100%;
+            height: 220px;
+            background: #f8f6f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #c9b98a;
+            flex-shrink: 0;
+            border-bottom: 1px solid var(--gold-line);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .catalog-card:hover .catalog-card-image {
+            background: #f3efe6;
+        }
+        .catalog-card-image i {
+            transition: var(--transition);
+        }
+        .catalog-card:hover .catalog-card-image i {
+            transform: scale(1.1);
+            color: var(--aged-gold);
+        }
+        .catalog-card-body {
+            padding: 25px 28px 30px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .catalog-card-category {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--aged-gold);
+            font-family: var(--font-sans);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        .catalog-card-name {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--petrol-blue);
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+        .catalog-card-desc {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .catalog-card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 24px;
+            background: transparent;
+            border: 1px solid var(--petrol-blue);
+            color: var(--petrol-blue);
+            text-decoration: none;
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            transition: var(--transition);
+            align-self: flex-start;
+            cursor: pointer;
+        }
+        .catalog-card-link:hover {
+            background: var(--petrol-blue);
+            color: #fff;
+            border-color: var(--petrol-blue);
+            gap: 14px;
+        }
+        .catalog-card-link i {
+            font-size: 0.7rem;
+            transition: var(--transition);
+        }
+
+        /* Categoria Destaque no Grid */
+        .catalog-section-divider {
+            grid-column: 1 / -1;
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            color: var(--petrol-blue);
+            padding-top: 20px;
+            margin-top: 10px;
+            border-top: 1px solid var(--gold-line);
+            text-align: center;
+            font-weight: 400;
+        }
+        .catalog-section-divider:first-of-type {
+            margin-top: 0;
+            border-top: none;
+            padding-top: 0;
+        }
+        .catalog-section-divider span {
+            color: var(--aged-gold);
+        }
+
+        /* ========== POP-UP DE LUXO (PÁGINA EM CONSTRUÇÃO) ========== */
+        .construction-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 49, 71, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1),
+                visibility 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            padding: 20px;
+        }
+        .construction-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .construction-dialog {
+            background: #ffffff;
+            max-width: 500px;
+            width: 100%;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.3);
+            border: 1px solid var(--gold-line);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .construction-overlay.active .construction-dialog {
+            transform: translateY(0);
+        }
+        .construction-dialog i {
+            font-size: 4rem;
+            color: var(--aged-gold);
+            margin-bottom: 25px;
+            display: block;
+        }
+        .construction-dialog h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: var(--petrol-blue);
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+        .construction-dialog p {
+            font-family: var(--font-body);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .construction-close-btn {
+            display: inline-block;
+            padding: 12px 35px;
+            background: var(--petrol-blue);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        .construction-close-btn:hover {
+            background: var(--aged-gold);
+            transform: scale(1.05);
+        }
+        .construction-dialog .gold-line-dec {
+            width: 60px;
+            height: 1px;
+            background: var(--aged-gold);
+            margin: 20px auto;
+            opacity: 0.5;
+        }
+
+        /* ========== FOOTER UNIFICADO ========== */
+        footer {
+            margin-top: 100px;
+            padding: 60px 0 30px;
+            border-top: 1px solid var(--gold-line);
+            text-align: center;
+        }
+        .disclaimer {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            padding: 20px;
+            border: 0.5px solid var(--gold-line);
+            background: #f9f9f9;
+            text-align: left;
+        }
+        .disclaimer strong {
+            color: var(--petrol-blue);
+            font-weight: 600;
+        }
+        .editorial-links {
+            margin: 35px 0 25px;
+            padding: 25px 0;
+            border-top: 1px solid var(--gold-line);
+            border-bottom: 1px solid var(--gold-line);
+        }
+        .editorial-links-title {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--aged-gold);
+            margin-bottom: 18px;
+            opacity: 0.8;
+        }
+        .editorial-links nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .editorial-links nav a {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--petrol-blue);
+            text-decoration: none;
+            transition: var(--transition);
+            padding: 4px 0;
+            border-bottom: 1px solid transparent;
+            font-weight: 400;
+        }
+        .editorial-links nav a:hover {
+            color: var(--aged-gold);
+            border-bottom-color: var(--aged-gold);
+        }
+        .footer-copyright {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 20px;
+            letter-spacing: 1px;
+        }
+        .footer-email {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+        }
+        .footer-email a {
+            color: var(--petrol-blue);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid var(--gold-line);
+            transition: var(--transition);
+        }
+        .footer-email a:hover {
+            color: var(--aged-gold);
+            border-bottom-color: var(--aged-gold);
+        }
+
+        /* Footer dentro do modal do catálogo */
+        .modal-footer-unified {
+            text-align: center;
+            padding: 20px 50px 35px;
+            border-top: 1px solid var(--gold-line);
+            background: #fcfcfc;
+        }
+        .modal-footer-unified .editorial-links {
+            border-top: none;
+            border-bottom: none;
+            margin: 5px 0 15px;
+            padding: 10px 0;
+        }
+        .modal-footer-unified .editorial-links-title {
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+        }
+        .modal-footer-unified .editorial-links nav a {
+            font-size: 0.65rem;
+            letter-spacing: 1.5px;
+        }
+        .modal-disclaimer-mini {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-top: 10px;
+        }
+        .modal-disclaimer-mini a {
+            color: var(--petrol-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .modal-disclaimer-mini a:hover {
+            color: var(--aged-gold);
+        }
+
+        /* ========== SCROLLBAR ESTILIZADA ========== */
+        .catalog-modal::-webkit-scrollbar {
+            width: 6px;
+        }
+        .catalog-modal::-webkit-scrollbar-track {
+            background: #fafafa;
+        }
+        .catalog-modal::-webkit-scrollbar-thumb {
+            background: #c9b98a;
+            border-radius: 3px;
+        }
+
+        /* ========== RESPONSIVIDADE ========== */
+        @media (max-width: 1024px) {
+            .catalog-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 25px;
+            }
+            .catalog-grid-container {
+                padding: 30px 30px 45px;
+            }
+            .catalog-modal-header {
+                padding: 28px 30px 18px;
+            }
+            .catalog-modal-title {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+            }
+            .modal-footer-unified {
+                padding: 18px 30px 28px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .guest-content {
+                padding: 30px;
+            }
+            .guest-page-preview {
+                padding: 40px 20px;
+            }
+            .guest-product-image {
+                height: 280px;
+            }
+            .guest-product-image .example-watermark i {
+                font-size: 4rem;
+            }
+            .guest-product-image .example-watermark span {
+                font-size: 0.6rem;
+                letter-spacing: 2px;
+                padding: 4px 14px;
+            }
+            .guest-product-title {
+                font-size: 1.8rem;
+            }
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .benefit-card {
+                padding: 28px;
+            }
+            .catalog-overlay {
+                padding: 10px;
+                align-items: flex-start;
+                padding-top: 10px;
+            }
+            .catalog-modal {
+                max-height: 95vh;
+            }
+            .catalog-modal-header {
+                padding: 22px 20px 14px;
+                gap: 12px;
+            }
+            .catalog-modal-title {
+                font-size: 1.3rem;
+                letter-spacing: 2px;
+            }
+            .catalog-close-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+            .catalog-grid-container {
+                padding: 20px 20px 35px;
+            }
+            .catalog-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 18px;
+            }
+            .catalog-card-image {
+                height: 160px;
+                font-size: 2.2rem;
+            }
+            .catalog-card-body {
+                padding: 18px 16px 22px;
+            }
+            .catalog-card-name {
+                font-size: 1rem;
+            }
+            .catalog-card-desc {
+                font-size: 0.75rem;
+            }
+            .catalog-card-link {
+                padding: 9px 18px;
+                font-size: 0.65rem;
+                letter-spacing: 1px;
+            }
+            .catalog-section-divider {
+                font-size: 1.1rem;
+                letter-spacing: 2px;
+            }
+            .catalog-card-badge {
+                top: 10px;
+                right: 10px;
+                font-size: 0.55rem;
+                padding: 4px 10px;
+                letter-spacing: 1.5px;
+            }
+            .logo {
+                font-size: 2rem;
+                letter-spacing: 5px;
+            }
+            .tagline {
+                font-size: 0.6rem;
+                letter-spacing: 3px;
+            }
+            .construction-dialog {
+                padding: 35px 25px;
+            }
+            .construction-dialog i {
+                font-size: 3rem;
+            }
+            .construction-dialog h3 {
+                font-size: 1.2rem;
+            }
+            .construction-dialog p {
+                font-size: 0.85rem;
+            }
+            .editorial-links nav {
+                gap: 18px;
+            }
+            .editorial-links nav a {
+                font-size: 0.65rem;
+                letter-spacing: 1.5px;
+            }
+            .modal-footer-unified {
+                padding: 15px 20px 25px;
+            }
+            .modal-footer-unified .editorial-links nav {
+                gap: 15px;
+            }
+            .modal-footer-unified .editorial-links nav a {
+                font-size: 0.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .catalog-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .catalog-card-image {
+                height: 200px;
+                font-size: 2.8rem;
+            }
+            .catalog-card-body {
+                padding: 20px 18px 24px;
+            }
+            .catalog-modal-header {
+                padding: 18px 16px 12px;
+            }
+            .catalog-modal-title {
+                font-size: 1.1rem;
+                letter-spacing: 1.5px;
+            }
+            .catalog-subtitle {
+                font-size: 0.65rem;
+                letter-spacing: 2px;
+            }
+            .catalog-grid-container {
+                padding: 16px 14px 28px;
+            }
+            .hero-title {
+                font-size: 1.6rem;
+            }
+            .hero-description {
+                font-size: 0.9rem;
+            }
+            .guest-product-title {
+                font-size: 1.4rem;
+            }
+            .guest-product-desc {
+                font-size: 0.9rem;
+            }
+            .guest-content {
+                padding: 20px 15px;
+            }
+            .guest-product-image {
+                height: 200px;
+            }
+            .guest-product-image .example-watermark i {
+                font-size: 3rem;
+            }
+            .guest-product-image .example-watermark span {
+                font-size: 0.55rem;
+                letter-spacing: 1.5px;
+                padding: 3px 10px;
+            }
+            .cta-button {
+                padding: 12px 28px;
+                font-size: 0.7rem;
+                letter-spacing: 1.5px;
+            }
+            .guest-badge {
+                font-size: 0.6rem;
+                padding: 4px 14px;
+                letter-spacing: 1.5px;
+                top: -12px;
+            }
+            .benefit-card {
+                padding: 22px 18px;
+            }
+            .benefit-card h3 {
+                font-size: 1rem;
+            }
+            .benefit-card i {
+                font-size: 1.5rem;
+            }
+            .section-label {
+                font-size: 0.65rem;
+                letter-spacing: 3px;
+            }
+            .catalog-close-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+            .construction-dialog {
+                padding: 30px 18px;
+            }
+            .construction-dialog i {
+                font-size: 2.5rem;
+            }
+            .construction-dialog h3 {
+                font-size: 1rem;
+                letter-spacing: 1.5px;
+            }
+            .construction-dialog p {
+                font-size: 0.8rem;
+            }
+            .construction-close-btn {
+                padding: 10px 25px;
+                font-size: 0.65rem;
+                letter-spacing: 1.5px;
+            }
+            .editorial-links nav {
+                flex-direction: column;
+                gap: 12px;
+                align-items: center;
+            }
+            .editorial-links-title {
+                font-size: 0.6rem;
+                letter-spacing: 3px;
+            }
+            .disclaimer {
+                padding: 15px;
+                font-size: 0.7rem;
+            }
+            .modal-footer-unified .editorial-links nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="#" class="logo">PAUTA<span>ZERO</span></a>
+            <div class="tagline">Negócios & Conexões de Valor</div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="business-hero">
+            <span class="section-label">Novo Serviço PautaZero</span>
+            <h1 class="hero-title">Sua Marca em Nossa Vitrine de <span style="color:var(--aged-gold)">Excelência</span></h1>
+            <p class="hero-description">
+                Apresentamos o novo canal de Negócios da Revista PautaZero. Um espaço exclusivo onde nossos convidados e parceiros podem expor seus produtos e serviços com a mesma sofisticação e autoridade de nosso conteúdo editorial.
+            </p>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i class="fas fa-gem"></i>
+                    <h3>Interface Premium</h3>
+                    <p>Seu produto apresentado em um ambiente de luxo, mantendo a identidade visual "clean" e sofisticada da PautaZero.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Público Qualificado</h3>
+                    <p>Acesso direto aos leitores da revista, um público que busca sabedoria, qualidade e confiança.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-gift"></i>
+                    <h3>Lançamento Gratuito</h3>
+                    <p>Como parte do nosso lançamento, os primeiros convidados terão sua página sem custos por um período determinado.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="guest-page-preview">
+            <div class="guest-badge">Exemplo de Página de Convidado</div>
+
+            <div class="guest-content">
+                <div class="guest-header">
+                    <div class="guest-invite-note">PautaZero convidou: <strong>Atelier de Joias Finas</strong></div>
+                    <h2 class="guest-product-title">Coleção Eterna: Ouro & Sabedoria</h2>
+                </div>
+
+                <div class="guest-product-image">
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; position: relative; z-index: 0;">
+                        <i class="fas fa-gem" style="font-size: 5rem; color: #c9b88f; opacity: 0.6;"></i>
+                        <i class="fas fa-ring" style="font-size: 4rem; color: #d4af37; opacity: 0.5;"></i>
+                        <i class="fas fa-crown" style="font-size: 5rem; color: #c9b88f; opacity: 0.6;"></i>
+                    </div>
+                    <div class="example-watermark">
+                        <i class="fas fa-image"></i>
+                        <span>Imagem Ilustrativa · Exemplo</span>
+                    </div>
+                </div>
+
+                <div class="guest-product-desc">
+                    <p><em style="color: var(--aged-gold); font-family: var(--font-sans); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px;">(Exemplo ilustrativo)</em></p>
+                    <p>A Coleção Eterna foi desenvolvida para aqueles que apreciam a fusão entre a arte clássica e o design contemporâneo. Cada peça é única, forjada com materiais nobres e inspirada nos princípios de beleza e perenidade que regem a nossa revista.</p>
+                    <br>
+                    <p>Nesta página exclusiva, você pode conhecer os detalhes técnicos, a história por trás da criação e como adquirir estas peças limitadas.</p>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <button class="cta-button" id="openCatalogBtn" aria-label="Abrir catálogo completo de convidados">
+                        Conhecer Catálogo Completo <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="disclaimer">
+                <strong>Isenção de Responsabilidade:</strong> A Revista PautaZero atua exclusivamente como plataforma de exposição para seus convidados e anunciantes. Não nos responsabilizamos pela fabricação, logística, garantia ou qualidade dos produtos e serviços aqui expostos. Toda e qualquer transação comercial é de inteira responsabilidade entre o anunciante e o consumidor final. A PautaZero não se responsabiliza por quaisquer danos, prejuízos ou obrigações decorrentes de negociações realizadas fora deste ambiente. Recomendamos a devida diligência antes de qualquer aquisição.
+            </div>
+
+            <div class="editorial-links">
+                <div class="editorial-links-title">Conheça os Artigos do Editorial PautaZero</div>
+                <nav>
+                    <a href="#" aria-label="Página Principal do Editorial">Página Principal</a>
+                    <a href="#" aria-label="Editorial de Direito e Justiça">Direito e Justiça</a>
+                    <a href="#" aria-label="Editorial de Teologia e Arqueologia">Teologia e Arqueologia</a>
+                </nav>
+            </div>
+
+            <div class="footer-email">
+                Contato editorial: <a href="mailto:editorial.pautazero@outlook.com">editorial.pautazero@outlook.com</a>
+            </div>
+            <p class="footer-copyright">
+                &copy; 2026 PautaZero · Todos os direitos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <!-- MODAL: CATÁLOGO DE CONVIDADOS -->
+    <div class="catalog-overlay" id="catalogOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="catalogTitle">
+        <div class="catalog-modal" id="catalogModal">
+            <div class="catalog-modal-header">
+                <div>
+                    <div class="catalog-modal-title" id="catalogTitle">Vitrine <span>PautaZero</span></div>
+                    <div class="catalog-subtitle">Convidados & Parceiros de Excelência</div>
+                </div>
+                <button class="catalog-close-btn" id="closeCatalogBtn" aria-label="Fechar catálogo">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="catalog-grid-container">
+                <div class="catalog-grid">
+
+                    <div class="catalog-section-divider">
+                        <span>✦</span> Joalheria & Acessórios <span>✦</span>
+                    </div>
+
+                    <div class="catalog-card">
+                        <span class="catalog-card-badge">Convidado</span>
+                        <div class="catalog-card-image"><i class="fas fa-gem"></i></div>
+                        <div class="catalog-card-body">
+                            <div class="catalog-card-category">Joalheria de Autor</div>
+                            <div class="catalog-card-name">Atelier Fasano Joias</div>
+                            <div class="catalog-card-desc">Peças exclusivas em ouro 18k com design assinado. Coleções limitadas que unem ourivesaria clássica e arte contemporânea.</div>
+                            <a href="#" class="catalog-card-link construction-link" target="_blank" rel="noopener">Visitar Página Oficial <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="catalog-card">
+                        <span class="catalog-card-badge">Convidado</span>
+                        <div class="catalog-card-image"><i class="fas fa-ring"></i></div>
+                        <div class="catalog-card-body">
+                            <div class="catalog-card-category">Ourivesaria Premium</div>
+                            <div class="catalog-card-name">Ourivesaria Porto</div>
+                            <div class="catalog-card-desc">Alianças e joias personalizadas criadas por mestres ourives. Tradição centenária com acabamento artesanal impecável.</div>
+                            <a href="#" class="catalog-card-link construction-link" target="_blank" rel="noopener">Visitar Página Oficial <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="catalog-card">
+                        <span class="catalog-card-badge">Convidado</span>
+                        <div class="catalog-card-image"><i class="fas fa-clock"></i></div>
+                        <div class="catalog-card-body">
+                            <div class="catalog-card-category">Relojoaria de Luxo</div>
+                            <div class="catalog-card-name">Casa Tempus</div>
+                            <div class="catalog-card-desc">Relógios mecânicos suíços e edições limitadas para colecionadores exigentes. Atendimento com hora marcada.</div>
+                            <a href="#" class="catalog-card-link construction-link" target="_blank" rel="noopener">Visitar Página Oficial <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="catalog-section-divider">
+                        <span>✦</span> Moda & Estilo <span>✦</span>
+                    </div>
+
+                    <div class="catalog-card">
+                        <span class="catalog-card-badge">Convidado</span>
+                        <div class="catalog-card-image"><i class="fas fa-tshirt"></i></div>
+                        <div class="catalog-card-body">
+                            <div class="catalog-card-category">Alta Costura Artesanal</div>
+                            <div class="catalog-card-name">Ateliê Santa Luzia</div>
+                            <div class="catalog-card-desc">Vestidos sob medida com bordados manuais e seda italiana. Cada peça leva até 200 horas de trabalho artesanal.</div>
+                            <a href="#" class="catalog-card-link construction-link" target="_blank" rel="noopener">Visitar Página Oficial <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="catalog-card">
+                        <span class="catalog-card-badge">Convidado</span>
+                        <div class="catalog-card-image"><i class="fas fa-glasses"></i></div>
+                        <div class="catalog-card-body">
+                            <div class="catalog-card-category">Ótica de Luxo</div>
+                            <div class="catalog-card-name">Lunetterie d'Or</div>
+                            <div class="catalog-card-desc">Armações em acetato de algodão, titânio japonês e lentes de precisão. Design exclusivo para rostos exigentes.</div>
+                            <a href="#" class="catalog-card-link construction-link" target="_blank" rel="noopener">Visitar Página Oficial <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="catalog-card">
+                        <span class="catalog-card-badge">Convidado</span>
+                        <div class="catalog-card-image"><i class="fas fa-shoe-prints"></i></div>
+                        <div class="catalog-card-body">
+                            <div class="catalog-card-category">Calçados Sob Medida</div>
+                            <div class="catalog-card-name">Bottega del Piede</div>
+                            <div class="catalog-card-desc">Sapatos artesanais feitos à mão com couro italiano e forma personalizada. Conforto e elegância em cada passo.</div>
+                            <a href="#" class="catalog-card-link construction-link" target="_blank" rel="noopener">Visitar Página Oficial <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="catalog-section-divider">
+                        <span>✦</span> Gastronomia & Vinhos <span>✦</span>
+                    </div>
+
+                    <div class="catalog-card">
+                        <span class="catalog-card-badge">Convidado</span>
+                        <div class="catalog-card-image"><i class="fas fa-wine-bottle"></i></div>
+                        <div class="catalog-card-body">
+                            <div class="catalog-card-category">Vinhos de Coleção</div>
+                            <div class="catalog-card-name">Vinícola Terras Altas</div>
+                            <div class="catalog-card-desc">Vinhos de altitude premiados, com produção limitada a 3.000 garrafas por safra. Enoturismo exclusivo.</div>
+                            <a href="#" class="catalog-card-link construction-link" target="_blank" rel="noopener">Visitar Página Oficial <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="catalog-card">
+                        <span class="catalog-card-badge">Convidado</span>
+                        <div class="catalog-card-image"><i class="fas fa-coffee"></i></div>
+                        <div class="catalog-card-body">
+                            <div class="catalog-card-category">Cafés & Infusões Raras</div>
+                            <div class="catalog-card-name">Casa de Chás & Infusões</div>
+                            <div class="catalog-card-desc">Seleção de chás importados e cafés especiais de origem única. Experiência sensorial para paladares refinados.</div>
+                            <a href="#" class="catalog-card-link construction-link" target="_blank" rel="noopener">Visitar Página Oficial <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="catalog-card">
+                        <span class="catalog-card-badge">Convidado</span>
+                        <div class="catalog-card-image"><i class="fas fa-cheese"></i></div>
+                        <div class="catalog-card-body">
+                            <div class="catalog-card-category">Queijaria Artesanal</div>
+                            <div class="catalog-card-name">Fazenda Serra Bela</div>
+                            <div class="catalog-card-desc">Queijos de leite cru maturados em caverna natural. Sabores autênticos da montanha direto para sua mesa.</div>
+                            <a href="#" class="catalog-card-link construction-link" target="_blank" rel="noopener">Visitar Página Oficial <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="catalog-section-divider">
+                        <span>✦</span> Arte & Decoração <span>✦</span>
+                    </div>
+
+                    <div class="catalog-card">
+                        <span class="catalog-card-badge">Convidado</span>
+                        <div class="catalog-card-image"><i class="fas fa-palette"></i></div>
+                        <div class="catalog-card-body">
+                            <div class="catalog-card-category">Galeria de Arte</div>
+                            <div class="catalog-card-name">Galeria Raízes</div>
+                            <div class="catalog-card-desc">Arte contemporânea brasileira com curadoria de excelência. Obras de artistas emergentes e consagrados.</div>
+                            <a href="#" class="catalog-card-link construction-link" target="_blank" rel="noopener">Visitar Página Oficial <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="catalog-card">
+                        <span class="catalog-card-badge">Convidado</span>
+                        <div class="catalog-card-image"><i class="fas fa-couch"></i></div>
+                        <div class="catalog-card-body">
+                            <div class="catalog-card-category">Design de Interiores</div>
+                            <div class="catalog-card-name">Estúdio Marfim</div>
+                            <div class="catalog-card-desc">Projetos residenciais de alto padrão com mobiliário exclusivo e acabamentos importados selecionados.</div>
+                            <a href="#" class="catalog-card-link construction-link" target="_blank" rel="noopener">Visitar Página Oficial <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="catalog-card">
+                        <span class="catalog-card-badge">Convidado</span>
+                        <div class="catalog-card-image"><i class="fas fa-spa"></i></div>
+                        <div class="catalog-card-body">
+                            <div class="catalog-card-category">Perfumaria de Nicho</div>
+                            <div class="catalog-card-name">Essência Rara</div>
+                            <div class="catalog-card-desc">Fragrâncias exclusivas criadas por perfumistas renomados. Ingredientes naturais e frascos de cristal artesanal.</div>
+                            <a href="#" class="catalog-card-link construction-link" target="_blank" rel="noopener">Visitar Página Oficial <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer-unified">
+                <div class="editorial-links">
+                    <div class="editorial-links-title">Conheça os Artigos do Editorial PautaZero</div>
+                    <nav>
+                        <a href="#">Página Principal</a>
+                        <a href="#">Direito e Justiça</a>
+                        <a href="#">Teologia e Arqueologia</a>
+                    </nav>
+                </div>
+                <div class="modal-disclaimer-mini">
+                    <strong>Nota de Compliance:</strong> Os links acima direcionam para as páginas oficiais de cada convidado. A PautaZero atua como plataforma de exposição e não se responsabiliza por transações realizadas fora deste ambiente, pela qualidade dos produtos ou por quaisquer obrigações entre as partes. Para anunciar conosco: <a href="mailto:editorial.pautazero@outlook.com">editorial.pautazero@outlook.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- POP-UP DE LUXO: PÁGINA EM CONSTRUÇÃO -->
+    <div class="construction-overlay" id="constructionOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="constructionTitle">
+        <div class="construction-dialog">
+            <i class="fas fa-hammer"></i>
+            <div class="gold-line-dec"></div>
+            <h3 id="constructionTitle">Página em Construção</h3>
+            <p>Esta página oficial do convidado ainda está sendo preparada com o mesmo cuidado e excelência que a PautaZero exige. Em breve, você poderá conferir todos os detalhes deste produto ou serviço exclusivo.</p>
+            <div class="gold-line-dec"></div>
+            <button class="construction-close-btn" id="closeConstructionBtn">Compreendido</button>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const catalogOverlay = document.getElementById('catalogOverlay');
+            const catalogModal = document.getElementById('catalogModal');
+            const openCatalogBtn = document.getElementById('openCatalogBtn');
+            const closeCatalogBtn = document.getElementById('closeCatalogBtn');
+            const body = document.body;
+
+            const constructionOverlay = document.getElementById('constructionOverlay');
+            const closeConstructionBtn = document.getElementById('closeConstructionBtn');
+
+            function openCatalog() {
+                catalogOverlay.classList.add('active');
+                catalogOverlay.setAttribute('aria-hidden', 'false');
+                body.classList.add('modal-open');
+                setTimeout(() => {
+                    closeCatalogBtn.focus();
+                }, 100);
+                catalogModal.scrollTop = 0;
+            }
+
+            function closeCatalog() {
+                catalogOverlay.classList.remove('active');
+                catalogOverlay.setAttribute('aria-hidden', 'true');
+                body.classList.remove('modal-open');
+                openCatalogBtn.focus();
+            }
+
+            function openConstruction(e) {
+                e.preventDefault();
+                constructionOverlay.classList.add('active');
+                constructionOverlay.setAttribute('aria-hidden', 'false');
+                body.classList.add('modal-open');
+                setTimeout(() => {
+                    closeConstructionBtn.focus();
+                }, 100);
+            }
+
+            function closeConstruction() {
+                constructionOverlay.classList.remove('active');
+                constructionOverlay.setAttribute('aria-hidden', 'true');
+                body.classList.remove('modal-open');
+                if (catalogOverlay.classList.contains('active')) {
+                    closeCatalogBtn.focus();
+                } else {
+                    openCatalogBtn.focus();
+                }
+            }
+
+            openCatalogBtn.addEventListener('click', openCatalog);
+            closeCatalogBtn.addEventListener('click', closeCatalog);
+
+            catalogOverlay.addEventListener('click', function(e) {
+                if (e.target === catalogOverlay) {
+                    closeCatalog();
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (constructionOverlay.classList.contains('active')) {
+                        closeConstruction();
+                    } else if (catalogOverlay.classList.contains('active')) {
+                        closeCatalog();
+                    }
+                }
+            });
+
+            catalogModal.addEventListener('touchmove', function(e) {
+                e.stopPropagation();
+            }, { passive: true });
+
+            let touchStartY = 0;
+            let isDragging = false;
+            catalogModal.addEventListener('touchstart', function(e) {
+                if (catalogModal.scrollTop <= 5) {
+                    touchStartY = e.touches[0].clientY;
+                    isDragging = true;
+                } else {
+                    isDragging = false;
+                }
+            }, { passive: true });
+            catalogModal.addEventListener('touchmove', function(e) {
+                if (isDragging && catalogModal.scrollTop <= 5) {
+                    const deltaY = e.touches[0].clientY - touchStartY;
+                    if (deltaY > 80) {
+                        closeCatalog();
+                        isDragging = false;
+                    }
+                }
+            }, { passive: true });
+            catalogModal.addEventListener('touchend', function() {
+                isDragging = false;
+            });
+
+            closeConstructionBtn.addEventListener('click', closeConstruction);
+            constructionOverlay.addEventListener('click', function(e) {
+                if (e.target === constructionOverlay) {
+                    closeConstruction();
+                }
+            });
+
+            const constructionLinks = document.querySelectorAll('.construction-link');
+            constructionLinks.forEach(function(link) {
+                link.addEventListener('click', openConstruction);
+            });
+
+            constructionOverlay.addEventListener('touchmove', function(e) {
+                e.stopPropagation();
+            }, { passive: true });
+
+            console.log('✨ PautaZero · Catálogo de Convidados e Vitrine de Luxo prontos.');
+            console.log('📧 Contato editorial: editorial.pautazero@outlook.com');
+            console.log('📖 Editoriais: Página Principal | Direito e Justiça | Teologia e Arqueologia');
+        })();
+    </script>
+
+</body>
+</html>
