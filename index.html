@@ -89,7 +89,6 @@
         .back-home-link {
             display: none;
         }
-        /* Estilo extra para os botões de compartilhamento (caso o CSS externo não carregue) */
         .share-icons a {
             cursor: pointer;
             text-decoration: none;
@@ -112,7 +111,6 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(184,134,11,0.25);
         }
-        /* Worker selector */
         .worker-select-row {
             display: flex;
             align-items: center;
@@ -384,7 +382,7 @@
                 <textarea id="references" rows="4" placeholder="Insira aqui as referências bibliográficas (HTML ou texto puro). Ex:&#10;BURLE MARX, R. Jardins e Rosas...&#10;LORENZI, H. Manual de Jardinagem..." oninput="updatePreview()"></textarea>
                 <div class="field-watermark">🔹 Aparecerá ao final do artigo, antes da assinatura do autor, separado por uma linha fina quase transparente. Texto em tamanho reduzido. URLs viram links automaticamente.</div>
             </div>
-            <!-- ========== SELETOR DE WORKER (NOVO) ========== -->
+            <!-- ========== SELETOR DE WORKER ========== -->
             <div class="worker-select-row">
                 <i class="fas fa-server"></i>
                 <span>Publicar no worker:</span>
@@ -514,7 +512,7 @@
             <button class="manual-btn" onclick="openManual()"><i class="fas fa-book"></i> Manual do usuário</button>
             <button class="terms-btn" onclick="openTerms()"><i class="fas fa-gavel"></i> Termos de uso</button>
             <button class="clear-cache-btn" onclick="clearCache()"><i class="fas fa-trash-alt"></i> Limpar cache</button>
-            <span>v10.3.0 · 3 workers · direcionamento editorial inteligente</span>
+            <span>v10.3.1 · 3 workers · direcionamento editorial inteligente</span>
         </div>
     </footer>
     <div id="linkModal" class="modal">
@@ -687,7 +685,7 @@
                 <button class="modal-close" onclick="closeManual()"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-text">
-                <p style="font-size:1.1rem; font-family: var(--font-serif); color: var(--petrol-blue); margin-bottom: 1.5rem;"><strong>Bem‑vindo ao Velocity Editor Engine v10.3.0</strong> — sua central de criação e publicação de artigos com ciclo completo, do rascunho à página publicada (ou baixada), sem sair do navegador.</p>
+                <p style="font-size:1.1rem; font-family: var(--font-serif); color: var(--petrol-blue); margin-bottom: 1.5rem;"><strong>Bem‑vindo ao Velocity Editor Engine v10.3.1</strong> — sua central de criação e publicação de artigos com ciclo completo, do rascunho à página publicada (ou baixada), sem sair do navegador.</p>
                 <div style="background: var(--gradient-gold-subtle); padding: 1.2rem; border-radius: 16px; margin-bottom: 1.8rem;">
                     <h4 style="margin-top:0;"><i class="fas fa-compass"></i> Primeiros Passos</h4>
                     <ol style="margin-left:1.2rem;">
@@ -728,7 +726,7 @@
                 <p><strong>Novidade v10.2.0:</strong> Clique em qualquer imagem inserida no corpo do artigo (figure.body-image) para alternar entre <strong>cinco tamanhos</strong>: muito pequeno (20%), pequeno (35%), médio (50%), grande (70%) e expandido (100%). Um indicador "🔍 Clique para redimensionar" aparece ao passar o mouse. Isso garante flexibilidade total e redução máxima quando necessário.</p>
                 <h4><i class="fas fa-fingerprint"></i> Marca d'água / Referência</h4>
                 <p>Use o campo <strong>"Marca d'água"</strong> para inserir um código pessoal de registro (ex: <code>0002-rosas</code>). Essa referência aparecerá discretamente no rodapé do artigo, funcionando como uma assinatura de origem.</p>
-                <p style="margin-top:1.5rem; text-align:right; color:var(--aged-gold);"><i class="fas fa-crown"></i> Velocity Editor Engine v10.3.0 · Robô de Publicação KV · Ciclo Completo</p>
+                <p style="margin-top:1.5rem; text-align:right; color:var(--aged-gold);"><i class="fas fa-crown"></i> Velocity Editor Engine v10.3.1 · Robô de Publicação KV · Ciclo Completo</p>
             </div>
             <button class="accept-btn" onclick="closeManual()"><i class="fas fa-check"></i> Entendi, fechar manual</button>
         </div>
@@ -797,22 +795,17 @@
         window.verificarDirecionamento = verificarDirecionamento;
         window.normalizeString = normalizeString;
 
-        // ========== FUNÇÃO AUXILIAR PARA OBTER O SITE SELECIONADO (RESPEITA O SELETOR DE WORKER) ==========
         function getSelectedSite() {
             const workerSelect = document.getElementById('workerSelect');
             const selectedWorker = workerSelect ? workerSelect.value : 'auto';
             const eixo = document.getElementById('eixo').value.trim();
-            
             if (selectedWorker !== 'auto' && SITE_CONFIG[selectedWorker]) {
                 console.log(`📌 [Worker Manual] Usando worker forçado: ${selectedWorker} → ${SITE_CONFIG[selectedWorker].portalName}`);
                 return SITE_CONFIG[selectedWorker];
             }
-            
-            // Modo automático: usa o eixo para determinar
             return getSiteForEixo(eixo);
         }
 
-        // Atualiza o indicador visual de worker quando o seletor muda
         function onWorkerSelectChange() {
             const site = getSelectedSite();
             const indicator = document.getElementById('workerIndicator');
@@ -821,7 +814,6 @@
                 indicator.style.display = 'inline-flex';
                 indicatorText.textContent = site.portalName + ' (' + site.domain + ')';
             }
-            // Atualiza a pré-visualização se necessário
             updatePreview();
         }
         window.onWorkerSelectChange = onWorkerSelectChange;
@@ -1033,7 +1025,6 @@
 
         function addImageResizeScriptToArticle() {
             return `
-<script>
 (function() {
     var sizes = ['size-xs','size-sm','size-md','size-lg','size-xl'];
     var labels = {'size-xs':'Muito pequeno (20%)','size-sm':'Pequeno (35%)','size-md':'Médio (50%)','size-lg':'Grande (70%)','size-xl':'Expandido (100%)'};
@@ -1053,8 +1044,7 @@
         fig.addEventListener('mouseenter', function() { label.style.opacity = '1'; });
         fig.addEventListener('mouseleave', function() { label.style.opacity = '0'; });
     });
-})();
-<\/script>`;
+})();`;
         }
 
         const mainContent = document.getElementById('htmlContent');
@@ -1092,6 +1082,40 @@
             return window.location.href;
         }
         function getPublishDateTime() { const val = document.getElementById('publishDateTime').value; return val ? new Date(val).toISOString() : undefined; }
+
+        // ========== FUNÇÃO SHAREARTICLE CORRIGIDA (PREVIEW) ==========
+        function shareArticle(network) {
+            const u = getArticleUrl();
+            const t = document.getElementById('title').value.trim();
+            const e = document.getElementById('excerpt').value.trim();
+            const eu = encodeURIComponent(u);
+            const et = encodeURIComponent(t);
+            const ee = encodeURIComponent(e);
+            let link = '';
+            switch (network) {
+                case 'facebook': link = `https://www.facebook.com/sharer/sharer.php?u=${eu}`; break;
+                case 'x': link = `https://x.com/intent/post?text=${et}&url=${eu}`; break;
+                case 'linkedin': link = `https://www.linkedin.com/shareArticle?mini=true&url=${eu}&title=${et}&summary=${ee}`; break;
+                case 'whatsapp': link = `https://api.whatsapp.com/send?text=${et}%20${eu}`; break;
+                case 'email': link = `mailto:?subject=${et}&body=${ee}%0A%0A${eu}`; break;
+            }
+            if (link) {
+                if (network === 'email') {
+                    window.location.href = link;
+                    return;
+                }
+                try {
+                    const popup = window.open(link, 'shareWindow', 'width=600,height=400,noopener');
+                    if (!popup || popup.closed) {
+                        window.open(link, '_blank', 'noopener');
+                    }
+                } catch (err) {
+                    window.open(link, '_blank', 'noopener');
+                }
+                showToast(`🔗 Compartilhando no ${network === 'x' ? 'X (Twitter)' : network.charAt(0).toUpperCase() + network.slice(1)}...`);
+            }
+        }
+        window.shareArticle = shareArticle;
 
         function generateFullHTML() {
             const portalName = document.getElementById('portalName').value || 'Pauta Zero';
@@ -1165,6 +1189,7 @@
                     <i class="fas fa-fingerprint"></i> <span>Ref: ${escapeHtml(watermarkRef)}</span>
                 </div>`;
             }
+            const imageResizeCode = addImageResizeScriptToArticle();
             const fullHTML = `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -1367,44 +1392,26 @@
                 case 'email': link = 'mailto:?subject=' + et + '&body=' + ee + '%0A%0A' + eu; break;
             }
             if (link) {
-                var popup = window.open(link, '_blank', 'width=600,height=400,noopener');
-                if (!popup || popup.closed || typeof popup.closed == 'undefined') {
-                    alert('Pop-up bloqueado! Por favor, permita pop-ups para compartilhar.');
+                if (network === 'email') {
+                    window.location.href = link;
+                    return;
+                }
+                try {
+                    var popup = window.open(link, 'shareWindow', 'width=600,height=400,noopener');
+                    if (!popup || popup.closed) {
+                        window.open(link, '_blank', 'noopener');
+                    }
+                } catch (err) {
+                    window.open(link, '_blank', 'noopener');
                 }
             }
         }
-        ${addImageResizeScriptToArticle()}
+        ${imageResizeCode}
     <\/script>
 </body>
 </html>`;
             return fullHTML;
         }
-
-        function shareArticle(network) {
-            const u = getArticleUrl();
-            const t = document.getElementById('title').value.trim();
-            const e = document.getElementById('excerpt').value.trim();
-            const eu = encodeURIComponent(u);
-            const et = encodeURIComponent(t);
-            const ee = encodeURIComponent(e);
-            let link = '';
-            switch (network) {
-                case 'facebook': link = `https://www.facebook.com/sharer/sharer.php?u=${eu}`; break;
-                case 'x': link = `https://x.com/intent/post?text=${et}&url=${eu}`; break;
-                case 'linkedin': link = `https://www.linkedin.com/shareArticle?mini=true&url=${eu}&title=${et}&summary=${ee}`; break;
-                case 'whatsapp': link = `https://api.whatsapp.com/send?text=${et}%20${eu}`; break;
-                case 'email': link = `mailto:?subject=${et}&body=${ee}%0A%0A${eu}`; break;
-            }
-            if (link) {
-                const popup = window.open(link, '_blank', 'width=600,height=400,noopener');
-                if (!popup || popup.closed || typeof popup.closed == 'undefined') {
-                    showToast('⚠️ Pop-up bloqueado! Permita pop-ups para compartilhar.', true);
-                } else {
-                    showToast(`Compartilhando no ${network === 'x' ? 'X (Twitter)' : network}...`);
-                }
-            }
-        }
-        window.shareArticle = shareArticle;
 
         window.downloadArticleHTML = function() { const slug = document.getElementById('slug').value.trim() || 'artigo'; const html = generateFullHTML(); const blob = new Blob([html], { type: 'text/html;charset=UTF-8' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = slug + '.html'; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); showToast('✅ Artigo baixado.'); };
         async function selectLocalFolder() { if (!('showDirectoryPicker' in window)) { showToast('⚠️ API não suportada.', true); return; } try { selectedDirectoryHandle = await window.showDirectoryPicker({ mode: 'readwrite' }); updateFolderUI(); showToast('📁 Pasta selecionada: ' + selectedDirectoryHandle.name); } catch (err) { if (err.name !== 'AbortError') showToast('❌ Erro: ' + err.message, true); } }
@@ -1473,7 +1480,6 @@
         document.getElementById('rawTextInput').addEventListener('input', triggerAutoSave);
         document.getElementById('fullscreenContent').addEventListener('input', triggerAutoSave);
         document.getElementById('slug').addEventListener('input', triggerAutoSave);
-        // Listener para o seletor de worker
         const workerSelectEl = document.getElementById('workerSelect');
         if (workerSelectEl) {
             workerSelectEl.addEventListener('change', () => { onWorkerSelectChange(); triggerAutoSave(); });
