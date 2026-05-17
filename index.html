@@ -851,7 +851,15 @@
                 if (state.portalSlogan !== undefined) document.getElementById('portalSlogan').value = state.portalSlogan;
                 if (state.title !== undefined) document.getElementById('title').value = state.title;
                 if (state.subtitle !== undefined) document.getElementById('subtitle').value = state.subtitle;
-                if (state.eixo !== undefined) document.getElementById('eixo').value = state.eixo;
+                if (state.eixo !== undefined) {
+                    // Garante que o eixo restaurado seja um nicho válido; caso contrário, volta ao padrão "plantas-e-natureza"
+                    const savedEixo = state.eixo;
+                    const niches = loadNiches();
+                    const normalizedEixo = savedEixo.trim().toLowerCase().replace(/\s+/g, '-');
+                    const isKnown = niches.some(n => n.toLowerCase() === normalizedEixo) || 
+                                    Object.keys(EIXO_SITE_MAP).includes(normalizedEixo);
+                    document.getElementById('eixo').value = isKnown ? savedEixo : 'plantas-e-natureza';
+                }
                 if (state.tema !== undefined) document.getElementById('tema').value = state.tema;
                 if (state.slug !== undefined) document.getElementById('slug').value = state.slug;
                 if (state.publishDateTime !== undefined) document.getElementById('publishDateTime').value = state.publishDateTime;
