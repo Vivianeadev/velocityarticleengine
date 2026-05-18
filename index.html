@@ -151,7 +151,7 @@
                 backdrop-filter: blur(4px);
                 -webkit-backdrop-filter: blur(4px);
                 border-radius: 30px;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
                 scrollbar-width: thin;
                 scrollbar-color: transparent transparent;
             }
@@ -528,8 +528,8 @@
             <div class="container">
                 <div class="breadcrumb">
                     <a href="/" id="prevBreadHome">PAUTA ZERO</a> /
-                    <a href="#" id="prevEixoLink">plantas-e-natureza</a> /
-                    <span id="prevTemaSpan">rosas</span>
+                    <a href="/" id="prevEixoLink">plantas-e-natureza</a> /
+                    <a href="/" id="prevTemaLink" style="color:var(--aged-gold); text-decoration:none;">rosas</a>
                 </div>
                 <div class="article-dual-column">
                     <div class="article-image-col">
@@ -1454,8 +1454,8 @@
     <div class="container">
         <div class="breadcrumb">
             <a href="/">${escapeHtml(portalName).toUpperCase()}</a> /
-            <a href="/${escapeHtml(eixo)}">${escapeHtml(eixo)}</a> /
-            <span>${escapeHtml(tema)}</span>
+            <a href="/">${escapeHtml(eixo)}</a> /
+            <a href="/">${escapeHtml(tema)}</a>
         </div>
         <div class="article-dual-column">
             <div class="article-image-col">
@@ -1575,7 +1575,7 @@
             if (publishAt) { const parts = publishAt.split('T'); if (parts.length) { const d = new Date(parts[0] + 'T00:00:00'); displayDate = d.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }); if (parts[1]) displayDate += ' às ' + parts[1].substring(0, 5); } }
             document.getElementById('prevTitle').textContent = title;
             document.getElementById('prevEixoLink').textContent = eixo;
-            document.getElementById('prevTemaSpan').textContent = tema;
+            document.getElementById('prevTemaLink').textContent = tema;
             document.getElementById('prevTemaMeta').textContent = tema;
             document.getElementById('prevDate').textContent = displayDate;
             document.getElementById('prevReadTime').textContent = readTime;
