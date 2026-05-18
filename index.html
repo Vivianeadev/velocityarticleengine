@@ -6,10 +6,96 @@
     <title>Velocity Article Engine · Super Eigend</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cinzel:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
+        /* ========== CABEÇALHO E LINK RETORNAR AO INÍCIO ========== */
+        .pz-header {
+            background: #0a3147;
+            color: #fff;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-family: 'Inter', sans-serif;
+        }
+        .pz-header .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .pz-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .pz-logo span {
+            color: #b8860b;
+        }
+        .pz-breaking-news {
+            background: rgba(184,134,11,0.06);
+            border-bottom: 1px solid rgba(184,134,11,0.12);
+            padding: 6px 0;
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 20px;
+            font-family: 'Inter', sans-serif;
+        }
+        .pz-breaking-label {
+            background: transparent;
+            color: #8b7318;
+            padding: 3px 12px;
+            font-weight: 500;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-right: 15px;
+            flex-shrink: 0;
+            border-radius: 20px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(184,134,11,0.25);
+        }
+        .pz-breaking-label:hover {
+            background: rgba(184,134,11,0.08);
+            color: #b8860b;
+            border-color: rgba(184,134,11,0.45);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(184,134,11,0.08);
+        }
+        .pz-breaking-label i {
+            font-size: 0.6rem;
+        }
+        @media (max-width: 768px) {
+            .pz-logo {
+                font-size: 1.5rem;
+            }
+            .pz-breaking-news {
+                padding-left: 12px;
+            }
+            .pz-breaking-label {
+                font-size: 0.6rem;
+                padding: 2px 10px;
+                letter-spacing: 1px;
+                border-radius: 16px;
+            }
+        }
+
         /* Contêiner dos botões – minúsculo e discreto */
         .top-nav-buttons {
             display: flex;
@@ -154,6 +240,16 @@
     </style>
 </head>
 <body>
+    <!-- ========== CABEÇALHO PAUTAZERO (HOME) + LINK RETORNAR AO INÍCIO (CANTO ESQUERDO, DISCRETO) ========== -->
+    <header class="pz-header">
+        <div class="header-inner">
+            <a href="https://pautazero.com" class="pz-logo">Pauta<span>Zero</span></a>
+        </div>
+    </header>
+    <div class="pz-breaking-news" id="breakingNews">
+        <a href="https://pautazero.com" class="pz-breaking-label"><i class="fas fa-arrow-left"></i> Retornar ao início</a>
+    </div>
+
     <!-- ========== SUPER EIGEND ========== -->
     <div class="eigend-section">
         <h2><i class="fas fa-bolt"></i> Super Eigend <span style="font-weight: 400; color: var(--aged-gold);">· Tendências 24h</span></h2>
@@ -1083,7 +1179,6 @@
         }
         function getPublishDateTime() { const val = document.getElementById('publishDateTime').value; return val ? new Date(val).toISOString() : undefined; }
 
-        // ========== FUNÇÃO SHAREARTICLE CORRIGIDA (PREVIEW) ==========
         function shareArticle(network) {
             const u = getArticleUrl();
             const t = document.getElementById('title').value.trim();
@@ -1190,6 +1285,15 @@
                 </div>`;
             }
             const imageResizeCode = addImageResizeScriptToArticle();
+            const headerHTML = `
+    <header class="pz-header">
+        <div class="header-inner">
+            <a href="https://pautazero.com" class="pz-logo">Pauta<span>Zero</span></a>
+        </div>
+    </header>
+    <div class="pz-breaking-news">
+        <a href="https://pautazero.com" class="pz-breaking-label"><i class="fas fa-arrow-left"></i> Retornar ao início</a>
+    </div>`;
             const fullHTML = `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -1207,6 +1311,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cinzel:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1216,6 +1321,40 @@
             --font-serif: 'Cinzel', serif; --font-sans: 'Inter', sans-serif; --font-body: 'Marcellus', serif;
         }
         body { background: #ffffff; color: var(--petrol-blue); font-family: var(--font-sans); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+        .pz-header {
+            background: #0a3147; color: #fff; padding: 15px 0; position: sticky; top: 0; z-index: 1100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); font-family: 'Inter', sans-serif;
+        }
+        .pz-header .header-inner {
+            display: flex; justify-content: space-between; align-items: center;
+            max-width: 1300px; margin: 0 auto; padding: 0 20px;
+        }
+        .pz-logo {
+            font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700;
+            letter-spacing: 2px; color: #fff; text-decoration: none;
+        }
+        .pz-logo span { color: #b8860b; }
+        .pz-breaking-news {
+            background: rgba(184,134,11,0.06); border-bottom: 1px solid rgba(184,134,11,0.12);
+            padding: 6px 0; max-width: 1300px; margin: 0 auto; display: flex;
+            align-items: center; justify-content: flex-start; padding-left: 20px;
+            font-family: 'Inter', sans-serif;
+        }
+        .pz-breaking-label {
+            background: transparent; color: #8b7318; padding: 3px 12px; font-weight: 500;
+            font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1.5px;
+            margin-right: 15px; flex-shrink: 0; border-radius: 20px;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+            transition: all 0.3s ease; border: 1px solid rgba(184,134,11,0.25);
+        }
+        .pz-breaking-label:hover { background: rgba(184,134,11,0.08); color: #b8860b; border-color: rgba(184,134,11,0.45); transform: translateY(-1px); box-shadow: 0 2px 8px rgba(184,134,11,0.08); }
+        .pz-breaking-label i { font-size: 0.6rem; }
+        @media (max-width: 768px) {
+            .pz-logo { font-size: 1.5rem; }
+            .pz-breaking-news { padding-left: 12px; }
+            .pz-breaking-label { font-size: 0.6rem; padding: 2px 10px; letter-spacing: 1px; border-radius: 16px; }
+        }
+
         .site-header { text-align: center; padding: 28px 0 18px; background: #fff; border-bottom: .5px solid var(--gold-line); position: relative; }
         .header-inner { max-width: 1280px; margin: 0 auto; padding: 0 20px; position: relative; }
         .logo { font-family: var(--font-serif); font-size: 2rem; letter-spacing: 6px; text-decoration: none; color: var(--petrol-blue); }
@@ -1310,15 +1449,8 @@
     </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="/" class="logo">${logoHTML}</a>
-            <div class="tagline">${escapeHtml(slogan)}</div>
-        </div>
-    </header>
-    <div class="top-nav-buttons">
-        <a href="https://pautazero.com" target="_blank" class="top-nav-btn"><i class="fas fa-home"></i> Página Principal</a>
-    </div>
+    ${headerHTML}
+
     <div class="container">
         <div class="breadcrumb">
             <a href="/">${escapeHtml(portalName).toUpperCase()}</a> /
