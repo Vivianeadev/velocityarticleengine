@@ -1294,37 +1294,6 @@
     <div class="pz-breaking-news">
         <a href="https://pautazero.com" class="pz-breaking-label"><i class="fas fa-arrow-left"></i> Retornar ao início</a>
     </div>`;
-
-            // ---------- DADOS ESTRUTURADOS JSON-LD (IMAGEM PRINCIPAL) ----------
-            const site = getSelectedSite();
-            const pageUrl = `https://${site.domain}/artigo/${encodeURIComponent(eixo)}/${encodeURIComponent(slug)}.html`;
-            const structuredData = {
-                "@context": "https://schema.org",
-                "@type": "Article",
-                "headline": title,
-                "description": excerpt,
-                "image": imageSrc,
-                "datePublished": publishAt || today.toISOString(),
-                "dateModified": publishAt || today.toISOString(),
-                "author": {
-                    "@type": "Person",
-                    "name": author
-                },
-                "publisher": {
-                    "@type": "Organization",
-                    "name": portalName,
-                    "logo": {
-                        "@type": "ImageObject",
-                        "url": "https://pautazero.com/logo.png" // substitua pelo logo real
-                    }
-                },
-                "mainEntityOfPage": {
-                    "@type": "WebPage",
-                    "@id": pageUrl
-                }
-            };
-            // ----------------------------------------------------------------
-
             const fullHTML = `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -1339,8 +1308,6 @@
     <meta property="og:image" content="${escapeHtml(imageSrc)}">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="${escapeHtml(portalName)}">
-    <!-- DADOS ESTRUTURADOS JSON-LD (IMAGEM PRINCIPAL) -->
-    <script type="application/ld+json">${JSON.stringify(structuredData)}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cinzel:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
