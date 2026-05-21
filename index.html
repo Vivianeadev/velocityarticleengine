@@ -297,9 +297,7 @@
             }
         }
 
-        /* ============================================================
-           ESTILOS ORIGINAIS (PRESERVADOS INTACTOS)
-           ============================================================ */
+        /* ========== CABEÇALHO E LINK RETORNAR AO INÍCIO ========== */
         .pz-header {
             background: #0a3147;
             color: #fff;
@@ -307,8 +305,8 @@
             position: sticky;
             top: 0;
             z-index: 1100;
-            box-shadow: 0 2px 10px rgb(0 0 0 / .1);
-            font-family: 'Inter', sans-serif
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-family: 'Inter', sans-serif;
         }
         .pz-header .header-inner {
             display: flex;
@@ -316,7 +314,7 @@
             align-items: center;
             max-width: 1300px;
             margin: 0 auto;
-            padding: 0 20px
+            padding: 0 20px;
         }
         .pz-logo {
             font-family: 'Playfair Display', serif;
@@ -324,14 +322,14 @@
             font-weight: 700;
             letter-spacing: 2px;
             color: #fff;
-            text-decoration: none
+            text-decoration: none;
         }
         .pz-logo span {
-            color: #b8860b
+            color: #b8860b;
         }
         .pz-breaking-news {
-            background: rgb(184 134 11 / .06);
-            border-bottom: 1px solid rgb(184 134 11 / .12);
+            background: rgba(184,134,11,0.06);
+            border-bottom: 1px solid rgba(184,134,11,0.12);
             padding: 6px 0;
             max-width: 1300px;
             margin: 0 auto;
@@ -339,14 +337,14 @@
             align-items: center;
             justify-content: flex-start;
             padding-left: 20px;
-            font-family: 'Inter', sans-serif
+            font-family: 'Inter', sans-serif;
         }
         .pz-breaking-label {
-            background: #fff0;
+            background: transparent;
             color: #8b7318;
             padding: 3px 12px;
             font-weight: 500;
-            font-size: .68rem;
+            font-size: 0.68rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             margin-right: 15px;
@@ -357,32 +355,34 @@
             align-items: center;
             gap: 5px;
             transition: all 0.3s ease;
-            border: 1px solid rgb(184 134 11 / .25)
+            border: 1px solid rgba(184,134,11,0.25);
         }
         .pz-breaking-label:hover {
-            background: rgb(184 134 11 / .08);
+            background: rgba(184,134,11,0.08);
             color: #b8860b;
-            border-color: rgb(184 134 11 / .45);
+            border-color: rgba(184,134,11,0.45);
             transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgb(184 134 11 / .08)
+            box-shadow: 0 2px 8px rgba(184,134,11,0.08);
         }
         .pz-breaking-label i {
-            font-size: .6rem
+            font-size: 0.6rem;
         }
-        @media (max-width:768px) {
+        @media (max-width: 768px) {
             .pz-logo {
-                font-size: 1.5rem
+                font-size: 1.5rem;
             }
             .pz-breaking-news {
-                padding-left: 12px
+                padding-left: 12px;
             }
             .pz-breaking-label {
-                font-size: .6rem;
+                font-size: 0.6rem;
                 padding: 2px 10px;
                 letter-spacing: 1px;
-                border-radius: 16px
+                border-radius: 16px;
             }
         }
+
+        /* Contêiner dos botões – minúsculo e discreto */
         .top-nav-buttons {
             display: flex;
             justify-content: center;
@@ -391,35 +391,35 @@
             max-width: 1400px;
             margin: 6px auto 4px;
             padding: 4px 12px;
-            flex-wrap: wrap
+            flex-wrap: wrap;
         }
         .top-nav-btn {
             font-family: var(--font-serif);
-            font-size: .5rem;
+            font-size: 0.5rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--aged-gold);
             text-decoration: none;
             padding: 3px 10px;
-            border: .5px solid var(--gold-line);
-            background: #fff0;
+            border: 0.5px solid var(--gold-line);
+            background: transparent;
             transition: all 0.4s ease;
             white-space: nowrap;
             display: inline-flex;
             align-items: center;
-            gap: 4px
+            gap: 4px;
         }
         .top-nav-btn i {
-            font-size: .45rem
+            font-size: 0.45rem;
         }
         .top-nav-btn:hover {
-            background: rgb(184 134 11 / .05);
+            background: rgba(184, 134, 11, 0.05);
             border-color: var(--aged-gold);
             color: var(--aged-gold);
             transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgb(184 134 11 / .12)
+            box-shadow: 0 2px 8px rgba(184, 134, 11, 0.12);
         }
-        @media (max-width:768px) {
+        @media (max-width: 768px) {
             .top-nav-buttons {
                 position: absolute;
                 top: 6px;
@@ -433,33 +433,33 @@
                 overflow-x: auto;
                 white-space: nowrap;
                 gap: 6px;
-                background: rgb(255 255 255 / .85);
+                background: rgba(255, 255, 255, 0.85);
                 backdrop-filter: blur(4px);
                 -webkit-backdrop-filter: blur(4px);
                 border-radius: 30px;
-                box-shadow: 0 2px 8px rgb(0 0 0 / .04);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
                 scrollbar-width: thin;
-                scrollbar-color: #fff0 #fff0
+                scrollbar-color: transparent transparent;
             }
             .top-nav-buttons::-webkit-scrollbar {
-                height: 2px
+                height: 2px;
             }
             .top-nav-buttons::-webkit-scrollbar-thumb {
-                background: rgb(184 134 11 / .25);
-                border-radius: 10px
+                background: rgba(184, 134, 11, 0.25);
+                border-radius: 10px;
             }
             .top-nav-btn {
-                font-size: .45rem;
+                font-size: 0.45rem;
                 padding: 2px 8px;
                 letter-spacing: 1px;
-                gap: 3px
+                gap: 3px;
             }
             .top-nav-btn i {
-                font-size: .4rem
+                font-size: 0.4rem;
             }
         }
         .back-home-link {
-            display: none
+            display: none;
         }
         .share-icons a {
             cursor: pointer;
@@ -470,30 +470,30 @@
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            border: 1px solid var(--gold-line, rgb(184 134 11 / .18));
+            border: 1px solid var(--gold-line, rgba(184,134,11,0.18));
             background: #fff;
             color: var(--petrol-blue, #0a3147);
             font-size: 1rem;
-            transition: all 0.3s ease
+            transition: all 0.3s ease;
         }
         .share-icons a:hover {
             color: #fff;
             background: var(--aged-gold, #b8860b);
             border-color: var(--aged-gold, #b8860b);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgb(184 134 11 / .25)
+            box-shadow: 0 4px 12px rgba(184,134,11,0.25);
         }
         .worker-select-row {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin: .6rem 0 .8rem;
+            margin: 0.6rem 0 0.8rem;
             flex-wrap: wrap;
-            font-size: .7rem;
-            color: var(--aged-gold)
+            font-size: 0.7rem;
+            color: var(--aged-gold);
         }
         .worker-select-row select {
-            font-size: .7rem;
+            font-size: 0.7rem;
             padding: 6px 12px;
             border: 1px solid var(--gold-line);
             background: #fff;
@@ -502,26 +502,91 @@
             font-family: var(--font-sans);
             cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 180px
+            min-width: 180px;
         }
         .worker-select-row select:focus {
             outline: none;
             border-color: var(--aged-gold);
-            box-shadow: 0 0 0 3px rgb(184 134 11 / .06)
+            box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.06);
         }
         .worker-indicator {
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            font-size: .6rem;
+            font-size: 0.6rem;
             color: var(--text-muted);
-            background: rgb(184 134 11 / .04);
+            background: rgba(184, 134, 11, 0.04);
             padding: 4px 10px;
             border-radius: 20px;
-            white-space: nowrap
+            white-space: nowrap;
         }
         .worker-indicator i {
-            color: var(--aged-gold)
+            color: var(--aged-gold);
+        }
+        /* Compliance expansível */
+        .compliance-details {
+            margin-top: 0.4rem;
+        }
+        .compliance-summary {
+            cursor: pointer;
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: var(--aged-gold);
+            list-style: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border: 1px solid rgba(184,134,11,0.2);
+            border-radius: 20px;
+            background: rgba(184,134,11,0.04);
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+        .compliance-summary::-webkit-details-marker {
+            display: none;
+        }
+        .compliance-summary:hover {
+            background: rgba(184,134,11,0.08);
+            border-color: var(--aged-gold);
+            color: var(--aged-gold);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(184,134,11,0.08);
+        }
+        .compliance-summary i {
+            font-size: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        details[open] .compliance-summary i {
+            transform: rotate(180deg);
+        }
+        .compliance-text {
+            font-size: 0.6rem;
+            background: rgba(184,134,11,0.04);
+            padding: 0.8rem;
+            border-radius: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            line-height: 1.5;
+            color: #5a7d91;
+            border: 1px solid rgba(184,134,11,0.12);
+            margin-top: 0.5rem;
+        }
+        .compliance-notice {
+            font-size: 0.6rem;
+            color: #5a7d91;
+            margin-top: 1.2rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(184,134,11,0.18);
+            line-height: 1.5;
+            opacity: 0.8;
+        }
+        .compliance-notice h4 {
+            font-family: var(--font-serif);
+            font-size: 0.7rem;
+            color: var(--aged-gold);
+            margin-bottom: 0.4rem;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -697,6 +762,36 @@
                     </div>
                     <div class="field-watermark">🔹 64x64px. Máx. 500KB. Opcional.</div>
                 </div>
+                <!-- ========== COMPLIANCE EXPANSÍVEL ========== -->
+                <div class="form-group">
+                    <label><i class="fas fa-balance-scale"></i> Compliance, Transparência e Responsabilidade Editorial</label>
+                    <details class="compliance-details">
+                        <summary class="compliance-summary">
+                            <i class="fas fa-chevron-down"></i> Clique para expandir
+                        </summary>
+                        <div class="compliance-text">
+                            <p style="margin-top:0;">O portal Revista PautaZero possui caráter estritamente informativo, opinativo, educacional e cultural. Todo o conteúdo publicado tem como objetivo promover informação, reflexão, debate público e acesso ao conhecimento, respeitando os princípios constitucionais da liberdade de expressão e da liberdade de imprensa previstos na legislação brasileira.</p>
+                            <p>Os artigos, colunas, análises, entrevistas e conteúdos opinativos refletem exclusivamente a interpretação de seus respectivos autores, não constituindo aconselhamento jurídico, financeiro, médico, psicológico, político, religioso ou profissional de qualquer natureza.</p>
+                            <p>A Revista PautaZero não incentiva práticas ilícitas, discurso de ódio, violência, discriminação, desinformação deliberada, manipulação de informações ou qualquer atividade contrária à legislação vigente.</p>
+                            <p>Nos comprometemos com:</p>
+                            <ul style="padding-left:1.2rem; margin:0.3rem 0;">
+                                <li>o respeito à Constituição Federal Brasileira;</li>
+                                <li>o cumprimento do Marco Civil da Internet (Lei nº 12.965/2014);</li>
+                                <li>a observância da Lei Geral de Proteção de Dados – LGPD (Lei nº 13.709/2018);</li>
+                                <li>o respeito aos direitos autorais e à propriedade intelectual;</li>
+                                <li>a proteção da privacidade e dos dados pessoais dos usuários;</li>
+                                <li>a transparência editorial e responsabilidade digital.</li>
+                            </ul>
+                            <p>Conteúdos enviados por colaboradores, colunistas, leitores ou terceiros são de responsabilidade exclusiva de seus respectivos autores.</p>
+                            <p>Caso algum conteúdo publicado viole direitos autorais, direitos de imagem, privacidade, honra, legislação vigente ou contenha informações incorretas, o titular poderá solicitar revisão, correção ou remoção através de contato oficial da plataforma.</p>
+                            <p>As imagens utilizadas podem possuir caráter meramente ilustrativo, institucional, jornalístico ou licenciadas de bancos públicos, gratuitos, autorizados ou de terceiros devidamente referenciados quando aplicável.</p>
+                            <p>A Revista PautaZero reserva-se o direito de atualizar, corrigir, editar ou remover conteúdos a qualquer momento para adequação legal, editorial, ética ou técnica.</p>
+                            <p>Ao acessar este portal, o usuário declara estar ciente destes termos e concorda com as políticas de uso, privacidade e responsabilidade editorial da plataforma.</p>
+                        </div>
+                    </details>
+                    <div class="field-watermark">🔹 Este aviso é inserido automaticamente em todos os artigos gerados.</div>
+                </div>
+                <!-- FIM COMPLIANCE -->
                 <div class="form-group">
                     <label><i class="fas fa-image"></i> Imagem do artigo</label>
                     <div class="image-drop-zone" id="imageDropZone">
@@ -900,6 +995,8 @@
                                 </div>
                                 <p class="author-bio" id="prevAuthorBio">Botânica e paisagista com mais de 20 anos de experiência em jardinagem ornamental.</p>
                             </div>
+                            <!-- Compliance expansível no preview -->
+                            <div class="compliance-notice" id="prevCompliance"></div>
                         </div>
                     </div>
                 </div>
@@ -1076,7 +1173,7 @@
                 <div class="modal-text">
                     <p><strong>Velocity Article Engine — Licença de Uso e Tratamento de Dados Pessoais</strong><br><em>Última atualização: 29 de abril de 2026</em></p>
                     <h4>1. Disposições Gerais e Aceitação</h4>
-                    <p>1.1. O Velocity Article Engine ("Ferramenta") é disponibilizado sob licença não exclusiva, intransferível e revogável, destinada à geração de conteúdo em formato HTML. Ao utilizar a Ferramenta, o Usuário declara ter lido, compreendido e aceitado integralmente os presentes Termos, em conformidade com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 – LGPD), o Marco Civil da Internet (Lei nº 12.965/2014) e demais normas aplicáveis do ordenamento jurídico brasileiro.</p>
+                    <p>1.1. O Velocity Article Engine ("Ferramenta") é disponibilizado sob licença não exclusiva, intransferível e revogável, destinada à geração de conteúdo em formato HTML. Ao utilizar a Ferramenta, o Usuário declara ter lido, compreendido e aceito integralmente os presentes Termos, em conformidade com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 – LGPD), o Marco Civil da Internet (Lei nº 12.965/2014) e demais normas aplicáveis do ordenamento jurídico brasileiro.</p>
                     <p>1.2. A utilização da Ferramenta implica aceitação tácita e vinculante de todas as cláusulas aqui dispostas. Caso não concorde, o Usuário deve abster-se de utilizar o Velocity Editor Engine.</p>
                     <h4>2. Do Tratamento de Dados e Privacidade (LGPD)</h4>
                     <p>2.1. O Velocity Article Engine opera exclusivamente no lado do cliente (<em>client-side</em>). <strong>Nenhum dado pessoal ou conteúdo gerado é transmitido, armazenado ou processado em servidores externos</strong>, exceto quando o Usuário opta por publicar via API KV, momento em que o conteúdo do artigo é enviado ao Worker configurado. Todas as informações inseridas nos formulários permanecem sob controle do Usuário.</p>
@@ -1152,10 +1249,10 @@
 
     </div><!-- FIM DO mainAppWrapper -->
 
+    <!-- ============================================================
+    SCRIPT DE AUTENTICAÇÃO LUXUOSA
+    ============================================================ -->
     <script>
-        // =================================================================
-        // CANVAS DE ONDAS CRISTALINAS (FUNDO LUXUOSO)
-        // =================================================================
         (function() {
             const canvas = document.getElementById('luxuryAuthCanvas');
             const ctx = canvas.getContext('2d');
@@ -1173,26 +1270,19 @@
                 time += 0.012;
                 ctx.clearRect(0, 0, width, height);
 
-                // Múltiplas camadas de ondas douradas e cristalinas
                 const layers = [
-                    { amplitude: 28, frequency: 0.008, speed: 0.7, color: 'rgba(184,134,11,0.14)', yOffset: height *
-                            0.45, phase: 0 },
-                    { amplitude: 22, frequency: 0.011, speed: 0.55, color: 'rgba(212,168,67,0.10)', yOffset: height *
-                            0.52, phase: 1.2 },
-                    { amplitude: 18, frequency: 0.014, speed: 0.9, color: 'rgba(230,194,122,0.07)', yOffset: height *
-                            0.58, phase: 2.5 },
-                    { amplitude: 35, frequency: 0.0055, speed: 0.35, color: 'rgba(184,134,11,0.06)', yOffset: height *
-                            0.40, phase: 4.0 },
-                    { amplitude: 15, frequency: 0.018, speed: 1.1, color: 'rgba(212,168,67,0.13)', yOffset: height *
-                            0.48, phase: 0.8 },
+                    { amplitude: 28, frequency: 0.008, speed: 0.7, color: 'rgba(184,134,11,0.14)', yOffset: height * 0.45, phase: 0 },
+                    { amplitude: 22, frequency: 0.011, speed: 0.55, color: 'rgba(212,168,67,0.10)', yOffset: height * 0.52, phase: 1.2 },
+                    { amplitude: 18, frequency: 0.014, speed: 0.9, color: 'rgba(230,194,122,0.07)', yOffset: height * 0.58, phase: 2.5 },
+                    { amplitude: 35, frequency: 0.0055, speed: 0.35, color: 'rgba(184,134,11,0.06)', yOffset: height * 0.40, phase: 4.0 },
+                    { amplitude: 15, frequency: 0.018, speed: 1.1, color: 'rgba(212,168,67,0.13)', yOffset: height * 0.48, phase: 0.8 },
                 ];
 
                 layers.forEach(layer => {
                     ctx.beginPath();
                     ctx.moveTo(0, layer.yOffset);
                     for (let x = 0; x <= width; x += 3) {
-                        const y = layer.yOffset + Math.sin(x * layer.frequency + time * layer.speed + layer
-                            .phase) * layer.amplitude;
+                        const y = layer.yOffset + Math.sin(x * layer.frequency + time * layer.speed + layer.phase) * layer.amplitude;
                         ctx.lineTo(x, y);
                     }
                     ctx.lineTo(width, height);
@@ -1202,7 +1292,6 @@
                     ctx.fill();
                 });
 
-                // Linhas finas douradas sobre as ondas (cristais)
                 ctx.beginPath();
                 for (let x = 0; x <= width; x += 6) {
                     const y = height * 0.45 + Math.sin(x * 0.008 + time * 0.7) * 28;
@@ -1223,7 +1312,6 @@
                 ctx.lineWidth = 0.8;
                 ctx.stroke();
 
-                // Partículas cintilantes (cristais flutuantes)
                 const particleCount = 45;
                 for (let i = 0; i < particleCount; i++) {
                     const seed = i * 137.508;
@@ -1243,29 +1331,23 @@
             window._luxuryAnimId = animId;
         })();
 
-        // =================================================================
-        // LÓGICA DE AUTENTICAÇÃO LUXUOSA
-        // =================================================================
         const AUTH_WORKER_URL = 'https://auth.avizaecosystem.workers.dev/verify';
         const AUTH_API_KEY = 'minhasenha2011';
         const SESSION_KEY = 'super_eigend_authenticated_v2';
         let passwordRevealed = false;
 
-        // Verifica se já está autenticado na sessão
         (function checkExistingSession() {
             const sessionData = sessionStorage.getItem(SESSION_KEY);
             if (sessionData) {
                 try {
                     const data = JSON.parse(sessionData);
                     const now = Date.now();
-                    // Sessão válida por 8 horas
                     if (data.expiresAt && now < data.expiresAt) {
                         unlockEngine();
                         return;
                     }
                 } catch (e) {}
             }
-            // Garante que o overlay está visível
             document.getElementById('luxuryAuthOverlay').classList.remove('fading-out');
             document.getElementById('mainAppWrapper').style.display = 'none';
         })();
@@ -1276,11 +1358,9 @@
             const wrapper = document.getElementById('luxuryPasswordWrapper');
             const card = document.getElementById('luxuryAuthCard');
             const btn = document.getElementById('luxuryAuthMainBtn');
-
             wrapper.classList.add('revealed');
             card.classList.add('expanded');
             btn.style.display = 'none';
-
             setTimeout(() => {
                 document.getElementById('luxuryPasswordInput').focus();
             }, 400);
@@ -1291,34 +1371,24 @@
             const submitBtn = document.getElementById('luxuryPasswordSubmitBtn');
             const errorEl = document.getElementById('luxuryAuthError');
             const password = input.value.trim();
-
             if (!password) {
                 errorEl.textContent = 'Digite a senha de acesso.';
                 input.focus();
                 return;
             }
-
             submitBtn.disabled = true;
             errorEl.textContent = '';
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-
             try {
                 const resp = await fetch(AUTH_WORKER_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-API-Key': AUTH_API_KEY
-                    },
+                    headers: { 'Content-Type': 'application/json', 'X-API-Key': AUTH_API_KEY },
                     body: JSON.stringify({ password: password })
                 });
-
                 let data;
                 const textResponse = await resp.text();
-                try { data = JSON.parse(textResponse); } catch (e) { data = { authorized: false,
-                        error: 'Resposta inválida do servidor' }; }
-
+                try { data = JSON.parse(textResponse); } catch (e) { data = { authorized: false, error: 'Resposta inválida do servidor' }; }
                 if (resp.ok && data.authorized) {
-                    // Armazena sessão por 8 horas
                     sessionStorage.setItem(SESSION_KEY, JSON.stringify({
                         authorized: true,
                         expiresAt: Date.now() + (8 * 60 * 60 * 1000)
@@ -1328,7 +1398,6 @@
                     errorEl.textContent = data.error || '🔒 Senha incorreta. Acesso negado.';
                     input.value = '';
                     input.focus();
-                    // Vibração sutil de erro no card
                     const card = document.getElementById('luxuryAuthCard');
                     card.style.transform = 'translateX(4px)';
                     setTimeout(() => { card.style.transform = ''; }, 150);
@@ -1345,32 +1414,19 @@
         function unlockEngine() {
             const overlay = document.getElementById('luxuryAuthOverlay');
             const wrapper = document.getElementById('mainAppWrapper');
-
-            // Cancela animação do canvas
             if (window._luxuryAnimId) {
                 cancelAnimationFrame(window._luxuryAnimId);
             }
-
-            // Fade out do overlay
             overlay.classList.add('fading-out');
-
-            // Revela o conteúdo
             wrapper.style.display = 'block';
-
-            // Força um pequeno delay para a transição CSS
             setTimeout(() => {
-                // Dispara eventos de resize para quaisquer componentes que precisem
                 window.dispatchEvent(new Event('resize'));
-                // Se houver updatePreview global, chama
                 if (typeof updatePreview === 'function') {
                     try { updatePreview(); } catch (e) {}
                 }
             }, 600);
-
-            // Após a transição, remove o overlay do DOM para liberar recursos
             setTimeout(() => {
                 overlay.style.display = 'none';
-                // Dispara novamente para garantir que tudo está renderizado
                 window.dispatchEvent(new Event('resize'));
                 if (typeof updatePreview === 'function') {
                     try { updatePreview(); } catch (e) {}
@@ -1378,7 +1434,6 @@
             }, 1200);
         }
 
-        // Expor funções globalmente
         window.revealPasswordField = revealPasswordField;
         window.verifyLuxuryPassword = verifyLuxuryPassword;
         window.unlockEngine = unlockEngine;
@@ -1393,125 +1448,59 @@
         // =================================================================
         const API_KEY = 'minhasenha2011';
         const SITE_CONFIG = {
-            TEOLOGIA: { worker: 'https://teologiapautazero.avizaecosystem.workers.dev/api/articles',
-                domain: 'teologia.pautazero.com', portalName: 'Teologia PautaZero',
-            slogan: 'fé · história · arqueologia' },
-            JUSTICA: { worker: 'https://pautazero-justica.avizaecosystem.workers.dev/api/articles',
-                domain: 'justica.pautazero.com', portalName: 'Justiça PautaZero',
-            slogan: 'direito · segurança · cidadania' },
-            GERAL: { worker: 'https://pautazero-worker.avizaecosystem.workers.dev/api/articles',
-                domain: 'pautazero.com', portalName: 'PautaZero', slogan: 'análise · tecnologia' }
+            TEOLOGIA: { worker: 'https://teologiapautazero.avizaecosystem.workers.dev/api/articles', domain: 'teologia.pautazero.com', portalName: 'Teologia PautaZero', slogan: 'fé · história · arqueologia' },
+            JUSTICA: { worker: 'https://pautazero-justica.avizaecosystem.workers.dev/api/articles', domain: 'justica.pautazero.com', portalName: 'Justiça PautaZero', slogan: 'direito · segurança · cidadania' },
+            GERAL: { worker: 'https://pautazero-worker.avizaecosystem.workers.dev/api/articles', domain: 'pautazero.com', portalName: 'PautaZero', slogan: 'análise · tecnologia' }
         };
 
         const EIXO_SITE_MAP = {
-            'teologia': 'TEOLOGIA',
-            'arqueologia-biblica': 'TEOLOGIA',
-            'arqueologia': 'TEOLOGIA',
-            'escatologia': 'TEOLOGIA',
-            'exegese-biblica': 'TEOLOGIA',
-            'exegese': 'TEOLOGIA',
-            'hermeneutica': 'TEOLOGIA',
-            'cristianismo': 'TEOLOGIA',
-            'cristianismo-primitivo': 'TEOLOGIA',
-            'historia-da-igreja': 'TEOLOGIA',
-            'filosofia-da-religiao': 'TEOLOGIA',
-            'manuscritos-antigos': 'TEOLOGIA',
-            'hebraico-biblico': 'TEOLOGIA',
-            'grego-koine': 'TEOLOGIA',
-            'profecia-biblica': 'TEOLOGIA',
-            'profecias-biblicas': 'TEOLOGIA',
-            'judaismo-antigo': 'TEOLOGIA',
-            'teologia-sistematica': 'TEOLOGIA',
-            'teologia-contemporanea': 'TEOLOGIA',
-            'patristica': 'TEOLOGIA',
-            'religioes-comparadas': 'TEOLOGIA',
-            'ia-e-espiritualidade': 'TEOLOGIA',
-            'cristianismo-e-ciencia': 'TEOLOGIA',
-            'fe-e-tecnologia': 'TEOLOGIA',
-            'neuroteologia': 'TEOLOGIA',
-            'bioetica-crista': 'TEOLOGIA',
-            'justica': 'JUSTICA',
-            'direito': 'JUSTICA',
-            'stf': 'JUSTICA',
-            'stj': 'JUSTICA',
-            'constitucional': 'JUSTICA',
-            'penal': 'JUSTICA',
-            'direito-penal': 'JUSTICA',
-            'civil': 'JUSTICA',
-            'direito-civil': 'JUSTICA',
-            'trabalhista': 'JUSTICA',
-            'direito-trabalhista': 'JUSTICA',
-            'tributario': 'JUSTICA',
-            'direito-tributario': 'JUSTICA',
-            'empresarial': 'JUSTICA',
-            'direito-empresarial': 'JUSTICA',
-            'compliance': 'JUSTICA',
-            'investigacao': 'JUSTICA',
-            'ministerio-publico': 'JUSTICA',
-            'policia-federal': 'JUSTICA',
-            'seguranca-publica': 'JUSTICA',
-            'direitos-humanos': 'JUSTICA',
-            'jurisprudencia': 'JUSTICA',
-            'legislacao': 'JUSTICA',
-            'processo-penal': 'JUSTICA',
-            'processo-civil': 'JUSTICA',
-            'crimes-digitais': 'JUSTICA',
-            'lgpd': 'JUSTICA',
-            'cibercrime': 'JUSTICA',
-            'regulacao': 'JUSTICA',
-            'corrupcao': 'JUSTICA',
-            'transparencia-publica': 'JUSTICA',
-            'crimes': 'JUSTICA',
-            'policial': 'JUSTICA',
-            'direito-de-familia': 'JUSTICA'
+            'teologia': 'TEOLOGIA', 'arqueologia-biblica': 'TEOLOGIA', 'arqueologia': 'TEOLOGIA',
+            'escatologia': 'TEOLOGIA', 'exegese-biblica': 'TEOLOGIA', 'exegese': 'TEOLOGIA',
+            'hermeneutica': 'TEOLOGIA', 'cristianismo': 'TEOLOGIA', 'cristianismo-primitivo': 'TEOLOGIA',
+            'historia-da-igreja': 'TEOLOGIA', 'filosofia-da-religiao': 'TEOLOGIA', 'manuscritos-antigos': 'TEOLOGIA',
+            'hebraico-biblico': 'TEOLOGIA', 'grego-koine': 'TEOLOGIA', 'profecia-biblica': 'TEOLOGIA',
+            'profecias-biblicas': 'TEOLOGIA', 'judaismo-antigo': 'TEOLOGIA', 'teologia-sistematica': 'TEOLOGIA',
+            'teologia-contemporanea': 'TEOLOGIA', 'patristica': 'TEOLOGIA', 'religioes-comparadas': 'TEOLOGIA',
+            'ia-e-espiritualidade': 'TEOLOGIA', 'cristianismo-e-ciencia': 'TEOLOGIA', 'fe-e-tecnologia': 'TEOLOGIA',
+            'neuroteologia': 'TEOLOGIA', 'bioetica-crista': 'TEOLOGIA',
+            'justica': 'JUSTICA', 'direito': 'JUSTICA', 'stf': 'JUSTICA', 'stj': 'JUSTICA',
+            'constitucional': 'JUSTICA', 'penal': 'JUSTICA', 'direito-penal': 'JUSTICA', 'civil': 'JUSTICA',
+            'direito-civil': 'JUSTICA', 'trabalhista': 'JUSTICA', 'direito-trabalhista': 'JUSTICA',
+            'tributario': 'JUSTICA', 'direito-tributario': 'JUSTICA', 'empresarial': 'JUSTICA',
+            'direito-empresarial': 'JUSTICA', 'compliance': 'JUSTICA', 'investigacao': 'JUSTICA',
+            'ministerio-publico': 'JUSTICA', 'policia-federal': 'JUSTICA', 'seguranca-publica': 'JUSTICA',
+            'direitos-humanos': 'JUSTICA', 'jurisprudencia': 'JUSTICA', 'legislacao': 'JUSTICA',
+            'processo-penal': 'JUSTICA', 'processo-civil': 'JUSTICA', 'crimes-digitais': 'JUSTICA',
+            'lgpd': 'JUSTICA', 'cibercrime': 'JUSTICA', 'regulacao': 'JUSTICA', 'corrupcao': 'JUSTICA',
+            'transparencia-publica': 'JUSTICA', 'crimes': 'JUSTICA', 'policial': 'JUSTICA', 'direito-de-familia': 'JUSTICA'
         };
 
         const SEMANTIC_KEYWORDS = {
-            TEOLOGIA: ['teolog', 'bibl', 'igreja', 'crist', 'deus', 'jesus', 'fe', 'espiritual', 'religiao',
-                'religiosa', 'sagrad', 'oracao', 'culto', 'pastor', 'padre', 'profeta', 'profeci', 'arqueolog',
-                'manuscrit', 'hebraic', 'grego', 'koine', 'hermeneu', 'exegese', 'escatolog', 'patrist',
-                'sistematic', 'judaism', 'qumran', 'essenio', 'fariseu', 'saduceu', 'templo', 'tabernaculo',
-                'neuroteolog', 'bioetic'
-            ],
-            JUSTICA: ['justic', 'direito', 'lei', 'jurid', 'judic', 'tribunal', 'juiz', 'ministro', 'stf', 'stj',
-                'penal', 'crime', 'criminos', 'policia', 'policial', 'delegado', 'processual', 'processo',
-                'sentenca', 'recurso', 'habeas', 'mandado', 'constituicao', 'constitucion', 'advogado', 'promotor',
-                'procurador', 'compliance', 'lgpd', 'cibercrime', 'corrupcao', 'transparencia', 'investigacao',
-                'seguranca', 'trabalhista', 'tributario', 'regulacao'
-            ]
+            TEOLOGIA: ['teolog', 'bibl', 'igreja', 'crist', 'deus', 'jesus', 'fe', 'espiritual', 'religiao', 'religiosa', 'sagrad', 'oracao', 'culto', 'pastor', 'padre', 'profeta', 'profeci', 'arqueolog', 'manuscrit', 'hebraic', 'grego', 'koine', 'hermeneu', 'exegese', 'escatolog', 'patrist', 'sistematic', 'judaism', 'qumran', 'essenio', 'fariseu', 'saduceu', 'templo', 'tabernaculo', 'neuroteolog', 'bioetic'],
+            JUSTICA: ['justic', 'direito', 'lei', 'jurid', 'judic', 'tribunal', 'juiz', 'ministro', 'stf', 'stj', 'penal', 'crime', 'criminos', 'policia', 'policial', 'delegado', 'processual', 'processo', 'sentenca', 'recurso', 'habeas', 'mandado', 'constituicao', 'constitucion', 'advogado', 'promotor', 'procurador', 'compliance', 'lgpd', 'cibercrime', 'corrupcao', 'transparencia', 'investigacao', 'seguranca', 'trabalhista', 'tributario', 'regulacao']
         };
 
         function normalizeString(str) {
             if (!str) return '';
-            return str.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9\s-]/g,
-                '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '');
+            return str.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '');
         }
 
         function matchesSemanticKeywords(normalizedEixo, portalKey) {
             const keywords = SEMANTIC_KEYWORDS[portalKey] || [];
             const partes = normalizedEixo.split('-');
             const fullString = normalizedEixo.replace(/-/g, '');
-            return keywords.some(keyword => partes.some(parte => parte.includes(keyword)) || fullString.includes(
-                keyword));
+            return keywords.some(keyword => partes.some(parte => parte.includes(keyword)) || fullString.includes(keyword));
         }
 
         function getSiteForEixo(eixo) {
             const normalized = normalizeString(eixo);
-            if (EIXO_SITE_MAP[normalized]) { const site = EIXO_SITE_MAP[normalized];
-                console.log(
-                    `🎯 [Direcionamento] Eixo "${eixo}" → ${site} (correspondência exata)`); return SITE_CONFIG[site]; }
-            if (matchesSemanticKeywords(normalized, 'TEOLOGIA')) { console.log(
-                    `🔍 [Direcionamento] Eixo "${eixo}" → TEOLOGIA (correspondência semântica)`
-                    ); return SITE_CONFIG['TEOLOGIA']; }
-            if (matchesSemanticKeywords(normalized, 'JUSTICA')) { console.log(
-                    `🔍 [Direcionamento] Eixo "${eixo}" → JUSTICA (correspondência semântica)`
-                    ); return SITE_CONFIG['JUSTICA']; }
+            if (EIXO_SITE_MAP[normalized]) { const site = EIXO_SITE_MAP[normalized]; console.log(`🎯 [Direcionamento] Eixo "${eixo}" → ${site} (correspondência exata)`); return SITE_CONFIG[site]; }
+            if (matchesSemanticKeywords(normalized, 'TEOLOGIA')) { console.log(`🔍 [Direcionamento] Eixo "${eixo}" → TEOLOGIA (correspondência semântica)`); return SITE_CONFIG['TEOLOGIA']; }
+            if (matchesSemanticKeywords(normalized, 'JUSTICA')) { console.log(`🔍 [Direcionamento] Eixo "${eixo}" → JUSTICA (correspondência semântica)`); return SITE_CONFIG['JUSTICA']; }
             console.log(`🌐 [Direcionamento] Eixo "${eixo}" → GERAL (fallback)`); return SITE_CONFIG['GERAL'];
         }
 
-        function verificarDirecionamento(eixo) { const site = getSiteForEixo(eixo);
-            console.log(
-                `📋 [PAUTAZERO] Eixo: "${eixo}" → Portal: ${site.portalName} → Domínio: ${site.domain}`); return site; }
+        function verificarDirecionamento(eixo) { const site = getSiteForEixo(eixo); console.log(`📋 [PAUTAZERO] Eixo: "${eixo}" → Portal: ${site.portalName} → Domínio: ${site.domain}`); return site; }
         window.verificarDirecionamento = verificarDirecionamento;
         window.normalizeString = normalizeString;
 
@@ -1520,9 +1509,7 @@
             const selectedWorker = workerSelect ? workerSelect.value : 'auto';
             const eixo = document.getElementById('eixo').value.trim();
             if (selectedWorker !== 'auto' && SITE_CONFIG[selectedWorker]) {
-                console.log(
-                    `📌 [Worker Manual] Usando worker forçado: ${selectedWorker} → ${SITE_CONFIG[selectedWorker].portalName}`
-                    );
+                console.log(`📌 [Worker Manual] Usando worker forçado: ${selectedWorker} → ${SITE_CONFIG[selectedWorker].portalName}`);
                 return SITE_CONFIG[selectedWorker];
             }
             return getSiteForEixo(eixo);
@@ -1544,310 +1531,134 @@
         let autoSaveTimeout = null;
         const AUTOSAVE_KEY = 'velocity_autosave_form_state';
         const AUTOSAVE_DEBOUNCE_MS = 1000;
-
         function saveFormState() {
             try {
                 const state = {
-                    portalName: document.getElementById('portalName').value,
-                    portalSlogan: document.getElementById('portalSlogan').value,
-                    title: document.getElementById('title').value,
-                    subtitle: document.getElementById('subtitle').value,
-                    eixo: document.getElementById('eixo').value,
-                    tema: document.getElementById('tema').value,
-                    slug: document.getElementById('slug').value,
-                    publishDateTime: document.getElementById('publishDateTime').value,
-                    readTime: document.getElementById('readTime').value,
-                    author: document.getElementById('author').value,
-                    excerpt: document.getElementById('excerpt').value,
-                    tags: document.getElementById('tags').value,
-                    watermarkRef: document.getElementById('watermarkRef').value,
-                    authorBio: document.getElementById('authorBio').value,
-                    image: document.getElementById('image').value,
-                    imageCaption: document.getElementById('imageCaption').value,
-                    htmlContent: document.getElementById('htmlContent').value,
-                    rawTextInput: document.getElementById('rawTextInput').value,
-                    fullscreenContent: document.getElementById('fullscreenContent').value,
-                    references: document.getElementById('references').value,
-                    avatarBase64: avatarBase64,
-                    relatedLinks: getRelatedLinks(),
-                    contextMode: currentContextMode,
-                    workerSelect: document.getElementById('workerSelect') ? document.getElementById('workerSelect')
-                        .value : 'auto',
+                    portalName: document.getElementById('portalName').value, portalSlogan: document.getElementById('portalSlogan').value,
+                    title: document.getElementById('title').value, subtitle: document.getElementById('subtitle').value,
+                    eixo: document.getElementById('eixo').value, tema: document.getElementById('tema').value,
+                    slug: document.getElementById('slug').value, publishDateTime: document.getElementById('publishDateTime').value,
+                    readTime: document.getElementById('readTime').value, author: document.getElementById('author').value,
+                    excerpt: document.getElementById('excerpt').value, tags: document.getElementById('tags').value,
+                    watermarkRef: document.getElementById('watermarkRef').value, authorBio: document.getElementById('authorBio').value,
+                    image: document.getElementById('image').value, imageCaption: document.getElementById('imageCaption').value,
+                    htmlContent: document.getElementById('htmlContent').value, rawTextInput: document.getElementById('rawTextInput').value,
+                    fullscreenContent: document.getElementById('fullscreenContent').value, references: document.getElementById('references').value,
+                    avatarBase64: avatarBase64, relatedLinks: getRelatedLinks(), contextMode: currentContextMode,
+                    workerSelect: document.getElementById('workerSelect') ? document.getElementById('workerSelect').value : 'auto',
                     savedAt: new Date().toISOString()
                 };
                 localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(state));
             } catch (e) {}
         }
-
-        function triggerAutoSave() { if (autoSaveTimeout) clearTimeout(autoSaveTimeout);
-            autoSaveTimeout = setTimeout(saveFormState, AUTOSAVE_DEBOUNCE_MS); }
-
+        function triggerAutoSave() { if (autoSaveTimeout) clearTimeout(autoSaveTimeout); autoSaveTimeout = setTimeout(saveFormState, AUTOSAVE_DEBOUNCE_MS); }
         function restoreFormState() {
             try {
                 const saved = localStorage.getItem(AUTOSAVE_KEY); if (!saved) return false;
                 const state = JSON.parse(saved);
                 if (state.portalName !== undefined) document.getElementById('portalName').value = state.portalName;
-                if (state.portalSlogan !== undefined) document.getElementById('portalSlogan').value = state
-                    .portalSlogan;
+                if (state.portalSlogan !== undefined) document.getElementById('portalSlogan').value = state.portalSlogan;
                 if (state.title !== undefined) document.getElementById('title').value = state.title;
                 if (state.subtitle !== undefined) document.getElementById('subtitle').value = state.subtitle;
                 if (state.eixo !== undefined) document.getElementById('eixo').value = state.eixo;
                 if (state.tema !== undefined) document.getElementById('tema').value = state.tema;
                 if (state.slug !== undefined) document.getElementById('slug').value = state.slug;
-                if (state.publishDateTime !== undefined) document.getElementById('publishDateTime').value = state
-                    .publishDateTime;
+                if (state.publishDateTime !== undefined) document.getElementById('publishDateTime').value = state.publishDateTime;
                 if (state.readTime !== undefined) document.getElementById('readTime').value = state.readTime;
                 if (state.author !== undefined) document.getElementById('author').value = state.author;
                 if (state.excerpt !== undefined) document.getElementById('excerpt').value = state.excerpt;
                 if (state.tags !== undefined) document.getElementById('tags').value = state.tags;
-                if (state.watermarkRef !== undefined) document.getElementById('watermarkRef').value = state
-                    .watermarkRef;
+                if (state.watermarkRef !== undefined) document.getElementById('watermarkRef').value = state.watermarkRef;
                 if (state.authorBio !== undefined) document.getElementById('authorBio').value = state.authorBio;
-                if (state.image !== undefined) { document.getElementById('image').value = state.image; if (state
-                        .image) { updatePreviewImage(state.image);
-                        dropZone.classList.add('has-image');
-                        dropZone.querySelector('span').textContent = 'Imagem definida via URL'; } }
-                if (state.imageCaption !== undefined) document.getElementById('imageCaption').value = state
-                    .imageCaption;
+                if (state.image !== undefined) { document.getElementById('image').value = state.image; if (state.image) { updatePreviewImage(state.image); dropZone.classList.add('has-image'); dropZone.querySelector('span').textContent = 'Imagem definida via URL'; } }
+                if (state.imageCaption !== undefined) document.getElementById('imageCaption').value = state.imageCaption;
                 if (state.htmlContent !== undefined) document.getElementById('htmlContent').value = state.htmlContent;
-                if (state.rawTextInput !== undefined) document.getElementById('rawTextInput').value = state
-                    .rawTextInput;
-                if (state.fullscreenContent !== undefined) document.getElementById('fullscreenContent').value = state
-                    .fullscreenContent;
+                if (state.rawTextInput !== undefined) document.getElementById('rawTextInput').value = state.rawTextInput;
+                if (state.fullscreenContent !== undefined) document.getElementById('fullscreenContent').value = state.fullscreenContent;
                 if (state.references !== undefined) document.getElementById('references').value = state.references;
-                if (state.avatarBase64) { avatarBase64 = state.avatarBase64;
-                    avatarPreviewImg.src = avatarBase64;
-                    avatarPreviewImg.style.display = 'block';
-                    avatarRemoveBtn.style.display = 'inline-flex'; }
-                if (state.relatedLinks && state.relatedLinks.length > 0) { relatedContainer.innerHTML = '';
-                    linkCounter = 0;
-                    state.relatedLinks.forEach(link => addLinkField(link.slug, link.url)); }
+                if (state.avatarBase64) { avatarBase64 = state.avatarBase64; avatarPreviewImg.src = avatarBase64; avatarPreviewImg.style.display = 'block'; avatarRemoveBtn.style.display = 'inline-flex'; }
+                if (state.relatedLinks && state.relatedLinks.length > 0) { relatedContainer.innerHTML = ''; linkCounter = 0; state.relatedLinks.forEach(link => addLinkField(link.slug, link.url)); }
                 if (state.contextMode) setContextMode(state.contextMode);
-                if (state.workerSelect !== undefined) { const ws = document.getElementById('workerSelect'); if (ws) { ws
-                            .value = state.workerSelect;
-                        onWorkerSelectChange(); } }
+                if (state.workerSelect !== undefined) { const ws = document.getElementById('workerSelect'); if (ws) { ws.value = state.workerSelect; onWorkerSelectChange(); } }
                 updatePreview(); return true;
             } catch (e) { return false; }
         }
         let currentContextMode = 'padrao';
-
-        function setContextMode(mode) { currentContextMode = mode; const panel = document.getElementById(
-                'articlePreview'); const btnPadrao = document.getElementById('ctxBtnPadrao'); const btnRevista =
-            document.getElementById('ctxBtnRevista'); if (mode === 'revista') { panel.classList.add('revista-mode');
-                btnPadrao.classList.remove('active');
-                btnRevista.classList.add('active'); } else { panel.classList.remove('revista-mode');
-                btnPadrao.classList.add('active');
-                btnRevista.classList.remove('active'); }
-            triggerAutoSave(); }
+        function setContextMode(mode) {
+            currentContextMode = mode; const panel = document.getElementById('articlePreview');
+            const btnPadrao = document.getElementById('ctxBtnPadrao'); const btnRevista = document.getElementById('ctxBtnRevista');
+            if (mode === 'revista') { panel.classList.add('revista-mode'); btnPadrao.classList.remove('active'); btnRevista.classList.add('active'); }
+            else { panel.classList.remove('revista-mode'); btnPadrao.classList.add('active'); btnRevista.classList.remove('active'); }
+            triggerAutoSave();
+        }
         window.setContextMode = setContextMode;
-
-        function escapeHtml(s) { return String(s).replace(/[&<>\"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;',
-                '"': '&quot;', "'": '&#039;' })[m]); }
-
-        function autoLink(t) { const r = /(\b(https?|ftp):\/\/[^\s<>[\]()]+[^\s<>[\]().,:;\"'?!])/gi;
-            let e = escapeHtml(t); return e.replace(r, u => { let h = u; if (!/^https?:\/\//i.test(u)) h = 'http://' +
-                    u; return '<a href="' + h + '" target="_blank" rel="noopener">' + u + '</a>'; }); }
+        function escapeHtml(s) { return String(s).replace(/[&<>\"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[m]); }
+        function autoLink(t) { const r = /(\b(https?|ftp):\/\/[^\s<>[\]()]+[^\s<>[\]().,:;\"'?!])/gi; let e = escapeHtml(t); return e.replace(r, u => { let h = u; if (!/^https?:\/\//i.test(u)) h = 'http://' + u; return '<a href="' + h + '" target="_blank" rel="noopener">' + u + '</a>'; }); }
         const dropZone = document.getElementById('imageDropZone');
         const imageInput = document.getElementById('image');
         const clearBtn = document.getElementById('clearImageBtn');
         const prevImage = document.getElementById('prevImage');
-
-        function handleImageFile(file) { if (!file.type.startsWith('image/')) { showToast('Apenas imagens.', true)
-            ; return; } const reader = new FileReader();
-            reader.onload = e => { imageInput.value = e.target.result;
-                updatePreviewImage(e.target.result);
-                dropZone.classList.add('has-image');
-                dropZone.querySelector('span').textContent = file.name; };
-            reader.readAsDataURL(file); }
-        dropZone.addEventListener('dragover', e => { e.preventDefault();
-            dropZone.classList.add('dragover'); });
+        function handleImageFile(file) { if (!file.type.startsWith('image/')) { showToast('Apenas imagens.', true); return; } const reader = new FileReader(); reader.onload = e => { imageInput.value = e.target.result; updatePreviewImage(e.target.result); dropZone.classList.add('has-image'); dropZone.querySelector('span').textContent = file.name; }; reader.readAsDataURL(file); }
+        dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
         dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
-        dropZone.addEventListener('drop', e => { e.preventDefault();
-            dropZone.classList.remove('dragover'); if (e.dataTransfer.files.length) handleImageFile(e.dataTransfer.files[
-                0]); });
-        dropZone.addEventListener('click', () => { const inp = document.createElement('input');
-            inp.type = 'file';
-            inp.accept = 'image/*';
-            inp.onchange = () => { if (inp.files.length) handleImageFile(inp.files[0]); };
-            inp.click(); });
-        clearBtn.addEventListener('click', () => { imageInput.value = '';
-            dropZone.classList.remove('has-image');
-            dropZone.querySelector('span').textContent = 'Arraste uma imagem aqui ou clique para selecionar';
-            updatePreviewImage('https://placehold.co/600x400/0a3147/b8860b?text=Rosas');
-            triggerAutoSave(); });
-        imageInput.addEventListener('input', () => { const val = imageInput.value.trim(); if (val) {
-                updatePreviewImage(val);
-                dropZone.classList.add('has-image');
-                dropZone.querySelector('span').textContent = 'Imagem definida via URL'; } else { updatePreviewImage(
-                    'https://placehold.co/600x400/0a3147/b8860b?text=Rosas');
-                dropZone.classList.remove('has-image');
-                dropZone.querySelector('span').textContent =
-                'Arraste uma imagem aqui ou clique para selecionar'; } });
-
+        dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('dragover'); if (e.dataTransfer.files.length) handleImageFile(e.dataTransfer.files[0]); });
+        dropZone.addEventListener('click', () => { const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.onchange = () => { if (inp.files.length) handleImageFile(inp.files[0]); }; inp.click(); });
+        clearBtn.addEventListener('click', () => { imageInput.value = ''; dropZone.classList.remove('has-image'); dropZone.querySelector('span').textContent = 'Arraste uma imagem aqui ou clique para selecionar'; updatePreviewImage('https://placehold.co/600x400/0a3147/b8860b?text=Rosas'); triggerAutoSave(); });
+        imageInput.addEventListener('input', () => { const val = imageInput.value.trim(); if (val) { updatePreviewImage(val); dropZone.classList.add('has-image'); dropZone.querySelector('span').textContent = 'Imagem definida via URL'; } else { updatePreviewImage('https://placehold.co/600x400/0a3147/b8860b?text=Rosas'); dropZone.classList.remove('has-image'); dropZone.querySelector('span').textContent = 'Arraste uma imagem aqui ou clique para selecionar'; } });
         function updatePreviewImage(src) { prevImage.src = src; }
         let avatarBase64 = null;
         const avatarPreviewImg = document.getElementById('avatarPreviewImg');
         const avatarRemoveBtn = document.getElementById('avatarRemoveBtn');
         const avatarFileInput = document.getElementById('avatarFileInput');
-        window.handleAvatarUpload = function(input) { const file = input.files[0]; if (!file) return; if (!file.type
-                .startsWith('image/')) { showToast('Selecione uma imagem válida.', true); return; } if (file.size > 500 *
-                1024) { showToast('Tamanho máximo: 500KB.', true); return; } const reader = new FileReader();
-            reader.onload = e => { const img = new Image();
-                img.onload = () => { const canvas = document.createElement('canvas');
-                    canvas.width = 64;
-                    canvas.height = 64;
-                    canvas.getContext('2d').drawImage(img, 0, 0, 64, 64);
-                    avatarBase64 = canvas.toDataURL('image/jpeg', 0.9);
-                    avatarPreviewImg.src = avatarBase64;
-                    avatarPreviewImg.style.display = 'block';
-                    avatarRemoveBtn.style.display = 'inline-flex';
-                    updatePreview(); };
-                img.src = e.target.result; };
-            reader.readAsDataURL(file); };
-        window.clearAvatar = function() { avatarBase64 = null;
-            avatarPreviewImg.src = '#';
-            avatarPreviewImg.style.display = 'none';
-            avatarRemoveBtn.style.display = 'none';
-            avatarFileInput.value = '';
-            updatePreview(); };
-
-        function loadNiches() { try { return JSON.parse(localStorage.getItem('velocity_niches') || '[]'); } catch (
-        e) { return []; } }
-
-        function saveNiches(niches) { localStorage.setItem('velocity_niches', JSON.stringify(niches));
-            renderNicheChips();
-            updateEixoDatalist(); }
-
-        function renderNicheChips() { const container = document.getElementById('nicheChipList'); const niches =
-                loadNiches(); if (niches.length === 0) { container.innerHTML =
-                '<span style="font-size:0.65rem;color:var(--text-muted);font-style:italic;">Nenhum nicho cadastrado ainda.</span>'
-                ; return; }
-            container.innerHTML = niches.map((n, i) =>
-                `<span class="niche-chip" onclick="selectNiche('${escapeHtml(n)}')">${escapeHtml(n)}<span class="remove-niche" onclick="event.stopPropagation();removeNiche(${i})"><i class="fas fa-times-circle"></i></span></span>`
-                ).join(''); }
-
-        function addNiche() { const input = document.getElementById('newNicheInput'); const name = input.value.trim()
-                .toLowerCase().replace(/\s+/g, '-'); if (!name) { showToast('Digite um nome para o nicho.', true)
-            ; return; } const niches = loadNiches(); if (niches.includes(name)) { showToast('Este nicho já existe.',
-                    true);
-                input.value = ''; return; }
-            niches.push(name);
-            saveNiches(niches);
-            input.value = '';
-            showToast('✅ Nicho "' + name + '" adicionado!'); }
-
-        function removeNiche(index) { const niches = loadNiches(); const removed = niches.splice(index, 1)[0];
-            saveNiches(niches);
-            showToast('🗑️ Nicho "' + removed + '" removido.'); }
-
-        function selectNiche(name) { document.getElementById('eixo').value = name;
-            updatePreview();
-            showToast('📌 Eixo "' + name + '" selecionado.'); }
-        window.addNiche = addNiche;
-        window.removeNiche = removeNiche;
-        window.selectNiche = selectNiche;
-
-        function updateEixoDatalist() { const datalist = document.getElementById('eixosSuggest'); const niches =
-                loadNiches();
-            datalist.innerHTML = niches.map(e => `<option value="${escapeHtml(e)}">`).join(''); }
-        renderNicheChips();
-        updateEixoDatalist();
-
-        function saveEixoToNiches(eixoName) { if (!eixoName) return; const niches = loadNiches(); const normalized =
-            eixoName.trim().toLowerCase(); if (!niches.find(n => n.toLowerCase() === normalized)) { niches.push(eixoName
-                    .trim());
-                saveNiches(niches); } }
+        window.handleAvatarUpload = function(input) { const file = input.files[0]; if (!file) return; if (!file.type.startsWith('image/')) { showToast('Selecione uma imagem válida.', true); return; } if (file.size > 500 * 1024) { showToast('Tamanho máximo: 500KB.', true); return; } const reader = new FileReader(); reader.onload = e => { const img = new Image(); img.onload = () => { const canvas = document.createElement('canvas'); canvas.width = 64; canvas.height = 64; canvas.getContext('2d').drawImage(img, 0, 0, 64, 64); avatarBase64 = canvas.toDataURL('image/jpeg', 0.9); avatarPreviewImg.src = avatarBase64; avatarPreviewImg.style.display = 'block'; avatarRemoveBtn.style.display = 'inline-flex'; updatePreview(); }; img.src = e.target.result; }; reader.readAsDataURL(file); };
+        window.clearAvatar = function() { avatarBase64 = null; avatarPreviewImg.src = '#'; avatarPreviewImg.style.display = 'none'; avatarRemoveBtn.style.display = 'none'; avatarFileInput.value = ''; updatePreview(); };
+        function loadNiches() { try { return JSON.parse(localStorage.getItem('velocity_niches') || '[]'); } catch (e) { return []; } }
+        function saveNiches(niches) { localStorage.setItem('velocity_niches', JSON.stringify(niches)); renderNicheChips(); updateEixoDatalist(); }
+        function renderNicheChips() { const container = document.getElementById('nicheChipList'); const niches = loadNiches(); if (niches.length === 0) { container.innerHTML = '<span style="font-size:0.65rem;color:var(--text-muted);font-style:italic;">Nenhum nicho cadastrado ainda.</span>'; return; } container.innerHTML = niches.map((n, i) => `<span class="niche-chip" onclick="selectNiche('${escapeHtml(n)}')">${escapeHtml(n)}<span class="remove-niche" onclick="event.stopPropagation();removeNiche(${i})"><i class="fas fa-times-circle"></i></span></span>`).join(''); }
+        function addNiche() { const input = document.getElementById('newNicheInput'); const name = input.value.trim().toLowerCase().replace(/\s+/g, '-'); if (!name) { showToast('Digite um nome para o nicho.', true); return; } const niches = loadNiches(); if (niches.includes(name)) { showToast('Este nicho já existe.', true); input.value = ''; return; } niches.push(name); saveNiches(niches); input.value = ''; showToast('✅ Nicho "' + name + '" adicionado!'); }
+        function removeNiche(index) { const niches = loadNiches(); const removed = niches.splice(index, 1)[0]; saveNiches(niches); showToast('🗑️ Nicho "' + removed + '" removido.'); }
+        function selectNiche(name) { document.getElementById('eixo').value = name; updatePreview(); showToast('📌 Eixo "' + name + '" selecionado.'); }
+        window.addNiche = addNiche; window.removeNiche = removeNiche; window.selectNiche = selectNiche;
+        function updateEixoDatalist() { const datalist = document.getElementById('eixosSuggest'); const niches = loadNiches(); datalist.innerHTML = niches.map(e => `<option value="${escapeHtml(e)}">`).join(''); }
+        renderNicheChips(); updateEixoDatalist();
+        function saveEixoToNiches(eixoName) { if (!eixoName) return; const niches = loadNiches(); const normalized = eixoName.trim().toLowerCase(); if (!niches.find(n => n.toLowerCase() === normalized)) { niches.push(eixoName.trim()); saveNiches(niches); } }
         let linkCounter = 0;
         const MAX_LINKS = 5;
         const relatedContainer = document.getElementById('relatedLinksContainer');
-
-        function addLinkField(titleSlug = '', url = '') { if (relatedContainer.querySelectorAll('.link-item').length >=
-                MAX_LINKS) { showToast('Máximo de 5 links relacionados.', true); return; } const id = linkCounter++;
-            const div = document.createElement('div');
-            div.className = 'link-item';
-            div.id = 'link-item-' + id;
-            div.innerHTML =
-                `<input type="text" placeholder="Slug (texto do link)" value="${escapeHtml(titleSlug)}" class="link-title-input"><input type="text" placeholder="Caminho interno: /artigo/eixo/slug.html" value="${escapeHtml(url)}" class="link-url-input"><button type="button" class="remove-link-btn"><i class="fas fa-trash-alt"></i></button>`;
+        function addLinkField(titleSlug = '', url = '') {
+            if (relatedContainer.querySelectorAll('.link-item').length >= MAX_LINKS) { showToast('Máximo de 5 links relacionados.', true); return; }
+            const id = linkCounter++; const div = document.createElement('div'); div.className = 'link-item'; div.id = 'link-item-' + id;
+            div.innerHTML = `<input type="text" placeholder="Slug (texto do link)" value="${escapeHtml(titleSlug)}" class="link-title-input"><input type="text" placeholder="Caminho interno: /artigo/eixo/slug.html" value="${escapeHtml(url)}" class="link-url-input"><button type="button" class="remove-link-btn"><i class="fas fa-trash-alt"></i></button>`;
             div.querySelector('.link-title-input').addEventListener('input', updatePreview);
             div.querySelector('.link-url-input').addEventListener('input', updatePreview);
-            div.querySelector('.remove-link-btn').addEventListener('click', () => { div.remove();
-                updatePreview(); });
-            relatedContainer.appendChild(div);
-            updatePreview(); }
-
-        function getRelatedLinks() { return Array.from(relatedContainer.querySelectorAll('.link-item')).map(item => {
-            const inputs = item.querySelectorAll('input'); const slug = inputs[0].value.trim(); const url = inputs[
-                1].value.trim(); if (url) return { slug: slug || url.replace(/^\/artigo\//, '').replace(/\.html$/,
-                    '').replace(/\//g, ' › '), url }; return null; }).filter(Boolean); }
-        window.addLinkField = addLinkField;
-        window.getRelatedLinks = getRelatedLinks;
+            div.querySelector('.remove-link-btn').addEventListener('click', () => { div.remove(); updatePreview(); });
+            relatedContainer.appendChild(div); updatePreview();
+        }
+        function getRelatedLinks() { return Array.from(relatedContainer.querySelectorAll('.link-item')).map(item => { const inputs = item.querySelectorAll('input'); const slug = inputs[0].value.trim(); const url = inputs[1].value.trim(); if (url) return { slug: slug || url.replace(/^\/artigo\//, '').replace(/\.html$/, '').replace(/\//g, ' › '), url }; return null; }).filter(Boolean); }
+        window.addLinkField = addLinkField; window.getRelatedLinks = getRelatedLinks;
         document.getElementById('addRelatedLinkBtn').addEventListener('click', () => addLinkField());
-        setTimeout(() => { if (relatedContainer.children.length === 0) { addLinkField('poda-de-roseiras',
-                    '/artigo/plantas-e-natureza/poda-de-roseiras.html');
-                addLinkField('adubacao-organica', '/artigo/plantas-e-natureza/adubacao-organica.html'); }
-            updatePreview(); }, 10);
-
-        function showToast(msg, isError = false) { const t = document.getElementById('toast');
-            t.textContent = msg;
-            t.style.background = isError ? '#c0392b' : 'var(--petrol-blue)';
-            t.classList.add('show');
-            setTimeout(() => t.classList.remove('show'), 4500); }
+        setTimeout(() => { if (relatedContainer.children.length === 0) { addLinkField('poda-de-roseiras', '/artigo/plantas-e-natureza/poda-de-roseiras.html'); addLinkField('adubacao-organica', '/artigo/plantas-e-natureza/adubacao-organica.html'); } updatePreview(); }, 10);
+        function showToast(msg, isError = false) { const t = document.getElementById('toast'); t.textContent = msg; t.style.background = isError ? '#c0392b' : 'var(--petrol-blue)'; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 4500); }
         let linkTargetEditor = 'main';
         const linkModal = document.getElementById('linkModal');
         const linkUrlInput = document.getElementById('linkUrlInput');
         const linkTextInput = document.getElementById('linkTextInput');
-
-        function openLinkModal() { linkTargetEditor = 'main';
-            linkUrlInput.value = '';
-            linkTextInput.value = '';
-            linkModal.classList.add('active');
-            linkUrlInput.focus(); }
-
-        function openLinkModalFullscreen() { linkTargetEditor = 'fullscreen';
-            linkUrlInput.value = '';
-            linkTextInput.value = '';
-            linkModal.classList.add('active');
-            linkUrlInput.focus(); }
-
-        function openLinkModalVisual() { linkTargetEditor = 'visual';
-            linkUrlInput.value = '';
-            linkTextInput.value = '';
-            linkModal.classList.add('active');
-            linkUrlInput.focus(); }
-        window.openLinkModal = openLinkModal;
-        window.openLinkModalFullscreen = openLinkModalFullscreen;
-        window.openLinkModalVisual = openLinkModalVisual;
+        function openLinkModal() { linkTargetEditor = 'main'; linkUrlInput.value = ''; linkTextInput.value = ''; linkModal.classList.add('active'); linkUrlInput.focus(); }
+        function openLinkModalFullscreen() { linkTargetEditor = 'fullscreen'; linkUrlInput.value = ''; linkTextInput.value = ''; linkModal.classList.add('active'); linkUrlInput.focus(); }
+        function openLinkModalVisual() { linkTargetEditor = 'visual'; linkUrlInput.value = ''; linkTextInput.value = ''; linkModal.classList.add('active'); linkUrlInput.focus(); }
+        window.openLinkModal = openLinkModal; window.openLinkModalFullscreen = openLinkModalFullscreen; window.openLinkModalVisual = openLinkModalVisual;
         window.closeLinkModal = () => linkModal.classList.remove('active');
-        window.applyLinkFromModal = function() { const url = linkUrlInput.value.trim(); if (!url) { showToast(
-                    'Insira uma URL.', true); return; } const text = linkTextInput.value.trim() || url; const finalUrl =
-                /^https?:\/\//i.test(url) ? url : 'https://' + url; const anchor = '<a href="' + finalUrl +
-                '" target="_blank" rel="noopener">' + escapeHtml(text) + '</a>'; if (linkTargetEditor === 'main') { const
-                    ta = document.getElementById('htmlContent');
-                insertAtCursor(ta, anchor);
-                updatePreview(); } else if (linkTargetEditor === 'fullscreen') { const ta = document.getElementById(
-                    'fullscreenContent');
-                insertAtCursor(ta, anchor);
-                syncCodeToVisual(); } else if (linkTargetEditor === 'visual') { const v = document.getElementById(
-                    'visualEditor');
-                v.focus(); if (window.getSelection().rangeCount) { const range = window.getSelection().getRangeAt(
-                    0); const a = document.createElement('a');
-                    a.href = finalUrl;
-                    a.target = '_blank';
-                    a.rel = 'noopener';
-                    a.textContent = text;
-                    range.deleteContents();
-                    range.insertNode(a); } else document.execCommand('insertHTML', false, anchor);
-                syncVisualToCode(); }
-            linkModal.classList.remove('active');
-            showToast('Link inserido com sucesso.'); };
-
-        function insertAtCursor(ta, text) { const s = ta.selectionStart,
-                e = ta.selectionEnd;
-            ta.value = ta.value.substring(0, s) + text + ta.value.substring(e);
-            ta.focus();
-            ta.setSelectionRange(s + text.length, s + text.length); }
-        document.addEventListener('keydown', e => { if (e.key === 'Escape' && linkModal.classList.contains('active'))
-                linkModal.classList.remove('active'); });
+        window.applyLinkFromModal = function() {
+            const url = linkUrlInput.value.trim(); if (!url) { showToast('Insira uma URL.', true); return; }
+            const text = linkTextInput.value.trim() || url; const finalUrl = /^https?:\/\//i.test(url) ? url : 'https://' + url;
+            const anchor = '<a href="' + finalUrl + '" target="_blank" rel="noopener">' + escapeHtml(text) + '</a>';
+            if (linkTargetEditor === 'main') { const ta = document.getElementById('htmlContent'); insertAtCursor(ta, anchor); updatePreview(); }
+            else if (linkTargetEditor === 'fullscreen') { const ta = document.getElementById('fullscreenContent'); insertAtCursor(ta, anchor); syncCodeToVisual(); }
+            else if (linkTargetEditor === 'visual') { const v = document.getElementById('visualEditor'); v.focus(); if (window.getSelection().rangeCount) { const range = window.getSelection().getRangeAt(0); const a = document.createElement('a'); a.href = finalUrl; a.target = '_blank'; a.rel = 'noopener'; a.textContent = text; range.deleteContents(); range.insertNode(a); } else document.execCommand('insertHTML', false, anchor); syncVisualToCode(); }
+            linkModal.classList.remove('active'); showToast('Link inserido com sucesso.');
+        };
+        function insertAtCursor(ta, text) { const s = ta.selectionStart, e = ta.selectionEnd; ta.value = ta.value.substring(0, s) + text + ta.value.substring(e); ta.focus(); ta.setSelectionRange(s + text.length, s + text.length); }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape' && linkModal.classList.contains('active')) linkModal.classList.remove('active'); });
         let bodyImageTargetEditor = 'main';
         let bodyImageBase64 = null;
         const bodyImageModal = document.getElementById('bodyImageModal');
@@ -1859,111 +1670,67 @@
         const bodyImagePreviewThumb = document.getElementById('bodyImagePreviewThumb');
         const bodyImageFileInput = document.getElementById('bodyImageFileInput');
         const bodyImageClearBtn = document.getElementById('bodyImageClearBtn');
-
-        function openBodyImageModal(target = 'main') { bodyImageTargetEditor = target;
-            bodyImageUrlInput.value = '';
-            bodyImageCaptionInput.value = '';
-            bodyImageAltInput.value = '';
-            resetBodyImageFile();
-            bodyImageModal.classList.add('active'); }
-
-        function resetBodyImageFile() { bodyImageBase64 = null;
-            bodyImageFileInput.value = '';
-            bodyImageFileName.textContent = '';
-            bodyImagePreviewThumb.style.display = 'none';
-            bodyImagePreviewThumb.src = '#';
-            bodyImageUploadArea.classList.remove('has-file');
-            bodyImageClearBtn.classList.remove('visible');
-            bodyImageUrlInput.disabled = false;
-            bodyImageUrlInput.placeholder = 'https://exemplo.com/imagem.jpg ou data:image/...'; }
+        function openBodyImageModal(target = 'main') { bodyImageTargetEditor = target; bodyImageUrlInput.value = ''; bodyImageCaptionInput.value = ''; bodyImageAltInput.value = ''; resetBodyImageFile(); bodyImageModal.classList.add('active'); }
+        function resetBodyImageFile() { bodyImageBase64 = null; bodyImageFileInput.value = ''; bodyImageFileName.textContent = ''; bodyImagePreviewThumb.style.display = 'none'; bodyImagePreviewThumb.src = '#'; bodyImageUploadArea.classList.remove('has-file'); bodyImageClearBtn.classList.remove('visible'); bodyImageUrlInput.disabled = false; bodyImageUrlInput.placeholder = 'https://exemplo.com/imagem.jpg ou data:image/...'; }
         window.openBodyImageModal = openBodyImageModal;
-        window.closeBodyImageModal = () => { bodyImageModal.classList.remove('active');
-            resetBodyImageFile(); };
+        window.closeBodyImageModal = () => { bodyImageModal.classList.remove('active'); resetBodyImageFile(); };
         window.triggerBodyImageFileInput = () => bodyImageFileInput.click();
-        window.handleBodyImageFile = function(input) { const file = input.files[0]; if (!file) return; if (!file.type
-                .startsWith('image/')) { showToast('Selecione uma imagem válida.', true); return; } if (file.size > 10 *
-                1024 * 1024) { showToast('Tamanho máximo: 10MB.', true); return; } const reader = new FileReader();
-            reader.onload = e => { bodyImageBase64 = e.target.result;
-                bodyImageFileName.textContent = file.name + ' (' + (file.size / 1024).toFixed(1) + ' KB)';
-                bodyImagePreviewThumb.src = bodyImageBase64;
-                bodyImagePreviewThumb.style.display = 'block';
-                bodyImageUploadArea.classList.add('has-file');
-                bodyImageClearBtn.classList.add('visible');
-                bodyImageUrlInput.value = '';
-                bodyImageUrlInput.disabled = true;
-                bodyImageUrlInput.placeholder = 'Imagem carregada do dispositivo';
-                showToast('📱 Imagem carregada: ' + file.name); };
-            reader.readAsDataURL(file); };
-        window.clearBodyImageFile = () => { resetBodyImageFile();
-            showToast('Imagem removida.'); };
-        window.applyBodyImage = function() { const caption = bodyImageCaptionInput.value.trim(); const alt =
-                bodyImageAltInput.value.trim() || (caption || 'Imagem no corpo do artigo'); let imageSrc =
-                bodyImageBase64 || bodyImageUrlInput.value.trim(); if (!imageSrc) { showToast(
-                    'Selecione uma imagem do dispositivo ou insira uma URL.', true); return; } let figureHtml =
-                '<figure class="body-image size-md"><img src="' + imageSrc + '" alt="' + escapeHtml(alt) +
-                '" loading="lazy">'; if (caption) figureHtml += '<figcaption>' + escapeHtml(caption) + '</figcaption>';
-            figureHtml += '</figure>'; if (bodyImageTargetEditor === 'main') { const ta = document.getElementById(
-                'htmlContent');
-                ta.focus();
-                insertAtCursor(ta, '\n' + figureHtml + '\n');
-                updatePreview(); } else if (bodyImageTargetEditor === 'fullscreen') { const ta = document.getElementById(
-                    'fullscreenContent');
-                ta.focus();
-                insertAtCursor(ta, '\n' + figureHtml + '\n');
-                syncCodeToVisual(); } else if (bodyImageTargetEditor === 'visual') { const vis = document.getElementById(
-                    'visualEditor');
-                vis.focus();
-                document.execCommand('insertHTML', false, figureHtml);
-                syncVisualToCode(); }
-            bodyImageModal.classList.remove('active');
-            resetBodyImageFile();
-            showToast('🖼️ Imagem inserida no corpo do artigo.'); };
-        document.addEventListener('keydown', e => { if (e.key === 'Escape' && bodyImageModal.classList.contains(
-                'active')) { bodyImageModal.classList.remove('active');
-                resetBodyImageFile(); } });
-        document.getElementById('bodyImageModal').addEventListener('click', function(e) { if (e.target === this) { this
-                .classList.remove('active');
-                resetBodyImageFile(); } });
-        document.getElementById('linkModal').addEventListener('click', function(e) { if (e.target === this) this
-            .classList.remove('active'); });
+        window.handleBodyImageFile = function(input) {
+            const file = input.files[0]; if (!file) return;
+            if (!file.type.startsWith('image/')) { showToast('Selecione uma imagem válida.', true); return; }
+            if (file.size > 10 * 1024 * 1024) { showToast('Tamanho máximo: 10MB.', true); return; }
+            const reader = new FileReader();
+            reader.onload = e => { bodyImageBase64 = e.target.result; bodyImageFileName.textContent = file.name + ' (' + (file.size / 1024).toFixed(1) + ' KB)'; bodyImagePreviewThumb.src = bodyImageBase64; bodyImagePreviewThumb.style.display = 'block'; bodyImageUploadArea.classList.add('has-file'); bodyImageClearBtn.classList.add('visible'); bodyImageUrlInput.value = ''; bodyImageUrlInput.disabled = true; bodyImageUrlInput.placeholder = 'Imagem carregada do dispositivo'; showToast('📱 Imagem carregada: ' + file.name); };
+            reader.readAsDataURL(file);
+        };
+        window.clearBodyImageFile = () => { resetBodyImageFile(); showToast('Imagem removida.'); };
+        window.applyBodyImage = function() {
+            const caption = bodyImageCaptionInput.value.trim(); const alt = bodyImageAltInput.value.trim() || (caption || 'Imagem no corpo do artigo');
+            let imageSrc = bodyImageBase64 || bodyImageUrlInput.value.trim();
+            if (!imageSrc) { showToast('Selecione uma imagem do dispositivo ou insira uma URL.', true); return; }
+            let figureHtml = '<figure class="body-image size-md"><img src="' + imageSrc + '" alt="' + escapeHtml(alt) + '" loading="lazy">';
+            if (caption) figureHtml += '<figcaption>' + escapeHtml(caption) + '</figcaption>';
+            figureHtml += '</figure>';
+            if (bodyImageTargetEditor === 'main') { const ta = document.getElementById('htmlContent'); ta.focus(); insertAtCursor(ta, '\n' + figureHtml + '\n'); updatePreview(); }
+            else if (bodyImageTargetEditor === 'fullscreen') { const ta = document.getElementById('fullscreenContent'); ta.focus(); insertAtCursor(ta, '\n' + figureHtml + '\n'); syncCodeToVisual(); }
+            else if (bodyImageTargetEditor === 'visual') { const vis = document.getElementById('visualEditor'); vis.focus(); document.execCommand('insertHTML', false, figureHtml); syncVisualToCode(); }
+            bodyImageModal.classList.remove('active'); resetBodyImageFile(); showToast('🖼️ Imagem inserida no corpo do artigo.');
+        };
+        document.addEventListener('keydown', e => { if (e.key === 'Escape' && bodyImageModal.classList.contains('active')) { bodyImageModal.classList.remove('active'); resetBodyImageFile(); } });
+        document.getElementById('bodyImageModal').addEventListener('click', function(e) { if (e.target === this) { this.classList.remove('active'); resetBodyImageFile(); } });
+        document.getElementById('linkModal').addEventListener('click', function(e) { if (e.target === this) this.classList.remove('active'); });
 
-        function initImageResizeHandler() { const previewContent = document.getElementById('prevContent'); if (!
-                previewContent) return;
+        function initImageResizeHandler() {
+            const previewContent = document.getElementById('prevContent'); if (!previewContent) return;
             previewContent.removeEventListener('click', imageResizeClickHandler);
-            previewContent.addEventListener('click', imageResizeClickHandler); }
-
-        function imageResizeClickHandler(e) { const figure = e.target.closest('figure.body-image'); if (!figure)
-        return; if (!e.target.closest('img') && !e.target.closest('figcaption')) return;
-            e.preventDefault(); const sizes = ['size-xs', 'size-sm', 'size-md', 'size-lg', 'size-xl']; const labels = {
-                'size-xs': 'Muito pequeno (20%)',
-                'size-sm': 'Pequeno (35%)',
-                'size-md': 'Médio (50%)',
-                'size-lg': 'Grande (70%)',
-                'size-xl': 'Expandido (100%)'
-            }; let current = 'size-md'; for (const sz of sizes) { if (figure.classList.contains(sz)) { current = sz;
-                    break; } } const currentIndex = sizes.indexOf(current); const nextIndex = (currentIndex + 1) % sizes
-                .length;
-            figure.classList.remove(...sizes);
-            figure.classList.add(sizes[nextIndex]);
+            previewContent.addEventListener('click', imageResizeClickHandler);
+        }
+        function imageResizeClickHandler(e) {
+            const figure = e.target.closest('figure.body-image'); if (!figure) return;
+            if (!e.target.closest('img') && !e.target.closest('figcaption')) return;
+            e.preventDefault();
+            const sizes = ['size-xs', 'size-sm', 'size-md', 'size-lg', 'size-xl'];
+            const labels = { 'size-xs': 'Muito pequeno (20%)', 'size-sm': 'Pequeno (35%)', 'size-md': 'Médio (50%)', 'size-lg': 'Grande (70%)', 'size-xl': 'Expandido (100%)' };
+            let current = 'size-md'; for (const sz of sizes) { if (figure.classList.contains(sz)) { current = sz; break; } }
+            const currentIndex = sizes.indexOf(current); const nextIndex = (currentIndex + 1) % sizes.length;
+            figure.classList.remove(...sizes); figure.classList.add(sizes[nextIndex]);
             showToast('📐 Imagem: ' + labels[sizes[nextIndex]]);
-            syncImageSizesToMainContent(); }
-
-        function syncImageSizesToMainContent() { const previewFigures = document.querySelectorAll(
-                '#prevContent figure.body-image'); const mainTA = document.getElementById('htmlContent'); let html = mainTA
-                .value;
-            previewFigures.forEach(fig => { const imgSrc = fig.querySelector('img')?.getAttribute('src'); if (!imgSrc)
-                    return; const classes = Array.from(fig.classList).filter(c => c.startsWith('size-')).join(
-                    ' '); const escapedSrc = imgSrc.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); const regex = new RegExp(
-                    '(<figure\\s+class="body-image)([^"]*)("\\s*>[\\s\\S]*?<img\\s+[^>]*src="' + escapedSrc +
-                    '"[^>]*>[\\s\\S]*?</figure>)', 'g');
-                html = html.replace(regex, (match, p1, p2, p3) => { let cleanClasses = p2.replace(/\bsize-\w+\b/g,
-                        '').replace(/\s+/g, ' ').trim(); return '<figure class="body-image' + (cleanClasses ?
-                        ' ' + cleanClasses : '') + ' ' + classes + '"' + p3; }); }); if (html !== mainTA.value) {
-                mainTA.value = html;
-                triggerAutoSave(); } }
+            syncImageSizesToMainContent();
+        }
+        function syncImageSizesToMainContent() {
+            const previewFigures = document.querySelectorAll('#prevContent figure.body-image');
+            const mainTA = document.getElementById('htmlContent'); let html = mainTA.value;
+            previewFigures.forEach(fig => {
+                const imgSrc = fig.querySelector('img')?.getAttribute('src'); if (!imgSrc) return;
+                const classes = Array.from(fig.classList).filter(c => c.startsWith('size-')).join(' ');
+                const escapedSrc = imgSrc.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                const regex = new RegExp('(<figure\\s+class="body-image)([^"]*)("\\s*>[\\s\\S]*?<img\\s+[^>]*src="' + escapedSrc + '"[^>]*>[\\s\\S]*?</figure>)', 'g');
+                html = html.replace(regex, (match, p1, p2, p3) => { let cleanClasses = p2.replace(/\bsize-\w+\b/g, '').replace(/\s+/g, ' ').trim(); return '<figure class="body-image' + (cleanClasses ? ' ' + cleanClasses : '') + ' ' + classes + '"' + p3; });
+            });
+            if (html !== mainTA.value) { mainTA.value = html; triggerAutoSave(); }
+        }
         const originalUpdatePreview = updatePreview;
-        updatePreview = function() { originalUpdatePreview();
-            initImageResizeHandler(); };
+        updatePreview = function() { originalUpdatePreview(); initImageResizeHandler(); };
 
         function addImageResizeScriptToArticle() {
             return `
@@ -1991,197 +1758,135 @@
 
         const mainContent = document.getElementById('htmlContent');
         const fullscreenContent = document.getElementById('fullscreenContent');
-
-        function applyFormattingToTextarea(type, ta) { const s = ta.selectionStart,
-                e = ta.selectionEnd; let txt = ta.value.substring(s, e); if (type === 'undo') { document.execCommand(
-                    'undo'); return; } if (type === 'redo') { document.execCommand('redo'); return; } if (type ===
-                'increaseFont') { applyFontSize(ta, 'increase'); return; } if (type === 'decreaseFont') { applyFontSize(
-                    ta, 'decrease'); return; } if (s === e && !['justifyLeft', 'justifyCenter', 'justifyRight',
-                    'justifyFull', 'h2', 'h3', 'paragraph', 'removeFormat', 'callout', 'info', 'warning',
-                'pullquote'].includes(type)) { showToast('Selecione um texto para formatar'); return; } let r =
-                ''; switch (type) { case 'bold':
-                r = '<strong>' + txt + '</strong>'; break; case 'italic':
-                r = '<em>' + txt + '</em>'; break; case 'underline':
-                r = '<u>' + txt + '</u>'; break; case 'highlight':
-                r = '<span class="highlight">' + txt + '</span>'; break; case 'destaque':
-                r = '<span class="destaque-frase">' + txt + '</span>'; break; case 'blockquote':
-                r = '<blockquote>\n  <p>' + txt + '</p>\n</blockquote>'; break; case 'callout':
-                r = '<div class="callout-box">\n  <p>' + txt + '</p>\n</div>'; break; case 'info':
-                r = '<div class="info-panel">\n  <p>' + txt + '</p>\n</div>'; break; case 'warning':
-                r = '<div class="warning-panel">\n  <p>' + txt + '</p>\n</div>'; break; case 'pullquote':
-                r = '<div class="pull-quote">\n  <p>' + txt + '</p>\n</div>'; break; case 'paragraph':
-                r = '<p>' + txt + '</p>'; break; case 'h2':
-                r = '<h2>' + txt + '</h2>'; break; case 'h3':
-                r = '<h3>' + txt + '</h3>'; break; case 'justifyLeft':
-                r = '<p style="text-align:left">' + txt + '</p>'; break; case 'justifyCenter':
-                r = '<p style="text-align:center">' + txt + '</p>'; break; case 'justifyRight':
-                r = '<p style="text-align:right">' + txt + '</p>'; break; case 'justifyFull':
-                r = '<p style="text-align:justify">' + txt + '</p>'; break; case 'removeFormat': const tmp = document
-                    .createElement('div');
-                tmp.innerHTML = txt;
-                r = tmp.textContent || ''; break; }
-            ta.value = ta.value.substring(0, s) + r + ta.value.substring(e);
-            ta.focus();
-            ta.setSelectionRange(s + r.length, s + r.length); if (ta.id === 'htmlContent') updatePreview(); if (ta.id ===
-                'fullscreenContent') syncCodeToVisual(); }
-
-        function applyFontSize(ta, op) { const s = ta.selectionStart,
-                e = ta.selectionEnd; let txt = ta.value.substring(s, e); if (!txt) return; let w =
-                `<span style="font-size:${op === 'increase' ? '1.2em' : '0.9em'}">${txt}</span>`;
-            ta.value = ta.value.substring(0, s) + w + ta.value.substring(e);
-            ta.focus();
-            ta.setSelectionRange(s + w.length, s + w.length); if (ta.id === 'htmlContent') updatePreview(); if (ta.id ===
-                'fullscreenContent') syncCodeToVisual(); }
+        function applyFormattingToTextarea(type, ta) { const s = ta.selectionStart, e = ta.selectionEnd; let txt = ta.value.substring(s, e); if (type === 'undo') { document.execCommand('undo'); return; } if (type === 'redo') { document.execCommand('redo'); return; } if (type === 'increaseFont') { applyFontSize(ta, 'increase'); return; } if (type === 'decreaseFont') { applyFontSize(ta, 'decrease'); return; } if (s === e && !['justifyLeft','justifyCenter','justifyRight','justifyFull','h2','h3','paragraph','removeFormat','callout','info','warning','pullquote'].includes(type)) { showToast('Selecione um texto para formatar'); return; } let r = ''; switch(type) { case 'bold': r = '<strong>'+txt+'</strong>'; break; case 'italic': r = '<em>'+txt+'</em>'; break; case 'underline': r = '<u>'+txt+'</u>'; break; case 'highlight': r = '<span class="highlight">'+txt+'</span>'; break; case 'destaque': r = '<span class="destaque-frase">'+txt+'</span>'; break; case 'blockquote': r = '<blockquote>\n  <p>'+txt+'</p>\n</blockquote>'; break; case 'callout': r = '<div class="callout-box">\n  <p>'+txt+'</p>\n</div>'; break; case 'info': r = '<div class="info-panel">\n  <p>'+txt+'</p>\n</div>'; break; case 'warning': r = '<div class="warning-panel">\n  <p>'+txt+'</p>\n</div>'; break; case 'pullquote': r = '<div class="pull-quote">\n  <p>'+txt+'</p>\n</div>'; break; case 'paragraph': r = '<p>'+txt+'</p>'; break; case 'h2': r = '<h2>'+txt+'</h2>'; break; case 'h3': r = '<h3>'+txt+'</h3>'; break; case 'justifyLeft': r = '<p style="text-align:left">'+txt+'</p>'; break; case 'justifyCenter': r = '<p style="text-align:center">'+txt+'</p>'; break; case 'justifyRight': r = '<p style="text-align:right">'+txt+'</p>'; break; case 'justifyFull': r = '<p style="text-align:justify">'+txt+'</p>'; break; case 'removeFormat': const tmp = document.createElement('div'); tmp.innerHTML = txt; r = tmp.textContent || ''; break; } ta.value = ta.value.substring(0, s) + r + ta.value.substring(e); ta.focus(); ta.setSelectionRange(s + r.length, s + r.length); if (ta.id === 'htmlContent') updatePreview(); if (ta.id === 'fullscreenContent') syncCodeToVisual(); }
+        function applyFontSize(ta, op) { const s = ta.selectionStart, e = ta.selectionEnd; let txt = ta.value.substring(s, e); if (!txt) return; let w = `<span style="font-size:${op === 'increase' ? '1.2em' : '0.9em'}">${txt}</span>`; ta.value = ta.value.substring(0, s) + w + ta.value.substring(e); ta.focus(); ta.setSelectionRange(s + w.length, s + w.length); if (ta.id === 'htmlContent') updatePreview(); if (ta.id === 'fullscreenContent') syncCodeToVisual(); }
         window.applyFormatting = t => applyFormattingToTextarea(t, mainContent);
-        window.applyUndoRedo = a => { mainContent.focus();
-            document.execCommand(a);
-            updatePreview(); };
+        window.applyUndoRedo = a => { mainContent.focus(); document.execCommand(a); updatePreview(); };
         window.applyFormattingFullscreen = t => applyFormattingToTextarea(t, fullscreenContent);
-        window.applyUndoRedoFullscreen = a => { fullscreenContent.focus();
-            document.execCommand(a);
-            syncCodeToVisual(); };
-        window.detectLinksInMainEditor = () => { if (!/<[a-z][\s\S]*>/i.test(mainContent.value)) mainContent.value =
-                autoLink(mainContent.value); else showToast('Editor já contém HTML');
-            updatePreview(); };
-        window.detectLinksInFullscreen = () => { if (!/<[a-z][\s\S]*>/i.test(fullscreenContent.value))
-                fullscreenContent.value = autoLink(fullscreenContent.value); else showToast('Editor já contém HTML');
-            syncCodeToVisual(); };
-        window.execVisualWrap = function(cn) { const v = document.getElementById('visualEditor');
-            v.focus(); if (window.getSelection().rangeCount && !window.getSelection().isCollapsed) { const r = window
-                    .getSelection().getRangeAt(0); const d = document.createElement('div');
-                d.className = cn;
-                d.appendChild(r.extractContents());
-                r.insertNode(d); } else { const d = document.createElement('div');
-                d.className = cn;
-                d.innerHTML = '<p>Conteúdo aqui...</p>';
-                document.execCommand('insertHTML', false, d.outerHTML); }
-            syncVisualToCode(); };
-        window.execVisualDestaque = function() { const v = document.getElementById('visualEditor');
-            v.focus(); if (window.getSelection().rangeCount && !window.getSelection().isCollapsed) { const r = window
-                    .getSelection().getRangeAt(0); const s = document.createElement('span');
-                s.className = 'destaque-frase';
-                s.appendChild(r.extractContents());
-                r.insertNode(s);
-                syncVisualToCode(); } else showToast('Selecione um texto para destacar.'); };
-        window.processRawText = function() { const raw = document.getElementById('rawTextInput').value.trim(); if (!
-                raw) return; const blocks = raw.split(/\n\s*\n/); const out = [];
-            blocks.forEach(block => { const lines = block.split('\n').map(l => l.trim()).filter(l => l); if (!lines
-                    .length) return; const first = lines[0]; const full = lines.join(' '); if (first.startsWith(
-                    '# ')) out.push('<h2>' + escapeHtml(first.substring(2)) + '</h2>' + (lines.length > 1 ? '<p>' +
-                    autoLink(lines.slice(1).join(' ')) + '</p>' : '')); else if (first.startsWith('## ')) out.push(
-                    '<h3>' + escapeHtml(first.substring(3)) + '</h3>' + (lines.length > 1 ? '<p>' + autoLink(lines
-                        .slice(1).join(' ')) + '</p>' : '')); else if (first.length <= 80 && (first === first
-                    .toUpperCase() || /^[A-ZÁÀÃÂÉÊÍÓÔÕÚÇ\s]+$/.test(first))) out.push('<h2>' + escapeHtml(
-                    first) + '</h2>' + (lines.length > 1 ? '<p>' + autoLink(lines.slice(1).join(' ')) + '</p>' :
-                    '')); else if (first.endsWith(':') || (first.length < 60 && !first.includes('.'))) out.push(
-                    '<h3>' + escapeHtml(first) + '</h3>' + (lines.length > 1 ? '<p>' + autoLink(lines.slice(1)
-                        .join(' ')) + '</p>' : '')); else out.push('<p>' + autoLink(full) + '</p>'); });
-            mainContent.value = out.join('\n\n');
-            updatePreview();
-            showToast('✅ ' + out.length + ' blocos convertidos.'); };
+        window.applyUndoRedoFullscreen = a => { fullscreenContent.focus(); document.execCommand(a); syncCodeToVisual(); };
+        window.detectLinksInMainEditor = () => { if (!/<[a-z][\s\S]*>/i.test(mainContent.value)) mainContent.value = autoLink(mainContent.value); else showToast('Editor já contém HTML'); updatePreview(); };
+        window.detectLinksInFullscreen = () => { if (!/<[a-z][\s\S]*>/i.test(fullscreenContent.value)) fullscreenContent.value = autoLink(fullscreenContent.value); else showToast('Editor já contém HTML'); syncCodeToVisual(); };
+        window.execVisualWrap = function(cn) { const v = document.getElementById('visualEditor'); v.focus(); if (window.getSelection().rangeCount && !window.getSelection().isCollapsed) { const r = window.getSelection().getRangeAt(0); const d = document.createElement('div'); d.className = cn; d.appendChild(r.extractContents()); r.insertNode(d); } else { const d = document.createElement('div'); d.className = cn; d.innerHTML = '<p>Conteúdo aqui...</p>'; document.execCommand('insertHTML', false, d.outerHTML); } syncVisualToCode(); };
+        window.execVisualDestaque = function() { const v = document.getElementById('visualEditor'); v.focus(); if (window.getSelection().rangeCount && !window.getSelection().isCollapsed) { const r = window.getSelection().getRangeAt(0); const s = document.createElement('span'); s.className = 'destaque-frase'; s.appendChild(r.extractContents()); r.insertNode(s); syncVisualToCode(); } else showToast('Selecione um texto para destacar.'); };
+        window.processRawText = function() { const raw = document.getElementById('rawTextInput').value.trim(); if (!raw) return; const blocks = raw.split(/\n\s*\n/); const out = []; blocks.forEach(block => { const lines = block.split('\n').map(l => l.trim()).filter(l => l); if (!lines.length) return; const first = lines[0]; const full = lines.join(' '); if (first.startsWith('# ')) out.push('<h2>' + escapeHtml(first.substring(2)) + '</h2>' + (lines.length > 1 ? '<p>' + autoLink(lines.slice(1).join(' ')) + '</p>' : '')); else if (first.startsWith('## ')) out.push('<h3>' + escapeHtml(first.substring(3)) + '</h3>' + (lines.length > 1 ? '<p>' + autoLink(lines.slice(1).join(' ')) + '</p>' : '')); else if (first.length <= 80 && (first === first.toUpperCase() || /^[A-ZÁÀÃÂÉÊÍÓÔÕÚÇ\s]+$/.test(first))) out.push('<h2>' + escapeHtml(first) + '</h2>' + (lines.length > 1 ? '<p>' + autoLink(lines.slice(1).join(' ')) + '</p>' : '')); else if (first.endsWith(':') || (first.length < 60 && !first.includes('.'))) out.push('<h3>' + escapeHtml(first) + '</h3>' + (lines.length > 1 ? '<p>' + autoLink(lines.slice(1).join(' ')) + '</p>' : '')); else out.push('<p>' + autoLink(full) + '</p>'); }); mainContent.value = out.join('\n\n'); updatePreview(); showToast('✅ ' + out.length + ' blocos convertidos.'); };
         let fullscreenActive = false;
-        window.openFullscreenEditor = () => { document.getElementById('fullscreenEditorModal').classList.add(
-            'active');
-            fullscreenContent.value = mainContent.value;
-            syncCodeToVisual();
-            document.getElementById('paneCodigo').classList.add('active');
-            document.getElementById('paneVisual').classList.remove('active');
-            document.getElementById('tabCodigo').classList.add('active');
-            document.getElementById('tabVisual').classList.remove('active');
-            fullscreenActive = true; };
-        window.closeFullscreenEditor = () => { document.getElementById('fullscreenEditorModal').classList.remove(
-            'active');
-            fullscreenActive = false; };
-        window.switchEditorTab = (tab) => { const code = document.getElementById('paneCodigo'); const vis = document
-                .getElementById('paneVisual'); if (tab === 'codigo') { code.classList.add('active');
-                vis.classList.remove('active');
-                document.getElementById('tabCodigo').classList.add('active');
-                document.getElementById('tabVisual').classList.remove('active');
-                syncVisualToCode(); } else { vis.classList.add('active');
-                code.classList.remove('active');
-                document.getElementById('tabVisual').classList.add('active');
-                document.getElementById('tabCodigo').classList.remove('active');
-                syncCodeToVisual(); } };
-        window.applyFullscreenChanges = () => { if (document.getElementById('paneVisual').classList.contains(
-                'active')) syncVisualToCode();
-            mainContent.value = fullscreenContent.value;
-            updatePreview();
-            closeFullscreenEditor();
-            showToast('✅ Alterações aplicadas');
-            triggerAutoSave(); };
-
+        window.openFullscreenEditor = () => { document.getElementById('fullscreenEditorModal').classList.add('active'); fullscreenContent.value = mainContent.value; syncCodeToVisual(); document.getElementById('paneCodigo').classList.add('active'); document.getElementById('paneVisual').classList.remove('active'); document.getElementById('tabCodigo').classList.add('active'); document.getElementById('tabVisual').classList.remove('active'); fullscreenActive = true; };
+        window.closeFullscreenEditor = () => { document.getElementById('fullscreenEditorModal').classList.remove('active'); fullscreenActive = false; };
+        window.switchEditorTab = (tab) => { const code = document.getElementById('paneCodigo'); const vis = document.getElementById('paneVisual'); if (tab === 'codigo') { code.classList.add('active'); vis.classList.remove('active'); document.getElementById('tabCodigo').classList.add('active'); document.getElementById('tabVisual').classList.remove('active'); syncVisualToCode(); } else { vis.classList.add('active'); code.classList.remove('active'); document.getElementById('tabVisual').classList.add('active'); document.getElementById('tabCodigo').classList.remove('active'); syncCodeToVisual(); } };
+        window.applyFullscreenChanges = () => { if (document.getElementById('paneVisual').classList.contains('active')) syncVisualToCode(); mainContent.value = fullscreenContent.value; updatePreview(); closeFullscreenEditor(); showToast('✅ Alterações aplicadas'); triggerAutoSave(); };
         function syncCodeToVisual() { document.getElementById('visualEditor').innerHTML = fullscreenContent.value; }
-
         function syncVisualToCode() { fullscreenContent.value = document.getElementById('visualEditor').innerHTML; }
-        window.execVisualCommand = (cmd, val) => { const v = document.getElementById('visualEditor');
-            v.focus(); if (cmd === 'hiliteColor') document.execCommand('hiliteColor', false, val); else if (cmd ===
-                'fontSize') document.execCommand('fontSize', false, '7'); else document.execCommand(cmd, false, val);
-            syncVisualToCode(); };
+        window.execVisualCommand = (cmd, val) => { const v = document.getElementById('visualEditor'); v.focus(); if (cmd === 'hiliteColor') document.execCommand('hiliteColor', false, val); else if (cmd === 'fontSize') document.execCommand('fontSize', false, '7'); else document.execCommand(cmd, false, val); syncVisualToCode(); };
         document.getElementById('visualEditor').addEventListener('input', syncVisualToCode);
-        document.addEventListener('keydown', e => { if (e.key === 'Escape' && fullscreenActive)
-            closeFullscreenEditor(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape' && fullscreenActive) closeFullscreenEditor(); });
+        function autoSlug() { const t = document.getElementById('title').value.trim(); const s = document.getElementById('slug'); if (!s.value || s.value === s.defaultValue) s.value = t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); }
+        function getArticleUrl() {
+            const slug = document.getElementById('slug').value.trim();
+            const eixo = document.getElementById('eixo').value.trim();
+            if (slug && eixo) {
+                const site = getSelectedSite();
+                const domain = site ? site.domain : 'pautazero.com';
+                return `https://${domain}/artigo/${encodeURIComponent(eixo)}/${encodeURIComponent(slug)}.html`;
+            }
+            return window.location.href;
+        }
+        function getPublishDateTime() { const val = document.getElementById('publishDateTime').value; return val ? new Date(val).toISOString() : undefined; }
 
-        function autoSlug() { const t = document.getElementById('title').value.trim(); const s = document.getElementById(
-                'slug'); if (!s.value || s.value === s.defaultValue) s.value = t.toLowerCase().normalize('NFD').replace(
-                /[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); }
-
-        function getArticleUrl() { const slug = document.getElementById('slug').value.trim(); const eixo = document
-                .getElementById('eixo').value.trim(); if (slug && eixo) { const site = getSelectedSite(); const domain =
-                    site ? site.domain : 'pautazero.com'; return `https://${domain}/artigo/${encodeURIComponent(eixo)}/${encodeURIComponent(slug)}.html`; }
-            return window.location.href; }
-
-        function getPublishDateTime() { const val = document.getElementById('publishDateTime').value; return val ? new Date(
-            val).toISOString() : undefined; }
-
-        function shareArticle(network) { const u = getArticleUrl(); const t = document.getElementById('title').value
-                .trim(); const e = document.getElementById('excerpt').value.trim(); const eu = encodeURIComponent(u); const
-                et = encodeURIComponent(t); const ee = encodeURIComponent(e); let link =
-                ''; switch (network) { case 'facebook':
-                link = `https://www.facebook.com/sharer/sharer.php?u=${eu}`; break; case 'x':
-                link = `https://x.com/intent/post?text=${et}&url=${eu}`; break; case 'linkedin':
-                link =
-                    `https://www.linkedin.com/shareArticle?mini=true&url=${eu}&title=${et}&summary=${ee}`; break;
-                case 'whatsapp':
-                link = `https://api.whatsapp.com/send?text=${et}%20${eu}`; break; case 'email':
-                link = `mailto:?subject=${et}&body=${ee}%0A%0A${eu}`; break; } if (link) { if (network === 'email') {
-                    window.location.href = link; return; } try { const popup = window.open(link, 'shareWindow',
-                    'width=600,height=400,noopener'); if (!popup || popup.closed) { window.open(link, '_blank',
-                        'noopener'); } } catch (err) { window.open(link, '_blank', 'noopener'); }
-                showToast(
-                    `🔗 Compartilhando no ${network === 'x' ? 'X (Twitter)' : network.charAt(0).toUpperCase() + network.slice(1)}...`
-                    ); } }
+        function shareArticle(network) {
+            const u = getArticleUrl();
+            const t = document.getElementById('title').value.trim();
+            const e = document.getElementById('excerpt').value.trim();
+            const eu = encodeURIComponent(u);
+            const et = encodeURIComponent(t);
+            const ee = encodeURIComponent(e);
+            let link = '';
+            switch (network) {
+                case 'facebook': link = `https://www.facebook.com/sharer/sharer.php?u=${eu}`; break;
+                case 'x': link = `https://x.com/intent/post?text=${et}&url=${eu}`; break;
+                case 'linkedin': link = `https://www.linkedin.com/shareArticle?mini=true&url=${eu}&title=${et}&summary=${ee}`; break;
+                case 'whatsapp': link = `https://api.whatsapp.com/send?text=${et}%20${eu}`; break;
+                case 'email': link = `mailto:?subject=${et}&body=${ee}%0A%0A${eu}`; break;
+            }
+            if (link) {
+                if (network === 'email') {
+                    window.location.href = link;
+                    return;
+                }
+                try {
+                    const popup = window.open(link, 'shareWindow', 'width=600,height=400,noopener');
+                    if (!popup || popup.closed) {
+                        window.open(link, '_blank', 'noopener');
+                    }
+                } catch (err) {
+                    window.open(link, '_blank', 'noopener');
+                }
+                showToast(`🔗 Compartilhando no ${network === 'x' ? 'X (Twitter)' : network.charAt(0).toUpperCase() + network.slice(1)}...`);
+            }
+        }
         window.shareArticle = shareArticle;
 
-        function generateFullHTML() { const portalName = document.getElementById('portalName').value || 'Pauta Zero';
-            const slogan = document.getElementById('portalSlogan').value || 'jardinagem · beleza · natureza'; const
-                title = document.getElementById('title').value || 'O Cultivo de Rosas'; const subtitle = document
-                .getElementById('subtitle').value; const eixo = document.getElementById('eixo').value ||
-                'plantas-e-natureza'; const tema = document.getElementById('tema').value || 'rosas'; const slug =
-                document.getElementById('slug').value.trim() || 'artigo'; const author = document.getElementById(
-                    'author').value.trim() || 'Dra. Flora Campos'; const authorBio = document.getElementById(
-                    'authorBio').value.trim(); const htmlContentVal = document.getElementById('htmlContent').value
-                .trim(); const publishAt = getPublishDateTime(); const readTime = document.getElementById('readTime')
-                .value || '8 min'; const tags = document.getElementById('tags').value.trim(); const tagsArr = tags ? tags
-                .split(',').map(t => t.trim()).filter(t => t) : []; const imageSrc = document.getElementById('image')
-                .value.trim() || 'https://placehold.co/600x400/0a3147/b8860b?text=Rosas'; const imageCaption = document
-                .getElementById('imageCaption').value.trim() || 'Rosas do Jardim Botânico'; const watermarkRef =
-                document.getElementById('watermarkRef').value.trim(); const referencesRaw = document.getElementById(
-                    'references').value.trim(); const excerpt = document.getElementById('excerpt').value.trim(); const
-                links = getRelatedLinks(); const today = new Date(); let displayDate = today.toLocaleDateString(
-                    'pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }); if (publishAt) { const parts =
-                    publishAt.split('T'); if (parts.length) { const d = new Date(parts[0] + 'T00:00:00');
-                    displayDate = d.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long',
-                        year: 'numeric' }); if (parts[1]) displayDate += ' às ' + parts[1].substring(0, 5); } }
-            const logoHTML = portalName.replace(/(Secreto|SECRETO)/i, '<span>$1</span>'); let relatedHTML =
-                ''; if (links.length > 0) {
+        const COMPLIANCE_TEXT = `<details class="compliance-details" style="font-size: inherit;">
+            <summary class="compliance-summary" style="font-size:0.65rem; font-weight:500; color:var(--aged-gold); cursor:pointer; display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border:1px solid rgba(184,134,11,0.2); border-radius:20px; background:rgba(184,134,11,0.04); transition:all 0.3s ease; user-select:none; list-style:none;">
+                <i class="fas fa-chevron-down" style="font-size:0.5rem; transition:transform 0.3s ease;"></i> Compliance, Transparência e Responsabilidade Editorial
+            </summary>
+            <div style="font-size:0.6rem; background:rgba(184,134,11,0.04); padding:0.8rem; border-radius:8px; max-height:200px; overflow-y:auto; line-height:1.5; color:#5a7d91; border:1px solid rgba(184,134,11,0.12); margin-top:0.5rem;">
+                <p style="margin-top:0;">O portal Revista PautaZero possui caráter estritamente informativo, opinativo, educacional e cultural. Todo o conteúdo publicado tem como objetivo promover informação, reflexão, debate público e acesso ao conhecimento, respeitando os princípios constitucionais da liberdade de expressão e da liberdade de imprensa previstos na legislação brasileira.</p>
+                <p>Os artigos, colunas, análises, entrevistas e conteúdos opinativos refletem exclusivamente a interpretação de seus respectivos autores, não constituindo aconselhamento jurídico, financeiro, médico, psicológico, político, religioso ou profissional de qualquer natureza.</p>
+                <p>A Revista PautaZero não incentiva práticas ilícitas, discurso de ódio, violência, discriminação, desinformação deliberada, manipulação de informações ou qualquer atividade contrária à legislação vigente.</p>
+                <p>Nos comprometemos com:</p>
+                <ul style="padding-left:1.2rem; margin:0.3rem 0;">
+                    <li>o respeito à Constituição Federal Brasileira;</li>
+                    <li>o cumprimento do Marco Civil da Internet (Lei nº 12.965/2014);</li>
+                    <li>a observância da Lei Geral de Proteção de Dados – LGPD (Lei nº 13.709/2018);</li>
+                    <li>o respeito aos direitos autorais e à propriedade intelectual;</li>
+                    <li>a proteção da privacidade e dos dados pessoais dos usuários;</li>
+                    <li>a transparência editorial e responsabilidade digital.</li>
+                </ul>
+                <p>Conteúdos enviados por colaboradores, colunistas, leitores ou terceiros são de responsabilidade exclusiva de seus respectivos autores.</p>
+                <p>Caso algum conteúdo publicado viole direitos autorais, direitos de imagem, privacidade, honra, legislação vigente ou contenha informações incorretas, o titular poderá solicitar revisão, correção ou remoção através de contato oficial da plataforma.</p>
+                <p>As imagens utilizadas podem possuir caráter meramente ilustrativo, institucional, jornalístico ou licenciadas de bancos públicos, gratuitos, autorizados ou de terceiros devidamente referenciados quando aplicável.</p>
+                <p>A Revista PautaZero reserva-se o direito de atualizar, corrigir, editar ou remover conteúdos a qualquer momento para adequação legal, editorial, ética ou técnica.</p>
+                <p>Ao acessar este portal, o usuário declara estar ciente destes termos e concorda com as políticas de uso, privacidade e responsabilidade editorial da plataforma.</p>
+            </div>
+        </details>`;
+
+        function generateFullHTML() {
+            const portalName = document.getElementById('portalName').value || 'Pauta Zero';
+            const slogan = document.getElementById('portalSlogan').value || 'jardinagem · beleza · natureza';
+            const title = document.getElementById('title').value || 'O Cultivo de Rosas';
+            const subtitle = document.getElementById('subtitle').value;
+            const eixo = document.getElementById('eixo').value || 'plantas-e-natureza';
+            const tema = document.getElementById('tema').value || 'rosas';
+            const slug = document.getElementById('slug').value.trim() || 'artigo';
+            const author = document.getElementById('author').value.trim() || 'Dra. Flora Campos';
+            const authorBio = document.getElementById('authorBio').value.trim();
+            const htmlContentVal = document.getElementById('htmlContent').value.trim();
+            const publishAt = getPublishDateTime();
+            const readTime = document.getElementById('readTime').value || '8 min';
+            const tags = document.getElementById('tags').value.trim();
+            const tagsArr = tags ? tags.split(',').map(t => t.trim()).filter(t => t) : [];
+            const imageSrc = document.getElementById('image').value.trim() || 'https://placehold.co/600x400/0a3147/b8860b?text=Rosas';
+            const imageCaption = document.getElementById('imageCaption').value.trim() || 'Rosas do Jardim Botânico';
+            const watermarkRef = document.getElementById('watermarkRef').value.trim();
+            const referencesRaw = document.getElementById('references').value.trim();
+            const excerpt = document.getElementById('excerpt').value.trim();
+            const links = getRelatedLinks();
+            const today = new Date();
+            let displayDate = today.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+            if (publishAt) { const parts = publishAt.split('T'); if (parts.length) { const d = new Date(parts[0] + 'T00:00:00'); displayDate = d.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }); if (parts[1]) displayDate += ' às ' + parts[1].substring(0, 5); } }
+            const logoHTML = portalName.replace(/(Secreto|SECRETO)/i, '<span>$1</span>');
+            let relatedHTML = '';
+            if (links.length > 0) {
                 relatedHTML = `
                         <div class="same-theme-articles">
                             <h5><i class="fas fa-check-circle"></i> Relacionados</h5>
                             <ul class="same-theme-list">
                                 ${links.map(l => `<li><a href="${escapeHtml(l.url)}" target="_blank" rel="noopener">${escapeHtml(l.slug)}</a></li>`).join('')}
                             </ul>
-                        </div>`; }
-            let authorSigHTML = ''; if (author) {
+                        </div>`;
+            }
+            let authorSigHTML = '';
+            if (author) {
                 authorSigHTML = `
                         <div class="author-signature">
                             <div class="author-signature-row">
@@ -2192,24 +1897,31 @@
                                 </div>
                             </div>
                             ${authorBio ? `<p class="author-bio">${escapeHtml(authorBio)}</p>` : ''}
-                        </div>`; }
-            let referencesHTML = ''; if (referencesRaw) {
+                        </div>`;
+            }
+            let referencesHTML = '';
+            if (referencesRaw) {
                 referencesHTML = `
                         <hr class="references-divider">
                         <div class="references-section">
                             <div class="references-title">Referências</div>
                             <div>${autoLink(referencesRaw)}</div>
-                        </div>`; }
-            let tagsHTML = ''; if (tagsArr.length > 0) {
+                        </div>`;
+            }
+            let tagsHTML = '';
+            if (tagsArr.length > 0) {
                 tagsHTML = `
                 <div class="footer-tags">
                     <i class="fas fa-tags"></i> <span>${tagsArr.join(' · ')}</span>
-                </div>`; }
-            let watermarkHTML = ''; if (watermarkRef) {
+                </div>`;
+            }
+            let watermarkHTML = '';
+            if (watermarkRef) {
                 watermarkHTML = `
                 <div class="footer-watermark">
                     <i class="fas fa-fingerprint"></i> <span>Ref: ${escapeHtml(watermarkRef)}</span>
-                </div>`; }
+                </div>`;
+            }
             const imageResizeCode = addImageResizeScriptToArticle();
             const headerHTML = `
     <header class="pz-header">
@@ -2348,6 +2060,26 @@
         .footer-tags { max-width: 1280px; margin: .6rem auto 0; padding: .5rem 20px 0; border-top: 1px solid rgba(184,134,11,.2); font-size: .5rem; color: rgba(255,255,255,.7); text-align: center; }
         .footer-tags i { color: var(--aged-gold); margin-right: 5px; }
         .footer-watermark { max-width: 1280px; margin: .4rem auto 0; padding: .4rem 20px; font-size: .45rem; color: rgba(255,255,255,.5); text-align: center; font-style: italic; }
+        .compliance-details { margin-top: 0.4rem; }
+        .compliance-summary {
+            cursor: pointer; font-size: 0.65rem; font-weight: 500; color: var(--aged-gold); list-style: none;
+            display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
+            border: 1px solid rgba(184,134,11,0.2); border-radius: 20px;
+            background: rgba(184,134,11,0.04); transition: all 0.3s ease; user-select: none;
+        }
+        .compliance-summary::-webkit-details-marker { display: none; }
+        .compliance-summary:hover { background: rgba(184,134,11,0.08); border-color: var(--aged-gold); color: var(--aged-gold); transform: translateY(-1px); box-shadow: 0 2px 8px rgba(184,134,11,0.08); }
+        .compliance-summary i { font-size: 0.5rem; transition: transform 0.3s ease; }
+        details[open] .compliance-summary i { transform: rotate(180deg); }
+        .compliance-text {
+            font-size: 0.6rem; background: rgba(184,134,11,0.04); padding: 0.8rem; border-radius: 8px;
+            max-height: 200px; overflow-y: auto; line-height: 1.5; color: #5a7d91;
+            border: 1px solid rgba(184,134,11,0.12); margin-top: 0.5rem;
+        }
+        .compliance-notice {
+            font-size: 0.6rem; color: #5a7d91; margin-top: 1.2rem; padding-top: 0.8rem;
+            border-top: 1px solid rgba(184,134,11,0.18); line-height: 1.5; opacity: 0.8;
+        }
         @media (max-width:600px) {
             .article-dual-column { flex-direction: column; }
             .article-image-col { flex: 0 0 auto; max-width: 100%; }
@@ -2413,6 +2145,9 @@
                 </div>
                 ${referencesHTML}
                 ${authorSigHTML}
+                <div class="compliance-notice">
+                    ${COMPLIANCE_TEXT}
+                </div>
             </div>
         </div>
     </div>
@@ -2468,308 +2203,209 @@
             return fullHTML;
         }
 
-        window.downloadArticleHTML = function() { const slug = document.getElementById('slug').value.trim() ||
-                'artigo'; const html = generateFullHTML(); const blob = new Blob([html], { type: 'text/html;charset=UTF-8' })
-            ; const url = URL.createObjectURL(blob); const a = document.createElement('a');
-            a.href = url;
-            a.download = slug + '.html';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            showToast('✅ Artigo baixado.'); };
-        async function selectLocalFolder() { if (!('showDirectoryPicker' in window)) { showToast(
-                    '⚠️ API não suportada.', true); return; } try { selectedDirectoryHandle = await window
-                .showDirectoryPicker({ mode: 'readwrite' });
-                updateFolderUI();
-                showToast('📁 Pasta selecionada: ' + selectedDirectoryHandle.name); } catch (err) { if (err.name !==
-                    'AbortError') showToast('❌ Erro: ' + err.message, true); } }
-        async function saveToSelectedFolder() { if (!selectedDirectoryHandle) { showToast('⚠️ Selecione uma pasta.',
-                    true); return; } const slug = document.getElementById('slug').value.trim() || 'artigo'; const html =
-                generateFullHTML(); const name = slug + '.html'; try { if (selectedDirectoryHandle.queryPermission && (
-                        await selectedDirectoryHandle.queryPermission({ mode: 'readwrite' })) !== 'granted') { if (!
-                        await selectedDirectoryHandle.requestPermission({ mode: 'readwrite' })) { showToast(
-                            '❌ Permissão negada.', true); return; } } const fh = await selectedDirectoryHandle
-                    .getFileHandle(name, { create: true }); const w = await fh.createWritable(); await w.write(html);
-                await w.close();
-                showToast('✅ Salvo em ' + selectedDirectoryHandle.name); } catch (err) { showToast('❌ Erro: ' + err
-                    .message, true); } }
+        window.downloadArticleHTML = function() { const slug = document.getElementById('slug').value.trim() || 'artigo'; const html = generateFullHTML(); const blob = new Blob([html], { type: 'text/html;charset=UTF-8' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = slug + '.html'; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); showToast('✅ Artigo baixado.'); };
+        async function selectLocalFolder() { if (!('showDirectoryPicker' in window)) { showToast('⚠️ API não suportada.', true); return; } try { selectedDirectoryHandle = await window.showDirectoryPicker({ mode: 'readwrite' }); updateFolderUI(); showToast('📁 Pasta selecionada: ' + selectedDirectoryHandle.name); } catch (err) { if (err.name !== 'AbortError') showToast('❌ Erro: ' + err.message, true); } }
+        async function saveToSelectedFolder() { if (!selectedDirectoryHandle) { showToast('⚠️ Selecione uma pasta.', true); return; } const slug = document.getElementById('slug').value.trim() || 'artigo'; const html = generateFullHTML(); const name = slug + '.html'; try { if (selectedDirectoryHandle.queryPermission && (await selectedDirectoryHandle.queryPermission({ mode: 'readwrite' })) !== 'granted') { if (!await selectedDirectoryHandle.requestPermission({ mode: 'readwrite' })) { showToast('❌ Permissão negada.', true); return; } } const fh = await selectedDirectoryHandle.getFileHandle(name, { create: true }); const w = await fh.createWritable(); await w.write(html); await w.close(); showToast('✅ Salvo em ' + selectedDirectoryHandle.name); } catch (err) { showToast('❌ Erro: ' + err.message, true); } }
+        function updateFolderUI() { const saveBtn = document.getElementById('saveToFolderBtn'); const selectBtn = document.getElementById('selectFolderBtn'); const indicator = document.getElementById('folderIndicator'); const nameDisplay = document.getElementById('folderNameDisplay'); if (selectedDirectoryHandle) { saveBtn.disabled = false; selectBtn.classList.add('active-folder'); indicator.style.display = 'flex'; nameDisplay.textContent = selectedDirectoryHandle.name; } else { saveBtn.disabled = true; selectBtn.classList.remove('active-folder'); indicator.style.display = 'none'; nameDisplay.textContent = ''; } }
+        window.selectLocalFolder = selectLocalFolder; window.saveToSelectedFolder = saveToSelectedFolder;
 
-        function updateFolderUI() { const saveBtn = document.getElementById('saveToFolderBtn'); const selectBtn =
-            document.getElementById('selectFolderBtn'); const indicator = document.getElementById(
-                'folderIndicator'); const nameDisplay = document.getElementById('folderNameDisplay'); if (
-                selectedDirectoryHandle) { saveBtn.disabled = false;
-                selectBtn.classList.add('active-folder');
-                indicator.style.display = 'flex';
-                nameDisplay.textContent = selectedDirectoryHandle.name; } else { saveBtn.disabled = true;
-                selectBtn.classList.remove('active-folder');
-                indicator.style.display = 'none';
-                nameDisplay.textContent = ''; } }
-        window.selectLocalFolder = selectLocalFolder;
-        window.saveToSelectedFolder = saveToSelectedFolder;
-
-        function updatePreview() { const portalName = document.getElementById('portalName').value || 'Pauta Zero';
-            const slogan = document.getElementById('portalSlogan').value || 'jardinagem · beleza · natureza'; const
-                title = document.getElementById('title').value || 'O Cultivo de Rosas'; const subtitle = document
-                .getElementById('subtitle').value; const eixo = document.getElementById('eixo').value ||
-                'plantas-e-natureza'; const tema = document.getElementById('tema').value || 'rosas'; const author =
-                document.getElementById('author').value.trim() || 'Dra. Flora Campos'; const authorBio = document
-                .getElementById('authorBio').value.trim(); const html = document.getElementById('htmlContent').value
-                .trim(); const publishAt = getPublishDateTime(); const readTime = document.getElementById('readTime')
-                .value || '8 min'; const tags = document.getElementById('tags').value.trim(); const imageCaption =
-                document.getElementById('imageCaption').value.trim() || 'Rosas do Jardim Botânico'; const
-                watermarkRef = document.getElementById('watermarkRef').value.trim(); const referencesRaw = document
-                .getElementById('references').value.trim();
-            document.getElementById('prevLogo').innerHTML = portalName.replace(/(Secreto|SECRETO)/i,
-                '<span>$1</span>');
+        function updatePreview() {
+            const portalName = document.getElementById('portalName').value || 'Pauta Zero';
+            const slogan = document.getElementById('portalSlogan').value || 'jardinagem · beleza · natureza';
+            const title = document.getElementById('title').value || 'O Cultivo de Rosas';
+            const subtitle = document.getElementById('subtitle').value;
+            const eixo = document.getElementById('eixo').value || 'plantas-e-natureza';
+            const tema = document.getElementById('tema').value || 'rosas';
+            const author = document.getElementById('author').value.trim() || 'Dra. Flora Campos';
+            const authorBio = document.getElementById('authorBio').value.trim();
+            const html = document.getElementById('htmlContent').value.trim();
+            const publishAt = getPublishDateTime();
+            const readTime = document.getElementById('readTime').value || '8 min';
+            const tags = document.getElementById('tags').value.trim();
+            const imageCaption = document.getElementById('imageCaption').value.trim() || 'Rosas do Jardim Botânico';
+            const watermarkRef = document.getElementById('watermarkRef').value.trim();
+            const referencesRaw = document.getElementById('references').value.trim();
+            document.getElementById('prevLogo').innerHTML = portalName.replace(/(Secreto|SECRETO)/i, '<span>$1</span>');
             document.getElementById('prevTagline').textContent = slogan;
             document.getElementById('prevBreadHome').textContent = portalName.toUpperCase();
             document.getElementById('prevFooterName').textContent = portalName;
             document.getElementById('prevFooterBrand').textContent = portalName;
-            document.getElementById('prevCaption').textContent = imageCaption; const today = new Date(); let
-                displayDate = today.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }); if (
-                    publishAt) { const parts = publishAt.split('T'); if (parts.length) { const d = new Date(parts[0] +
-                        'T00:00:00');
-                    displayDate = d.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long',
-                        year: 'numeric' }); if (parts[1]) displayDate += ' às ' + parts[1].substring(0, 5); } }
+            document.getElementById('prevCaption').textContent = imageCaption;
+            const today = new Date();
+            let displayDate = today.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+            if (publishAt) { const parts = publishAt.split('T'); if (parts.length) { const d = new Date(parts[0] + 'T00:00:00'); displayDate = d.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }); if (parts[1]) displayDate += ' às ' + parts[1].substring(0, 5); } }
             document.getElementById('prevTitle').textContent = title;
             document.getElementById('prevEixoLink').textContent = eixo;
             document.getElementById('prevTemaLink').textContent = tema;
             document.getElementById('prevTemaMeta').textContent = tema;
             document.getElementById('prevDate').textContent = displayDate;
-            document.getElementById('prevReadTime').textContent = readTime; const subEl = document.getElementById(
-                'prevSubtitle'); if (subtitle) { subEl.textContent = subtitle;
-                subEl.style.display = 'block'; } else subEl.style.display = 'none';
-            document.getElementById('prevContent').innerHTML = html || '<p>Prévia do conteúdo...</p>'; const refSection =
-                document.getElementById('prevReferencesSection'); const refContent = document.getElementById(
-                    'prevReferencesContent'); if (referencesRaw) { refSection.style.display = 'block';
-                refContent.innerHTML = autoLink(referencesRaw); } else refSection.style.display = 'none'; const sigDiv =
-                document.getElementById('prevAuthorSig'); const avatarImg = document.getElementById(
-                'prevAuthorAvatar'); const bioEl = document.getElementById('prevAuthorBio'); if (author) { sigDiv.style
-                    .display = 'flex';
-                document.getElementById('prevAuthorName').textContent = author; if (avatarBase64) { avatarImg.src =
-                        avatarBase64;
-                    avatarImg.style.display = 'block'; } else avatarImg.style.display = 'none'; if (authorBio) { bioEl
-                        .textContent = authorBio;
-                    bioEl.style.display = 'block'; } else bioEl.style.display = 'none'; } else { sigDiv.style.display =
-                    'none';
-                bioEl.style.display = 'none';
-                avatarImg.style.display = 'none'; } const relatedDiv = document.getElementById('prevRelated'); const
-                relatedList = document.getElementById('prevRelatedList'); const links = getRelatedLinks(); if (links
-                    .length) { relatedDiv.style.display = 'block';
-                relatedList.innerHTML = links.map(l =>
-                    `<li><a href="${escapeHtml(l.url)}" target="_blank" rel="noopener">${escapeHtml(l.slug)}</a></li>`
-                    ).join(''); } else relatedDiv.style.display = 'none'; const footerTagsDiv = document.getElementById(
-                    'prevFooterTags'); const tagsListSpan = document.getElementById('prevTagsList'); if (tags) { const
-                    arr = tags.split(',').map(t => t.trim()).filter(t => t); if (arr.length) { footerTagsDiv.style
-                        .display = 'block';
-                    tagsListSpan.textContent = arr.join(' · '); } else footerTagsDiv.style.display = 'none'; } else
-                footerTagsDiv.style.display = 'none'; const wDiv = document.getElementById('prevWatermark'); const
-                wText = document.getElementById('prevWatermarkText'); if (watermarkRef) { wDiv.style.display =
-                    'block';
-                wText.textContent = 'Ref: ' + watermarkRef; } else wDiv.style.display = 'none';
+            document.getElementById('prevReadTime').textContent = readTime;
+            const subEl = document.getElementById('prevSubtitle');
+            if (subtitle) { subEl.textContent = subtitle; subEl.style.display = 'block'; } else subEl.style.display = 'none';
+            document.getElementById('prevContent').innerHTML = html || '<p>Prévia do conteúdo...</p>';
+            const refSection = document.getElementById('prevReferencesSection');
+            const refContent = document.getElementById('prevReferencesContent');
+            if (referencesRaw) { refSection.style.display = 'block'; refContent.innerHTML = autoLink(referencesRaw); } else refSection.style.display = 'none';
+            const sigDiv = document.getElementById('prevAuthorSig');
+            const avatarImg = document.getElementById('prevAuthorAvatar');
+            const bioEl = document.getElementById('prevAuthorBio');
+            if (author) { sigDiv.style.display = 'flex'; document.getElementById('prevAuthorName').textContent = author; if (avatarBase64) { avatarImg.src = avatarBase64; avatarImg.style.display = 'block'; } else avatarImg.style.display = 'none'; if (authorBio) { bioEl.textContent = authorBio; bioEl.style.display = 'block'; } else bioEl.style.display = 'none'; } else { sigDiv.style.display = 'none'; bioEl.style.display = 'none'; avatarImg.style.display = 'none'; }
+            const relatedDiv = document.getElementById('prevRelated');
+            const relatedList = document.getElementById('prevRelatedList');
+            const links = getRelatedLinks();
+            if (links.length) { relatedDiv.style.display = 'block'; relatedList.innerHTML = links.map(l => `<li><a href="${escapeHtml(l.url)}" target="_blank" rel="noopener">${escapeHtml(l.slug)}</a></li>`).join(''); } else relatedDiv.style.display = 'none';
+            const footerTagsDiv = document.getElementById('prevFooterTags');
+            const tagsListSpan = document.getElementById('prevTagsList');
+            if (tags) { const arr = tags.split(',').map(t => t.trim()).filter(t => t); if (arr.length) { footerTagsDiv.style.display = 'block'; tagsListSpan.textContent = arr.join(' · '); } else footerTagsDiv.style.display = 'none'; } else footerTagsDiv.style.display = 'none';
+            const wDiv = document.getElementById('prevWatermark');
+            const wText = document.getElementById('prevWatermarkText');
+            if (watermarkRef) { wDiv.style.display = 'block'; wText.textContent = 'Ref: ' + watermarkRef; } else wDiv.style.display = 'none';
+            const complianceDiv = document.getElementById('prevCompliance');
+            if (complianceDiv) complianceDiv.innerHTML = COMPLIANCE_TEXT;
             triggerAutoSave();
-            initImageResizeHandler(); }
-        ['portalName', 'portalSlogan', 'title', 'subtitle', 'eixo', 'tema', 'author', 'authorBio', 'excerpt',
-            'publishDateTime', 'readTime', 'tags', 'imageCaption', 'watermarkRef'
-        ].forEach(id => { const el = document.getElementById(id); if (el) el.addEventListener('input',
-            updatePreview); });
+            initImageResizeHandler();
+        }
+        ['portalName','portalSlogan','title','subtitle','eixo','tema','author','authorBio','excerpt','publishDateTime','readTime','tags','imageCaption','watermarkRef'].forEach(id => { const el = document.getElementById(id); if (el) el.addEventListener('input', updatePreview); });
         document.getElementById('htmlContent').addEventListener('input', updatePreview);
         document.getElementById('image').addEventListener('input', updatePreview);
         document.getElementById('references').addEventListener('input', updatePreview);
         document.getElementById('rawTextInput').addEventListener('input', triggerAutoSave);
         document.getElementById('fullscreenContent').addEventListener('input', triggerAutoSave);
         document.getElementById('slug').addEventListener('input', triggerAutoSave);
-        const workerSelectEl = document.getElementById('workerSelect'); if (workerSelectEl) { workerSelectEl
-            .addEventListener('change', () => { onWorkerSelectChange();
-                triggerAutoSave(); }); }
+        const workerSelectEl = document.getElementById('workerSelect');
+        if (workerSelectEl) {
+            workerSelectEl.addEventListener('change', () => { onWorkerSelectChange(); triggerAutoSave(); });
+        }
         updatePreview();
 
-        async function sendToKV() { const html = generateFullHTML(); const slug = document.getElementById('slug').value
-                .trim(); const eixo = document.getElementById('eixo').value.trim(); const title = document.getElementById(
-                    'title').value.trim(); const tema = document.getElementById('tema').value.trim(); const excerpt =
-                document.getElementById('excerpt').value.trim(); const tags = document.getElementById('tags').value
-                .trim(); const author = document.getElementById('author').value.trim(); const imageSrc = document
-                .getElementById('image').value.trim(); const publishAt = getPublishDateTime(); if (!slug || !title) {
-                    showToast('⚠️ Preencha título e slug.', true); return; }
-            saveEixoToNiches(eixo); const site = getSelectedSite(); const payload = { slug, title, eixo, tema, html,
-                excerpt, tags, author, image: imageSrc, portalName: site.portalName, domain: site.domain, publishAt };
-            try { showToast('🚀 Enviando para ' + site.portalName + ' (' + site.domain + ')...'); const res = await fetch(
-                    site.worker, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-API-Key': API_KEY },
-                    body: JSON.stringify(payload) }); let data; const textResponse = await res.text(); try { data = JSON
-                    .parse(textResponse); } catch (e) { data = { error: textResponse.trim() ||
-                        'Resposta inválida do servidor' }; } if (res.ok) showToast(
-                    '✅ Publicado com sucesso em ' + site.portalName + '!\n🔗 ' + (data.url || site.domain +
-                        '/artigo/' + encodeURIComponent(eixo) + '/' + encodeURIComponent(slug) + '.html')); else
-                showToast('❌ Erro: ' + (data.error || 'Falha ao publicar'), true); } catch (err) { showToast(
-                    '❌ Erro de conexão: ' + err.message, true); } }
+        async function sendToKV() {
+            const html = generateFullHTML();
+            const slug = document.getElementById('slug').value.trim();
+            const eixo = document.getElementById('eixo').value.trim();
+            const title = document.getElementById('title').value.trim();
+            const tema = document.getElementById('tema').value.trim();
+            const excerpt = document.getElementById('excerpt').value.trim();
+            const tags = document.getElementById('tags').value.trim();
+            const author = document.getElementById('author').value.trim();
+            const imageSrc = document.getElementById('image').value.trim();
+            const publishAt = getPublishDateTime();
+            if (!slug || !title) { showToast('⚠️ Preencha título e slug.', true); return; }
+            saveEixoToNiches(eixo);
+            const site = getSelectedSite();
+            const payload = { slug, title, eixo, tema, html, excerpt, tags, author, image: imageSrc, portalName: site.portalName, domain: site.domain, publishAt };
+            try {
+                showToast('🚀 Enviando para ' + site.portalName + ' (' + site.domain + ')...');
+                const res = await fetch(site.worker, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-API-Key': API_KEY }, body: JSON.stringify(payload) });
+                let data; const textResponse = await res.text(); try { data = JSON.parse(textResponse); } catch (e) { data = { error: textResponse.trim() || 'Resposta inválida do servidor' }; }
+                if (res.ok) showToast('✅ Publicado com sucesso em ' + site.portalName + '!\n🔗 ' + (data.url || site.domain + '/artigo/' + encodeURIComponent(eixo) + '/' + encodeURIComponent(slug) + '.html'));
+                else showToast('❌ Erro: ' + (data.error || 'Falha ao publicar'), true);
+            } catch (err) { showToast('❌ Erro de conexão: ' + err.message, true); }
+        }
 
         let termsAccepted = localStorage.getItem('velocity_terms_v4') === 'true';
         window.openTerms = () => document.getElementById('termsModal').classList.add('active');
         window.closeTerms = () => document.getElementById('termsModal').classList.remove('active');
-        window.acceptTerms = () => { termsAccepted = true;
-            localStorage.setItem('velocity_terms_v4', 'true');
-            closeTerms();
-            showToast('Termos aceitos.'); };
+        window.acceptTerms = () => { termsAccepted = true; localStorage.setItem('velocity_terms_v4', 'true'); closeTerms(); showToast('Termos aceitos.'); };
         window.openManual = () => document.getElementById('manualModal').classList.add('active');
         window.closeManual = () => document.getElementById('manualModal').classList.remove('active');
-        window.clearCache = () => { ['velocity_articles', 'velocity_data_entries', 'velocity_terms_v4',
-                'velocity_discovered_articles', 'velocity_niches', AUTOSAVE_KEY
-            ].forEach(k => localStorage.removeItem(k));
-            termsAccepted = false;
-            selectedDirectoryHandle = null;
-            updateFolderUI();
-            renderNicheChips();
-            updateEixoDatalist();
-            showToast('🧹 Cache limpo!'); };
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('termsModal')
-                .classList.remove('active');
-                document.getElementById('manualModal').classList.remove('active'); if (linkModal.classList.contains(
-                    'active')) linkModal.classList.remove('active'); if (bodyImageModal.classList.contains(
-                    'active')) { bodyImageModal.classList.remove('active');
-                    resetBodyImageFile(); } } }); if (!restoreFormState()) updatePreview();
+        window.clearCache = () => { ['velocity_articles','velocity_data_entries','velocity_terms_v4','velocity_discovered_articles','velocity_niches',AUTOSAVE_KEY].forEach(k => localStorage.removeItem(k)); termsAccepted = false; selectedDirectoryHandle = null; updateFolderUI(); renderNicheChips(); updateEixoDatalist(); showToast('🧹 Cache limpo!'); };
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('termsModal').classList.remove('active'); document.getElementById('manualModal').classList.remove('active'); if (linkModal.classList.contains('active')) linkModal.classList.remove('active'); if (bodyImageModal.classList.contains('active')) { bodyImageModal.classList.remove('active'); resetBodyImageFile(); } } });
+        if (!restoreFormState()) updatePreview();
         updateFolderUI();
     </script>
 
     <script>
         // =================================================================
-        // SUPER EIGEND SCRIPTS (INTACTOS)
+        // SUPER EIGEND SCRIPTS
         // =================================================================
         const EIGEND_WORKER_URL = 'https://trends.avizaecosystem.workers.dev';
         const CONTEXT_EIXO_MAP = { teologia: 'teologia', justica: 'direito-penal', geral: 'noticia' };
         const CONTEXT_LABELS = { teologia: 'Teologia', justica: 'Direito & Justiça', geral: 'Geral' };
-        let currentContext = 'geral',
-            currentTrends = [],
-            selectedTrend = null,
-            lastGeneratedData = null;
-        const keywordInput = document.getElementById('keywordInput'),
-            fetchBtn = document.getElementById('fetchTrendsBtn'),
-            trendsListEl = document.getElementById('trendsList');
-        const generatedContentEl = document.getElementById('generatedContent'),
-            generateBtn = document.getElementById('generateBtn'),
-            fillVelocityBtn = document.getElementById('fillVelocityBtn');
-        const copyEigendBtn = document.getElementById('copyEigendBtn'),
-            eixoSelect = document.getElementById('eixoSelect');
+        let currentContext = 'geral', currentTrends = [], selectedTrend = null, lastGeneratedData = null;
+        const keywordInput = document.getElementById('keywordInput'), fetchBtn = document.getElementById('fetchTrendsBtn'), trendsListEl = document.getElementById('trendsList');
+        const generatedContentEl = document.getElementById('generatedContent'), generateBtn = document.getElementById('generateBtn'), fillVelocityBtn = document.getElementById('fillVelocityBtn');
+        const copyEigendBtn = document.getElementById('copyEigendBtn'), eixoSelect = document.getElementById('eixoSelect');
 
         (function() {
             const ctxDiv = document.createElement('div');
             ctxDiv.className = 'flex-row';
             ctxDiv.style.marginBottom = '0.8rem';
             ctxDiv.innerHTML = '<span style="font-size:0.8rem;color:var(--text-muted);margin-right:8px;">Foco:</span>' +
-                Object.entries(CONTEXT_LABELS).map(([k, l]) =>
-                    `<button class="btn-outline-eigend context-btn ${k === currentContext ? 'selected' : ''}" data-context="${k}">${l}</button>`
-                    ).join('');
+                Object.entries(CONTEXT_LABELS).map(([k, l]) => `<button class="btn-outline-eigend context-btn ${k === currentContext ? 'selected' : ''}" data-context="${k}">${l}</button>`).join('');
             eixoSelect.parentElement.parentElement.insertBefore(ctxDiv, eixoSelect.parentElement);
         })();
 
         document.querySelectorAll('.context-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 currentContext = btn.dataset.context;
-                document.querySelectorAll('.context-btn').forEach(b => b.classList.toggle('selected', b
-                    .dataset.context === currentContext));
+                document.querySelectorAll('.context-btn').forEach(b => b.classList.toggle('selected', b.dataset.context === currentContext));
                 fetchTrends();
-                selectedTrend = null;
-                generateBtn.disabled = true;
-                fillVelocityBtn.style.display = 'none';
-                copyEigendBtn.style.display = 'none';
-                generatedContentEl.innerHTML =
-                    '<span class="empty-message">Contexto alterado. Busque ou selecione um tópico.</span>';
+                selectedTrend = null; generateBtn.disabled = true; fillVelocityBtn.style.display = 'none'; copyEigendBtn.style.display = 'none';
+                generatedContentEl.innerHTML = '<span class="empty-message">Contexto alterado. Busque ou selecione um tópico.</span>';
             });
         });
 
-        async function fetchTrends(keyword = '') { trendsListEl.innerHTML =
-                '<li class="empty-message">🔍 Buscando tendências...</li>'; try { let url; if (keyword.trim()) { url =
-                    `${EIGEND_WORKER_URL}?q=${encodeURIComponent(keyword.trim())}`; } else { url =
-                    `${EIGEND_WORKER_URL}?context=${currentContext}`; } const resp = await fetch(url, { headers: {
-                        'X-Api-Key': API_KEY } }); if (!resp.ok) { let errorBody =
-                ''; try { errorBody = await resp.text(); } catch (e) {} throw new Error(
-                    `HTTP ${resp.status}${errorBody ? ': ' + errorBody : ''}`); } let trends = await resp.json();
-                currentTrends = trends;
-                renderTrendsList(); } catch (e) { console.error('Fetch trends error:', e);
-                trendsListEl.innerHTML =
-                    `<li class="empty-message" style="color:#c0392b;">❌ Erro: ${escapeHtml(e.message)}</li>`; } }
+        async function fetchTrends(keyword = '') {
+            trendsListEl.innerHTML = '<li class="empty-message">🔍 Buscando tendências...</li>';
+            try {
+                let url;
+                if (keyword.trim()) { url = `${EIGEND_WORKER_URL}?q=${encodeURIComponent(keyword.trim())}`; }
+                else { url = `${EIGEND_WORKER_URL}?context=${currentContext}`; }
+                const resp = await fetch(url, { headers: { 'X-Api-Key': API_KEY } });
+                if (!resp.ok) { let errorBody = ''; try { errorBody = await resp.text(); } catch (e) {} throw new Error(`HTTP ${resp.status}${errorBody ? ': ' + errorBody : ''}`); }
+                let trends = await resp.json(); currentTrends = trends; renderTrendsList();
+            } catch (e) { console.error('Fetch trends error:', e); trendsListEl.innerHTML = `<li class="empty-message" style="color:#c0392b;">❌ Erro: ${escapeHtml(e.message)}</li>`; }
+        }
 
-        function renderTrendsList() { if (!currentTrends.length) { trendsListEl.innerHTML =
-                '<li class="empty-message">Nenhum assunto encontrado.</li>'; return; }
-            trendsListEl.innerHTML = currentTrends.map((t, i) => { const nome = escapeHtml(t.name); const nomeHtml = t
-                    .url ?
-                    `<a href="${escapeHtml(t.url)}" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;" title="Abrir fonte original">${nome} <i class="fas fa-external-link-alt" style="font-size:0.6rem; opacity:0.6;"></i></a>` :
-                    nome; return `<li class="trend-item ${selectedTrend?.name === t.name ? 'selected' : ''}" data-index="${i}">
+        function renderTrendsList() {
+            if (!currentTrends.length) { trendsListEl.innerHTML = '<li class="empty-message">Nenhum assunto encontrado.</li>'; return; }
+            trendsListEl.innerHTML = currentTrends.map((t, i) => {
+                const nome = escapeHtml(t.name);
+                const nomeHtml = t.url ? `<a href="${escapeHtml(t.url)}" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;" title="Abrir fonte original">${nome} <i class="fas fa-external-link-alt" style="font-size:0.6rem; opacity:0.6;"></i></a>` : nome;
+                return `<li class="trend-item ${selectedTrend?.name === t.name ? 'selected' : ''}" data-index="${i}">
                     <span class="trend-name">${nomeHtml}</span>
                     <span class="trend-category">${escapeHtml(t.category)} · ${t.volume || 'N/A'}</span>
-                </li>`; }).join('');
-            document.querySelectorAll('.trend-item').forEach(item => item.addEventListener('click', () => selectTrend(
-                parseInt(item.dataset.index)))); }
+                </li>`;
+            }).join('');
+            document.querySelectorAll('.trend-item').forEach(item => item.addEventListener('click', () => selectTrend(parseInt(item.dataset.index))));
+        }
 
-        function selectTrend(idx) { selectedTrend = currentTrends[idx];
-            document.querySelectorAll('.trend-item').forEach(el => el.classList.toggle('selected', el.dataset.index ==
-                idx));
-            generateBtn.disabled = false;
-            fillVelocityBtn.style.display = 'none';
-            copyEigendBtn.style.display = 'none';
-            generatedContentEl.innerHTML =
-                '<span class="empty-message">Tópico selecionado. Escolha o gênero e clique em Gerar.</span>'; }
+        function selectTrend(idx) { selectedTrend = currentTrends[idx]; document.querySelectorAll('.trend-item').forEach(el => el.classList.toggle('selected', el.dataset.index == idx)); generateBtn.disabled = false; fillVelocityBtn.style.display = 'none'; copyEigendBtn.style.display = 'none'; generatedContentEl.innerHTML = '<span class="empty-message">Tópico selecionado. Escolha o gênero e clique em Gerar.</span>'; }
 
-        function generateContent() { if (!selectedTrend) return; const eixoGenero = eixoSelect.value,
-                topic = selectedTrend.name,
-                cat = selectedTrend.category; const tagBase = topic.replace(/[#]/g, '').split(' ')[0].toLowerCase()
-                .replace(/[^a-z0-9à-ú]/g, ''),
-                tag = tagBase + '_' + Date.now().toString(36); const title = gerarTitulo(topic, eixoGenero, cat),
-                subtitle = gerarSubtitulo(topic, eixoGenero, cat),
-                corpo = gerarCorpo(topic, eixoGenero, cat); const eixoVelocity = CONTEXT_EIXO_MAP[currentContext] ||
-                'noticia';
-            lastGeneratedData = { tag, eixo: eixoVelocity, titulo: title, subtitulo: subtitle, corpo, tema: tagBase,
-                tags: tagBase + ', ' + (currentContext === 'teologia' ? 'teologia, fé' : currentContext === 'justica' ?
-                    'direito, justiça' : '') };
-            generatedContentEl.innerHTML =
-                `<pre>${escapeHtml(`TAG: ${tag}\nEIXO: ${eixoVelocity}\nGÊNERO: ${eixoGenero}\nTÍTULO: ${title}\nSUBTÍTULO: ${subtitle}\n\nCORPO:\n${corpo}\n\n---\nGerado pelo Super Eigend em ${new Date().toLocaleString('pt-BR')}`)}</pre>`;
-            fillVelocityBtn.style.display = 'inline-flex';
-            copyEigendBtn.style.display = 'inline-flex'; }
+        function generateContent() {
+            if (!selectedTrend) return;
+            const eixoGenero = eixoSelect.value, topic = selectedTrend.name, cat = selectedTrend.category;
+            const tagBase = topic.replace(/[#]/g, '').split(' ')[0].toLowerCase().replace(/[^a-z0-9à-ú]/g, ''), tag = tagBase + '_' + Date.now().toString(36);
+            const title = gerarTitulo(topic, eixoGenero, cat), subtitle = gerarSubtitulo(topic, eixoGenero, cat), corpo = gerarCorpo(topic, eixoGenero, cat);
+            const eixoVelocity = CONTEXT_EIXO_MAP[currentContext] || 'noticia';
+            lastGeneratedData = { tag, eixo: eixoVelocity, titulo: title, subtitulo: subtitle, corpo, tema: tagBase, tags: tagBase + ', ' + (currentContext === 'teologia' ? 'teologia, fé' : currentContext === 'justica' ? 'direito, justiça' : '') };
+            generatedContentEl.innerHTML = `<pre>${escapeHtml(`TAG: ${tag}\nEIXO: ${eixoVelocity}\nGÊNERO: ${eixoGenero}\nTÍTULO: ${title}\nSUBTÍTULO: ${subtitle}\n\nCORPO:\n${corpo}\n\n---\nGerado pelo Super Eigend em ${new Date().toLocaleString('pt-BR')}`)}</pre>`;
+            fillVelocityBtn.style.display = 'inline-flex'; copyEigendBtn.style.display = 'inline-flex';
+        }
 
-        function gerarTitulo(nome, eixo, cat) { const b = nome.replace(/#/g, ''); switch (eixo) { case 'Opinião':
-                return `Opinião: O que realmente está por trás de "${b}"`; case 'Análise':
-                return `Análise: Os impactos de "${b}" no cenário atual`; case 'Humor':
-                return `Só lamento: "${b}" e a arte de viralizar`; case 'Educativo':
-                return `Entenda: "${b}" em 5 pontos`; case 'Crítica':
-                return `A conta não fecha: crítica a "${b}" e suas consequências`; default:
-                return `${b}: o que está acontecendo e por que todos comentam`; } }
+        function gerarTitulo(nome, eixo, cat) { const b = nome.replace(/#/g, ''); switch (eixo) { case 'Opinião': return `Opinião: O que realmente está por trás de "${b}"`; case 'Análise': return `Análise: Os impactos de "${b}" no cenário atual`; case 'Humor': return `Só lamento: "${b}" e a arte de viralizar`; case 'Educativo': return `Entenda: "${b}" em 5 pontos`; case 'Crítica': return `A conta não fecha: crítica a "${b}" e suas consequências`; default: return `${b}: o que está acontecendo e por que todos comentam`; } }
+        function gerarSubtitulo(nome, eixo, cat) { if (eixo === 'Notícia') return `O assunto domina as redes nas últimas 24h, com milhares de menções.`; if (eixo === 'Opinião') return `Minha visão pessoal sobre o fenômeno que mobilizou o Brasil.`; if (eixo === 'Análise') return `Números, contexto e projeções sobre o tema.`; return `Um olhar ${eixo.toLowerCase()} sobre o buzz do momento.`; }
+        function gerarCorpo(nome, eixo, cat) { const intro = `O tópico "${nome}" explodiu nas redes sociais nesta terça-feira (12), acumulando milhares de menções em poucas horas. `; const meio = { 'Notícia': `De acordo com os principais portais, o assunto ganhou tração após um evento inesperado. Especialistas apontam que as discussões refletem um sentimento mais amplo da população. `, 'Opinião': `Na minha leitura, essa repercussão revela uma carência de diálogo. A sociedade está reagindo a algo antes ignorado. `, 'Análise': `Dados preliminares do Trend Monitor indicam um pico às 14h, com engajamento 340% acima da média para a categoria ${cat}. `, 'Humor': `A internet não perdoa. Em minutos, surgiram memes e piadas que dominaram as timelines. `, 'Educativo': `Para entender o fenômeno, é preciso recuar um pouco no tempo. O contexto histórico explica por que o termo viralizou agora. `, 'Crítica': `Por trás dos holofotes, há decisões questionáveis que merecem escrutínio. A mídia trata com superficialidade. ` }; const fecho = `O assunto continua entre os mais comentados do dia.`; return intro + (meio[eixo] || meio['Notícia']) + fecho; }
 
-        function gerarSubtitulo(nome, eixo, cat) { if (eixo === 'Notícia')
-                return `O assunto domina as redes nas últimas 24h, com milhares de menções.`; if (eixo === 'Opinião')
-                return `Minha visão pessoal sobre o fenômeno que mobilizou o Brasil.`; if (eixo === 'Análise')
-                return `Números, contexto e projeções sobre o tema.`; return `Um olhar ${eixo.toLowerCase()} sobre o buzz do momento.`; }
-
-        function gerarCorpo(nome, eixo, cat) { const intro =
-                `O tópico "${nome}" explodiu nas redes sociais nesta terça-feira (12), acumulando milhares de menções em poucas horas. `;
-            const meio = { 'Notícia':
-                    `De acordo com os principais portais, o assunto ganhou tração após um evento inesperado. Especialistas apontam que as discussões refletem um sentimento mais amplo da população. `,
-                'Opinião': `Na minha leitura, essa repercussão revela uma carência de diálogo. A sociedade está reagindo a algo antes ignorado. `,
-                'Análise': `Dados preliminares do Trend Monitor indicam um pico às 14h, com engajamento 340% acima da média para a categoria ${cat}. `,
-                'Humor': `A internet não perdoa. Em minutos, surgiram memes e piadas que dominaram as timelines. `,
-                'Educativo': `Para entender o fenômeno, é preciso recuar um pouco no tempo. O contexto histórico explica por que o termo viralizou agora. `,
-                'Crítica': `Por trás dos holofotes, há decisões questionáveis que merecem escrutínio. A mídia trata com superficialidade. `
-            }; const fecho =
-                `O assunto continua entre os mais comentados do dia.`; return intro + (meio[eixo] || meio['Notícia']) +
-                fecho; }
-
-        function fillVelocityForm() { if (!lastGeneratedData) return;
+        function fillVelocityForm() {
+            if (!lastGeneratedData) return;
             document.getElementById('title').value = lastGeneratedData.titulo;
             document.getElementById('subtitle').value = lastGeneratedData.subtitulo;
             document.getElementById('eixo').value = lastGeneratedData.eixo;
             document.getElementById('tema').value = lastGeneratedData.tema;
             document.getElementById('tags').value = lastGeneratedData.tags;
-            document.getElementById('htmlContent').value = lastGeneratedData.corpo.split('. ').filter(p => p.trim()).map(
-                p => `<p>${p.trim()}.</p>`).join('\n');
-            autoSlug();
-            updatePreview();
+            document.getElementById('htmlContent').value = lastGeneratedData.corpo.split('. ').filter(p => p.trim()).map(p => `<p>${p.trim()}.</p>`).join('\n');
+            autoSlug(); updatePreview();
             document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            showToast('✅ Campos preenchidos com os dados do Super Eigend!'); }
+            showToast('✅ Campos preenchidos com os dados do Super Eigend!');
+        }
 
-        function copyEigendToClipboard() { navigator.clipboard.writeText(generatedContentEl.innerText).then(() => { const
-                btn = document.getElementById('copyEigendBtn'),
-                orig = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
-                setTimeout(() => btn.innerHTML = orig, 2000); }); }
+        function copyEigendToClipboard() {
+            navigator.clipboard.writeText(generatedContentEl.innerText).then(() => {
+                const btn = document.getElementById('copyEigendBtn'), orig = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copiado!'; setTimeout(() => btn.innerHTML = orig, 2000);
+            });
+        }
 
         fetchBtn.addEventListener('click', () => fetchTrends(keywordInput.value));
         keywordInput.addEventListener('keypress', e => { if (e.key === 'Enter') fetchTrends(); });
