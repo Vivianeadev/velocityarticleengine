@@ -237,6 +237,71 @@
         .worker-indicator i {
             color: var(--aged-gold);
         }
+        /* Compliance expansível */
+        .compliance-details {
+            margin-top: 0.4rem;
+        }
+        .compliance-summary {
+            cursor: pointer;
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: var(--aged-gold);
+            list-style: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border: 1px solid rgba(184,134,11,0.2);
+            border-radius: 20px;
+            background: rgba(184,134,11,0.04);
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+        .compliance-summary::-webkit-details-marker {
+            display: none;
+        }
+        .compliance-summary:hover {
+            background: rgba(184,134,11,0.08);
+            border-color: var(--aged-gold);
+            color: var(--aged-gold);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(184,134,11,0.08);
+        }
+        .compliance-summary i {
+            font-size: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        details[open] .compliance-summary i {
+            transform: rotate(180deg);
+        }
+        .compliance-text {
+            font-size: 0.6rem;
+            background: rgba(184,134,11,0.04);
+            padding: 0.8rem;
+            border-radius: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            line-height: 1.5;
+            color: #5a7d91;
+            border: 1px solid rgba(184,134,11,0.12);
+            margin-top: 0.5rem;
+        }
+        .compliance-notice {
+            font-size: 0.6rem;
+            color: #5a7d91;
+            margin-top: 1.2rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(184,134,11,0.18);
+            line-height: 1.5;
+            opacity: 0.8;
+        }
+        .compliance-notice h4 {
+            font-family: var(--font-serif);
+            font-size: 0.7rem;
+            color: var(--aged-gold);
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -376,6 +441,36 @@
                 </div>
                 <div class="field-watermark">🔹 64x64px. Máx. 500KB. Opcional.</div>
             </div>
+            <!-- ========== COMPLIANCE EXPANSÍVEL ========== -->
+            <div class="form-group">
+                <label><i class="fas fa-balance-scale"></i> Compliance, Transparência e Responsabilidade Editorial</label>
+                <details class="compliance-details">
+                    <summary class="compliance-summary">
+                        <i class="fas fa-chevron-down"></i> Clique para expandir
+                    </summary>
+                    <div class="compliance-text">
+                        <p style="margin-top:0;">O portal Revista PautaZero possui caráter estritamente informativo, opinativo, educacional e cultural. Todo o conteúdo publicado tem como objetivo promover informação, reflexão, debate público e acesso ao conhecimento, respeitando os princípios constitucionais da liberdade de expressão e da liberdade de imprensa previstos na legislação brasileira.</p>
+                        <p>Os artigos, colunas, análises, entrevistas e conteúdos opinativos refletem exclusivamente a interpretação de seus respectivos autores, não constituindo aconselhamento jurídico, financeiro, médico, psicológico, político, religioso ou profissional de qualquer natureza.</p>
+                        <p>A Revista PautaZero não incentiva práticas ilícitas, discurso de ódio, violência, discriminação, desinformação deliberada, manipulação de informações ou qualquer atividade contrária à legislação vigente.</p>
+                        <p>Nos comprometemos com:</p>
+                        <ul style="padding-left:1.2rem; margin:0.3rem 0;">
+                            <li>o respeito à Constituição Federal Brasileira;</li>
+                            <li>o cumprimento do Marco Civil da Internet (Lei nº 12.965/2014);</li>
+                            <li>a observância da Lei Geral de Proteção de Dados – LGPD (Lei nº 13.709/2018);</li>
+                            <li>o respeito aos direitos autorais e à propriedade intelectual;</li>
+                            <li>a proteção da privacidade e dos dados pessoais dos usuários;</li>
+                            <li>a transparência editorial e responsabilidade digital.</li>
+                        </ul>
+                        <p>Conteúdos enviados por colaboradores, colunistas, leitores ou terceiros são de responsabilidade exclusiva de seus respectivos autores.</p>
+                        <p>Caso algum conteúdo publicado viole direitos autorais, direitos de imagem, privacidade, honra, legislação vigente ou contenha informações incorretas, o titular poderá solicitar revisão, correção ou remoção através de contato oficial da plataforma.</p>
+                        <p>As imagens utilizadas podem possuir caráter meramente ilustrativo, institucional, jornalístico ou licenciadas de bancos públicos, gratuitos, autorizados ou de terceiros devidamente referenciados quando aplicável.</p>
+                        <p>A Revista PautaZero reserva-se o direito de atualizar, corrigir, editar ou remover conteúdos a qualquer momento para adequação legal, editorial, ética ou técnica.</p>
+                        <p>Ao acessar este portal, o usuário declara estar ciente destes termos e concorda com as políticas de uso, privacidade e responsabilidade editorial da plataforma.</p>
+                    </div>
+                </details>
+                <div class="field-watermark">🔹 Este aviso é inserido automaticamente em todos os artigos gerados.</div>
+            </div>
+            <!-- FIM COMPLIANCE -->
             <div class="form-group">
                 <label><i class="fas fa-image"></i> Imagem do artigo</label>
                 <div class="image-drop-zone" id="imageDropZone">
@@ -579,6 +674,8 @@
                             </div>
                             <p class="author-bio" id="prevAuthorBio">Botânica e paisagista com mais de 20 anos de experiência em jardinagem ornamental.</p>
                         </div>
+                        <!-- Compliance expansível no preview -->
+                        <div class="compliance-notice" id="prevCompliance"></div>
                     </div>
                 </div>
             </div>
@@ -1212,6 +1309,32 @@
         }
         window.shareArticle = shareArticle;
 
+        // Compliance text (permanent, injected into all articles) with expandable details
+        const COMPLIANCE_TEXT = `<details class="compliance-details" style="font-size: inherit;">
+            <summary class="compliance-summary" style="font-size:0.65rem; font-weight:500; color:var(--aged-gold); cursor:pointer; display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border:1px solid rgba(184,134,11,0.2); border-radius:20px; background:rgba(184,134,11,0.04); transition:all 0.3s ease; user-select:none; list-style:none;">
+                <i class="fas fa-chevron-down" style="font-size:0.5rem; transition:transform 0.3s ease;"></i> Compliance, Transparência e Responsabilidade Editorial
+            </summary>
+            <div style="font-size:0.6rem; background:rgba(184,134,11,0.04); padding:0.8rem; border-radius:8px; max-height:200px; overflow-y:auto; line-height:1.5; color:#5a7d91; border:1px solid rgba(184,134,11,0.12); margin-top:0.5rem;">
+                <p style="margin-top:0;">O portal Revista PautaZero possui caráter estritamente informativo, opinativo, educacional e cultural. Todo o conteúdo publicado tem como objetivo promover informação, reflexão, debate público e acesso ao conhecimento, respeitando os princípios constitucionais da liberdade de expressão e da liberdade de imprensa previstos na legislação brasileira.</p>
+                <p>Os artigos, colunas, análises, entrevistas e conteúdos opinativos refletem exclusivamente a interpretação de seus respectivos autores, não constituindo aconselhamento jurídico, financeiro, médico, psicológico, político, religioso ou profissional de qualquer natureza.</p>
+                <p>A Revista PautaZero não incentiva práticas ilícitas, discurso de ódio, violência, discriminação, desinformação deliberada, manipulação de informações ou qualquer atividade contrária à legislação vigente.</p>
+                <p>Nos comprometemos com:</p>
+                <ul style="padding-left:1.2rem; margin:0.3rem 0;">
+                    <li>o respeito à Constituição Federal Brasileira;</li>
+                    <li>o cumprimento do Marco Civil da Internet (Lei nº 12.965/2014);</li>
+                    <li>a observância da Lei Geral de Proteção de Dados – LGPD (Lei nº 13.709/2018);</li>
+                    <li>o respeito aos direitos autorais e à propriedade intelectual;</li>
+                    <li>a proteção da privacidade e dos dados pessoais dos usuários;</li>
+                    <li>a transparência editorial e responsabilidade digital.</li>
+                </ul>
+                <p>Conteúdos enviados por colaboradores, colunistas, leitores ou terceiros são de responsabilidade exclusiva de seus respectivos autores.</p>
+                <p>Caso algum conteúdo publicado viole direitos autorais, direitos de imagem, privacidade, honra, legislação vigente ou contenha informações incorretas, o titular poderá solicitar revisão, correção ou remoção através de contato oficial da plataforma.</p>
+                <p>As imagens utilizadas podem possuir caráter meramente ilustrativo, institucional, jornalístico ou licenciadas de bancos públicos, gratuitos, autorizados ou de terceiros devidamente referenciados quando aplicável.</p>
+                <p>A Revista PautaZero reserva-se o direito de atualizar, corrigir, editar ou remover conteúdos a qualquer momento para adequação legal, editorial, ética ou técnica.</p>
+                <p>Ao acessar este portal, o usuário declara estar ciente destes termos e concorda com as políticas de uso, privacidade e responsabilidade editorial da plataforma.</p>
+            </div>
+        </details>`;
+
         function generateFullHTML() {
             const portalName = document.getElementById('portalName').value || 'Pauta Zero';
             const slogan = document.getElementById('portalSlogan').value || 'jardinagem · beleza · natureza';
@@ -1422,6 +1545,26 @@
         .footer-tags { max-width: 1280px; margin: .6rem auto 0; padding: .5rem 20px 0; border-top: 1px solid rgba(184,134,11,.2); font-size: .5rem; color: rgba(255,255,255,.7); text-align: center; }
         .footer-tags i { color: var(--aged-gold); margin-right: 5px; }
         .footer-watermark { max-width: 1280px; margin: .4rem auto 0; padding: .4rem 20px; font-size: .45rem; color: rgba(255,255,255,.5); text-align: center; font-style: italic; }
+        .compliance-details { margin-top: 0.4rem; }
+        .compliance-summary {
+            cursor: pointer; font-size: 0.65rem; font-weight: 500; color: var(--aged-gold); list-style: none;
+            display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
+            border: 1px solid rgba(184,134,11,0.2); border-radius: 20px;
+            background: rgba(184,134,11,0.04); transition: all 0.3s ease; user-select: none;
+        }
+        .compliance-summary::-webkit-details-marker { display: none; }
+        .compliance-summary:hover { background: rgba(184,134,11,0.08); border-color: var(--aged-gold); color: var(--aged-gold); transform: translateY(-1px); box-shadow: 0 2px 8px rgba(184,134,11,0.08); }
+        .compliance-summary i { font-size: 0.5rem; transition: transform 0.3s ease; }
+        details[open] .compliance-summary i { transform: rotate(180deg); }
+        .compliance-text {
+            font-size: 0.6rem; background: rgba(184,134,11,0.04); padding: 0.8rem; border-radius: 8px;
+            max-height: 200px; overflow-y: auto; line-height: 1.5; color: #5a7d91;
+            border: 1px solid rgba(184,134,11,0.12); margin-top: 0.5rem;
+        }
+        .compliance-notice {
+            font-size: 0.6rem; color: #5a7d91; margin-top: 1.2rem; padding-top: 0.8rem;
+            border-top: 1px solid rgba(184,134,11,0.18); line-height: 1.5; opacity: 0.8;
+        }
         @media (max-width:600px) {
             .article-dual-column { flex-direction: column; }
             .article-image-col { flex: 0 0 auto; max-width: 100%; }
@@ -1487,6 +1630,9 @@
                 </div>
                 ${referencesHTML}
                 ${authorSigHTML}
+                <div class="compliance-notice">
+                    ${COMPLIANCE_TEXT}
+                </div>
             </div>
         </div>
     </div>
@@ -1599,6 +1745,9 @@
             const wDiv = document.getElementById('prevWatermark');
             const wText = document.getElementById('prevWatermarkText');
             if (watermarkRef) { wDiv.style.display = 'block'; wText.textContent = 'Ref: ' + watermarkRef; } else wDiv.style.display = 'none';
+            // Update compliance in preview
+            const complianceDiv = document.getElementById('prevCompliance');
+            if (complianceDiv) complianceDiv.innerHTML = COMPLIANCE_TEXT;
             triggerAutoSave();
             initImageResizeHandler();
         }
