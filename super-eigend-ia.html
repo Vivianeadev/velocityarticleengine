@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Super Eigend + Super IA · Velocity Article Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cinzel:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --petrol-blue: #0a3147;
+            --petrol-light: #1a4b6d;
+            --aged-gold: #b8860b;
+            --gold-line: rgba(184, 134, 11, 0.18);
+            --text-muted: #5a7d91;
+            --font-serif: 'Cinzel', serif;
+            --font-sans: 'Inter', sans-serif;
+            --font-body: 'Marcellus', serif;
+            --gradient-gold-subtle: linear-gradient(135deg, rgba(184,134,11,0.06) 0%, rgba(184,134,11,0.02) 100%);
+            --bg-card: #ffffff;
+            --shadow-card: 0 4px 24px rgba(10,49,71,0.06), 0 1px 8px rgba(184,134,11,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #faf8f4;
+            color: var(--petrol-blue);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+        .pz-header {
+            background: #0a3147;
+            color: #fff;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .pz-header .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .pz-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .pz-logo span { color: #b8860b; }
+        .pz-breaking-news {
+            background: rgba(184,134,11,0.06);
+            border-bottom: 1px solid rgba(184,134,11,0.12);
+            padding: 6px 0;
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 20px;
+        }
+        .pz-breaking-label {
+            background: transparent;
+            color: #8b7318;
+            padding: 3px 12px;
+            font-weight: 500;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: 20px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(184,134,11,0.25);
+        }
+        .pz-breaking-label:hover {
+            background: rgba(184,134,11,0.08);
+            color: #b8860b;
+            border-color: rgba(184,134,11,0.45);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(184,134,11,0.08);
+        }
+        .main-container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+        .page-title {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            color: var(--petrol-blue);
+            text-align: center;
+            margin-bottom: 0.3rem;
+            letter-spacing: 1px;
+        }
+        .page-title span { color: var(--aged-gold); }
+        .page-subtitle {
+            text-align: center;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--aged-gold);
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--gold-line);
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--gold-line);
+        }
+        .card-header h2 {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--petrol-blue);
+            letter-spacing: 1px;
+            margin: 0;
+        }
+        .card-header i { color: var(--aged-gold); font-size: 1.1rem; }
+        .card-header .badge {
+            font-size: 0.55rem;
+            background: rgba(184,134,11,0.1);
+            color: var(--aged-gold);
+            padding: 3px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .flex-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            background: var(--petrol-blue);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: 0.5px;
+        }
+        .btn:hover {
+            background: var(--petrol-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(10,49,71,0.2);
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--aged-gold);
+            color: var(--aged-gold);
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: 0.5px;
+        }
+        .btn-outline:hover {
+            background: rgba(184,134,11,0.08);
+            border-color: var(--aged-gold);
+            color: var(--aged-gold);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(184,134,11,0.12);
+        }
+        .btn-outline.selected {
+            background: rgba(184,134,11,0.12);
+            border-color: var(--aged-gold);
+            color: var(--aged-gold);
+            font-weight: 600;
+            box-shadow: 0 0 0 2px rgba(184,134,11,0.15);
+        }
+        .btn-accent {
+            background: linear-gradient(135deg, #b8860b 0%, #d4a017 100%);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-family: var(--font-serif);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 1px;
+        }
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(184,134,11,0.3);
+        }
+        .btn-accent:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        input[type="text"], input[type="url"], input[type="password"], select, textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid var(--gold-line);
+            border-radius: 10px;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            color: var(--petrol-blue);
+            background: #fdfdfb;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--aged-gold);
+            box-shadow: 0 0 0 3px rgba(184,134,11,0.08);
+            background: #fff;
+        }
+        label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        .form-group { margin-bottom: 1rem; }
+        .trends-list {
+            list-style: none;
+            max-height: 280px;
+            overflow-y: auto;
+            border: 1px solid var(--gold-line);
+            border-radius: 12px;
+            background: #fdfdfb;
+        }
+        .trends-list li {
+            padding: 10px 14px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(184,134,11,0.08);
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+        .trends-list li:hover { background: rgba(184,134,11,0.04); }
+        .trends-list li.selected {
+            background: rgba(184,134,11,0.1);
+            border-left: 3px solid var(--aged-gold);
+            font-weight: 600;
+        }
+        .trends-list li:last-child { border-bottom: none; }
+        .trend-name { font-size: 0.85rem; color: var(--petrol-blue); flex: 1; }
+        .trend-category { font-size: 0.6rem; color: var(--text-muted); white-space: nowrap; }
+        .empty-message {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.8rem;
+            padding: 1rem;
+            text-align: center;
+            display: block;
+        }
+        pre {
+            background: #f8f6f0;
+            border: 1px solid var(--gold-line);
+            border-radius: 12px;
+            padding: 1.2rem;
+            font-size: 0.75rem;
+            line-height: 1.6;
+            max-height: 400px;
+            overflow: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            color: var(--petrol-blue);
+            font-family: 'Inter', monospace;
+        }
+        .status-bar {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .status-bar i { color: var(--aged-gold); }
+        .button-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .divider-or {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 1.2rem 0;
+            position: relative;
+        }
+        .divider-or::before, .divider-or::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: var(--gold-line);
+        }
+        .divider-or::before { left: 0; }
+        .divider-or::after { right: 0; }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--petrol-blue);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            max-width: 90vw;
+            text-align: center;
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(-5px); }
+        .two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        @media (max-width: 768px) {
+            .two-cols { grid-template-columns: 1fr; }
+            .card { padding: 1.2rem; }
+            .page-title { font-size: 1.5rem; }
+            .pz-logo { font-size: 1.5rem; }
+        }
+        .api-config-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 0.8rem;
+        }
+        @media (max-width: 600px) {
+            .api-config-row { grid-template-columns: 1fr; }
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--aged-gold);
+            text-decoration: none;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            margin-bottom: 1rem;
+        }
+        .back-link:hover { color: var(--petrol-blue); }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho PautaZero -->
+    <header class="pz-header">
+        <div class="header-inner">
+            <a href="dashboard.html" class="pz-logo">Pauta<span>Zero</span></a>
+        </div>
+    </header>
+    <div class="pz-breaking-news">
+        <a href="velocity.html" class="pz-breaking-label"><i class="fas fa-arrow-left"></i> Entrar no Velocity Article Engine Agora</a>
+    </div>
+
+    <div class="main-container">
+        <h1 class="page-title">Super <span>Eigend</span> + Super <span>IA</span></h1>
+        <p class="page-subtitle">Pesquisa de Tendências · Geração Inteligente de Artigos</p>
+
+        <!-- ============ SUPER EIGEND TRENDS ============ -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-chart-line"></i>
+                <h2>Super Eigend Trends</h2>
+                <span class="badge">Pesquisa</span>
+            </div>
+            <div class="flex-row" style="margin-bottom: 1rem;">
+                <span style="font-size:0.8rem;color:var(--text-muted);margin-right:8px;">Foco:</span>
+                <button class="btn-outline context-btn selected" data-context="geral">Geral</button>
+                <button class="btn-outline context-btn" data-context="teologia">Teologia</button>
+                <button class="btn-outline context-btn" data-context="justica">Direito & Justiça</button>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-search"></i> Buscar por palavra-chave</label>
+                <div class="flex-row">
+                    <input type="text" id="keywordInput" placeholder="Digite um termo para buscar..." style="flex:1;">
+                    <button class="btn" id="fetchTrendsBtn"><i class="fas fa-search"></i> Buscar</button>
+                </div>
+            </div>
+            <label style="margin-top:0.5rem;"><i class="fas fa-list"></i> Resultados (clique para selecionar)</label>
+            <ul class="trends-list" id="trendsList">
+                <li class="empty-message">🔍 Selecione um contexto ou busque por palavra-chave.</li>
+            </ul>
+            <div style="margin-top:0.8rem;">
+                <label><i class="fas fa-pen-fancy"></i> Gênero do artigo</label>
+                <select id="eixoSelect">
+                    <option value="Notícia">📰 Notícia</option>
+                    <option value="Opinião">💬 Opinião</option>
+                    <option value="Análise">📊 Análise</option>
+                    <option value="Educativo">📚 Educativo</option>
+                    <option value="Humor">😄 Humor</option>
+                    <option value="Crítica">🔍 Crítica</option>
+                </select>
+            </div>
+            <div class="button-row">
+                <button class="btn-accent" id="generateBtn" disabled><i class="fas fa-magic"></i> Gerar com Super Eigend</button>
+                <button class="btn-outline" id="fillVelocityBtn" style="display:none;"><i class="fas fa-arrow-right"></i> Enviar ao Velocity</button>
+                <button class="btn-outline" id="copyEigendBtn" style="display:none;"><i class="fas fa-copy"></i> Copiar</button>
+            </div>
+            <div id="generatedContent" style="margin-top:1rem;">
+                <span class="empty-message">Selecione um tópico e escolha o gênero para gerar.</span>
+            </div>
+        </div>
+
+        <!-- ============ SUPER IA GENERATOR ============ -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-brain"></i>
+                <h2>Super IA Article Engine</h2>
+                <span class="badge">OpenAI · Groq · DeepSeek</span>
+            </div>
+            <div class="api-config-row">
+                <div class="form-group">
+                    <label><i class="fas fa-key"></i> Chave da API</label>
+                    <input type="password" id="superIAApiKey" placeholder="sk-... ou gsk_...">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-microchip"></i> Modelo</label>
+                    <input type="text" id="superIAModel" placeholder="gpt-4o-mini" value="gpt-4o-mini">
+                </div>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-globe"></i> Endpoint da API</label>
+                <input type="url" id="superIAEndpoint" placeholder="https://api.openai.com/v1/chat/completions" value="https://api.openai.com/v1/chat/completions">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-lightbulb"></i> Assunto (opcional — usa o trend selecionado se vazio)</label>
+                <input type="text" id="superIATopicInput" placeholder="Ex: O impacto da inteligência artificial no mercado jurídico">
+            </div>
+            <div class="button-row">
+                <button class="btn-accent" id="generateSuperIABtn"><i class="fas fa-robot"></i> Gerar Artigo com IA</button>
+                <button class="btn-outline" id="applySuperIABtn" style="display:none;"><i class="fas fa-arrow-right"></i> Enviar ao Velocity</button>
+                <button class="btn-outline" id="copySuperIABtn" style="display:none;"><i class="fas fa-copy"></i> Copiar JSON</button>
+                <button class="btn-outline" id="clearSuperIABtn" style="display:none; color:#c0392b; border-color:#c0392b;"><i class="fas fa-trash"></i> Limpar</button>
+            </div>
+            <div class="status-bar" id="superIAStatus"></div>
+            <div id="superIAGeneratedContent" style="margin-top:0.5rem;">
+                <span class="empty-message">Configure sua chave de API, defina um assunto e clique em Gerar.</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // =================================================================
+        // PROTEÇÃO DE ACESSO
+        // =================================================================
+        if (!localStorage.getItem('super_eigend_authenticated_v2')) {
+            window.location.href = 'index.html';
+        }
+
+        // =================================================================
+        // SUPER EIGEND SCRIPTS
+        // =================================================================
+        const EIGEND_WORKER_URL = 'https://trends.pautazero.com';
+        const CONTEXT_EIXO_MAP = { teologia: 'teologia', justica: 'direito-penal', geral: 'noticia' };
+        const CONTEXT_LABELS = { teologia: 'Teologia', justica: 'Direito & Justiça', geral: 'Geral' };
+        let currentContext = 'geral', currentTrends = [], selectedTrend = null, lastEigendData = null;
+        const keywordInput = document.getElementById('keywordInput'),
+              fetchBtn = document.getElementById('fetchTrendsBtn'),
+              trendsListEl = document.getElementById('trendsList'),
+              generatedContentEl = document.getElementById('generatedContent'),
+              generateBtn = document.getElementById('generateBtn'),
+              fillVelocityBtn = document.getElementById('fillVelocityBtn'),
+              copyEigendBtn = document.getElementById('copyEigendBtn'),
+              eixoSelect = document.getElementById('eixoSelect');
+
+        // Context buttons
+        document.querySelectorAll('.context-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentContext = btn.dataset.context;
+                document.querySelectorAll('.context-btn').forEach(b => b.classList.toggle('selected', b.dataset.context === currentContext));
+                fetchTrends();
+                selectedTrend = null;
+                generateBtn.disabled = true;
+                fillVelocityBtn.style.display = 'none';
+                copyEigendBtn.style.display = 'none';
+                generatedContentEl.innerHTML = '<span class="empty-message">Contexto alterado. Busque ou selecione um tópico.</span>';
+            });
+        });
+
+        // Toast
+        function showToast(msg, isError = false) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.style.background = isError ? '#c0392b' : 'var(--petrol-blue)';
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 4500);
+        }
+
+        // Escape HTML
+        function escapeHtml(s) {
+            return String(s).replace(/[&<>\"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[m]);
+        }
+
+        // Fetch trends
+        async function fetchTrends(keyword = '') {
+            trendsListEl.innerHTML = '<li class="empty-message">🔍 Buscando tendências...</li>';
+            try {
+                let url;
+                if (keyword.trim()) {
+                    url = `${EIGEND_WORKER_URL}?q=${encodeURIComponent(keyword.trim())}`;
+                } else {
+                    url = `${EIGEND_WORKER_URL}?context=${currentContext}`;
+                }
+                const resp = await fetch(url, {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('super_eigend_authenticated_v2')
+                    }
+                });
+                if (!resp.ok) {
+                    let errorBody = '';
+                    try { errorBody = await resp.text(); } catch (e) {}
+                    throw new Error(`HTTP ${resp.status}${errorBody ? ': ' + errorBody : ''}`);
+                }
+                let trends = await resp.json();
+                currentTrends = trends;
+                renderTrendsList();
+            } catch (e) {
+                console.error('Fetch trends error:', e);
+                trendsListEl.innerHTML = `<li class="empty-message" style="color:#c0392b;">❌ Erro: ${escapeHtml(e.message)}</li>`;
+            }
+        }
+
+        function renderTrendsList() {
+            if (!currentTrends.length) {
+                trendsListEl.innerHTML = '<li class="empty-message">Nenhum assunto encontrado.</li>';
+                return;
+            }
+            trendsListEl.innerHTML = currentTrends.map((t, i) => {
+                const nome = escapeHtml(t.name);
+                const nomeHtml = t.url
+                    ? `<a href="${escapeHtml(t.url)}" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;" title="Abrir fonte original">${nome} <i class="fas fa-external-link-alt" style="font-size:0.6rem; opacity:0.6;"></i></a>`
+                    : nome;
+                return `<li class="trend-item ${selectedTrend?.name === t.name ? 'selected' : ''}" data-index="${i}">
+                    <span class="trend-name">${nomeHtml}</span>
+                    <span class="trend-category">${escapeHtml(t.category)} · ${t.volume || 'N/A'}</span>
+                </li>`;
+            }).join('');
+            document.querySelectorAll('.trend-item').forEach(item => {
+                item.addEventListener('click', () => selectTrend(parseInt(item.dataset.index)));
+            });
+        }
+
+        function selectTrend(idx) {
+            selectedTrend = currentTrends[idx];
+            document.querySelectorAll('.trend-item').forEach(el => el.classList.toggle('selected', el.dataset.index == idx));
+            generateBtn.disabled = false;
+            fillVelocityBtn.style.display = 'none';
+            copyEigendBtn.style.display = 'none';
+            generatedContentEl.innerHTML = '<span class="empty-message">Tópico selecionado. Escolha o gênero e clique em Gerar.</span>';
+        }
+
+        function generateContent() {
+            if (!selectedTrend) return;
+            const eixoGenero = eixoSelect.value,
+                  topic = selectedTrend.name,
+                  cat = selectedTrend.category;
+            const tagBase = topic.replace(/[#]/g, '').split(' ')[0].toLowerCase().replace(/[^a-z0-9à-ú]/g, ''),
+                  tag = tagBase + '_' + Date.now().toString(36);
+            const title = gerarTitulo(topic, eixoGenero, cat),
+                  subtitle = gerarSubtitulo(topic, eixoGenero, cat),
+                  corpo = gerarCorpo(topic, eixoGenero, cat);
+            const eixoVelocity = CONTEXT_EIXO_MAP[currentContext] || 'noticia';
+            lastEigendData = {
+                tag, eixo: eixoVelocity, titulo: title, subtitulo: subtitle, corpo,
+                tema: tagBase,
+                tags: tagBase + ', ' + (currentContext === 'teologia' ? 'teologia, fé' : currentContext === 'justica' ? 'direito, justiça' : ''),
+                tempo_leitura: '5 min',
+                resumo: subtitle
+            };
+            generatedContentEl.innerHTML = `<pre>${escapeHtml(`TAG: ${tag}\nEIXO: ${eixoVelocity}\nGÊNERO: ${eixoGenero}\nTÍTULO: ${title}\nSUBTÍTULO: ${subtitle}\n\nCORPO:\n${corpo}\n\n---\nGerado pelo Super Eigend em ${new Date().toLocaleString('pt-BR')}`)}</pre>`;
+            fillVelocityBtn.style.display = 'inline-flex';
+            copyEigendBtn.style.display = 'inline-flex';
+        }
+
+        function gerarTitulo(nome, eixo, cat) {
+            const b = nome.replace(/#/g, '');
+            switch (eixo) {
+                case 'Opinião': return `Opinião: O que realmente está por trás de "${b}"`;
+                case 'Análise': return `Análise: Os impactos de "${b}" no cenário atual`;
+                case 'Humor': return `Só lamento: "${b}" e a arte de viralizar`;
+                case 'Educativo': return `Entenda: "${b}" em 5 pontos`;
+                case 'Crítica': return `A conta não fecha: crítica a "${b}" e suas consequências`;
+                default: return `${b}: o que está acontecendo e por que todos comentam`;
+            }
+        }
+        function gerarSubtitulo(nome, eixo, cat) {
+            if (eixo === 'Notícia') return `O assunto domina as redes nas últimas 24h, com milhares de menções.`;
+            if (eixo === 'Opinião') return `Minha visão pessoal sobre o fenômeno que mobilizou o Brasil.`;
+            if (eixo === 'Análise') return `Números, contexto e projeções sobre o tema.`;
+            return `Um olhar ${eixo.toLowerCase()} sobre o buzz do momento.`;
+        }
+        function gerarCorpo(nome, eixo, cat) {
+            const intro = `O tópico "${nome}" explodiu nas redes sociais nesta terça-feira (12), acumulando milhares de menções em poucas horas. `;
+            const meio = {
+                'Notícia': `De acordo com os principais portais, o assunto ganhou tração após um evento inesperado. Especialistas apontam que as discussões refletem um sentimento mais amplo da população. `,
+                'Opinião': `Na minha leitura, essa repercussão revela uma carência de diálogo. A sociedade está reagindo a algo antes ignorado. `,
+                'Análise': `Dados preliminares do Trend Monitor indicam um pico às 14h, com engajamento 340% acima da média para a categoria ${cat}. `,
+                'Humor': `A internet não perdoa. Em minutos, surgiram memes e piadas que dominaram as timelines. `,
+                'Educativo': `Para entender o fenômeno, é preciso recuar um pouco no tempo. O contexto histórico explica por que o termo viralizou agora. `,
+                'Crítica': `Por trás dos holofotes, há decisões questionáveis que merecem escrutínio. A mídia trata com superficialidade. `
+            };
+            const fecho = `O assunto continua entre os mais comentados do dia.`;
+            return intro + (meio[eixo] || meio['Notícia']) + fecho;
+        }
+
+        function fillVelocityForm(data) {
+            // Salva os dados no localStorage para o Velocity Engine ler
+            localStorage.setItem('velocity_ia_bridge', JSON.stringify({
+                titulo: data.titulo,
+                subtitulo: data.subtitulo,
+                eixo: data.eixo,
+                tema: data.tema,
+                tags: data.tags,
+                resumo: data.resumo || data.subtitulo,
+                tempo_leitura: data.tempo_leitura || '8 min',
+                conteudo_html: data.corpo.split('. ').filter(p => p.trim()).map(p => `<p>${p.trim()}.</p>`).join('\n'),
+                timestamp: Date.now()
+            }));
+            window.location.href = 'dashboard.html';
+        }
+
+        fillVelocityBtn.addEventListener('click', () => {
+            if (lastEigendData) fillVelocityForm(lastEigendData);
+        });
+        copyEigendBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(generatedContentEl.innerText).then(() => {
+                const btn = document.getElementById('copyEigendBtn');
+                const orig = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+                setTimeout(() => btn.innerHTML = orig, 2000);
+            });
+        });
+        fetchBtn.addEventListener('click', () => fetchTrends(keywordInput.value));
+        keywordInput.addEventListener('keypress', e => { if (e.key === 'Enter') fetchTrends(); });
+        generateBtn.addEventListener('click', generateContent);
+
+        // =================================================================
+        // SUPER IA ARTICLE ENGINE SCRIPTS
+        // =================================================================
+        const superIAApiKeyInput = document.getElementById('superIAApiKey');
+        const superIAEndpointInput = document.getElementById('superIAEndpoint');
+        const superIAModelInput = document.getElementById('superIAModel');
+        const superIATopicInput = document.getElementById('superIATopicInput');
+        const generateSuperIABtn = document.getElementById('generateSuperIABtn');
+        const clearSuperIABtn = document.getElementById('clearSuperIABtn');
+        const applySuperIABtn = document.getElementById('applySuperIABtn');
+        const copySuperIABtn = document.getElementById('copySuperIABtn');
+        const superIAStatus = document.getElementById('superIAStatus');
+        const superIAGeneratedContent = document.getElementById('superIAGeneratedContent');
+        let lastSuperIAResponse = null;
+
+        function getSuperIATopic() {
+            const manualTopic = superIATopicInput.value.trim();
+            if (manualTopic) return manualTopic;
+            if (selectedTrend) return selectedTrend.name;
+            return null;
+        }
+
+        function buildSuperIAPrompt(topic) {
+            const eixoGenero = eixoSelect.value;
+            const contextLabel = CONTEXT_LABELS[currentContext] || 'Geral';
+            return `Você é um redator profissional especializado em criar artigos para portais de notícias e revistas digitais. Gere um artigo completo sobre o seguinte tópico: "${topic}".
+
+Contexto editorial: ${contextLabel}
+Gênero jornalístico: ${eixoGenero}
+
+RETORNE EXCLUSIVAMENTE um objeto JSON válido (sem texto adicional, sem markdown, sem comentários) com a seguinte estrutura:
+{
+  "titulo": "Título do artigo (atraente, com no máximo 80 caracteres)",
+  "subtitulo": "Subtítulo do artigo (explicativo, complementa o título, com no máximo 120 caracteres)",
+  "eixo": "categoria-do-artigo (use letras minúsculas, sem acentos, separado por hífen, ex: tecnologia, direito-penal, jardinagem)",
+  "tema": "tema-principal (uma ou duas palavras-chave, sem acentos, separadas por hífen, ex: inteligencia-artificial, rosas)",
+  "resumo": "Resumo curto do artigo, com no máximo 160 caracteres, ideal para meta description",
+  "tags": "tag1, tag2, tag3, tag4, tag5 (tags relevantes separadas por vírgula)",
+  "tempo_leitura": "X min",
+  "conteudo_html": "<p>Primeiro parágrafo do artigo...</p><h2>Subtítulo da seção</h2><p>Conteúdo da seção...</p><blockquote><p>Citação relevante.</p></blockquote><h2>Conclusão</h2><p>Parágrafo final...</p>"
+}
+
+Regras para o conteúdo HTML:
+- Use tags HTML semânticas: <p>, <h2>, <h3>, <blockquote>, <div class="callout-box">, <div class="info-panel">, <div class="warning-panel">, <div class="pull-quote">.
+- O primeiro parágrafo NÃO deve ter recuo (indent).
+- Inclua pelo menos 2 subtítulos (<h2>).
+- Inclua um blockquote com uma citação relevante.
+- Inclua pelo menos uma callout-box ou info-panel.
+- Gere de 6 a 10 parágrafos de conteúdo rico e informativo.
+- Todo o conteúdo deve estar em português do Brasil.
+- Não use markdown. Apenas HTML puro dentro da string "conteudo_html".`;
+        }
+
+        function parseSuperIAResponse(rawText) {
+            let cleaned = rawText.trim();
+            if (cleaned.startsWith('```json')) cleaned = cleaned.replace(/```json\s*/g, '').replace(/```\s*$/g, '');
+            else if (cleaned.startsWith('```')) cleaned = cleaned.replace(/```\s*/g, '').replace(/```\s*$/g, '');
+            cleaned = cleaned.trim();
+            const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+            if (jsonMatch) cleaned = jsonMatch[0];
+            try {
+                const parsed = JSON.parse(cleaned);
+                return {
+                    titulo: parsed.titulo || '',
+                    subtitulo: parsed.subtitulo || '',
+                    eixo: parsed.eixo || '',
+                    tema: parsed.tema || '',
+                    resumo: parsed.resumo || '',
+                    tags: parsed.tags || '',
+                    tempo_leitura: parsed.tempo_leitura || '8 min',
+                    conteudo_html: parsed.conteudo_html || ''
+                };
+            } catch (e) {
+                console.error('JSON parse error:', e, '\nRaw cleaned:', cleaned);
+                return null;
+            }
+        }
+
+        async function generateArticleWithSuperIA() {
+            const topic = getSuperIATopic();
+            if (!topic) {
+                showToast('⚠️ Insira um assunto ou selecione um trend do Super Eigend.', true);
+                return;
+            }
+            const apiKey = superIAApiKeyInput.value.trim();
+            if (!apiKey) {
+                showToast('⚠️ Configure sua chave de API IA primeiro.', true);
+                superIAApiKeyInput.focus();
+                return;
+            }
+            const endpoint = superIAEndpointInput.value.trim() || 'https://api.openai.com/v1/chat/completions';
+            const model = superIAModelInput.value.trim() || 'gpt-4o-mini';
+            const prompt = buildSuperIAPrompt(topic);
+
+            generateSuperIABtn.disabled = true;
+            superIAStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando artigo com IA...';
+            superIAGeneratedContent.innerHTML = '<span class="empty-message">⏳ Aguardando resposta da IA...</span>';
+            applySuperIABtn.style.display = 'none';
+            copySuperIABtn.style.display = 'none';
+            clearSuperIABtn.style.display = 'inline-flex';
+            lastSuperIAResponse = null;
+
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: model,
+                        messages: [
+                            { role: 'system', content: 'Você é um redator profissional. Retorne apenas JSON válido, sem texto adicional.' },
+                            { role: 'user', content: prompt }
+                        ],
+                        temperature: 0.7,
+                        max_tokens: 4000
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${errorText.substring(0, 200)}`);
+                }
+
+                const data = await response.json();
+                const rawContent = data.choices?.[0]?.message?.content || '';
+                if (!rawContent) throw new Error('Resposta vazia da IA.');
+
+                const parsed = parseSuperIAResponse(rawContent);
+                if (!parsed) {
+                    superIAGeneratedContent.innerHTML = `<div style="color:#c0392b; font-size:0.8rem;">❌ A IA retornou um formato inválido. Resposta bruta:</div><pre style="font-size:0.7rem; max-height:300px; overflow:auto;">${escapeHtml(rawContent)}</pre>`;
+                    throw new Error('Formato de resposta inválido.');
+                }
+
+                lastSuperIAResponse = parsed;
+                superIAGeneratedContent.innerHTML = `<pre style="font-size:0.75rem; line-height:1.6;">${escapeHtml(JSON.stringify(parsed, null, 2))}</pre>`;
+                applySuperIABtn.style.display = 'inline-flex';
+                copySuperIABtn.style.display = 'inline-flex';
+                superIAStatus.innerHTML = '<i class="fas fa-check-circle" style="color:var(--aged-gold);"></i> Artigo gerado com sucesso!';
+                showToast('✅ Artigo gerado pela Super IA!');
+            } catch (err) {
+                console.error('Super IA error:', err);
+                superIAStatus.innerHTML = `<i class="fas fa-exclamation-triangle" style="color:#c0392b;"></i> Erro: ${escapeHtml(err.message)}`;
+                if (!lastSuperIAResponse) {
+                    superIAGeneratedContent.innerHTML = `<span class="empty-message" style="color:#c0392b;">❌ ${escapeHtml(err.message)}</span>`;
+                }
+            } finally {
+                generateSuperIABtn.disabled = false;
+            }
+        }
+
+        function applySuperIAToVelocity() {
+            if (!lastSuperIAResponse) return;
+            const data = {
+                titulo: lastSuperIAResponse.titulo,
+                subtitulo: lastSuperIAResponse.subtitulo,
+                eixo: lastSuperIAResponse.eixo,
+                tema: lastSuperIAResponse.tema,
+                tags: lastSuperIAResponse.tags,
+                resumo: lastSuperIAResponse.resumo,
+                tempo_leitura: lastSuperIAResponse.tempo_leitura,
+                conteudo_html: lastSuperIAResponse.conteudo_html,
+                corpo: lastSuperIAResponse.conteudo_html // compatibilidade com fillVelocityForm
+            };
+            fillVelocityForm(data);
+        }
+
+        function copySuperIAToClipboard() {
+            if (!lastSuperIAResponse) return;
+            navigator.clipboard.writeText(JSON.stringify(lastSuperIAResponse, null, 2)).then(() => {
+                const btn = document.getElementById('copySuperIABtn');
+                const orig = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+                setTimeout(() => btn.innerHTML = orig, 2000);
+            });
+        }
+
+        function clearSuperIAResult() {
+            lastSuperIAResponse = null;
+            superIAGeneratedContent.innerHTML = '<span class="empty-message">Configure sua chave de API, defina um assunto e clique em Gerar.</span>';
+            superIAStatus.innerHTML = '';
+            applySuperIABtn.style.display = 'none';
+            copySuperIABtn.style.display = 'none';
+            clearSuperIABtn.style.display = 'none';
+            showToast('🧹 Resultado limpo.');
+        }
+
+        generateSuperIABtn.addEventListener('click', generateArticleWithSuperIA);
+        applySuperIABtn.addEventListener('click', applySuperIAToVelocity);
+        copySuperIABtn.addEventListener('click', copySuperIAToClipboard);
+        clearSuperIABtn.addEventListener('click', clearSuperIAResult);
+
+        // =================================================================
+        // INICIALIZAÇÃO
+        // =================================================================
+        fetchTrends();
+
+        // Restaurar configs da API do localStorage
+        const savedApiKey = localStorage.getItem('super_ia_api_key');
+        const savedEndpoint = localStorage.getItem('super_ia_endpoint');
+        const savedModel = localStorage.getItem('super_ia_model');
+        if (savedApiKey) superIAApiKeyInput.value = savedApiKey;
+        if (savedEndpoint) superIAEndpointInput.value = savedEndpoint;
+        if (savedModel) superIAModelInput.value = savedModel;
+
+        // Salvar configs ao alterar
+        superIAApiKeyInput.addEventListener('input', () => localStorage.setItem('super_ia_api_key', superIAApiKeyInput.value));
+        superIAEndpointInput.addEventListener('input', () => localStorage.setItem('super_ia_endpoint', superIAEndpointInput.value));
+        superIAModelInput.addEventListener('input', () => localStorage.setItem('super_ia_model', superIAModelInput.value));
+
+        console.log('🔮 Super Eigend + Super IA inicializados. Pronto para pesquisar e gerar artigos.');
+    </script>
+</body>
+</html>
