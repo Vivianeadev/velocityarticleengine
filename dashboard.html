@@ -156,6 +156,12 @@
                     <input type="text" id="imageCaption" placeholder="Rosas do Jardim Botânico" value="Rosas do Jardim Botânico" oninput="updatePreview()" style="font-size:0.8rem;">
                 </div>
             </div>
+            <!-- NOVO: Chave de API do Worker de Upload (segura, fornecida pelo usuário) -->
+            <div class="form-group">
+                <label><i class="fas fa-key"></i> Chave da API de Upload (opcional)</label>
+                <input type="password" id="uploadApiKey" placeholder="Deixe em branco se o worker não exigir autenticação" oninput="updateUploadApiKey()" autocomplete="off">
+                <div class="field-watermark">🔹 Necessária apenas se o worker de upload (assets.pautazero.com) exigir o cabeçalho X-API-Key. Sua chave nunca é exposta no código-fonte.</div>
+            </div>
             <div class="form-group">
                 <label><i class="fas fa-link"></i> Artigos relacionados</label>
                 <div id="relatedLinksContainer" class="related-links-container"></div>
@@ -722,6 +728,7 @@
                     fullscreenContent: document.getElementById('fullscreenContent').value, references: document.getElementById('references').value,
                     avatarBase64: avatarBase64, relatedLinks: getRelatedLinks(), contextMode: currentContextMode,
                     workerSelect: document.getElementById('workerSelect') ? document.getElementById('workerSelect').value : 'auto',
+                    uploadApiKey: uploadApiKey, // salvar a chave de upload também
                     savedAt: new Date().toISOString()
                 };
                 localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(state));
@@ -756,6 +763,7 @@
                 if (state.relatedLinks && state.relatedLinks.length > 0) { relatedContainer.innerHTML = ''; linkCounter = 0; state.relatedLinks.forEach(link => addLinkField(link.slug, link.url)); }
                 if (state.contextMode) setContextMode(state.contextMode);
                 if (state.workerSelect !== undefined) { const ws = document.getElementById('workerSelect'); if (ws) { ws.value = state.workerSelect; onWorkerSelectChange(); } }
+                if (state.uploadApiKey !== undefined) { uploadApiKey = state.uploadApiKey; document.getElementById('uploadApiKey').value = uploadApiKey; }
                 updatePreview(); return true;
             } catch (e) { return false; }
         }
@@ -774,29 +782,40 @@
         const imageInput = document.getElementById('image');
         const clearBtn = document.getElementById('clearImageBtn');
         const prevImage = document.getElementById('prevImage');
-        // ========== UPLOAD DE IMAGENS (CORRIGIDO: dinâmico e seguro) ==========
+
+        // ========== UPLOAD DE IMAGENS (CORRIGIDO E SEGURO) ==========
+        const UPLOAD_WORKER_URL = 'https://assets.pautazero.com/upload';
+
+        // Chave de API fornecida pelo usuário (armazenada em localStorage)
+        let uploadApiKey = localStorage.getItem('velocity_upload_api_key') || '';
+        document.getElementById('uploadApiKey').value = uploadApiKey;
+
+        function updateUploadApiKey() {
+            uploadApiKey = document.getElementById('uploadApiKey').value.trim();
+            localStorage.setItem('velocity_upload_api_key', uploadApiKey);
+            triggerAutoSave();
+        }
+        window.updateUploadApiKey = updateUploadApiKey;
+
         async function uploadToR2(file) {
             if (!file) return null;
             showToast('⏳ Enviando imagem para o CDN...');
             const form = new FormData();
             form.append('image', file);
 
-            // Define o caminho de acordo com o site selecionado
-            const site = getSelectedSite();
-            let sitePath = 'geral';
-            if (site.portalName.includes('Teologia')) sitePath = 'teologia';
-            else if (site.portalName.includes('Justiça')) sitePath = 'justica';
-
-            const uploadUrl = `https://assets.pautazero.com/upload/${sitePath}`;
+            // Prepara headers condicionais
+            const headers = {};
+            if (uploadApiKey) {
+                headers['X-API-Key'] = uploadApiKey;
+            }
 
             try {
-                const res = await fetch(uploadUrl, {
+                const res = await fetch(UPLOAD_WORKER_URL, {
                     method: 'POST',
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem('super_eigend_authenticated_v2')
-                    },
+                    headers,
                     body: form
                 });
+
                 if (!res.ok) {
                     const err = await res.json().catch(() => ({ error: 'Erro desconhecido' }));
                     throw new Error(err.error || `HTTP ${res.status}`);
@@ -810,7 +829,6 @@
             }
         }
 
-        // --- handleImageFile e listeners mantidos ---
         async function handleImageFile(file) {
             if (!file.type.startsWith('image/')) { showToast('Apenas imagens.', true); return; }
             const url = await uploadToR2(file);
@@ -1406,6 +1424,8 @@
         if (workerSelectEl) {
             workerSelectEl.addEventListener('change', () => { onWorkerSelectChange(); triggerAutoSave(); });
         }
+        // Adiciona evento para o novo campo de chave
+        document.getElementById('uploadApiKey').addEventListener('input', triggerAutoSave);
         updatePreview();
 
         async function sendToKV() {
