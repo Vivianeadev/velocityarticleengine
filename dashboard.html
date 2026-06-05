@@ -774,18 +774,27 @@
         const imageInput = document.getElementById('image');
         const clearBtn = document.getElementById('clearImageBtn');
         const prevImage = document.getElementById('prevImage');
-        // ========== UPLOAD DE IMAGENS (CORRIGIDO PARA assets.pautazero.com/images) ==========
-        const UPLOAD_WORKER_URL = 'assets.pautazero.com/upload';
-
+        // ========== UPLOAD DE IMAGENS (CORRIGIDO: dinâmico e seguro) ==========
         async function uploadToR2(file) {
             if (!file) return null;
             showToast('⏳ Enviando imagem para o CDN...');
             const form = new FormData();
             form.append('image', file);
+
+            // Define o caminho de acordo com o site selecionado
+            const site = getSelectedSite();
+            let sitePath = 'geral';
+            if (site.portalName.includes('Teologia')) sitePath = 'teologia';
+            else if (site.portalName.includes('Justiça')) sitePath = 'justica';
+
+            const uploadUrl = `https://assets.pautazero.com/upload/${sitePath}`;
+
             try {
-                const res = await fetch(UPLOAD_WORKER_URL, {
+                const res = await fetch(uploadUrl, {
                     method: 'POST',
-                    headers: { 'X-API-Key': '550e8400-e29b-41d4-a716-446655440000' },
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('super_eigend_authenticated_v2')
+                    },
                     body: form
                 });
                 if (!res.ok) {
@@ -801,6 +810,7 @@
             }
         }
 
+        // --- handleImageFile e listeners mantidos ---
         async function handleImageFile(file) {
             if (!file.type.startsWith('image/')) { showToast('Apenas imagens.', true); return; }
             const url = await uploadToR2(file);
