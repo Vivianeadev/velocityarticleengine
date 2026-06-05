@@ -381,30 +381,16 @@
         @media (max-width: 600px) {
             .api-config-row { grid-template-columns: 1fr; }
         }
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--aged-gold);
-            text-decoration: none;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
-            margin-bottom: 1rem;
-        }
-        .back-link:hover { color: var(--petrol-blue); }
     </style>
 </head>
 <body>
-    <!-- Cabeçalho PautaZero -->
     <header class="pz-header">
         <div class="header-inner">
             <a href="dashboard.html" class="pz-logo">Pauta<span>Zero</span></a>
         </div>
     </header>
     <div class="pz-breaking-news">
-        <a href="velocity.html" class="pz-breaking-label"><i class="fas fa-arrow-left"></i> Entrar no Velocity Article Engine Agora</a>
+        <a href="dashboard.html" class="pz-breaking-label"><i class="fas fa-arrow-left"></i> Entrar no Velocity Article Engine Agora</a>
     </div>
 
     <div class="main-container">
@@ -497,44 +483,15 @@
     <div class="toast" id="toast"></div>
 
     <script>
-        // =================================================================
-        // PROTEÇÃO DE ACESSO
-        // =================================================================
         if (!localStorage.getItem('super_eigend_authenticated_v2')) {
             window.location.href = 'index.html';
         }
 
-        // =================================================================
-        // SUPER EIGEND SCRIPTS
-        // =================================================================
         const EIGEND_WORKER_URL = 'https://trends.pautazero.com';
         const CONTEXT_EIXO_MAP = { teologia: 'teologia', justica: 'direito-penal', geral: 'noticia' };
         const CONTEXT_LABELS = { teologia: 'Teologia', justica: 'Direito & Justiça', geral: 'Geral' };
         let currentContext = 'geral', currentTrends = [], selectedTrend = null, lastEigendData = null;
-        const keywordInput = document.getElementById('keywordInput'),
-              fetchBtn = document.getElementById('fetchTrendsBtn'),
-              trendsListEl = document.getElementById('trendsList'),
-              generatedContentEl = document.getElementById('generatedContent'),
-              generateBtn = document.getElementById('generateBtn'),
-              fillVelocityBtn = document.getElementById('fillVelocityBtn'),
-              copyEigendBtn = document.getElementById('copyEigendBtn'),
-              eixoSelect = document.getElementById('eixoSelect');
 
-        // Context buttons
-        document.querySelectorAll('.context-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                currentContext = btn.dataset.context;
-                document.querySelectorAll('.context-btn').forEach(b => b.classList.toggle('selected', b.dataset.context === currentContext));
-                fetchTrends();
-                selectedTrend = null;
-                generateBtn.disabled = true;
-                fillVelocityBtn.style.display = 'none';
-                copyEigendBtn.style.display = 'none';
-                generatedContentEl.innerHTML = '<span class="empty-message">Contexto alterado. Busque ou selecione um tópico.</span>';
-            });
-        });
-
-        // Toast
         function showToast(msg, isError = false) {
             const t = document.getElementById('toast');
             t.textContent = msg;
@@ -543,14 +500,13 @@
             setTimeout(() => t.classList.remove('show'), 4500);
         }
 
-        // Escape HTML
         function escapeHtml(s) {
             return String(s).replace(/[&<>\"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[m]);
         }
 
-        // Fetch trends
         async function fetchTrends(keyword = '') {
-            trendsListEl.innerHTML = '<li class="empty-message">🔍 Buscando tendências...</li>';
+            const list = document.getElementById('trendsList');
+            list.innerHTML = '<li class="empty-message">🔍 Buscando tendências...</li>';
             try {
                 let url;
                 if (keyword.trim()) {
@@ -559,34 +515,25 @@
                     url = `${EIGEND_WORKER_URL}?context=${currentContext}`;
                 }
                 const resp = await fetch(url, {
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem('super_eigend_authenticated_v2')
-                    }
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem('super_eigend_authenticated_v2') }
                 });
-                if (!resp.ok) {
-                    let errorBody = '';
-                    try { errorBody = await resp.text(); } catch (e) {}
-                    throw new Error(`HTTP ${resp.status}${errorBody ? ': ' + errorBody : ''}`);
-                }
-                let trends = await resp.json();
-                currentTrends = trends;
-                renderTrendsList();
+                if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+                currentTrends = await resp.json();
+                renderTrends();
             } catch (e) {
-                console.error('Fetch trends error:', e);
-                trendsListEl.innerHTML = `<li class="empty-message" style="color:#c0392b;">❌ Erro: ${escapeHtml(e.message)}</li>`;
+                list.innerHTML = `<li class="empty-message" style="color:#c0392b;">❌ Erro: ${escapeHtml(e.message)}</li>`;
             }
         }
 
-        function renderTrendsList() {
+        function renderTrends() {
+            const list = document.getElementById('trendsList');
             if (!currentTrends.length) {
-                trendsListEl.innerHTML = '<li class="empty-message">Nenhum assunto encontrado.</li>';
+                list.innerHTML = '<li class="empty-message">Nenhum assunto encontrado.</li>';
                 return;
             }
-            trendsListEl.innerHTML = currentTrends.map((t, i) => {
+            list.innerHTML = currentTrends.map((t, i) => {
                 const nome = escapeHtml(t.name);
-                const nomeHtml = t.url
-                    ? `<a href="${escapeHtml(t.url)}" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;" title="Abrir fonte original">${nome} <i class="fas fa-external-link-alt" style="font-size:0.6rem; opacity:0.6;"></i></a>`
-                    : nome;
+                const nomeHtml = t.url ? `<a href="${escapeHtml(t.url)}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">${nome} <i class="fas fa-external-link-alt" style="font-size:0.6rem;"></i></a>` : nome;
                 return `<li class="trend-item ${selectedTrend?.name === t.name ? 'selected' : ''}" data-index="${i}">
                     <span class="trend-name">${nomeHtml}</span>
                     <span class="trend-category">${escapeHtml(t.category)} · ${t.volume || 'N/A'}</span>
@@ -600,33 +547,10 @@
         function selectTrend(idx) {
             selectedTrend = currentTrends[idx];
             document.querySelectorAll('.trend-item').forEach(el => el.classList.toggle('selected', el.dataset.index == idx));
-            generateBtn.disabled = false;
-            fillVelocityBtn.style.display = 'none';
-            copyEigendBtn.style.display = 'none';
-            generatedContentEl.innerHTML = '<span class="empty-message">Tópico selecionado. Escolha o gênero e clique em Gerar.</span>';
-        }
-
-        function generateContent() {
-            if (!selectedTrend) return;
-            const eixoGenero = eixoSelect.value,
-                  topic = selectedTrend.name,
-                  cat = selectedTrend.category;
-            const tagBase = topic.replace(/[#]/g, '').split(' ')[0].toLowerCase().replace(/[^a-z0-9à-ú]/g, ''),
-                  tag = tagBase + '_' + Date.now().toString(36);
-            const title = gerarTitulo(topic, eixoGenero, cat),
-                  subtitle = gerarSubtitulo(topic, eixoGenero, cat),
-                  corpo = gerarCorpo(topic, eixoGenero, cat);
-            const eixoVelocity = CONTEXT_EIXO_MAP[currentContext] || 'noticia';
-            lastEigendData = {
-                tag, eixo: eixoVelocity, titulo: title, subtitulo: subtitle, corpo,
-                tema: tagBase,
-                tags: tagBase + ', ' + (currentContext === 'teologia' ? 'teologia, fé' : currentContext === 'justica' ? 'direito, justiça' : ''),
-                tempo_leitura: '5 min',
-                resumo: subtitle
-            };
-            generatedContentEl.innerHTML = `<pre>${escapeHtml(`TAG: ${tag}\nEIXO: ${eixoVelocity}\nGÊNERO: ${eixoGenero}\nTÍTULO: ${title}\nSUBTÍTULO: ${subtitle}\n\nCORPO:\n${corpo}\n\n---\nGerado pelo Super Eigend em ${new Date().toLocaleString('pt-BR')}`)}</pre>`;
-            fillVelocityBtn.style.display = 'inline-flex';
-            copyEigendBtn.style.display = 'inline-flex';
+            document.getElementById('generateBtn').disabled = false;
+            document.getElementById('fillVelocityBtn').style.display = 'none';
+            document.getElementById('copyEigendBtn').style.display = 'none';
+            document.getElementById('generatedContent').innerHTML = '<span class="empty-message">Tópico selecionado. Escolha o gênero e clique em Gerar.</span>';
         }
 
         function gerarTitulo(nome, eixo, cat) {
@@ -640,12 +564,14 @@
                 default: return `${b}: o que está acontecendo e por que todos comentam`;
             }
         }
+
         function gerarSubtitulo(nome, eixo, cat) {
             if (eixo === 'Notícia') return `O assunto domina as redes nas últimas 24h, com milhares de menções.`;
             if (eixo === 'Opinião') return `Minha visão pessoal sobre o fenômeno que mobilizou o Brasil.`;
             if (eixo === 'Análise') return `Números, contexto e projeções sobre o tema.`;
             return `Um olhar ${eixo.toLowerCase()} sobre o buzz do momento.`;
         }
+
         function gerarCorpo(nome, eixo, cat) {
             const intro = `O tópico "${nome}" explodiu nas redes sociais nesta terça-feira (12), acumulando milhares de menções em poucas horas. `;
             const meio = {
@@ -660,8 +586,30 @@
             return intro + (meio[eixo] || meio['Notícia']) + fecho;
         }
 
+        function generateContent() {
+            if (!selectedTrend) return;
+            const eixoGenero = document.getElementById('eixoSelect').value;
+            const topic = selectedTrend.name;
+            const cat = selectedTrend.category;
+            const tagBase = topic.replace(/[#]/g, '').split(' ')[0].toLowerCase().replace(/[^a-z0-9à-ú]/g, '');
+            const tag = tagBase + '_' + Date.now().toString(36);
+            const title = gerarTitulo(topic, eixoGenero, cat);
+            const subtitle = gerarSubtitulo(topic, eixoGenero, cat);
+            const corpo = gerarCorpo(topic, eixoGenero, cat);
+            const eixoVelocity = CONTEXT_EIXO_MAP[currentContext] || 'noticia';
+            lastEigendData = {
+                tag, eixo: eixoVelocity, titulo: title, subtitulo: subtitle, corpo,
+                tema: tagBase,
+                tags: tagBase + ', ' + (currentContext === 'teologia' ? 'teologia, fé' : currentContext === 'justica' ? 'direito, justiça' : ''),
+                tempo_leitura: '5 min',
+                resumo: subtitle
+            };
+            document.getElementById('generatedContent').innerHTML = `<pre>${escapeHtml(`TAG: ${tag}\nEIXO: ${eixoVelocity}\nGÊNERO: ${eixoGenero}\nTÍTULO: ${title}\nSUBTÍTULO: ${subtitle}\n\nCORPO:\n${corpo}\n\n---\nGerado pelo Super Eigend em ${new Date().toLocaleString('pt-BR')}`)}</pre>`;
+            document.getElementById('fillVelocityBtn').style.display = 'inline-flex';
+            document.getElementById('copyEigendBtn').style.display = 'inline-flex';
+        }
+
         function fillVelocityForm(data) {
-            // Salva os dados no localStorage para o Velocity Engine ler
             localStorage.setItem('velocity_ia_bridge', JSON.stringify({
                 titulo: data.titulo,
                 subtitulo: data.subtitulo,
@@ -673,118 +621,94 @@
                 conteudo_html: data.corpo.split('. ').filter(p => p.trim()).map(p => `<p>${p.trim()}.</p>`).join('\n'),
                 timestamp: Date.now()
             }));
-            window.location.href = 'velocity.html';
+            window.location.href = 'dashboard.html';
         }
 
-        fillVelocityBtn.addEventListener('click', () => {
-            if (lastEigendData) fillVelocityForm(lastEigendData);
-        });
-        copyEigendBtn.addEventListener('click', () => {
-            navigator.clipboard.writeText(generatedContentEl.innerText).then(() => {
+        document.getElementById('fetchTrendsBtn').addEventListener('click', () => fetchTrends(document.getElementById('keywordInput').value));
+        document.getElementById('keywordInput').addEventListener('keypress', e => { if (e.key === 'Enter') fetchTrends(); });
+        document.getElementById('generateBtn').addEventListener('click', generateContent);
+        document.getElementById('fillVelocityBtn').addEventListener('click', () => { if (lastEigendData) fillVelocityForm(lastEigendData); });
+        document.getElementById('copyEigendBtn').addEventListener('click', () => {
+            navigator.clipboard.writeText(document.getElementById('generatedContent').innerText).then(() => {
                 const btn = document.getElementById('copyEigendBtn');
                 const orig = btn.innerHTML;
                 btn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
                 setTimeout(() => btn.innerHTML = orig, 2000);
             });
         });
-        fetchBtn.addEventListener('click', () => fetchTrends(keywordInput.value));
-        keywordInput.addEventListener('keypress', e => { if (e.key === 'Enter') fetchTrends(); });
-        generateBtn.addEventListener('click', generateContent);
 
-        // =================================================================
-        // SUPER IA ARTICLE ENGINE SCRIPTS
-        // =================================================================
-        const superIAApiKeyInput = document.getElementById('superIAApiKey');
-        const superIAEndpointInput = document.getElementById('superIAEndpoint');
-        const superIAModelInput = document.getElementById('superIAModel');
-        const superIATopicInput = document.getElementById('superIATopicInput');
+        document.querySelectorAll('.context-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentContext = btn.dataset.context;
+                document.querySelectorAll('.context-btn').forEach(b => b.classList.toggle('selected', b.dataset.context === currentContext));
+                fetchTrends();
+                selectedTrend = null;
+                document.getElementById('generateBtn').disabled = true;
+                document.getElementById('fillVelocityBtn').style.display = 'none';
+                document.getElementById('copyEigendBtn').style.display = 'none';
+                document.getElementById('generatedContent').innerHTML = '<span class="empty-message">Contexto alterado. Busque ou selecione um tópico.</span>';
+            });
+        });
+
+        // ============ SUPER IA ============
+        const superIAApiKey = document.getElementById('superIAApiKey');
+        const superIAEndpoint = document.getElementById('superIAEndpoint');
+        const superIAModel = document.getElementById('superIAModel');
+        const superIATopic = document.getElementById('superIATopicInput');
         const generateSuperIABtn = document.getElementById('generateSuperIABtn');
-        const clearSuperIABtn = document.getElementById('clearSuperIABtn');
         const applySuperIABtn = document.getElementById('applySuperIABtn');
         const copySuperIABtn = document.getElementById('copySuperIABtn');
+        const clearSuperIABtn = document.getElementById('clearSuperIABtn');
         const superIAStatus = document.getElementById('superIAStatus');
         const superIAGeneratedContent = document.getElementById('superIAGeneratedContent');
         let lastSuperIAResponse = null;
 
-        function getSuperIATopic() {
-            const manualTopic = superIATopicInput.value.trim();
-            if (manualTopic) return manualTopic;
-            if (selectedTrend) return selectedTrend.name;
-            return null;
-        }
-
         function buildSuperIAPrompt(topic) {
-            const eixoGenero = eixoSelect.value;
+            const eixoGenero = document.getElementById('eixoSelect').value;
             const contextLabel = CONTEXT_LABELS[currentContext] || 'Geral';
             return `Você é um redator profissional especializado em criar artigos para portais de notícias e revistas digitais. Gere um artigo completo sobre o seguinte tópico: "${topic}".
 
 Contexto editorial: ${contextLabel}
 Gênero jornalístico: ${eixoGenero}
 
-RETORNE EXCLUSIVAMENTE um objeto JSON válido (sem texto adicional, sem markdown, sem comentários) com a seguinte estrutura:
+RETORNE EXCLUSIVAMENTE um objeto JSON válido com a seguinte estrutura:
 {
-  "titulo": "Título do artigo (atraente, com no máximo 80 caracteres)",
-  "subtitulo": "Subtítulo do artigo (explicativo, complementa o título, com no máximo 120 caracteres)",
-  "eixo": "categoria-do-artigo (use letras minúsculas, sem acentos, separado por hífen, ex: tecnologia, direito-penal, jardinagem)",
-  "tema": "tema-principal (uma ou duas palavras-chave, sem acentos, separadas por hífen, ex: inteligencia-artificial, rosas)",
-  "resumo": "Resumo curto do artigo, com no máximo 160 caracteres, ideal para meta description",
-  "tags": "tag1, tag2, tag3, tag4, tag5 (tags relevantes separadas por vírgula)",
+  "titulo": "...",
+  "subtitulo": "...",
+  "eixo": "...",
+  "tema": "...",
+  "resumo": "...",
+  "tags": "...",
   "tempo_leitura": "X min",
-  "conteudo_html": "<p>Primeiro parágrafo do artigo...</p><h2>Subtítulo da seção</h2><p>Conteúdo da seção...</p><blockquote><p>Citação relevante.</p></blockquote><h2>Conclusão</h2><p>Parágrafo final...</p>"
+  "conteudo_html": "<p>...</p><h2>...</h2>..."
 }
 
 Regras para o conteúdo HTML:
 - Use tags HTML semânticas: <p>, <h2>, <h3>, <blockquote>, <div class="callout-box">, <div class="info-panel">, <div class="warning-panel">, <div class="pull-quote">.
-- O primeiro parágrafo NÃO deve ter recuo (indent).
 - Inclua pelo menos 2 subtítulos (<h2>).
-- Inclua um blockquote com uma citação relevante.
-- Inclua pelo menos uma callout-box ou info-panel.
-- Gere de 6 a 10 parágrafos de conteúdo rico e informativo.
-- Todo o conteúdo deve estar em português do Brasil.
-- Não use markdown. Apenas HTML puro dentro da string "conteudo_html".`;
+- Inclua um blockquote.
+- Gere de 6 a 10 parágrafos.
+- Não use markdown. Apenas HTML puro.`;
         }
 
         function parseSuperIAResponse(rawText) {
             let cleaned = rawText.trim();
             if (cleaned.startsWith('```json')) cleaned = cleaned.replace(/```json\s*/g, '').replace(/```\s*$/g, '');
             else if (cleaned.startsWith('```')) cleaned = cleaned.replace(/```\s*/g, '').replace(/```\s*$/g, '');
-            cleaned = cleaned.trim();
             const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
             if (jsonMatch) cleaned = jsonMatch[0];
             try {
-                const parsed = JSON.parse(cleaned);
-                return {
-                    titulo: parsed.titulo || '',
-                    subtitulo: parsed.subtitulo || '',
-                    eixo: parsed.eixo || '',
-                    tema: parsed.tema || '',
-                    resumo: parsed.resumo || '',
-                    tags: parsed.tags || '',
-                    tempo_leitura: parsed.tempo_leitura || '8 min',
-                    conteudo_html: parsed.conteudo_html || ''
-                };
+                return JSON.parse(cleaned);
             } catch (e) {
-                console.error('JSON parse error:', e, '\nRaw cleaned:', cleaned);
                 return null;
             }
         }
 
         async function generateArticleWithSuperIA() {
-            const topic = getSuperIATopic();
-            if (!topic) {
-                showToast('⚠️ Insira um assunto ou selecione um trend do Super Eigend.', true);
-                return;
-            }
-            const apiKey = superIAApiKeyInput.value.trim();
-            if (!apiKey) {
-                showToast('⚠️ Configure sua chave de API IA primeiro.', true);
-                superIAApiKeyInput.focus();
-                return;
-            }
-            const endpoint = superIAEndpointInput.value.trim() || 'https://api.openai.com/v1/chat/completions';
-            const model = superIAModelInput.value.trim() || 'gpt-4o-mini';
-            const prompt = buildSuperIAPrompt(topic);
-
+            const topic = superIATopic.value.trim() || (selectedTrend ? selectedTrend.name : null);
+            if (!topic) { showToast('⚠️ Insira um assunto ou selecione um trend.', true); return; }
+            const apiKey = superIAApiKey.value.trim();
+            if (!apiKey) { showToast('⚠️ Configure sua chave de API IA.', true); return; }
             generateSuperIABtn.disabled = true;
             superIAStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando artigo com IA...';
             superIAGeneratedContent.innerHTML = '<span class="empty-message">⏳ Aguardando resposta da IA...</span>';
@@ -794,50 +718,34 @@ Regras para o conteúdo HTML:
             lastSuperIAResponse = null;
 
             try {
-                const response = await fetch(endpoint, {
+                const response = await fetch(superIAEndpoint.value.trim() || 'https://api.openai.com/v1/chat/completions', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${apiKey}`
-                    },
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
                     body: JSON.stringify({
-                        model: model,
-                        messages: [
-                            { role: 'system', content: 'Você é um redator profissional. Retorne apenas JSON válido, sem texto adicional.' },
-                            { role: 'user', content: prompt }
-                        ],
+                        model: superIAModel.value.trim() || 'gpt-4o-mini',
+                        messages: [{ role: 'system', content: 'Você é um redator profissional. Retorne apenas JSON válido.' }, { role: 'user', content: buildSuperIAPrompt(topic) }],
                         temperature: 0.7,
                         max_tokens: 4000
                     })
                 });
-
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`HTTP ${response.status}: ${errorText.substring(0, 200)}`);
-                }
-
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const data = await response.json();
                 const rawContent = data.choices?.[0]?.message?.content || '';
-                if (!rawContent) throw new Error('Resposta vazia da IA.');
-
+                if (!rawContent) throw new Error('Resposta vazia.');
                 const parsed = parseSuperIAResponse(rawContent);
                 if (!parsed) {
-                    superIAGeneratedContent.innerHTML = `<div style="color:#c0392b; font-size:0.8rem;">❌ A IA retornou um formato inválido. Resposta bruta:</div><pre style="font-size:0.7rem; max-height:300px; overflow:auto;">${escapeHtml(rawContent)}</pre>`;
-                    throw new Error('Formato de resposta inválido.');
+                    superIAGeneratedContent.innerHTML = `<div style="color:#c0392b;">❌ Formato inválido. Resposta bruta:</div><pre style="max-height:200px;overflow:auto;">${escapeHtml(rawContent)}</pre>`;
+                    throw new Error('Formato inválido.');
                 }
-
                 lastSuperIAResponse = parsed;
-                superIAGeneratedContent.innerHTML = `<pre style="font-size:0.75rem; line-height:1.6;">${escapeHtml(JSON.stringify(parsed, null, 2))}</pre>`;
+                superIAGeneratedContent.innerHTML = `<pre>${escapeHtml(JSON.stringify(parsed, null, 2))}</pre>`;
                 applySuperIABtn.style.display = 'inline-flex';
                 copySuperIABtn.style.display = 'inline-flex';
                 superIAStatus.innerHTML = '<i class="fas fa-check-circle" style="color:var(--aged-gold);"></i> Artigo gerado com sucesso!';
                 showToast('✅ Artigo gerado pela Super IA!');
             } catch (err) {
-                console.error('Super IA error:', err);
                 superIAStatus.innerHTML = `<i class="fas fa-exclamation-triangle" style="color:#c0392b;"></i> Erro: ${escapeHtml(err.message)}`;
-                if (!lastSuperIAResponse) {
-                    superIAGeneratedContent.innerHTML = `<span class="empty-message" style="color:#c0392b;">❌ ${escapeHtml(err.message)}</span>`;
-                }
+                if (!lastSuperIAResponse) superIAGeneratedContent.innerHTML = `<span class="empty-message" style="color:#c0392b;">❌ ${escapeHtml(err.message)}</span>`;
             } finally {
                 generateSuperIABtn.disabled = false;
             }
@@ -845,7 +753,7 @@ Regras para o conteúdo HTML:
 
         function applySuperIAToVelocity() {
             if (!lastSuperIAResponse) return;
-            const data = {
+            fillVelocityForm({
                 titulo: lastSuperIAResponse.titulo,
                 subtitulo: lastSuperIAResponse.subtitulo,
                 eixo: lastSuperIAResponse.eixo,
@@ -853,23 +761,22 @@ Regras para o conteúdo HTML:
                 tags: lastSuperIAResponse.tags,
                 resumo: lastSuperIAResponse.resumo,
                 tempo_leitura: lastSuperIAResponse.tempo_leitura,
-                conteudo_html: lastSuperIAResponse.conteudo_html,
-                corpo: lastSuperIAResponse.conteudo_html // compatibilidade com fillVelocityForm
-            };
-            fillVelocityForm(data);
+                corpo: lastSuperIAResponse.conteudo_html // compatível
+            });
         }
 
-        function copySuperIAToClipboard() {
+        generateSuperIABtn.addEventListener('click', generateArticleWithSuperIA);
+        applySuperIABtn.addEventListener('click', applySuperIAToVelocity);
+        copySuperIABtn.addEventListener('click', () => {
             if (!lastSuperIAResponse) return;
             navigator.clipboard.writeText(JSON.stringify(lastSuperIAResponse, null, 2)).then(() => {
-                const btn = document.getElementById('copySuperIABtn');
+                const btn = copySuperIABtn;
                 const orig = btn.innerHTML;
                 btn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
                 setTimeout(() => btn.innerHTML = orig, 2000);
             });
-        }
-
-        function clearSuperIAResult() {
+        });
+        clearSuperIABtn.addEventListener('click', () => {
             lastSuperIAResponse = null;
             superIAGeneratedContent.innerHTML = '<span class="empty-message">Configure sua chave de API, defina um assunto e clique em Gerar.</span>';
             superIAStatus.innerHTML = '';
@@ -877,32 +784,20 @@ Regras para o conteúdo HTML:
             copySuperIABtn.style.display = 'none';
             clearSuperIABtn.style.display = 'none';
             showToast('🧹 Resultado limpo.');
-        }
+        });
 
-        generateSuperIABtn.addEventListener('click', generateArticleWithSuperIA);
-        applySuperIABtn.addEventListener('click', applySuperIAToVelocity);
-        copySuperIABtn.addEventListener('click', copySuperIAToClipboard);
-        clearSuperIABtn.addEventListener('click', clearSuperIAResult);
-
-        // =================================================================
-        // INICIALIZAÇÃO
-        // =================================================================
-        fetchTrends();
-
-        // Restaurar configs da API do localStorage
+        // Restaurar configs
         const savedApiKey = localStorage.getItem('super_ia_api_key');
         const savedEndpoint = localStorage.getItem('super_ia_endpoint');
         const savedModel = localStorage.getItem('super_ia_model');
-        if (savedApiKey) superIAApiKeyInput.value = savedApiKey;
-        if (savedEndpoint) superIAEndpointInput.value = savedEndpoint;
-        if (savedModel) superIAModelInput.value = savedModel;
+        if (savedApiKey) superIAApiKey.value = savedApiKey;
+        if (savedEndpoint) superIAEndpoint.value = savedEndpoint;
+        if (savedModel) superIAModel.value = savedModel;
+        superIAApiKey.addEventListener('input', () => localStorage.setItem('super_ia_api_key', superIAApiKey.value));
+        superIAEndpoint.addEventListener('input', () => localStorage.setItem('super_ia_endpoint', superIAEndpoint.value));
+        superIAModel.addEventListener('input', () => localStorage.setItem('super_ia_model', superIAModel.value));
 
-        // Salvar configs ao alterar
-        superIAApiKeyInput.addEventListener('input', () => localStorage.setItem('super_ia_api_key', superIAApiKeyInput.value));
-        superIAEndpointInput.addEventListener('input', () => localStorage.setItem('super_ia_endpoint', superIAEndpointInput.value));
-        superIAModelInput.addEventListener('input', () => localStorage.setItem('super_ia_model', superIAModelInput.value));
-
-        console.log('🔮 Super Eigend + Super IA inicializados. Pronto para pesquisar e gerar artigos.');
+        fetchTrends();
     </script>
 </body>
 </html>
