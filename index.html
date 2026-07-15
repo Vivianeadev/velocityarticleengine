@@ -1,131 +1,730 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Acesso Restrito · Velocity Article Engine</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cinzel:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDEnza — Centro de Comando Cognitivo</title>
+    <link rel="stylesheet" href="css/style_gerador.css">
     <style>
-       :root{--deep-abyss:#020b13;--ocean-blue:#061f2f;--petrol-depths:#0a3147;--liquid-gold:#b8860b;--gold-shimmer:#d4a843;--gold-pale:#e6c27a;--error-red:#c0392b;--error-glow:#e74c3c;--font-display:'Playfair Display', serif;--font-body-lux:'Cinzel', serif;--font-ui:'Inter', sans-serif}*{margin:0;padding:0;box-sizing:border-box}body{font-family:var(--font-ui);background:radial-gradient(ellipse at center,#0d3b56 0%,#061e2f 40%,#020c14 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}.superia-splash{position:fixed;inset:0;z-index:10;background:radial-gradient(ellipse at center,#0d3b56 0%,#061e2f 40%,#020c14 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 0.8s cubic-bezier(.4,0,.2,1),visibility 0.8s;overflow:hidden}.superia-splash.fade-out{opacity:0;visibility:hidden;pointer-events:none}.particles-container{position:absolute;inset:0;pointer-events:none}.particle{position:absolute;width:2px;height:2px;background:#b8860b;border-radius:50%;animation:particleFloat 6s infinite ease-in-out;opacity:0}.particle:nth-child(1){left:10%;top:20%;animation-delay:0s}.particle:nth-child(2){left:25%;top:60%;animation-delay:0.8s}.particle:nth-child(3){left:40%;top:30%;animation-delay:1.6s}.particle:nth-child(4){left:55%;top:70%;animation-delay:2.4s}.particle:nth-child(5){left:70%;top:15%;animation-delay:3.2s}.particle:nth-child(6){left:80%;top:50%;animation-delay:4.0s}.particle:nth-child(7){left:15%;top:85%;animation-delay:4.8s}.particle:nth-child(8){left:90%;top:35%;animation-delay:1.2s}.particle:nth-child(9){left:50%;top:45%;animation-delay:3.6s}.particle:nth-child(10){left:35%;top:10%;animation-delay:5.2s}.particle:nth-child(11){left:65%;top:80%;animation-delay:2.0s}.particle:nth-child(12){left:5%;top:40%;animation-delay:4.4s}@keyframes particleFloat{0%{opacity:0;transform:translateY(0) scale(.5)}10%{opacity:.8}30%{opacity:.4;transform:translateY(-30px) scale(1.2)}50%{opacity:.7;transform:translateY(-15px) scale(.8)}70%{opacity:.3;transform:translateY(-40px) scale(1.4)}90%{opacity:.6}100%{opacity:0;transform:translateY(-60px) scale(.3)}}.golden-line{position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:100%;background:linear-gradient(180deg,transparent 0%,rgb(184 134 11 / .4) 20%,rgb(184 134 11 / .15) 50%,rgb(184 134 11 / .4) 80%,transparent 100%);animation:goldenLinePulse 3s ease-in-out infinite}.golden-line:nth-child(2){left:48%;animation-delay:0.5s;width:.5px}.golden-line:nth-child(3){left:52%;animation-delay:1s;width:.5px}@keyframes goldenLinePulse{0%,100%{opacity:.3}50%{opacity:.7}}.horizontal-line{position:absolute;left:50%;transform:translateX(-50%);width:300px;height:1px;background:linear-gradient(90deg,transparent,rgb(184 134 11 / .3),transparent);animation:horizontalLinePulse 4s ease-in-out infinite}.horizontal-line.top{top:18%}.horizontal-line.bottom{bottom:18%;animation-delay:2s}@keyframes horizontalLinePulse{0%,100%{opacity:.2;width:300px}50%{opacity:.6;width:500px}}.splash-content{position:relative;z-index:2;text-align:center;padding:2rem}.brand-tag{font-family:'Inter',sans-serif;font-size:.55rem;text-transform:uppercase;letter-spacing:6px;color:rgb(184 134 11 / .7);margin-bottom:1.5rem;animation:fadeInUp 1s ease forwards;opacity:0;animation-delay:0.3s}.splash-title{font-family:'Cinzel',serif;font-size:clamp(2.2rem, 5vw, 3.8rem);font-weight:600;color:#fff;letter-spacing:8px;margin-bottom:.3rem;animation:fadeInUp 1s ease forwards;opacity:0;animation-delay:0.5s;text-shadow:0 0 60px rgb(184 134 11 / .3)}.splash-title span{color:#b8860b;font-weight:700}.splash-subtitle{font-family:'Marcellus',serif;font-size:clamp(0.8rem, 1.5vw, 1.1rem);color:rgb(255 255 255 / .6);letter-spacing:4px;margin-bottom:2.5rem;animation:fadeInUp 1s ease forwards;opacity:0;animation-delay:0.7s}.splash-divider{display:flex;align-items:center;justify-content:center;gap:15px;margin-bottom:2.5rem;animation:fadeInUp 1s ease forwards;opacity:0;animation-delay:0.9s}.divider-wing{width:50px;height:1px;background:linear-gradient(90deg,transparent,#b8860b)}.divider-wing.right{background:linear-gradient(90deg,#b8860b,transparent)}.divider-diamond{width:8px;height:8px;background:#b8860b;transform:rotate(45deg);box-shadow:0 0 20px rgb(184 134 11 / .6)}.enter-btn{font-family:'Cinzel',serif;font-size:.75rem;text-transform:uppercase;letter-spacing:5px;color:#fff;background:#fff0;border:1.5px solid rgb(184 134 11 / .4);padding:14px 40px;cursor:pointer;transition:all 0.5s ease;position:relative;overflow:hidden;animation:fadeInUp 1s ease forwards;opacity:0;animation-delay:1.1s}.enter-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgb(184 134 11 / .15) 0%,rgb(184 134 11 / .05) 50%,transparent 100%);transition:opacity 0.5s ease}.enter-btn:hover{border-color:#b8860b;color:#b8860b;box-shadow:0 0 40px rgb(184 134 11 / .2),inset 0 0 40px rgb(184 134 11 / .05);letter-spacing:8px;transform:translateY(-2px)}.enter-btn:hover::before{opacity:1}.splash-loader{margin-top:2rem;display:flex;gap:6px;justify-content:center;animation:fadeInUp 1s ease forwards;opacity:0;animation-delay:1.2s}.dot{width:4px;height:4px;background:rgb(184 134 11 / .6);border-radius:50%;animation:dotPulse 1.5s ease-in-out infinite}.dot:nth-child(2){animation-delay:0.2s}.dot:nth-child(3){animation-delay:0.4s}@keyframes dotPulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.5)}}.version-tag{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);font-family:'Inter',sans-serif;font-size:.5rem;color:rgb(255 255 255 / .25);letter-spacing:3px;animation:fadeInUp 1s ease forwards;opacity:0;animation-delay:1.3s}@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}.password-overlay{position:fixed;inset:0;background:rgb(0 0 0 / .85);z-index:100;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);animation:fadeIn 0.5s ease}.password-overlay.fade-out{opacity:0;transition:opacity 0.3s}.password-box{background:linear-gradient(145deg,#0d3b56 0%,#061e2f 100%);border:1px solid rgb(184 134 11 / .4);border-radius:16px;padding:2.5rem;width:90%;max-width:400px;text-align:center;box-shadow:0 20px 60px rgb(0 0 0 / .8),0 0 40px rgb(184 134 11 / .2);animation:fadeInUp 0.5s ease}.password-box h2{font-family:'Cinzel',serif;color:#fff;font-size:1.2rem;letter-spacing:3px;margin-bottom:.3rem}.password-box .gold-line{width:60px;height:2px;background:linear-gradient(90deg,transparent,#b8860b,transparent);margin:.8rem auto 1.5rem}.password-box input{width:100%;padding:12px 16px;background:rgb(255 255 255 / .05);border:1px solid rgb(184 134 11 / .3);border-radius:8px;color:#fff;font-family:'Marcellus',serif;font-size:1rem;letter-spacing:4px;text-align:center;outline:none;transition:border-color 0.3s,box-shadow 0.3s}.password-box input:focus{border-color:#b8860b;box-shadow:0 0 20px rgb(184 134 11 / .3)}.password-box .btn-row{display:flex;gap:10px;justify-content:center;margin-top:1.5rem}.password-btn{font-family:'Cinzel',serif;font-size:.7rem;text-transform:uppercase;letter-spacing:3px;padding:10px 24px;border-radius:6px;cursor:pointer;transition:all 0.4s ease;background:#fff0;color:#fff;border:1px solid rgb(184 134 11 / .4)}.password-btn.primary{background:rgb(184 134 11 / .2);border-color:#b8860b}.password-btn:hover{background:rgb(184 134 11 / .3);border-color:#b8860b;box-shadow:0 0 20px rgb(184 134 11 / .3);transform:translateY(-2px)}.error-msg{color:#c78b1a;font-size:.7rem;margin-top:.6rem;min-height:1.2em}@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        .metadata-card {
+            background: #f8fafc;
+            border: 1px solid #d1d9e6;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+        .metadata-card .item {
+            display: flex;
+            flex-direction: column;
+            min-width: 140px;
+        }
+        .metadata-card .item label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #5e6f7d;
+            margin-bottom: 2px;
+        }
+        .metadata-card .item span {
+            font-weight: 600;
+            color: #1e293b;
+            word-break: break-word;
+            font-size: 0.9rem;
+        }
+        .auto-link {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 8px 16px;
+            background: #edf2ff;
+            color: #1d4ed8;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #bfdbfe;
+        }
+        .auto-link:hover {
+            background: #dbeafe;
+            border-color: #3b82f6;
+        }
+        .confianca-badge {
+            background: #dbeafe;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-weight: 700;
+            color: #1d4ed8;
+        }
     </style>
 </head>
 <body>
-    <div class="superia-splash" id="superiaSplash">
-        <div class="particles-container">
-            <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-            <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-            <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-            <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+<div style="display: flex; gap: 12px; margin-bottom: 12px; background: #2d5a27; padding: 8px 16px; border-radius: 6px;">
+    <a href="painel.html" style="color: #fff; text-decoration: none; font-weight: 600;">🌐 Painel</a>
+    <a href="painel_clientes.html" style="color: #fff; text-decoration: none; font-weight: 600;">🌐 ADMIN CLIENTES</a>
+    <a href="https://idenza.pages.dev" style="color: #fff; text-decoration: none; font-weight: 600;">🌐 Cliente</a>
+</div>
+<div class="tab-nav">
+    <button class="tab-btn n1-tab active" id="tabN1Btn">🧬 Gerador N1</button>
+    <button class="tab-btn n2-tab" id="tabN2Btn">⚡ Expansão N2</button>
+    <button class="tab-btn n3-tab" id="tabN3Btn">🧠 Fortificação N3</button>
+    <button class="tab-btn gov-tab" id="tabGovBtn">🏛️ Governança</button>
+    <button class="tab-btn rec-tab" id="tabRecBtn">♻️ Reciclagem</button>
+</div>
+
+<!-- GERADOR N1 -->
+<div id="tabN1" class="tab-content active">
+    <div class="section">
+        <div class="section-title n1">🧬 Gerador de Nó Cognitivo N1</div>
+        <p style="font-size:0.7rem;">Envio obrigatório para a <strong>Caixa Preta</strong>.</p>
+        <div class="grid-2">
+            <div><label>Domínio</label><input type="text" id="n1Dominio" value="artes" class="raw-textarea" style="min-height:auto;"></div>
+            <div><label>Nó Especializado</label><input type="text" id="n1NoEspecializado" value="Dança" class="raw-textarea" style="min-height:auto;"></div>
+            <div><label>Tópico Principal</label><input type="text" id="n1Topico" value="Danças Urbanas" class="raw-textarea" style="min-height:auto;"></div>
+            <div><label>Subtópicos (vírgula)</label><input type="text" id="n1SubTopicos" value="Hip Hop, Breaking" class="raw-textarea" style="min-height:auto;"></div>
         </div>
-        <div class="golden-line"></div><div class="golden-line"></div><div class="golden-line"></div>
-        <div class="horizontal-line top"></div><div class="horizontal-line bottom"></div>
-        <div class="splash-content">
-            <div class="brand-tag">A Revista Digital do futuro</div>
-            <h1 class="splash-title">Bem<span> vindo</span></h1>
-            <p class="splash-subtitle">a excelência de um Editorial de Respeito</p>
-            <div class="splash-divider">
-                <div class="divider-wing"></div><div class="divider-diamond"></div><div class="divider-wing right"></div>
-            </div>
-            <button class="enter-btn" id="enterBtn">
-                <i class="fas fa-crown" style="margin-right: 10px; font-size: 0.7rem;"></i>Area Reservada
-            </button>
-            <div class="splash-loader">
-                <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-            </div>
+        <button class="btn btn-n1" id="btnGerarPromptN1">⚡ Gerar Prompt N1</button>
+        <div id="n1PromptContainer" style="display:none; margin-top:16px;">
+            <textarea class="generated-question" id="n1PromptGerado" readonly style="min-height:200px;"></textarea>
+            <button class="btn btn-outline" id="btnCopiarN1Prompt">📋 Copiar</button>
+            <span class="copy-feedback" id="n1CopyFeedback"></span>
         </div>
-        <div class="version-tag">v1.0 · Autômato Editorial de Rigor Supremo</div>
+        <div id="n1RespostaContainer" style="display:none; margin-top:20px;">
+            <label>Resposta da IA (JSON com 7 camadas)</label>
+            <textarea class="raw-textarea n1-textarea" id="n1RespostaIA"></textarea>
+            <button class="btn btn-n1" id="btnCompilarN1">🔄 Compilar e Enviar N1</button>
+            <div class="redis-feedback" id="n1Feedback"></div>
+            <div id="n1MetadataCard" class="metadata-card" style="display:none;"></div>
+            <span class="auto-link" id="linkAutoN2" style="display:none;">⚡ Avançar para Expansão N2 com este payload</span>
+        </div>
     </div>
+</div>
 
-    <script>
-        // ============================================================
-        // CONFIGURAÇÃO – agora usa o próprio Worker principal
-        // ============================================================
-        const AUTH_WORKER_URL = 'https://meu-worker-api.avizaecosystem.workers.dev/verify';
-        const SESSION_KEY = 'super_eigend_authenticated_v2';
-        const DESTINO = 'dashboard.html';
+<!-- EXPANSÃO N2 -->
+<div id="tabN2" class="tab-content">
+    <div class="section">
+        <div class="section-title n2">⚡ Expansão N2</div>
+        <div id="n2ClusterInfo" style="display:none; margin-bottom:8px;">🔗 Cluster: <strong id="n2ClusterName"></strong></div>
+        <input type="text" class="raw-textarea n2-textarea" id="nivel2Chave" placeholder="Chave Redis">
+        <textarea class="raw-textarea n2-textarea" id="nivel2JsonNivel1" placeholder="JSON N1..." style="min-height:200px;"></textarea>
+        <button class="btn btn-n2" id="btnGerarPromptExpansao">⚡ Gerar Prompt N2</button>
+        <button class="btn btn-outline" id="btnLimparNivel2">🧹</button>
+        <div id="nivel2PromptContainer" style="display:none; margin-top:16px;">
+            <textarea class="generated-question" id="nivel2SuperPrompt" readonly></textarea>
+            <button class="btn btn-outline" id="btnCopiarNivel2Prompt">📋 Copiar</button>
+        </div>
+        <div id="nivel2RespostaContainer" style="display:none; margin-top:20px;">
+            <textarea class="raw-textarea n2-textarea" id="nivel2RespostaIA"></textarea>
+            <button class="btn btn-n2" id="btnCompilarNivel2">🔄 Compilar N2</button>
+            <div class="redis-feedback" id="nivel2Feedback"></div>
+            <div id="n2MetadataCard" class="metadata-card" style="display:none;"></div>
+            <span class="auto-link" id="linkAutoN3" style="display:none;">🧠 Avançar para Fortificação N3 com este payload</span>
+        </div>
+    </div>
+</div>
 
-        let overlay = null;
+<!-- FORTIFICAÇÃO N3 -->
+<div id="tabN3" class="tab-content">
+    <div class="section">
+        <div class="section-title n3">🧠 Fortificação N3</div>
+        <div id="n3ClusterInfo" style="display:none; margin-bottom:8px;">🔗 Cluster: <strong id="n3ClusterName"></strong></div>
+        <input type="text" class="raw-textarea n3-textarea" id="nivel3Chave" placeholder="Chave Redis">
+        <textarea class="raw-textarea n3-textarea" id="nivel3JsonDocumento" placeholder="JSON completo (N1+N2)..." style="min-height:200px;"></textarea>
+        <button class="btn btn-n3" id="btnGerarFortificacao">🧠 Gerar Prompt N3</button>
+        <button class="btn btn-outline" id="btnLimparNivel3">🧹</button>
+        <div id="nivel3PromptContainer" style="display:none; margin-top:16px;">
+            <textarea class="generated-question" id="nivel3SuperPrompt" readonly></textarea>
+            <button class="btn btn-outline" id="btnCopiarNivel3Prompt">📋 Copiar</button>
+        </div>
+        <div id="nivel3RespostaContainer" style="display:none; margin-top:20px;">
+            <textarea class="raw-textarea n3-textarea" id="nivel3RespostaIA"></textarea>
+            <button class="btn btn-n3" id="btnCompilarNivel3">🔄 Compilar N3</button>
+            <div class="redis-feedback" id="nivel3Feedback"></div>
+            <div id="n3MetadataCard" class="metadata-card" style="display:none;"></div>
+        </div>
+    </div>
+</div>
 
-        function abrir() {
-            if (overlay) overlay.remove();
-            overlay = document.createElement('div');
-            overlay.className = 'password-overlay';
-            overlay.innerHTML = `
-                <div class="password-box">
-                    <h2><i class="fas fa-lock" style="color: #b8860b; margin-right: 8px;"></i>Acesso Restrito</h2>
-                    <div class="gold-line"></div>
-                    <input type="password" id="senha" placeholder="••••••••" autofocus>
-                    <div class="error-msg" id="erro"></div>
-                    <div class="btn-row">
-                        <button class="password-btn" id="cancelar">Cancelar</button>
-                        <button class="password-btn primary" id="acessar">Acessar</button>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(overlay);
-            document.getElementById('senha').focus();
-            document.getElementById('acessar').addEventListener('click', verificar);
-            document.getElementById('cancelar').addEventListener('click', fechar);
-            document.addEventListener('keydown', esc);
-        }
+<!-- GOVERNANÇA -->
+<div id="tabGov" class="tab-content">
+    <div class="section"><div class="section-title">📊 Estatísticas</div><div class="gov-stats" id="govStats"><div class="gov-stats-item"><span class="badge badge-valid">✅ Ativos</span><strong id="govTotalAtivos">0</strong></div><div class="gov-stats-item"><span class="badge badge-expired">❌ Expirados</span><strong id="govTotalExpirados">0</strong></div><div class="gov-stats-item"><span class="badge badge-review">⚠️ Revisão</span><strong id="govTotalRevisao">0</strong></div><div class="gov-stats-item"><span class="badge badge-n2">N2</span><strong id="govTotalN2">0</strong></div><div class="gov-stats-item"><span class="badge badge-n3">N3</span><strong id="govTotalN3">0</strong></div><div class="gov-stats-item"><span class="badge" style="background:#6c757d;">📦 Total</span><strong id="govTotalTotal">0</strong></div></div></div>
+    <div class="section"><div class="section-title">📋 Índice Mestre</div>
+        <div style="display:flex; gap:10px; margin-bottom:16px;">
+            <input type="text" id="govSearchInput" placeholder="Buscar..." style="flex:1; padding:8px; border:1px solid var(--border); border-radius:4px;">
+            <button class="btn btn-outline" id="govSearchBtn">🔍</button>
+            <button class="btn btn-outline" id="govRefreshBtn">🔄</button>
+            <button class="btn btn-data" id="govAddAciBtn">➕ Novo ACI</button>
+        </div>
+        <table class="eng-payload-table" id="govTabelaAcis"><thead><tr><th>UID</th><th>Título</th><th>Versão</th><th>Status</th><th>Maturidade</th><th>Redis</th><th>Ações</th></tr></thead><tbody id="govTabelaBody"></tbody></table>
+        <div class="status-msg" id="govStatusMsg"></div>
+    </div>
+    <div class="section"><div class="section-title">🗄️ Registry <button class="btn btn-data btn-sm" id="govAddClusterBtn" style="margin-left:auto;">➕ Adicionar</button></div><div id="govRedisRegistry" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:12px;"></div></div>
+</div>
 
-        function fechar() {
-            if (overlay) {
-                overlay.classList.add('fade-out');
-                setTimeout(() => { if (overlay) overlay.remove(); overlay = null; }, 300);
-            }
-            document.removeEventListener('keydown', esc);
-        }
+<!-- MODAIS GOVERNANÇA -->
+<div class="modal-overlay" id="govModalDetalhes"><div class="modal"><h3 id="govModalTitle">Detalhes</h3><pre id="govModalContent" style="background:#f7f9fb;padding:16px;max-height:400px;overflow:auto;"></pre><div class="modal-actions"><button class="btn btn-outline" id="govModalFechar">Fechar</button></div></div></div>
+<div class="modal-overlay" id="govNovoAciModal"><div class="modal"><h3>➕ Novo ACI</h3><label>UID</label><input type="text" id="novoAciUid"><label>Título</label><input type="text" id="novoAciTitulo"><label>Versão</label><input type="text" id="novoAciVersao" value="1.0.0"><label>Hash</label><input type="text" id="novoAciHash"><label>JSON</label><textarea id="novoAciConteudo" rows="6"></textarea><label>Cluster</label><select id="novoAciCluster"></select><div class="modal-actions"><button class="btn btn-data" id="novoAciSalvar">💾 Salvar</button><button class="btn btn-outline" id="novoAciFechar">Cancelar</button></div></div></div>
+<div class="modal-overlay" id="govAddClusterModal"><div class="modal"><h3>➕ Cluster</h3><label>Nome</label><input type="text" id="novoClusterNome"><label>URL</label><input type="text" id="novoClusterUrl"><label>Token</label><input type="text" id="novoClusterToken"><div class="modal-actions"><button class="btn btn-data" id="novoClusterSalvar">💾 Adicionar</button><button class="btn btn-outline" id="novoClusterFechar">Cancelar</button></div></div></div>
 
-        function esc(e) { if (e.key === 'Escape') fechar(); }
+<!-- RECICLAGEM -->
+<div id="tabRec" class="tab-content">
+    <div class="section"><div class="section-title rec">♻️ Reciclagem</div>
+        <div class="grid-2"><div><label>Cluster Fonte</label><select id="recClusterSource"></select></div><div><label>Cluster Destino</label><select id="recClusterTarget"></select></div></div>
+        <button class="btn btn-rec" id="btnScanReciclagem">🔍 Escanear</button><div class="status-msg" id="recStatusMsg"></div>
+        <h4>🚫 Duplicados</h4><table class="eng-payload-table" id="tabelaDuplicados"><thead><tr><th>Código</th><th>Tópico</th><th>Motivo</th></tr></thead><tbody></tbody></table>
+        <h4>✨ Novos</h4><table class="eng-payload-table" id="tabelaNovos"><thead><tr><th><input type="checkbox" id="selecionarTodos"></th><th>Código</th><th>Tópico</th></tr></thead><tbody id="novosTemasBody"></tbody></table>
+        <button class="btn btn-data" id="btnIntegrarSelecionados" disabled>📦 Integrar</button><div class="redis-feedback" id="recFeedback"></div>
+    </div>
+</div>
 
-        async function verificar() {
-            const campo = document.getElementById('senha');
-            const erro = document.getElementById('erro');
-            const senha = campo.value.trim();
+<script>
+(function() {
+    const FIXED_CLUSTERS = [
+        { name: 'Caixa Branca', url: 'https://premium-dove-145094.upstash.io', token: 'gQAAAAAAAjbGAAIgcDFiNDc1Njc5NmYxNTI0NThlODNhZGNjYTQ0YThiN2YyZQ', color: '#f0f0f0' },
+        { name: 'Caixa Roxa',    url: 'https://busy-puma-128407.upstash.io', token: 'gQAAAAAAAfWXAAIgcDE0MjM4NzNmNTY4Yzg0ZDVjODMwMDZjOWQ2ZjE5NTQxYg', color: '#9b59b6' },
+        { name: 'Caixa Preta',   url: 'https://welcomed-satyr-116661.upstash.io', token: 'gQAAAAAAAce1AAIgcDFiNmUxOWVjY2E1Njk0MzQwOTI5NmExZWJlZGI1M2M1OQ', color: '#2c3e50' },
+        { name: 'Caixa Azul',    url: 'https://tidy-muskrat-128571.upstash.io', token: 'gQAAAAAAAfY7AAIgcDE4ZTEyZDgwZTgzZTY0Zjk1OGI2MTY0OWY2Mjc0YzY5OQ', color: '#3498db' },
+        { name: 'Caixa Verde',   url: 'https://saving-peacock-130283.upstash.io', token: 'gQAAAAAAAfzrAAIgcDJhMmUzMDNiYmRhYTI0MzdhYWE5Y2MyOWYwNjQ4MDZjOQ', color: '#2ecc71' },
+        { name: 'Caixa Rosa',    url: 'https://fluent-dove-150720.upstash.io', token: 'gQAAAAAAAkzAAAIgcDIwNjJmMzQxNzJkZDQ0Yjk1OGVmMmExNDAzMTUxN2RhZg', color: '#fd79a8' }
+    ];
+    function getClusters() { try { const s = localStorage.getItem('idenza_clusters_dinamicos'); return [...FIXED_CLUSTERS, ...(s ? JSON.parse(s) : [])]; } catch (e) { return [...FIXED_CLUSTERS]; } }
+    function saveClusters(c) { try { localStorage.setItem('idenza_clusters_dinamicos', JSON.stringify(c.filter(x=>!x.fixed))); } catch (e) {} }
 
-            if (!senha) {
-                erro.textContent = 'Digite a senha.';
-                return;
-            }
+    async function redisFetch(c, cmd, ...args) {
+        const key = args[0];
+        const url = `${c.url.replace(/\/$/,'')}/${cmd}/${encodeURIComponent(key)}`;
+        const headers = { 'Authorization': `Bearer ${c.token}` };
+        let m = 'GET', b = null;
+        if (cmd === 'set') { m = 'POST'; b = args[1]; }
+        else if (cmd === 'del') { m = 'POST'; }
+        const res = await fetch(url, { method: m, headers, body: b });
+        if (!res.ok) throw new Error(`Erro ${res.status} em ${c.name}`);
+        const data = await res.json();
+        return data.result !== undefined ? data.result : data;
+    }
+    async function redisGet(c,k){ try { return await redisFetch(c,'get',k); } catch { return null; } }
+    async function redisSet(c,k,v){ try { return (await redisFetch(c,'set',k,JSON.stringify(v))) === 'OK'; } catch { return false; } }
+    async function redisDel(c,k){ try { return await redisFetch(c,'del',k); } catch { return false; } }
+    async function redisKeys(c,p){ try { const r = await redisFetch(c,'keys',p); return Array.isArray(r)?r:[r]; } catch { return []; } }
 
-            const btn = document.getElementById('acessar');
-            btn.disabled = true;
-            btn.textContent = 'Verificando...';
+    function slugify(texto) {
+        return texto.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '').replace(/_+/g, '_');
+    }
 
+    function gerarHash(t, s=16){ let h=0; for(let i=0;i<t.length;i++){ h=((h<<5)-h)+t.charCodeAt(i); h|=0; } return (Math.abs(h).toString(36)+Date.now().toString(36)).substring(0,s); }
+
+    async function gerarEmbeddingViaWorker(texto) {
+        const apiBase = 'https://cliente-db.atendimento-bazana.workers.dev';
+        const res = await fetch(`${apiBase}/api/embeddings`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: texto })
+        });
+        if (!res.ok) throw new Error(`Erro ao gerar embedding: ${res.status}`);
+        const data = await res.json();
+        return data.embedding;
+    }
+
+    function copiarTexto(texto, fbId) {
+        const fb = document.getElementById(fbId);
+        const show = (msg, ok) => { if(!fb)return; fb.textContent=msg; fb.style.color=ok?'var(--success)':'var(--error)'; fb.classList.add('show'); setTimeout(()=>fb.classList.remove('show'),2000); };
+        if(!texto) return show('Nada para copiar', false);
+        if(navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(texto).then(()=>show('✓ Copiado',true)).catch(()=>fallbackCopy(texto,show));
+        else fallbackCopy(texto,show);
+    }
+    function fallbackCopy(txt,cb){ const ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.left='-9999px'; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy')?cb('✓ Copiado',true):cb('❌ Falha',false); } catch{ cb('❌ Erro',false); } document.body.removeChild(ta); }
+
+    function montarMetadataCard(codigo, chaveRedis, clusterNome, dataObj, tamanhoBytes, confianca) {
+        const dataFormatada = dataObj ? dataObj.toLocaleString('pt-BR') : new Date().toLocaleString('pt-BR');
+        const confiancaHtml = confianca !== undefined ? `<span class="confianca-badge">${(confianca * 100).toFixed(0)}%</span>` : '—';
+        return `
+            <div class="item"><label>📁 Código Universal</label><span>${codigo}</span></div>
+            <div class="item"><label>🔐 Chave Redis</label><span style="font-family:monospace;">${chaveRedis}</span></div>
+            <div class="item"><label>🗄️ Cluster</label><span>${clusterNome}</span></div>
+            <div class="item"><label>📏 Tamanho</label><span>${tamanhoBytes} bytes</span></div>
+            <div class="item"><label>🕒 Data</label><span>${dataFormatada}</span></div>
+            <div class="item"><label>📈 Confiança</label><span>${confiancaHtml}</span></div>
+        `;
+    }
+
+    window._ultimoN1 = null;
+    window._ultimoN2 = null;
+    window._todosACIs = [];
+
+    function calcularConfianca(payload) {
+        let score = 0.5;
+        const camadas = payload.conteudo.camadas || [];
+        if (!camadas.length) return score;
+        const totalChars = camadas.reduce((acc, c) => acc + (c.descricao || '').length, 0);
+        if (totalChars > 500) score += 0.15;
+        if (totalChars > 1500) score += 0.10;
+        if (totalChars > 3000) score += 0.05;
+        const subtemas = camadas.flatMap(c => c.subtemas || []);
+        const subtemasUnicos = new Set(subtemas);
+        if (subtemasUnicos.size >= 7) score += 0.10;
+        const fontes = camadas.flatMap(c => c.fontes || []);
+        const fontesUnicas = new Set(fontes);
+        if (fontesUnicas.size >= 7) score += 0.10;
+        const todasValidas = camadas.every(c => (c.descricao || '').length >= 200);
+        if (todasValidas) score += 0.10;
+        return Math.min(Math.max(score, 0.5), 0.99);
+    }
+
+    // ========== N1 ==========
+    document.getElementById('btnGerarPromptN1').onclick = () => {
+        const d = document.getElementById('n1Dominio').value.trim();
+        const no = document.getElementById('n1NoEspecializado').value.trim();
+        const t = document.getElementById('n1Topico').value.trim();
+        const sub = document.getElementById('n1SubTopicos').value.trim();
+        if(!d||!no||!t) return alert('Preencha todos os campos.');
+        const prompt = `⚡ ATIVAÇÃO DE NÓ COGNITIVO IDENZA — PROTOCOLO IGP ⚡
+Você é um nó especializado em ${no}. Gere conhecimento ESTRITAMENTE VERDADEIRO, VERIFICÁVEL e ESTRUTURADO sobre: ${t}.
+
+⚠️ REGRA FUNDAMENTAL — NÃO INVENTE CONHECIMENTO:
+- Não crie fatos, dados, datas, nomes, fontes ou referências que não existam no mundo real.
+- Se não houver informação suficiente ou confiável sobre algum aspecto, indique claramente a limitação, mas jamais fabrique conteúdo.
+- Busque EFETIVAMENTE em fontes oficiais, acadêmicas, institucionais, científicas e primárias. Priorize referências publicadas e rastreáveis.
+- Toda referência listada deve ser real, verificável e diretamente relacionada ao tema. Jamais cite fontes fictícias ou genéricas sem lastro.
+- Seja FIEL ao tópico solicitado e ao domínio do conhecimento, mantendo rigor conceitual e precisão factual.
+
+As 7 camadas imutáveis do Protocolo IGP são:
+
+1. Essência — O que é? Por que existe? Qual sua finalidade?
+2. Teorias e Fundamentos — Princípios, teorias, bases científicas.
+3. Estrutura e Processos — Como funciona? Componentes e fluxos.
+4. Aplicação Prática — Exemplos reais, estudos de caso.
+5. Métodos e Ferramentas — Como executar? Ferramentas e protocolos.
+6. Uso Cotidiano e Inovação — Tendências atuais e impacto.
+7. Curiosidades e Marcos Históricos — Origem, evolução, fatos relevantes.
+
+Para CADA camada, forneça:
+- Uma descrição em parágrafo (mínimo 200 caracteres) baseada em fatos.
+- 3 subtemas reais e pertinentes.
+- 3 conceitos-chave efetivamente usados na área.
+- 3 fontes/referências VERDADEIRAS (livros, artigos, sites oficiais, periódicos, teses etc.). NÃO invente fontes.
+
+Formato de saída: JSON com array "camadas" contendo 7 objetos.
+Cada objeto deve ter: nivel (1 a 7), nome (exato como acima), descricao (string), subtemas (array), conceitos_chave (array), fontes (array).
+
+EXEMPLO ESTRUTURAL (conteúdo ilustrativo, mas use informações REAIS):
+{"camadas":[
+  {"nivel":1,"nome":"Essência","descricao":"...","subtemas":["...","...","..."],"conceitos_chave":["...","...","..."],"fontes":["...","...","..."]},
+  ...
+]}
+
+Tópico: ${t}${sub?' ('+sub+')':''}`;
+        document.getElementById('n1PromptGerado').value = prompt;
+        document.getElementById('n1PromptContainer').style.display = 'block';
+        document.getElementById('n1RespostaContainer').style.display = 'block';
+        document.getElementById('n1MetadataCard').style.display = 'none';
+        document.getElementById('linkAutoN2').style.display = 'none';
+    };
+    document.getElementById('btnCopiarN1Prompt').onclick = () => copiarTexto(document.getElementById('n1PromptGerado').value, 'n1CopyFeedback');
+    
+    document.getElementById('btnCompilarN1').onclick = async () => {
+        const fb = document.getElementById('n1Feedback'), card = document.getElementById('n1MetadataCard'), linkN2 = document.getElementById('linkAutoN2');
+        fb.className = 'redis-feedback'; card.style.display = 'none'; linkN2.style.display = 'none';
+        try {
+            let resp = document.getElementById('n1RespostaIA').value.trim(); if(!resp) throw new Error('Cole a resposta da IA.');
+            const m = resp.match(/\{[\s\S]*\}/); if(m) resp = m[0];
+            let json; try { json = JSON.parse(resp); } catch { throw new Error('JSON inválido.'); }
+            let camadas = json.camadas || json;
+            if(!camadas || !Array.isArray(camadas) || camadas.length !== 7) throw new Error('Necessário exatamente 7 camadas.');
+
+            const nomesEsperados = [
+                'Essência',
+                'Teorias e Fundamentos',
+                'Estrutura e Processos',
+                'Aplicação Prática',
+                'Métodos e Ferramentas',
+                'Uso Cotidiano e Inovação',
+                'Curiosidades e Marcos Históricos'
+            ];
+
+            camadas.forEach((c, i) => {
+                const esperado = nomesEsperados[i];
+                if(!c.nivel || c.nivel !== i+1) throw new Error(`Camada ${i+1} com nivel incorreto.`);
+                if(!c.nome || c.nome.trim() !== esperado) throw new Error(`Camada ${i+1} deve ter nome "${esperado}" (encontrado: "${c.nome}").`);
+                if(!c.descricao || c.descricao.length < 200) throw new Error(`Camada ${i+1} com descrição curta (mínimo 200 caracteres).`);
+                if(!Array.isArray(c.subtemas) || c.subtemas.length < 3) throw new Error(`Camada ${i+1} deve ter pelo menos 3 subtemas.`);
+                if(!Array.isArray(c.conceitos_chave) || c.conceitos_chave.length < 3) throw new Error(`Camada ${i+1} deve ter pelo menos 3 conceitos-chave.`);
+                if(!Array.isArray(c.fontes) || c.fontes.length < 3) throw new Error(`Camada ${i+1} deve ter pelo menos 3 fontes.`);
+            });
+
+            const dominio = slugify(document.getElementById('n1Dominio').value.trim());
+            const no = document.getElementById('n1NoEspecializado').value.trim();
+            const topico = document.getElementById('n1Topico').value.trim();
+            const topicoSlug = slugify(topico);
+            const subTopicosArr = document.getElementById('n1SubTopicos').value.split(',').map(s=>s.trim()).filter(Boolean);
+            const agora = new Date(), iso = agora.toISOString();
+            const cod = `${dominio}.${slugify(no)}.${topicoSlug}.ptbr.idenza.v1`;
+
+            const payload = {
+                codigo_universal: cod,
+                versao: 'v1',
+                hash: gerarHash(JSON.stringify(camadas) + cod),
+                escopo: { dominio, area: no, topico, subtopicos: subTopicosArr, idioma: 'pt-BR' },
+                conteudo: { resumo: topico, camadas },
+                indexacao: { tags: [dominio, slugify(no)], palavras_chave: [topicoSlug, ...subTopicosArr.map(slugify)] },
+                governanca: {
+                    score_confianca: calcularConfianca({ conteudo: { camadas } }),
+                    autor: 'IDEnza Compiler',
+                    revisor: `Especialista em ${no}`,
+                    aprovado_por: 'Compilador Cognitivo Industrial v3.0',
+                    criado_em: iso,
+                    revisado_em: new Date(agora.getTime() + 180*86400000).toISOString().split('T')[0]
+                },
+                origem: { tipo: 'ia_externa', modelo: 'Gerador N1', data_geracao: iso, hash_original: gerarHash(resp, 20), uri_original: null },
+                licenca: { tipo: 'CC BY-NC', responsavel: 'IDEnza' }
+            };
+
+            const preto = getClusters().find(c => c.name === 'Caixa Preta');
+            if(!preto) throw new Error('Cluster Caixa Preta não encontrado.');
+            const chave = `idenza:aci:${cod}`;
+            const ok = await redisSet(preto, chave, payload);
+            
             try {
-                const response = await fetch(AUTH_WORKER_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ password: senha })
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    localStorage.setItem(SESSION_KEY, data.token);
-                    window.location.href = DESTINO;
-                } else {
-                    erro.textContent = data.error || 'Senha incorreta.';
-                    campo.value = '';
-                    campo.focus();
-                }
-            } catch (err) {
-                erro.textContent = 'Erro de conexão. Tente novamente.';
-                console.error('Auth error:', err);
-            } finally {
-                btn.disabled = false;
-                btn.textContent = 'Acessar';
+                const textoParaEmbedding = camadas.map(c =>
+                    `${c.descricao} ${c.subtemas.join(' ')} ${c.conceitos_chave.join(' ')} ${c.fontes.join(' ')}`
+                ).join(' ');
+                const embedding = await gerarEmbeddingViaWorker(textoParaEmbedding);
+                await redisSet(preto, `embed:${cod}`, { embedding, codigo: cod });
+            } catch (embedErr) {
+                console.warn('⚠️ Não foi possível gerar embedding:', embedErr);
             }
-        }
 
-        document.getElementById('enterBtn').addEventListener('click', abrir);
-        document.addEventListener('keydown', e => { if (e.key === 'Escape' && !overlay) e.preventDefault(); });
-        document.getElementById('superiaSplash').addEventListener('click', e => { if (e.target === e.currentTarget) e.stopPropagation(); });
-    </script>
+            if(!ok) throw new Error('Falha ao gravar no Redis.');
+            const tamanho = new Blob([JSON.stringify(payload)]).size;
+            const confianca = payload.governanca.score_confianca;
+            card.innerHTML = montarMetadataCard(cod, chave, preto.name, agora, tamanho, confianca);
+            card.style.display = 'flex';
+            fb.className = 'redis-feedback show success';
+            fb.textContent = `✅ N1 enviado para Caixa Preta (confiança: ${(confianca*100).toFixed(0)}%).`;
+
+            window._ultimoN1 = { chave, payload, cluster: preto };
+            linkN2.style.display = 'inline-block';
+            linkN2.onclick = () => {
+                document.getElementById('nivel2Chave').value = chave;
+                document.getElementById('nivel2JsonNivel1').value = JSON.stringify(payload, null, 2);
+                document.getElementById('n2ClusterName').textContent = preto.name;
+                document.getElementById('n2ClusterInfo').style.display = 'block';
+                switchTab('n2');
+            };
+        } catch(e) {
+            fb.className = 'redis-feedback show error';
+            fb.textContent = '❌ ' + e.message;
+        }
+    };
+
+    // ========== N2 ==========
+    document.getElementById('btnGerarPromptExpansao').onclick = () => {
+        const chave = document.getElementById('nivel2Chave').value.trim(), jsonN1 = document.getElementById('nivel2JsonNivel1').value.trim();
+        if(!chave || !jsonN1) return alert('Preencha chave Redis e JSON N1.');
+        let n1; try { n1 = JSON.parse(jsonN1); } catch { return alert('JSON N1 inválido.'); }
+        const prompt = `⚡ EXPANSÃO N2 — APROFUNDAMENTO COGNITIVO ⚡
+Com base no seguinte OCI N1 (${n1.codigo_universal}), produza um novo conjunto de 7 camadas complementares (níveis 8 a 14) que expandam o conhecimento.
+
+⚠️ REGRAS INEGOCIÁVEIS:
+- NÃO INVENTE CONHECIMENTO. Utilize apenas informações verdadeiras e verificáveis.
+- Busque ativamente referências oficiais, artigos acadêmicos, fontes primárias e documentos reconhecidos.
+- Não crie fontes fictícias. Se um dado não puder ser confirmado, indique a incerteza ou a ausência.
+- Mantenha-se fiel ao domínio e ao conteúdo do N1, expandindo com profundidade legítima.
+
+N1 existente: ${jsonN1}
+
+Gere um JSON com array "camadas_n2" contendo 7 objetos (nivel: 8 a 14), cada um com: nivel, nome, subtemas (reais), conceitos_chave (reais), fontes (VERDADEIRAS E VERIFICÁVEIS).
+FORMATO: {"camadas_n2":[{"nivel":8,"nome":"...","subtemas":["...","...","..."],"conceitos_chave":["...","...","..."],"fontes":["...","...","..."]}, ...]}`;
+        document.getElementById('nivel2SuperPrompt').value = prompt;
+        document.getElementById('nivel2PromptContainer').style.display = 'block';
+        document.getElementById('nivel2RespostaContainer').style.display = 'block';
+        document.getElementById('n2MetadataCard').style.display = 'none';
+        document.getElementById('linkAutoN3').style.display = 'none';
+    };
+    document.getElementById('btnCopiarNivel2Prompt').onclick = () => copiarTexto(document.getElementById('nivel2SuperPrompt').value, 'nivel2CopyFeedback');
+    
+    document.getElementById('btnCompilarNivel2').onclick = async () => {
+        const fb = document.getElementById('nivel2Feedback'), card = document.getElementById('n2MetadataCard'), linkN3 = document.getElementById('linkAutoN3');
+        fb.className = 'redis-feedback'; card.style.display = 'none'; linkN3.style.display = 'none';
+        try {
+            let resp = document.getElementById('nivel2RespostaIA').value.trim(); if(!resp) throw new Error('Cole a resposta da IA.');
+            const m = resp.match(/\{[\s\S]*\}/); if(m) resp = m[0];
+            let json; try { json = JSON.parse(resp); } catch { throw new Error('JSON inválido.'); }
+            let camadasN2 = json.camadas_n2 || json;
+            if(!camadasN2 || !Array.isArray(camadasN2) || camadasN2.length !== 7) throw new Error('Necessário 7 camadas_n2.');
+            const jsonN1 = document.getElementById('nivel2JsonNivel1').value.trim(); let n1; try { n1 = JSON.parse(jsonN1); } catch { throw new Error('JSON N1 inválido.'); }
+            const chave = document.getElementById('nivel2Chave').value.trim(); if(!chave) throw new Error('Chave Redis não informada.');
+            const agora = new Date();
+            const payloadAtualizado = { ...n1, nivel_2: { camadas: camadasN2, compilado_em: agora.toISOString() } };
+            payloadAtualizado.governanca = { ...(payloadAtualizado.governanca || {}), score_confianca: Math.min(0.95, (payloadAtualizado.governanca.score_confianca || 0.85) + 0.05), revisado_em: new Date(Date.now() + 180*86400000).toISOString().split('T')[0] };
+            const cluster = window._ultimoN1?.cluster || getClusters().find(c => c.name === 'Caixa Preta');
+            if(!cluster) throw new Error('Cluster não identificado.');
+            const ok = await redisSet(cluster, chave, payloadAtualizado);
+            if(!ok) throw new Error('Falha ao gravar N2.');
+            const tamanho = new Blob([JSON.stringify(payloadAtualizado)]).size;
+            card.innerHTML = montarMetadataCard(payloadAtualizado.codigo_universal || chave, chave, cluster.name, agora, tamanho);
+            card.style.display = 'flex';
+            fb.className = 'redis-feedback show success';
+            fb.textContent = '✅ N2 compilado e enviado.';
+            window._ultimoN2 = { chave, payload: payloadAtualizado, cluster };
+            linkN3.style.display = 'inline-block';
+            linkN3.onclick = () => {
+                document.getElementById('nivel3Chave').value = chave;
+                document.getElementById('nivel3JsonDocumento').value = JSON.stringify(payloadAtualizado, null, 2);
+                document.getElementById('n3ClusterName').textContent = cluster.name;
+                document.getElementById('n3ClusterInfo').style.display = 'block';
+                switchTab('n3');
+            };
+        } catch(e) {
+            fb.className = 'redis-feedback show error';
+            fb.textContent = '❌ ' + e.message;
+        }
+    };
+    
+    document.getElementById('btnLimparNivel2').onclick = () => {
+        ['nivel2Chave','nivel2JsonNivel1','nivel2SuperPrompt','nivel2RespostaIA'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('nivel2PromptContainer').style.display = 'none';
+        document.getElementById('nivel2RespostaContainer').style.display = 'none';
+        document.getElementById('n2MetadataCard').style.display = 'none';
+        document.getElementById('linkAutoN3').style.display = 'none';
+    };
+
+    // ========== N3 ==========
+    document.getElementById('btnGerarFortificacao').onclick = () => {
+        const chave = document.getElementById('nivel3Chave').value.trim(), jsonDoc = document.getElementById('nivel3JsonDocumento').value.trim();
+        if(!chave || !jsonDoc) return alert('Preencha chave Redis e JSON completo.');
+        const prompt = `🧠 FORTIFICAÇÃO N3 — VALIDAÇÃO CRUZADA E CITAÇÕES REAIS 🧠
+Com base no OCI completo (N1+N2) abaixo, adicione um bloco de fortificação contendo validação cruzada, referências acadêmicas REAIS e conexões interdisciplinares VERDADEIRAS.
+
+⚠️ REGRAS CRÍTICAS:
+- NÃO INVENTE referências, autores, títulos ou anos. Cada referência deve corresponder a uma obra ou documento REALMENTE EXISTENTE e verificável.
+- A validação cruzada deve apontar convergências e divergências factuais com base em literatura real.
+- As conexões interdisciplinares devem ser legítimas, fundamentadas em relações documentadas.
+- Se não encontrar referência suficiente, declare explicitamente, mas NÃO FABRIQUE.
+
+Documento: ${jsonDoc}
+
+Gere um JSON com campo "nivel_3" contendo: validacao (array de strings), referencias (array de objetos com autor, titulo, ano — TUDO REAL), conexoes (array de strings).
+FORMATO: {"nivel_3":{"validacao":["...","..."],"referencias":[{"autor":"...","titulo":"...","ano":2023}],"conexoes":["...","..."]}}`;
+        document.getElementById('nivel3SuperPrompt').value = prompt;
+        document.getElementById('nivel3PromptContainer').style.display = 'block';
+        document.getElementById('nivel3RespostaContainer').style.display = 'block';
+        document.getElementById('n3MetadataCard').style.display = 'none';
+    };
+    document.getElementById('btnCopiarNivel3Prompt').onclick = () => copiarTexto(document.getElementById('nivel3SuperPrompt').value, 'nivel3CopyFeedback');
+    
+    document.getElementById('btnCompilarNivel3').onclick = async () => {
+        const fb = document.getElementById('nivel3Feedback'), card = document.getElementById('n3MetadataCard');
+        fb.className = 'redis-feedback'; card.style.display = 'none';
+        try {
+            let resp = document.getElementById('nivel3RespostaIA').value.trim(); if(!resp) throw new Error('Cole a resposta da IA.');
+            const m = resp.match(/\{[\s\S]*\}/); if(m) resp = m[0];
+            let json; try { json = JSON.parse(resp); } catch { throw new Error('JSON inválido.'); }
+            let nivel3 = json.nivel_3 || json; if(!nivel3 || typeof nivel3 !== 'object') throw new Error('Formato nivel_3 inválido.');
+            const jsonDoc = document.getElementById('nivel3JsonDocumento').value.trim(); let doc; try { doc = JSON.parse(jsonDoc); } catch { throw new Error('JSON do documento inválido.'); }
+            const chave = document.getElementById('nivel3Chave').value.trim(); if(!chave) throw new Error('Chave Redis não informada.');
+            const agora = new Date();
+            const payloadAtualizado = { ...doc, nivel_3: nivel3 };
+            payloadAtualizado.governanca = { ...(payloadAtualizado.governanca || {}), score_confianca: Math.min(0.99, (payloadAtualizado.governanca.score_confianca || 0.9) + 0.05), revisado_em: new Date(Date.now() + 365*86400000).toISOString().split('T')[0] };
+            const cluster = window._ultimoN2?.cluster || getClusters().find(c => c.name === 'Caixa Preta');
+            if(!cluster) throw new Error('Cluster não identificado.');
+            const ok = await redisSet(cluster, chave, payloadAtualizado);
+            if(!ok) throw new Error('Falha ao gravar N3.');
+            const tamanho = new Blob([JSON.stringify(payloadAtualizado)]).size;
+            card.innerHTML = montarMetadataCard(payloadAtualizado.codigo_universal || chave, chave, cluster.name, agora, tamanho);
+            card.style.display = 'flex';
+            fb.className = 'redis-feedback show success';
+            fb.textContent = '✅ N3 compilado e enviado.';
+        } catch(e) {
+            fb.className = 'redis-feedback show error';
+            fb.textContent = '❌ ' + e.message;
+        }
+    };
+    
+    document.getElementById('btnLimparNivel3').onclick = () => {
+        ['nivel3Chave','nivel3JsonDocumento','nivel3SuperPrompt','nivel3RespostaIA'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('nivel3PromptContainer').style.display = 'none';
+        document.getElementById('nivel3RespostaContainer').style.display = 'none';
+        document.getElementById('n3MetadataCard').style.display = 'none';
+    };
+
+    // ========== GOVERNANÇA ==========
+    async function carregarTodosACIs() {
+        const todos = [];
+        for(const c of getClusters()) {
+            try {
+                const keys = [...new Set([...await redisKeys(c,'aci:*'), ...await redisKeys(c,'idenza:aci:*')])];
+                for(const k of keys) { const raw = await redisGet(c,k); if(raw) { let a = typeof raw==='string'?JSON.parse(raw):raw; a._redisKey=k; a._clusterName=c.name; a._cluster=c; todos.push(a); } }
+            } catch(e) { console.warn(e); }
+        }
+        return todos;
+    }
+    function renderizarTabelaGovernanca(acis, filtro='') {
+        const tbody = document.getElementById('govTabelaBody'), sm = document.getElementById('govStatusMsg');
+        let f = acis; if(filtro) { const t = filtro.toLowerCase(); f = acis.filter(a=>(a.uid||a._redisKey||'').toLowerCase().includes(t)||(a.titulo||a.nome||'').toLowerCase().includes(t)); }
+        if(!f.length) { tbody.innerHTML='<tr><td colspan="7">Nenhum ACI.</td></tr>'; sm.textContent='Nenhum.'; atualizarEstatisticas(acis); return; }
+        const agora = new Date(); let html='';
+        f.forEach(a => {
+            const uid=a.uid||a._redisKey||'N/A', titulo=a.titulo||a.nome||'Sem título', versao=a.version||a.versao||'1.0.0', cn=a._clusterName;
+            let sc='badge-valid', st='Válido'; const v=a.valido_ate||a.alertaRevisao||a.metadata?.data_revisao;
+            if(v){ const d=new Date(v); if(d<agora){sc='badge-expired';st='Expirado';} else if(d-agora<30*86400000){sc='badge-review';st='Revisão';} }
+            else if(a.status==='revisao'){sc='badge-review';st='Revisão';}
+            const n2=!!a.nivel_2, n3=!!a.nivel_3;
+            let mat=n3?'<span class="badge badge-n3">N3</span>':n2?'<span class="badge badge-n2">N2</span>':'<span class="badge" style="background:#aaa;">N1</span>';
+            html+=`<tr><td><code>${uid.substring(0,20)}</code></td><td><strong>${titulo}</strong></td><td>v${versao}</td><td><span class="${sc}">${st}</span></td><td>${mat}</td><td>${cn}</td><td><button class="btn btn-outline btn-sm" onclick="verDetalhes('${uid}')">🔍</button> <button class="btn btn-data btn-sm" onclick="revalidarACI('${uid}')">🔄</button> <button class="btn btn-n2 btn-sm" onclick="abrirN2('${uid}')">N2</button> ${n2?`<button class="btn btn-n3 btn-sm" onclick="abrirN3('${uid}')">N3</button>`:''} <button class="btn btn-danger btn-sm" onclick="excluirACI('${uid}')">🗑️</button></td></tr>`;
+        });
+        tbody.innerHTML=html; sm.textContent=`Exibindo ${f.length} de ${acis.length}`; atualizarEstatisticas(acis);
+    }
+    function atualizarEstatisticas(acis) {
+        const agora=new Date(); let at=0,ex=0,rev=0,n2=0,n3=0;
+        acis.forEach(a=>{
+            const v=a.valido_ate||a.alertaRevisao||a.metadata?.data_revisao;
+            if(v){const d=new Date(v); if(d<agora)ex++; else if(d-agora<30*86400000)rev++; else at++;}
+            else if(a.status==='revisao') rev++; else at++;
+            if(a.nivel_2)n2++; if(a.nivel_3)n3++;
+        });
+        document.getElementById('govTotalAtivos').textContent=at; document.getElementById('govTotalExpirados').textContent=ex;
+        document.getElementById('govTotalRevisao').textContent=rev; document.getElementById('govTotalN2').textContent=n2;
+        document.getElementById('govTotalN3').textContent=n3; document.getElementById('govTotalTotal').textContent=acis.length;
+    }
+    window.verDetalhes = (uid) => {
+        const aci = window._todosACIs.find(a=>(a.uid||a._redisKey)===uid); if(!aci) return;
+        document.getElementById('govModalTitle').textContent = aci.titulo||uid;
+        document.getElementById('govModalContent').textContent = JSON.stringify(aci,null,2);
+        document.getElementById('govModalDetalhes').classList.add('open');
+    };
+    document.getElementById('govModalFechar').onclick = () => document.getElementById('govModalDetalhes').classList.remove('open');
+    window.revalidarACI = async (uid) => {
+        const aci = window._todosACIs.find(a=>(a.uid||a._redisKey)===uid); if(!aci) return;
+        const nd = new Date(); nd.setDate(nd.getDate()+90); aci.valido_ate = nd.toISOString();
+        if(aci._cluster) { await redisSet(aci._cluster, aci._redisKey, aci); carregarEAtualizarGovernanca(); }
+    };
+    window.excluirACI = async (uid) => {
+        if(!confirm('Excluir?')) return;
+        const aci = window._todosACIs.find(a=>(a.uid||a._redisKey)===uid);
+        if(aci?._cluster) { await redisDel(aci._cluster, aci._redisKey); carregarEAtualizarGovernanca(); }
+    };
+    window.abrirN2 = (uid) => {
+        const aci = window._todosACIs.find(a=>(a.uid||a._redisKey)===uid);
+        if(aci) { window._ultimoN1 = { chave: aci._redisKey, payload: aci, cluster: aci._cluster }; document.getElementById('nivel2Chave').value=aci._redisKey; document.getElementById('nivel2JsonNivel1').value=JSON.stringify(aci,null,2); document.getElementById('n2ClusterName').textContent=aci._clusterName; document.getElementById('n2ClusterInfo').style.display='block'; switchTab('n2'); }
+    };
+    window.abrirN3 = (uid) => {
+        const aci = window._todosACIs.find(a=>(a.uid||a._redisKey)===uid);
+        if(aci) { window._ultimoN2 = { chave: aci._redisKey, payload: aci, cluster: aci._cluster }; document.getElementById('nivel3Chave').value=aci._redisKey; document.getElementById('nivel3JsonDocumento').value=JSON.stringify(aci,null,2); document.getElementById('n3ClusterName').textContent=aci._clusterName; document.getElementById('n3ClusterInfo').style.display='block'; switchTab('n3'); }
+    };
+    async function renderizarRegistry() {
+        const ctr = document.getElementById('govRedisRegistry'); let html='';
+        for(const c of getClusters()) {
+            let st='disconnected',dot='off',txt='Desconectado';
+            try{await redisFetch(c,'ping'); st='connected'; dot='on'; txt='Conectado';}catch{}
+            let db='?'; try{db=await redisFetch(c,'dbsize')||'0';}catch{}
+            html+=`<div class="redis-slot-card ${st}"><div><strong>${c.name}</strong><span class="redis-slot-dot ${dot}"></span></div><div>${c.url.replace(/^https?:\/\//,'')}</div><div>${txt} | Chaves: ${db}</div></div>`;
+        }
+        ctr.innerHTML=html;
+    }
+    async function carregarEAtualizarGovernanca() {
+        document.getElementById('govStatusMsg').textContent='⏳ Carregando...';
+        try { window._todosACIs = await carregarTodosACIs(); renderizarTabelaGovernanca(window._todosACIs, document.getElementById('govSearchInput').value); await renderizarRegistry(); document.getElementById('govStatusMsg').textContent=`✅ ${window._todosACIs.length} ACIs.`; } catch(e) { document.getElementById('govStatusMsg').textContent=`❌ ${e.message}`; }
+    }
+    document.getElementById('govSearchBtn').onclick = () => renderizarTabelaGovernanca(window._todosACIs, document.getElementById('govSearchInput').value);
+    document.getElementById('govRefreshBtn').onclick = carregarEAtualizarGovernanca;
+    document.getElementById('govAddAciBtn').onclick = () => { preencherSelectNovoAci(); document.getElementById('govNovoAciModal').classList.add('open'); };
+    document.getElementById('novoAciFechar').onclick = () => document.getElementById('govNovoAciModal').classList.remove('open');
+    document.getElementById('govAddClusterBtn').onclick = () => document.getElementById('govAddClusterModal').classList.add('open');
+    document.getElementById('novoClusterFechar').onclick = () => document.getElementById('govAddClusterModal').classList.remove('open');
+    function preencherSelectNovoAci() { document.getElementById('novoAciCluster').innerHTML = getClusters().map(c=>`<option value="${c.name}">${c.name}</option>`).join(''); }
+    document.getElementById('novoAciSalvar').onclick = async () => {
+        const uid = document.getElementById('novoAciUid').value || 'aci_'+Date.now();
+        const cluster = getClusters().find(c=>c.name===document.getElementById('novoAciCluster').value);
+        if(!cluster) return alert('Selecione um cluster.');
+        let aci; try { aci = JSON.parse(document.getElementById('novoAciConteudo').value); } catch { aci = { raw: document.getElementById('novoAciConteudo').value }; }
+        aci.uid=uid; aci.titulo=document.getElementById('novoAciTitulo').value; aci.versao=document.getElementById('novoAciVersao').value; aci.hash=document.getElementById('novoAciHash').value;
+        await redisSet(cluster, uid, aci); document.getElementById('govNovoAciModal').classList.remove('open'); carregarEAtualizarGovernanca();
+    };
+    document.getElementById('novoClusterSalvar').onclick = async () => {
+        const nome = document.getElementById('novoClusterNome').value.trim(), url = document.getElementById('novoClusterUrl').value.trim(), token = document.getElementById('novoClusterToken').value.trim();
+        if(!nome||!url||!token) return alert('Preencha todos.');
+        let clusters = getClusters(); clusters.push({name:nome, url, token, color:'#6c757d', fixed:false}); saveClusters(clusters);
+        document.getElementById('govAddClusterModal').classList.remove('open'); carregarEAtualizarGovernanca();
+    };
+
+    // ========== RECICLAGEM ==========
+    function preencherSelectReciclagem() {
+        const clusters = getClusters();
+        ['recClusterSource','recClusterTarget'].forEach(id => {
+            document.getElementById(id).innerHTML = clusters.map(c=>`<option value="${c.name}">${c.name}</option>`).join('');
+        });
+    }
+    document.getElementById('btnScanReciclagem').onclick = async () => {
+        const sourceName = document.getElementById('recClusterSource').value, targetName = document.getElementById('recClusterTarget').value;
+        const source = getClusters().find(c=>c.name===sourceName), target = getClusters().find(c=>c.name===targetName);
+        if(!source||!target) return alert('Selecione clusters.');
+        document.getElementById('recStatusMsg').textContent = '⏳ Escaneando...';
+        try {
+            const sourceKeys = await redisKeys(source, 'aci:*');
+            const targetKeys = await redisKeys(target, 'aci:*');
+            const targetSet = new Set(targetKeys);
+            const duplicados = [], novos = [];
+            for(const k of sourceKeys) {
+                if(targetSet.has(k)) duplicados.push(k);
+                else novos.push(k);
+            }
+            let htmlDup = '', htmlNovo = '';
+            for(const k of duplicados) { htmlDup += `<tr><td>${k}</td><td>-</td><td>Chave já existe</td></tr>`; }
+            for(const k of novos) { htmlNovo += `<tr><td><input type="checkbox" class="check-novo" data-key="${k}"></td><td>${k}</td><td>Novo</td></tr>`; }
+            document.getElementById('tabelaDuplicados').querySelector('tbody').innerHTML = htmlDup || '<tr><td colspan="3">Nenhum</td></tr>';
+            document.getElementById('novosTemasBody').innerHTML = htmlNovo || '<tr><td colspan="3">Nenhum</td></tr>';
+            document.getElementById('recStatusMsg').textContent = `✅ ${duplicados.length} duplicados, ${novos.length} novos.`;
+            document.getElementById('btnIntegrarSelecionados').disabled = novos.length === 0;
+            document.getElementById('selecionarTodos').onclick = (e) => {
+                document.querySelectorAll('.check-novo').forEach(cb => cb.checked = e.target.checked);
+            };
+        } catch(e) { document.getElementById('recStatusMsg').textContent = '❌ ' + e.message; }
+    };
+    document.getElementById('btnIntegrarSelecionados').onclick = async () => {
+        const sourceName = document.getElementById('recClusterSource').value, targetName = document.getElementById('recClusterTarget').value;
+        const source = getClusters().find(c=>c.name===sourceName), target = getClusters().find(c=>c.name===targetName);
+        if(!source||!target) return;
+        const checkboxes = document.querySelectorAll('.check-novo:checked');
+        const fb = document.getElementById('recFeedback');
+        let success = 0;
+        for(const cb of checkboxes) {
+            const key = cb.dataset.key;
+            try {
+                const raw = await redisGet(source, key);
+                if(raw) { let payload = typeof raw==='string'?JSON.parse(raw):raw; await redisSet(target, key, payload); success++; }
+            } catch(e) { console.warn(e); }
+        }
+        fb.className = 'redis-feedback show success'; fb.textContent = `✅ ${success} itens integrados.`;
+    };
+
+    // ========== CONTROLE DE ABAS ==========
+    const tabs = {
+        n1: { btn: document.getElementById('tabN1Btn'), content: document.getElementById('tabN1') },
+        n2: { btn: document.getElementById('tabN2Btn'), content: document.getElementById('tabN2') },
+        n3: { btn: document.getElementById('tabN3Btn'), content: document.getElementById('tabN3') },
+        gov: { btn: document.getElementById('tabGovBtn'), content: document.getElementById('tabGov') },
+        rec: { btn: document.getElementById('tabRecBtn'), content: document.getElementById('tabRec') }
+    };
+    function switchTab(t) {
+        if(!tabs[t]) return;
+        Object.values(tabs).forEach(x => { x.btn.classList.remove('active'); x.content.style.display = 'none'; });
+        tabs[t].btn.classList.add('active'); tabs[t].content.style.display = 'block';
+        if(t==='gov') carregarEAtualizarGovernanca();
+        if(t==='rec') preencherSelectReciclagem();
+    }
+    tabs.n1.btn.onclick = () => switchTab('n1');
+    tabs.n2.btn.onclick = () => switchTab('n2');
+    tabs.n3.btn.onclick = () => switchTab('n3');
+    tabs.gov.btn.onclick = () => switchTab('gov');
+    tabs.rec.btn.onclick = () => switchTab('rec');
+
+    carregarEAtualizarGovernanca();
+    console.log('✅ IDEnza Centro de Comando carregado (N1 corrigido com 7 camadas da ATA e confiança dinâmica).');
+})();
+</script>
 </body>
 </html>
