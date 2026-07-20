@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDEnza — Centro de Comando Cognitivo</title>
+	<link rel="stylesheet" href="css/style_centro_cognitivo.css">
+</head>
+<body>
+<header class="header">
+    <div class="logo-area">
+        <a href="#" class="logo">i<span>D</span>enza</a>
+        <span class="logo-tagline">Centro de Comando Cognitivo</span>
+    </div>
+    <div class="header-links">
+        <a href="painel.html">🌐 Painel</a>
+        <a href="restrito.html">🌐 ADMIN CLIENTES</a>
+        <a href="https://idenza.pages.dev">🌐 Cliente</a>
+    </div>
+</header>
+<hr class="divider-gold">
+
+<div class="tab-nav">
+    <button class="tab-btn gov-tab active" id="tabGovBtn">🏛️ Gov</button>
+    <button class="tab-btn tree-tab" id="tabTreeBtn">🌳 Árvore</button>
+    <button class="tab-btn free-tab" id="tabFreeBtn">🌱 Tema Livre</button>
+    <button class="tab-btn n1-tab" id="tabN1Btn">🧬 N1</button>
+    <button class="tab-btn n2-tab" id="tabN2Btn">⚡ N2</button>
+    <button class="tab-btn n3-tab" id="tabN3Btn">🧠 N3</button>
+    <button class="tab-btn ci-tab" id="tabCientificoBtn">🔬 Científico</button>
+    <button class="tab-btn revista-tab" id="tabRevistaBtn">📰 Revista</button>
+    <button class="tab-btn rec-tab" id="tabRecBtn">♻️ Rec</button>
+    <button class="tab-btn reestruturar-tab" id="tabReestruturarBtn">🔍 Reestruturar</button>
+</div>
+
+<div class="main-container">
+    <div id="tabGov" class="tab-content active"></div>
+    <div id="tabTree" class="tab-content"></div>
+    <div id="tabFree" class="tab-content"></div>
+    <div id="tabN1" class="tab-content"></div>
+    <div id="tabN2" class="tab-content"></div>
+    <div id="tabN3" class="tab-content"></div>
+    <div id="tabCientifico" class="tab-content"></div>
+    <div id="tabRevista" class="tab-content"></div>
+    <div id="tabRec" class="tab-content"></div>
+    <div id="tabReestruturar" class="tab-content"></div>
+</div>
+
+<script>
+(function() {
+    const RAW_DATA = [
+        "Direito | Direito Constitucional | Princípios Fundamentais | direito, jurídico, constituição",
+        "Direito | Direito Constitucional | Direitos e Garantias Fundamentais | direito, jurídico, direitos humanos",
+        "Direito | Direito Constitucional | Controle de Constitucionalidade | direito, jurídico, supremo",
+        "Direito | Direito Penal | Teoria do Crime | direito, penal, crime",
+        "Direito | Direito Penal | Penas e Medidas Alternativas | direito, penal, penas",
+        "Direito | Direito Civil | Obrigações e Contratos | direito, civil, contratos",
+        "Direito | Direito Civil | Responsabilidade Civil | direito, civil, indenização",
+        "Direito | Direito Administrativo | Licitações e Contratos Administrativos | direito, administrativo, licitações",
+        "Direito | Direito Administrativo | Improbidade Administrativa | direito, administrativo, corrupção",
+        "Direito | Direito Tributário | Sistema Tributário Nacional | direito, tributário, impostos",
+        "Direito | Direito do Trabalho | Relações de Trabalho | direito, trabalhista, emprego",
+        "Direito | Direito Internacional | Tratados Internacionais | direito, internacional, tratados",
+        "Artes | Artes Visuais | História da Pintura | arte, pintura, história",
+        "Artes | Artes Visuais | Escultura Moderna | arte, escultura, modernismo",
+        "Artes | Música | Teoria Musical | música, teoria, harmonia",
+        "Artes | Música | Música Clássica Brasileira | música, clássica, Brasil",
+        "Artes | Dança | Danças Urbanas | dança, hip hop, breaking",
+        "Artes | Dança | Ballet Clássico | dança, ballet, clássico",
+        "Artes | Teatro | Dramaturgia Brasileira | teatro, dramaturgia, Brasil",
+        "Artes | Teatro | Teatro de Rua | teatro, performance, rua",
+        "Artes | Cinema | Roteiro Cinematográfico | cinema, roteiro, narrativa",
+        "Artes | Cinema | Cinema Novo Brasileiro | cinema, Brasil, Glauber Rocha",
+        "Artes | Literatura | Poesia Modernista | literatura, poesia, modernismo",
+        "Artes | Literatura | Romance Contemporâneo | literatura, romance, contemporâneo",
+        "Matemática | Álgebra | Equações Diferenciais | matemática, álgebra, cálculo",
+        "Matemática | Álgebra | Estruturas Algébricas | matemática, álgebra, grupos",
+        "Matemática | Geometria | Geometria Euclidiana | matemática, geometria, Euclides",
+        "Matemática | Geometria | Geometria Analítica | matemática, geometria, coordenadas",
+        "Matemática | Cálculo | Limites e Derivadas | matemática, cálculo, derivadas",
+        "Matemática | Cálculo | Integrais e Aplicações | matemática, cálculo, integrais",
+        "Matemática | Estatística | Probabilidade Aplicada | matemática, estatística, probabilidade",
+        "Matemática | Estatística | Inferência Estatística | matemática, estatística, inferência",
+        "Matemática | Matemática Discreta | Teoria dos Grafos | matemática, discreta, grafos",
+        "Matemática | Matemática Discreta | Combinatória | matemática, combinatória, contagem",
+        "Cultura e Sociedade | Antropologia | Antropologia Cultural | antropologia, cultura, sociedade",
+        "Cultura e Sociedade | Antropologia | Etnografia Indígena | antropologia, indígena, etnografia",
+        "Cultura e Sociedade | Sociologia | Teorias Sociológicas Clássicas | sociologia, teoria, clássicos",
+        "Cultura e Sociedade | Sociologia | Movimentos Sociais | sociologia, movimentos, sociedade",
+        "Cultura e Sociedade | Filosofia | Ética e Moral | filosofia, ética, moral",
+        "Cultura e Sociedade | Filosofia | Filosofia Política | filosofia, política, estado",
+        "Cultura e Sociedade | História | História do Brasil Colonial | história, Brasil, colonial",
+        "Cultura e Sociedade | História | Segunda Guerra Mundial | história, guerra, mundial",
+        "Cultura e Sociedade | Geografia | Geopolítica Mundial | geografia, geopolítica, mundo",
+        "Teologia Bíblica | Antigo Testamento | Pentateuco | teologia, bíblia, antigo testamento",
+        "Teologia Bíblica | Antigo Testamento | Profetas Maiores | teologia, bíblia, profetas",
+        "Teologia Bíblica | Novo Testamento | Evangelhos Sinóticos | teologia, bíblia, evangelhos",
+        "Teologia Bíblica | Novo Testamento | Epístolas Paulinas | teologia, bíblia, Paulo",
+        "Teologia Bíblica | Hermenêutica | Interpretação Bíblica | teologia, hermenêutica, interpretação",
+        "Teologia Bíblica | Teologia Sistemática | Doutrina da Salvação | teologia, sistemática, salvação",
+        "Ciências Humanas | Psicologia | Psicologia Cognitiva | psicologia, cognição, mente",
+        "Ciências Humanas | Psicologia | Psicologia Social | psicologia, social, grupo",
+        "Ciências Humanas | Pedagogia | Didática e Metodologia | pedagogia, didática, ensino",
+        "Ciências Humanas | Pedagogia | Educação Inclusiva | pedagogia, inclusão, educação",
+        "Ciências Humanas | Ciência Política | Sistemas de Governo | política, governo, sistemas",
+        "Ciências Humanas | Ciência Política | Teoria do Estado | política, estado, teoria",
+        "IA & LLMs | Machine Learning | Redes Neurais Convolucionais | IA, machine learning, CNN",
+        "IA & LLMs | Machine Learning | Aprendizado por Reforço | IA, machine learning, RL",
+        "IA & LLMs | LLMs | Arquitetura Transformer | IA, LLM, transformers",
+        "IA & LLMs | LLMs | Fine-tuning e RAG | IA, LLM, RAG, fine-tuning",
+        "IA & LLMs | Processamento de Linguagem Natural | Tokenização e Embeddings | IA, NLP, embeddings",
+        "IA & LLMs | Processamento de Linguagem Natural | Análise de Sentimentos | IA, NLP, sentimentos",
+        "IA & LLMs | Ética em IA | Vieses Algorítmicos | IA, ética, viés",
+        "IA & LLMs | Visão Computacional | Detecção de Objetos | IA, visão computacional, YOLO",
+        "Medicina | Anatomia | Anatomia Humana Sistêmica | medicina, anatomia, corpo humano",
+        "Medicina | Fisiologia | Fisiologia Cardiovascular | medicina, fisiologia, coração",
+        "Medicina | Patologia | Neoplasias Malignas | medicina, patologia, câncer",
+        "Medicina | Farmacologia | Antibióticos e Resistência Bacteriana | medicina, farmacologia, antibióticos",
+        "Medicina | Clínica Médica | Doenças Crônicas Não Transmissíveis | medicina, clínica, crônicas",
+        "Medicina | Cirurgia | Técnicas Laparoscópicas | medicina, cirurgia, laparoscopia",
+        "Medicina | Neurologia | Doenças Neurodegenerativas | medicina, neurologia, Alzheimer",
+        "Medicina | Pediatria | Desenvolvimento Infantil | medicina, pediatria, criança",
+        "Engenharia | Engenharia Civil | Estruturas de Concreto Armado | engenharia, civil, concreto",
+        "Engenharia | Engenharia Civil | Fundações e Solos | engenharia, civil, fundações",
+        "Engenharia | Engenharia Elétrica | Sistemas de Potência | engenharia, elétrica, potência",
+        "Engenharia | Engenharia Elétrica | Eletrônica Digital | engenharia, elétrica, eletrônica",
+        "Engenharia | Engenharia Mecânica | Termodinâmica Aplicada | engenharia, mecânica, termodinâmica",
+        "Engenharia | Engenharia Mecânica | Mecânica dos Fluidos | engenharia, mecânica, fluidos",
+        "Engenharia | Engenharia de Software | Metodologias Ágeis | engenharia, software, ágil",
+        "Engenharia | Engenharia de Software | Arquitetura de Microsserviços | engenharia, software, microsserviços",
+        "Robótica | Robótica Industrial | Automação de Processos | robótica, industrial, automação",
+        "Robótica | Robótica Industrial | Robôs Colaborativos | robótica, colaborativos, indústria 4.0",
+        "Robótica | Robótica Móvel | Veículos Autônomos | robótica, autônomos, navegação",
+        "Robótica | Robótica Móvel | Drones e Aplicações | robótica, drones, voo",
+        "Robótica | Inteligência Artificial para Robôs | Percepção Robótica | robótica, IA, percepção",
+        "Robótica | Robótica Educacional | Robótica com Arduino | robótica, educação, Arduino",
+        "Aviação | Pilotagem | Pilotagem de Aeronaves Comerciais | aviação, pilotagem, comercial",
+        "Aviação | Pilotagem | Pilotagem de Helicópteros | aviação, helicóptero, pilotagem",
+        "Aviação | Segurança de Voo | Investigação de Acidentes Aéreos | aviação, segurança, acidentes",
+        "Aviação | Meteorologia Aeronáutica | Previsão e Rota de Voo | aviação, meteorologia, rota",
+        "Aviação | Manutenção de Aeronaves | Motores a Jato | aviação, manutenção, motores",
+        "Aviação | Regulamentação Aérea | Normas da ANAC e ICAO | aviação, regulamentação, ANAC",
+        "Espaço | Astronomia | Astrofísica Estelar | espaço, astronomia, estrelas",
+        "Espaço | Astronomia | Exoplanetas e Habitabilidade | espaço, exoplanetas, vida",
+        "Espaço | Astronáutica | Foguetes e Propulsão Espacial | espaço, foguetes, propulsão",
+        "Espaço | Astronáutica | Missões Tripuladas | espaço, missões, tripulação",
+        "Espaço | Exploração Espacial | Marte e Colonização | espaço, Marte, colonização",
+        "Espaço | Tecnologia Espacial | Satélites e Órbitas | espaço, satélites, órbita",
+        "Marítimo | Navegação | Navegação Costeira e Oceânica | marítimo, navegação, oceano",
+        "Marítimo | Navegação | Instrumentos Náuticos | marítimo, instrumentos, náutica",
+        "Marítimo | Oceanografia | Correntes Marinhas | marítimo, oceanografia, correntes",
+        "Marítimo | Oceanografia | Ecossistemas Marinhos | marítimo, oceanografia, ecossistemas",
+        "Marítimo | Engenharia Naval | Construção de Embarcações | marítimo, naval, construção",
+        "Marítimo | Legislação Marítima | Direito do Mar | marítimo, legislação, mar",
+        "Gastronomia | Culinária Brasileira | Gastronomia Regional | gastronomia, culinária, Brasil",
+        "Gastronomia | Culinária Brasileira | Doces e Sobremesas | gastronomia, doces, sobremesas",
+        "Gastronomia | Culinária Internacional | Cozinha Francesa | gastronomia, francesa, culinária",
+        "Gastronomia | Culinária Internacional | Cozinha Japonesa | gastronomia, japonesa, sushi",
+        "Gastronomia | Panificação | Pães Artesanais | gastronomia, pão, panificação",
+        "Gastronomia | Enologia | Degustação e Harmonização | gastronomia, vinho, enologia",
+        "Gastronomia | Nutrição e Gastronomia | Alimentação Funcional | gastronomia, nutrição, funcional",
+        "Esportes | Futebol | Tática e Estratégia | esporte, futebol, tática",
+        "Esportes | Futebol | Preparação Física no Futebol | esporte, futebol, preparação física",
+        "Esportes | Esportes de Combate | Jiu-Jitsu Brasileiro | esporte, luta, jiu-jitsu",
+        "Esportes | Esportes de Combate | Boxe Olímpico | esporte, boxe, olímpico",
+        "Esportes | Esportes Aquáticos | Natação Competitiva | esporte, natação, competição",
+        "Esportes | Atletismo | Corridas de Fundo | esporte, atletismo, corrida",
+        "Esportes | Esportes Radicais | Surfe e Ondas | esporte, surfe, radical",
+        "Esportes | Gestão Esportiva | Marketing Esportivo | esporte, gestão, marketing",
+        "Economia | Macroeconomia | Política Monetária | economia, macroeconomia, monetária",
+        "Economia | Macroeconomia | Inflação e Controle de Preços | economia, inflação, preços",
+        "Economia | Microeconomia | Teoria da Firma | economia, microeconomia, empresa",
+        "Economia | Microeconomia | Elasticidade e Demanda | economia, microeconomia, demanda",
+        "Economia | Economia Brasileira | Plano Real e Estabilização | economia, Brasil, Plano Real",
+        "Economia | Finanças Públicas | Dívida Pública | economia, finanças, dívida",
+        "Economia | Comércio Internacional | Globalização e Blocos Econômicos | economia, comércio, globalização",
+        "Psicologia | Psicologia Clínica | Terapia Cognitivo-Comportamental | psicologia, clínica, TCC",
+        "Psicologia | Psicologia Clínica | Transtornos de Ansiedade | psicologia, ansiedade, transtornos",
+        "Psicologia | Neuropsicologia | Funções Executivas | psicologia, neuropsicologia, cérebro",
+        "Psicologia | Psicologia do Desenvolvimento | Adolescência e Identidade | psicologia, desenvolvimento, adolescência",
+        "Psicologia | Psicologia Organizacional | Liderança e Motivação | psicologia, organizacional, liderança",
+        "Psicologia | Psicometria | Testes de Inteligência | psicologia, psicometria, testes",
+        "Educação | Educação Básica | Alfabetização e Letramento | educação, alfabetização, letramento",
+        "Educação | Educação Básica | Metodologias Ativas | educação, metodologias, ativas",
+        "Educação | Educação Superior | Pesquisa Acadêmica | educação, superior, pesquisa",
+        "Educação | Educação a Distância | Plataformas de EAD | educação, EAD, tecnologia",
+        "Educação | Políticas Educacionais | Financiamento da Educação | educação, políticas, financiamento",
+        "Educação | Educação Especial | Autismo e Inclusão Escolar | educação, especial, autismo",
+        "Biologia | Biologia Celular | Membrana Plasmática e Transporte | biologia, celular, membrana",
+        "Biologia | Biologia Celular | Ciclo Celular e Mitose | biologia, celular, ciclo",
+        "Biologia | Genética | Genética Mendeliana | biologia, genética, Mendel",
+        "Biologia | Genética | CRISPR e Edição Genética | biologia, genética, CRISPR",
+        "Biologia | Ecologia | Biomas Brasileiros | biologia, ecologia, biomas",
+        "Biologia | Ecologia | Conservação e Biodiversidade | biologia, ecologia, conservação",
+        "Biologia | Microbiologia | Bactérias e Resistência | biologia, microbiologia, bactérias",
+        "Biologia | Evolução | Seleção Natural e Adaptação | biologia, evolução, Darwin",
+        "Biologia | Bioquímica | Metabolismo Celular | biologia, bioquímica, energia",
+        "Biologia | Bioquímica | Fotossíntese e Quimiossíntese | biologia, bioquímica, fotossíntese",
+        "Física | Mecânica Clássica | Leis de Newton | física, mecânica, Newton",
+        "Física | Mecânica Clássica | Gravitação Universal | física, gravitação, Kepler",
+        "Física | Termodinâmica | Leis da Termodinâmica | física, termodinâmica, calor",
+        "Física | Termodinâmica | Máquinas Térmicas | física, termodinâmica, máquinas",
+        "Física | Eletromagnetismo | Equações de Maxwell | física, eletromagnetismo, Maxwell",
+        "Física | Eletromagnetismo | Ondas Eletromagnéticas | física, ondas, eletromagnetismo",
+        "Física | Física Quântica | Dualidade Onda-Partícula | física, quântica, dualidade",
+        "Física | Física Quântica | Entrelaçamento Quântico | física, quântica, entrelaçamento",
+        "Física | Relatividade | Relatividade Especial | física, relatividade, Einstein",
+        "Física | Óptica | Laser e Aplicações | física, óptica, laser",
+        "Química | Química Orgânica | Hidrocarbonetos e Petróleo | química, orgânica, petróleo",
+        "Química | Química Orgânica | Polímeros e Plásticos | química, orgânica, polímeros",
+        "Química | Química Inorgânica | Metais de Transição | química, inorgânica, metais",
+        "Química | Química Inorgânica | Catálise Heterogênea | química, inorgânica, catálise",
+        "Química | Físico-Química | Cinética Química | química, físico-química, cinética",
+        "Química | Físico-Química | Eletroquímica e Baterias | química, eletroquímica, baterias",
+        "Química | Bioquímica | Enzimas e Catálise Biológica | química, bioquímica, enzimas",
+        "Química | Bioquímica | Metabolismo Celular | química, bioquímica, energia",
+        "Química | Química Analítica | Cromatografia e Espectrometria | química, analítica, cromatografia"
+    ];
+
+    const AREA_EMOJIS = {
+        'Direito':'⚖️','Artes':'🎨','Matemática':'📐','Cultura e Sociedade':'🌍','Teologia Bíblica':'📖',
+        'Ciências Humanas':'🧠','IA & LLMs':'🤖','Medicina':'🩺','Engenharia':'⚙️','Robótica':'🦾',
+        'Aviação':'✈️','Espaço':'🚀','Marítimo':'⚓','Gastronomia':'🍽️','Esportes':'⚽',
+        'Economia':'📈','Psicologia':'🧠','Educação':'📚','Biologia':'🧬','Física':'🔭','Química':'⚗️'
+    };
+
+    const FIXED_CLUSTERS = [
+	    { name:'triagem_IDEnza', url:'https://ace-tarpon-157341.upstash.io', token:'gQAAAAAAAmadAAIgcDJmMDkzNjVlYmQ5MTI0OTc1YWNmZGVjODZmODZlNDAyMw' },
+        { name:'Caixa Preta Bruta', url:'https://welcomed-satyr-116661.upstash.io', token:'gQAAAAAAAce1AAIgcDFiNmUxOWVjY2E1Njk0MzQwOTI5NmExZWJlZGI1M2M1OQ' },
+        { name:'Caixa Preta Oficial', url:'https://saving-peacock-130283.upstash.io', token:'gQAAAAAAAfzrAAIgcDJhMmUzMDNiYmRhYTI0MzdhYWE5Y2MyOWYwNjQ4MDZjOQ' },
+        { name:'Caixa Branca', url:'https://premium-dove-145094.upstash.io', token:'gQAAAAAAAjbGAAIgcDFiNDc1Njc5NmYxNTI0NThlODNhZGNjYTQ0YThiN2YyZQ' },
+        { name:'Caixa Roxa', url:'https://busy-puma-128407.upstash.io', token:'gQAAAAAAAfWXAAIgcDE0MjM4NzNmNTY4Yzg0ZDVjODMwMDZjOWQ2ZjE5NTQxYg' },
+        { name:'Caixa Azul', url:'https://tidy-muskrat-128571.upstash.io', token:'gQAAAAAAAfY7AAIgcDE4ZTEyZDgwZTgzZTY0Zjk1OGI2MTY0OWY2Mjc0YzY5OQ' },
+        { name:'Caixa Rosa', url:'https://fluent-dove-150720.upstash.io', token:'gQAAAAAAAkzAAAIgcDIwNjJmMzQxNzJkZDQ0Yjk1OGVmMmExNDAzMTUxN2RhZg' }
+    ];
+
+    function getClusters() {
+        try { const s = localStorage.getItem('idenza_clusters_dinamicos'); return [...FIXED_CLUSTERS, ...(s ? JSON.parse(s) : [])]; }
+        catch(e) { return [...FIXED_CLUSTERS]; }
+    }
+    function saveClusters(c) { try { localStorage.setItem('idenza_clusters_dinamicos', JSON.stringify(c.filter(x=>!x.fixed))); } catch(e) {} }
+
+    async function redisFetch(c, cmd, ...args) {
+        const key = args[0]; const url = `${c.url.replace(/\/$/,'')}/${cmd}/${encodeURIComponent(key)}`;
+        const headers = { 'Authorization': `Bearer ${c.token}` }; let m = 'GET', b = null;
+        if (cmd === 'set') { m = 'POST'; b = args[1]; } else if (cmd === 'del') { m = 'POST'; }
+        const res = await fetch(url, { method:m, headers, body:b }); if (!res.ok) throw new Error(`Erro ${res.status}`);
+        const data = await res.json(); return data.result !== undefined ? data.result : data;
+    }
+    async function redisGet(c,k) { try { return await redisFetch(c,'get',k); } catch { return null; } }
+    async function redisSet(c,k,v) { try { return (await redisFetch(c,'set',k,JSON.stringify(v))) === 'OK'; } catch { return false; } }
+    async function redisDel(c,k) { try { return await redisFetch(c,'del',k); } catch { return false; } }
+    async function redisKeys(c,p) { try { const r = await redisFetch(c,'keys',p); return Array.isArray(r) ? r : [r]; } catch { return []; } }
+
+    function slugify(t) { return t.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'').replace(/_+/g,'_'); }
+    function gerarHash(t,s=16) { let h=0; for(let i=0;i<t.length;i++){ h=((h<<5)-h)+t.charCodeAt(i); h|=0; } return (Math.abs(h).toString(36)+Date.now().toString(36)).substring(0,s); }
+    function agoraISO() { return new Date().toISOString(); }
+    function agoraBR() { return new Date().toLocaleString('pt-BR'); }
+
+    function criarCompliance({ autor='IDEnza System', licenca='CC BY-SA 4.0', palavrasChave=[], referencias=[], nivelMaturidade='N1', status='rascunho', metadadosSemanticos={} } = {}) {
+        return {
+            schema_version:'1.1.0', autor, licenca, data_criacao:agoraISO(), data_modificacao:agoraISO(),
+            nivel_maturidade:nivelMaturidade, status, palavras_chave:palavrasChave, referencias,
+            metadados_semanticos: {
+                topico_central: metadadosSemanticos.topico_central || '',
+                tags_principais: metadadosSemanticos.tags_principais || palavrasChave,
+                dominio_conhecimento: metadadosSemanticos.dominio_conhecimento || '',
+                nos_relacionados: metadadosSemanticos.nos_relacionados || [],
+                grau_confiabilidade: metadadosSemanticos.grau_confiabilidade || 'médio',
+                aviso_lacuna: metadadosSemanticos.aviso_lacuna || 'Nenhuma lacuna detectada'
+            },
+            hash_conteudo: ''
+        };
+    }
+    function atualizarHashCompliance(obj) {
+        if (obj.compliance) { const copia = JSON.parse(JSON.stringify(obj)); delete copia.compliance.hash_conteudo; obj.compliance.hash_conteudo = gerarHash(JSON.stringify(copia), 32); }
+    }
+
+    function copiarTexto(texto, fbId) {
+        const fb = document.getElementById(fbId);
+        const show = (msg, ok) => { if(!fb) return; fb.textContent=msg; fb.style.color=ok?'var(--success)':'var(--error)'; fb.classList.add('show'); setTimeout(()=>fb.classList.remove('show'),2000); };
+        if (!texto) return show('Nada para copiar', false);
+        if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(texto).then(()=>show('✓ Copiado',true)).catch(()=>fallbackCopy(texto,show)); }
+        else { fallbackCopy(texto, show); }
+    }
+    function fallbackCopy(txt, cb) {
+        const ta = document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.left='-9999px';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy') ? cb('✓ Copiado',true) : cb('❌ Falha',false); } catch { cb('❌ Erro',false); }
+        document.body.removeChild(ta);
+    }
+
+    function montarMetadataCardCompliance(codigo, chaveRedis, clusterNome, tamanhoBytes, compliance) {
+        const df = compliance?.data_criacao ? new Date(compliance.data_criacao).toLocaleString('pt-BR') : agoraBR();
+        const hash = compliance?.hash_conteudo ? compliance.hash_conteudo.substring(0,12) : '—';
+        const status = compliance?.status || 'rascunho'; const maturidade = compliance?.nivel_maturidade || 'N1';
+        const tags = (compliance?.metadados_semanticos?.tags_principais || []).join(', ');
+        return `<div class="item"><label>📁 Código</label><span>${codigo}</span></div>
+        <div class="item"><label>🔐 Chave</label><span style="font-family:monospace;">${chaveRedis}</span></div>
+        <div class="item"><label>🗄️ Cluster</label><span>${clusterNome}</span></div>
+        <div class="item"><label>📏 Tamanho</label><span>${tamanhoBytes} bytes</span></div>
+        <div class="item"><label>🕒 Criação</label><span>${df}</span></div>
+        <div class="item"><label>🔒 Hash</label><span style="font-family:monospace;">${hash}</span></div>
+        <div class="item"><label>📌 Status</label><span>${status}</span></div>
+        <div class="item"><label>🧪 Maturidade</label><span>${maturidade}</span></div>
+        <div class="item"><label>🏷️ Tags</label><span>${tags||'—'}</span></div>
+        <div class="item"><label>👤 Autor</label><span>${compliance?.autor||'—'}</span></div>
+        <div class="item"><label>📜 Licença</label><span>${compliance?.licenca||'—'}</span></div>`;
+    }
+
+    function criarAbas() {
+        document.getElementById('tabGov').innerHTML = `
+        <div class="section"><div class="section-title gov">📊 Estatísticas do Sistema Imunológico</div>
+            <div class="gov-stats" id="govStats">
+                <div class="gov-stats-item"><span class="badge badge-valid">✅ Ativos</span> <strong id="govTotalAtivos">0</strong></div>
+                <div class="gov-stats-item"><span class="badge badge-expired">❌ Expirados</span> <strong id="govTotalExpirados">0</strong></div>
+                <div class="gov-stats-item"><span class="badge badge-review">⚠️ Revisão</span> <strong id="govTotalRevisao">0</strong></div>
+                <div class="gov-stats-item"><span class="badge badge-conflict">🔴 Conflitos</span> <strong id="govTotalConflitos">0</strong></div>
+                <div class="gov-stats-item"><span class="badge badge-n2">N2 prontos</span> <strong id="govTotalN2">0</strong></div>
+                <div class="gov-stats-item"><span class="badge badge-n3">N3 prontos</span> <strong id="govTotalN3">0</strong></div>
+                <div class="gov-stats-item"><span class="badge" style="background:#6c757d;">📦 Total</span> <strong id="govTotalTotal">0</strong></div>
+            </div>
+        </div>
+        <div class="section"><div class="section-title gov">📋 Índice Mestre de ACIs</div>
+            <p style="font-size:0.7rem;color:var(--text-soft);margin-bottom:12px;">Todos os ACIs das caixas Redis.</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">
+                <input type="text" id="govSearchInput" placeholder="Buscar por UID, título ou hash..." style="flex:1;min-width:200px;padding:8px 12px;border:1px solid var(--border);font-size:0.8rem;">
+                <button class="btn btn-gov btn-sm" id="govSearchBtn">🔍 Buscar</button>
+                <button class="btn btn-outline btn-sm" id="govRefreshBtn">🔄 Atualizar</button>
+                <button class="btn btn-data btn-sm" id="govAddAciBtn">➕ Novo ACI</button>
+            </div>
+            <div style="overflow-x:auto;"><table class="eng-payload-table" id="govTabelaAcis"><thead><tr><th>UID</th><th>Título</th><th>Versão</th><th>Status</th><th>Maturidade</th><th>Hash</th><th>Redis</th><th>Ações</th></tr></thead><tbody id="govTabelaBody"><tr><td colspan="8" style="text-align:center;">Carregando...</td></tr></tbody></table></div>
+            <div class="status-msg" id="govStatusMsg">Aguardando consulta...</div>
+        </div>
+        <div class="section"><div class="section-title gov">🗄️ Registry dos Redis — Clusters Conectados <button class="btn btn-data btn-sm" id="govAddClusterBtn" style="margin-left:auto;">➕ Adicionar Cluster</button></div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;" id="govRedisRegistry"></div>
+        </div>
+        <div class="slot-modal-overlay" id="govModalOverlay"><div class="slot-modal"><h3 id="govModalTitle">Detalhes do ACI</h3><pre id="govModalContent">Carregando...</pre><div class="modal-actions"><button class="btn btn-outline btn-sm" id="govModalRevalidar">🔄 Revalidar</button><button class="btn btn-danger btn-sm" id="govModalRegenerar">⚡ Forçar Regeneração</button><button class="btn btn-danger btn-sm" id="govModalExcluir">🗑️ Excluir</button><button class="btn btn-outline btn-sm" id="govModalFechar">Fechar</button></div><div class="status-msg" id="govModalStatus"></div></div></div>
+        <div class="slot-modal-overlay" id="govNovoAciOverlay"><div class="slot-modal"><h3>➕ Novo Artefato Cognitivo (ACI)</h3><label>UID (opcional)</label><input type="text" id="novoAciUid"><label>Título</label><input type="text" id="novoAciTitulo"><label>Versão</label><input type="text" id="novoAciVersao" value="1.0.0"><label>Conteúdo (JSON)</label><textarea id="novoAciConteudo" rows="8"></textarea><label>Cluster</label><select id="novoAciCluster"></select><div class="modal-actions"><button class="btn btn-data btn-sm" id="novoAciSalvar">💾 Salvar</button><button class="btn btn-outline btn-sm" id="novoAciFechar">Cancelar</button></div><div class="status-msg" id="novoAciStatus"></div></div></div>
+        <div class="slot-modal-overlay" id="govAddClusterOverlay"><div class="slot-modal"><h3>➕ Adicionar Cluster Redis</h3><label>Nome</label><input type="text" id="novoClusterNome"><label>URL</label><input type="text" id="novoClusterUrl"><label>Token</label><input type="text" id="novoClusterToken"><div class="modal-actions"><button class="btn btn-data btn-sm" id="novoClusterSalvar">💾 Adicionar</button><button class="btn btn-outline btn-sm" id="novoClusterFechar">Cancelar</button></div><div class="status-msg" id="novoClusterStatus"></div></div></div>`;
+
+        document.getElementById('tabTree').innerHTML = `
+        <div class="section"><div class="section-title tree">🌳 Árvore do Conhecimento</div>
+            <div class="tree-breadcrumb" id="treeBreadcrumb"><span class="breadcrumb-current">📂 Todas as Áreas</span></div>
+            <div class="tree-grid" id="treeGrid"></div>
+            <div class="selected-info" id="selectedInfo">
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+                    <div><strong id="selectedName"></strong><div class="tag-pills" id="selectedTags"></div></div>
+                    <button class="btn btn-tree btn-sm" id="btnSendToN1">🧬 Enviar para N1</button>
+                </div>
+            </div>
+        </div>`;
+
+        document.getElementById('tabFree').innerHTML = `
+        <div class="section"><div class="section-title free">🌱 Inserir Tema Livre</div>
+            <p style="font-size:0.7rem;color:var(--text-soft);margin-bottom:16px;">Preencha os campos com um tema novo. Será injetado no fluxo N1.</p>
+            <div class="grid-2">
+                <div><label>Domínio</label><input type="text" id="freeDominio" placeholder="Ex: Astrofotografia"></div>
+                <div><label>Nó Especializado</label><input type="text" id="freeNo" placeholder="Ex: Técnicas de Captura"></div>
+                <div><label>Tópico Principal</label><input type="text" id="freeTopico" placeholder="Ex: Longa Exposição"></div>
+                <div><label>Subtópicos (vírgula)</label><input type="text" id="freeSubTopicos" placeholder="Ex: ISO, abertura, stacking"></div>
+            </div>
+            <button class="btn btn-free" id="btnEnviarTemaLivre" style="margin-top:12px;">➡️ Enviar para N1</button>
+            <div class="status-msg" id="freeStatus"></div>
+        </div>`;
+
+        document.getElementById('tabN1').innerHTML = `
+        <div class="section"><div class="section-title n1">🧬 Gerador de Nó Cognitivo N1 (Super Prompt)</div>
+            <p style="font-size:0.7rem;color:var(--text-soft);">Prompt alinhado ao protocolo IGP com metadados semânticos.</p>
+            <div class="grid-2">
+                <div><label>Domínio</label><input type="text" id="n1Dominio" value="Aviação"></div>
+                <div><label>Nó Especializado</label><input type="text" id="n1NoEspecializado" value="Meteorologia Aeronáutica"></div>
+                <div><label>Tópico Principal</label><input type="text" id="n1Topico" value="Previsão e Rota de Voo"></div>
+                <div><label>Subtópicos</label><input type="text" id="n1SubTopicos" value="aviação, meteorologia, rota"></div>
+            </div>
+            <button class="btn btn-n1" id="btnGerarPromptN1" style="margin-top:10px;">⚡ Gerar Super Prompt N1</button>
+            <div id="n1PromptContainer" style="display:none;margin-top:16px;">
+                <textarea class="generated-question" id="n1PromptGerado" readonly style="min-height:260px;"></textarea>
+                <div style="display:flex;align-items:center;gap:8px;margin-top:6px;"><button class="btn btn-outline btn-sm" id="btnCopiarN1Prompt">📋 Copiar</button><span class="copy-feedback" id="n1CopyFeedback"></span><span style="font-size:0.65rem;color:var(--text-soft);margin-left:auto;" id="n1Timestamp"></span></div>
+            </div>
+            <div id="n1RespostaContainer" style="display:none;margin-top:20px;">
+                <label>Resposta da IA (JSON + Metadados)</label>
+                <textarea id="n1RespostaIA" class="raw-textarea n1-textarea" style="min-height:220px;"></textarea>
+                <button class="btn btn-n1 btn-sm" id="btnCompilarN1" style="margin-top:8px;">🔄 Compilar N1 com Metadados</button>
+                <div class="redis-feedback" id="n1Feedback"></div>
+                <div id="n1MetadataCard" class="metadata-card" style="display:none;"></div>
+                <span class="auto-link" id="linkAutoN2" style="display:none;">⚡ Avançar para Expansão N2</span>
+            </div>
+        </div>`;
+
+        document.getElementById('tabN2').innerHTML = `
+        <div class="section"><div class="section-title n2">⚡ Expansão N2</div>
+            <input type="text" class="raw-textarea n2-textarea" id="nivel2Chave" placeholder="Chave Redis">
+            <textarea class="raw-textarea n2-textarea" id="nivel2JsonNivel1" placeholder="JSON N1..." style="min-height:180px;"></textarea>
+            <div style="display:flex;gap:6px;margin-top:8px;"><button class="btn btn-n2 btn-sm" id="btnGerarPromptExpansao">⚡ Gerar Prompt N2</button><button class="btn btn-outline btn-sm" id="btnLimparNivel2">🧹 Limpar</button></div>
+            <div id="nivel2PromptContainer" style="display:none;margin-top:16px;"><textarea class="generated-question" id="nivel2SuperPrompt" readonly style="min-height:180px;"></textarea><div style="display:flex;align-items:center;gap:8px;margin-top:6px;"><button class="btn btn-outline btn-sm" id="btnCopiarNivel2Prompt">📋 Copiar</button><span class="copy-feedback" id="n2CopyFeedback"></span><span style="font-size:0.65rem;color:var(--text-soft);margin-left:auto;" id="n2Timestamp"></span></div></div>
+            <div id="nivel2RespostaContainer" style="display:none;margin-top:20px;"><textarea class="raw-textarea n2-textarea" id="nivel2RespostaIA" style="min-height:180px;"></textarea><button class="btn btn-n2 btn-sm" id="btnCompilarNivel2" style="margin-top:8px;">🔄 Compilar N2</button><div class="redis-feedback" id="nivel2Feedback"></div><div id="n2MetadataCard" class="metadata-card" style="display:none;"></div><span class="auto-link" id="linkAutoN3" style="display:none;">🧠 Avançar para Fortificação N3</span></div>
+        </div>`;
+
+        document.getElementById('tabN3').innerHTML = `
+        <div class="section"><div class="section-title n3">🧠 Fortificação N3</div>
+            <input type="text" class="raw-textarea n3-textarea" id="nivel3Chave" placeholder="Chave Redis">
+            <textarea class="raw-textarea n3-textarea" id="nivel3JsonDocumento" placeholder="JSON completo (N1+N2)..." style="min-height:180px;"></textarea>
+            <div style="display:flex;gap:6px;margin-top:8px;"><button class="btn btn-n3 btn-sm" id="btnGerarFortificacao">🧠 Gerar Prompt N3</button><button class="btn btn-outline btn-sm" id="btnLimparNivel3">🧹 Limpar</button></div>
+            <div id="nivel3PromptContainer" style="display:none;margin-top:16px;"><textarea class="generated-question" id="nivel3SuperPrompt" readonly style="min-height:180px;"></textarea><div style="display:flex;align-items:center;gap:8px;margin-top:6px;"><button class="btn btn-outline btn-sm" id="btnCopiarNivel3Prompt">📋 Copiar</button><span class="copy-feedback" id="n3CopyFeedback"></span><span style="font-size:0.65rem;color:var(--text-soft);margin-left:auto;" id="n3Timestamp"></span></div></div>
+            <div id="nivel3RespostaContainer" style="display:none;margin-top:20px;"><textarea class="raw-textarea n3-textarea" id="nivel3RespostaIA" style="min-height:180px;"></textarea><button class="btn btn-n3 btn-sm" id="btnCompilarNivel3" style="margin-top:8px;">🔄 Compilar N3</button><div class="redis-feedback" id="nivel3Feedback"></div><div id="n3MetadataCard" class="metadata-card" style="display:none;"></div><span class="auto-link" id="linkAutoCientifico" style="display:none;">🔬 Gerar Artigo Científico</span></div>
+        </div>`;
+
+        document.getElementById('tabCientifico').innerHTML = `
+        <div class="section"><div class="section-title" style="color:var(--sci-accent);border-bottom:1px solid rgba(230,81,0,0.2);">🔬 Gerador de Artigo Científico</div>
+            <div class="grid-2"><div><label>Área Científica</label><input type="text" id="ciArea" value="Inteligência Artificial"></div><div><label>Subárea</label><input type="text" id="ciSubarea" value="LLMs e RAG"></div><div><label>Título do Artigo</label><input type="text" id="ciTitulo" value="O Impacto dos Grandes Modelos de Linguagem na Recuperação de Informação"></div><div><label>Palavras-chave</label><input type="text" id="ciKeywords" value="LLM, RAG, NLP, Transformers"></div></div>
+            <button class="btn btn-ci" id="btnGerarPromptCientifico" style="margin-top:10px;">🔬 Gerar Prompt Científico</button>
+            <div id="ciPromptContainer" style="display:none;margin-top:16px;"><textarea class="generated-question" id="ciPromptGerado" readonly style="min-height:220px;"></textarea><div style="display:flex;align-items:center;gap:8px;margin-top:6px;"><button class="btn btn-outline btn-sm" id="btnCopiarCientificoPrompt">📋 Copiar</button><span class="copy-feedback" id="ciCopyFeedback"></span><span style="font-size:0.65rem;color:var(--text-soft);margin-left:auto;" id="ciTimestamp"></span></div></div>
+            <div id="ciRespostaContainer" style="display:none;margin-top:20px;"><textarea id="ciRespostaIA" class="raw-textarea ci-textarea" style="min-height:220px;"></textarea><button class="btn btn-ci btn-sm" id="btnCompilarCientifico" style="margin-top:8px;">🔄 Compilar Artigo</button><div class="redis-feedback" id="ciFeedback"></div><div id="ciMetadataCard" class="metadata-card" style="display:none;"></div></div>
+        </div>`;
+
+        document.getElementById('tabRevista').innerHTML = `
+        <div class="section"><div class="section-title revista">📰 Gerador de Artigo para Revista IDEnza</div>
+            <p style="font-size:0.7rem;color:var(--text-soft);margin-bottom:16px;">
+                Crie seu artigo completo com HTML, imagem e compliance expansível. Gere e baixe o HTML final ou salve no Redis.
+            </p>
+            <div class="grid-2">
+                <div><label>Eixo Temático</label><input type="text" id="revEixo" placeholder="Ex: Tecnologia e Sociedade"></div>
+                <div><label>Tema</label><input type="text" id="revTema" placeholder="Ex: IA na Educação"></div>
+                <div><label>Título do Artigo</label><input type="text" id="revTitulo" placeholder="Ex: O Futuro da Aprendizagem com IA"></div>
+                <div><label>Subtítulo</label><input type="text" id="revSubtitulo" placeholder="Ex: Desafios e Oportunidades"></div>
+                <div><label>Tags / Descritores (vírgula)</label><input type="text" id="revTags" placeholder="Ex: IA, educação, personalização"></div>
+                <div><label>Autor(es)</label><input type="text" id="revAutores" value="IDEnza System"></div>
+                <div><label>Licença</label><select id="revLicenca"><option>CC BY 4.0</option><option>CC BY-SA 4.0</option><option>CC BY-NC 4.0</option><option>Copyright (Todos os direitos reservados)</option></select></div>
+            </div>
+            <div class="form-group" style="margin-top:16px;">
+                <label>Imagem do Artigo (URL ou upload)</label>
+                <div class="revista-image-upload">
+                    <input type="text" id="revImageUrl" placeholder="https://... ou cole base64" style="flex:1;">
+                    <input type="file" id="revImageFile" accept="image/*" style="display:none;" onchange="handleRevistaImageUpload(this)">
+                    <button class="btn btn-outline btn-sm" onclick="document.getElementById('revImageFile').click()">📁 Upload</button>
+                    <button class="btn btn-outline btn-sm" onclick="document.getElementById('revImageUrl').value=''; document.getElementById('revImagePreview').src='#'; document.getElementById('revImagePreview').style.display='none';">🧹 Limpar</button>
+                </div>
+                <img id="revImagePreview" src="#" alt="Preview da imagem" style="display:none; max-width:200px; max-height:100px; margin-top:8px; border:1px solid var(--gold-line); border-radius:4px;">
+            </div>
+            <div class="form-group" style="margin-top:16px;">
+                <label>Conteúdo HTML do Artigo</label>
+                <textarea id="revHtmlContent" class="raw-textarea" style="min-height:300px;" placeholder="<h2>Introdução</h2><p>Seu texto aqui...</p>"></textarea>
+            </div>
+            <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap;">
+                <button class="btn btn-revista" id="btnGerarHtmlRevista">📄 Gerar HTML Final</button>
+                <button class="btn btn-outline btn-sm" id="btnBaixarRevista" disabled>📥 Baixar HTML</button>
+                <button class="btn btn-revista btn-sm" id="btnSalvarRevistaRedis">💾 Salvar no Redis</button>
+            </div>
+            <div class="status-msg" id="revStatusMsg"></div>
+            <textarea id="revHtmlGerado" class="raw-textarea" style="display:none; min-height:200px; margin-top:16px;" readonly></textarea>
+        </div>`;
+
+        document.getElementById('tabRec').innerHTML = `
+        <div class="section"><div class="section-title" style="color:var(--rec-accent);border-bottom:1px solid rgba(243,156,18,0.2);">♻️ Reciclagem</div>
+            <div class="grid-2"><div><label>Cluster Fonte</label><select id="recClusterSource" class="raw-textarea"></select></div><div><label>Cluster Destino</label><select id="recClusterTarget" class="raw-textarea"></select></div></div>
+            <button class="btn btn-rec btn-sm" id="btnScanReciclagem">🔍 Escanear</button><div id="recStatusMsg" style="margin-top:8px;"></div>
+            <h4>🚫 Duplicados</h4><table class="eng-payload-table" id="tabelaDuplicados"><thead><tr><th>Código</th><th>Tópico</th><th>Motivo</th></tr></thead><tbody></tbody></table>
+            <h4>✨ Novos</h4><table class="eng-payload-table" id="tabelaNovos"><thead><tr><th><input type="checkbox" id="selecionarTodos"></th><th>Código</th><th>Tópico</th></tr></thead><tbody id="novosTemasBody"></tbody></table>
+            <button class="btn btn-data btn-sm" id="btnIntegrarSelecionados" disabled>📦 Integrar</button><div class="redis-feedback" id="recFeedback"></div>
+        </div>`;
+
+        document.getElementById('tabReestruturar').innerHTML = `
+        <div class="section">
+            <div class="section-title reestruturar">🔍 Analisar & Reestruturar Conteúdo</div>
+            <p style="font-size:0.7rem;color:var(--text-soft);margin-bottom:16px;">
+                Cole uma <strong>chave Redis</strong> e o <strong>JSON completo</strong>. O sistema analisará automaticamente o nível de maturidade (N1, N2, N3, Científico ou Revista).<br>
+                Se o formato for <strong>desconhecido</strong>, um novo template N1 será gerado com base nos metadados extraídos.<br>
+                Destino: <span style="color:var(--reestruturar-accent);font-weight:600;">Caixa Preta Oficial</span>.
+            </p>
+            <div class="grid-2">
+                <div><label>Chave Redis</label><input type="text" id="reestruturarChave" placeholder="Ex: idenza:arts:cinema:..."></div>
+                <div><label>Cluster de Origem</label>
+                    <select id="reestruturarClusterOrigem">
+                        <option value="">— Manual (cole JSON abaixo) —</option>
+                    </select>
+                </div>
+            </div>
+            <textarea id="reestruturarJson" class="raw-textarea" style="min-height:250px; margin-top:12px;" placeholder='{"codigo_universal":"...", ...}'></textarea>
+            <button class="btn btn-reestruturar" id="btnAnalisarReestruturar" style="margin-top:12px;">🔎 Analisar</button>
+            <div id="reestruturarDiagnostico" style="display:none; margin-top:20px; padding:16px; background:#f4f9f9; border:1px solid #b8d8d8;">
+                <h4 style="font-size:0.75rem; color:var(--reestruturar-accent); margin-bottom:10px;">📋 Diagnóstico</h4>
+                <div id="reestruturarResultado"></div>
+                <div style="margin-top:12px; display:flex; gap:8px; align-items:center;">
+                    <button class="btn btn-sm btn-reestruturar" id="btnEnviarParaCaixaVerde" disabled>📤 Enviar para Caixa Preta Oficial</button>
+                    <span class="status-msg" id="reestruturarStatus"></span>
+                </div>
+            </div>
+        </div>`;
+    }
+
+    criarAbas();
+
+    // ==================== ÁRVORE ====================
+    const knowledgeTree = {};
+    RAW_DATA.forEach(line => {
+        const parts = line.split('|').map(s=>s.trim());
+        if (parts.length < 3) return;
+        const [area, subarea, tema] = parts;
+        const tags = parts[3] ? parts[3].split(',').map(t=>t.trim()) : [];
+        if (!knowledgeTree[area]) knowledgeTree[area] = {};
+        if (!knowledgeTree[area][subarea]) knowledgeTree[area][subarea] = [];
+        knowledgeTree[area][subarea].push({ tema, tags });
+    });
+
+    let navState = { level:0, area:null, subarea:null, selectedTema:null, selectedTags:[] };
+    function renderTree() {
+        const grid = document.getElementById('treeGrid'), info = document.getElementById('selectedInfo');
+        if (!grid) return;
+        grid.innerHTML = ''; info.classList.remove('visible'); navState.selectedTema = null; updateBreadcrumb();
+        if (navState.level === 0) {
+            Object.keys(knowledgeTree).sort().forEach(area => {
+                const card = document.createElement('div'); card.className = 'tree-card';
+                card.innerHTML = `<div class="emoji">${AREA_EMOJIS[area]||'📁'}</div><div class="info"><div class="name">${area}</div></div><div class="arrow">▸</div>`;
+                card.onclick = () => { navState = { level:1, area, subarea:null }; renderTree(); };
+                grid.appendChild(card);
+            });
+        } else if (navState.level === 1 && navState.area) {
+            Object.keys(knowledgeTree[navState.area]||{}).sort().forEach(sub => {
+                const card = document.createElement('div'); card.className = 'tree-card';
+                card.innerHTML = `<div class="emoji">📂</div><div class="info"><div class="name">${sub}</div></div><div class="arrow">▸</div>`;
+                card.onclick = () => { navState = { ...navState, level:2, subarea:sub }; renderTree(); };
+                grid.appendChild(card);
+            });
+        } else if (navState.level === 2 && navState.subarea) {
+            (knowledgeTree[navState.area][navState.subarea]||[]).forEach(item => {
+                const card = document.createElement('div'); card.className = 'tree-card';
+                card.innerHTML = `<div class="emoji">📌</div><div class="info"><div class="name">${item.tema}</div></div><div class="arrow">▸</div>`;
+                card.onclick = () => selectTema(item, card);
+                grid.appendChild(card);
+            });
+        }
+    }
+    function selectTema(item, card) {
+        document.querySelectorAll('.tree-card.selected').forEach(c=>c.classList.remove('selected'));
+        card.classList.add('selected');
+        navState.selectedTema = item.tema; navState.selectedTags = item.tags;
+        document.getElementById('selectedInfo').classList.add('visible');
+        document.getElementById('selectedName').textContent = `${navState.area} ▸ ${navState.subarea} ▸ ${item.tema}`;
+        document.getElementById('selectedTags').innerHTML = item.tags.map(t=>`<span class="tag-pill">${t}</span>`).join('');
+    }
+    function updateBreadcrumb() {
+        const bc = document.getElementById('treeBreadcrumb'); if (!bc) return;
+        bc.innerHTML = '<span class="breadcrumb-item" data-action="root">📂 Todas as Áreas</span>';
+        if (navState.area) bc.innerHTML += ` <span class="breadcrumb-separator">▸</span> <span class="breadcrumb-item" data-action="area" data-area="${navState.area}">${navState.area}</span>`;
+        if (navState.subarea) bc.innerHTML += ` <span class="breadcrumb-separator">▸</span> <span class="breadcrumb-item" data-action="subarea" data-subarea="${navState.subarea}">${navState.subarea}</span>`;
+        if (navState.selectedTema) bc.innerHTML += ` <span class="breadcrumb-separator">▸</span> <span class="breadcrumb-current">${navState.selectedTema}</span>`;
+        bc.querySelectorAll('.breadcrumb-item').forEach(el => {
+            el.onclick = () => {
+                if (el.dataset.action === 'root') navState = { level:0 };
+                else if (el.dataset.action === 'area') navState = { level:1, area:el.dataset.area };
+                else if (el.dataset.action === 'subarea') navState = { level:2, area:navState.area, subarea:el.dataset.subarea };
+                renderTree();
+            };
+        });
+    }
+
+    // ==================== ABAS ====================
+    const tabMap = {
+        gov: document.getElementById('tabGov'), tree: document.getElementById('tabTree'), free: document.getElementById('tabFree'),
+        n1: document.getElementById('tabN1'), n2: document.getElementById('tabN2'), n3: document.getElementById('tabN3'),
+        cientifico: document.getElementById('tabCientifico'), revista: document.getElementById('tabRevista'),
+        rec: document.getElementById('tabRec'), reestruturar: document.getElementById('tabReestruturar')
+    };
+    function switchTab(id) {
+        Object.values(tabMap).forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        tabMap[id].classList.add('active');
+        const btn = document.getElementById(`tab${id.charAt(0).toUpperCase()+id.slice(1)}Btn`);
+        if (btn) btn.classList.add('active');
+        if (id === 'gov') carregarGovernanca();
+        if (id === 'rec') preencherSelectReciclagem();
+        if (id === 'tree') renderTree();
+        if (id === 'reestruturar') atualizarSelectReestruturar();
+    }
+    document.getElementById('tabGovBtn').onclick = () => switchTab('gov');
+    document.getElementById('tabTreeBtn').onclick = () => switchTab('tree');
+    document.getElementById('tabFreeBtn').onclick = () => switchTab('free');
+    document.getElementById('tabN1Btn').onclick = () => switchTab('n1');
+    document.getElementById('tabN2Btn').onclick = () => switchTab('n2');
+    document.getElementById('tabN3Btn').onclick = () => switchTab('n3');
+    document.getElementById('tabCientificoBtn').onclick = () => switchTab('cientifico');
+    document.getElementById('tabRevistaBtn').onclick = () => switchTab('revista');
+    document.getElementById('tabRecBtn').onclick = () => switchTab('rec');
+    document.getElementById('tabReestruturarBtn').onclick = () => switchTab('reestruturar');
+
+    document.getElementById('btnSendToN1').onclick = () => {
+        if (!navState.selectedTema) return;
+        document.getElementById('n1Dominio').value = navState.area;
+        document.getElementById('n1NoEspecializado').value = navState.subarea;
+        document.getElementById('n1Topico').value = navState.selectedTema;
+        document.getElementById('n1SubTopicos').value = navState.selectedTags.join(', ');
+        switchTab('n1');
+    };
+    document.getElementById('btnEnviarTemaLivre').onclick = () => {
+        const d = document.getElementById('freeDominio').value.trim();
+        const no = document.getElementById('freeNo').value.trim();
+        const t = document.getElementById('freeTopico').value.trim();
+        const sub = document.getElementById('freeSubTopicos').value.trim();
+        if (!d || !t) { document.getElementById('freeStatus').textContent = '⚠️ Preencha ao menos Domínio e Tópico.'; return; }
+        document.getElementById('n1Dominio').value = d;
+        document.getElementById('n1NoEspecializado').value = no || d;
+        document.getElementById('n1Topico').value = t;
+        document.getElementById('n1SubTopicos').value = sub;
+        switchTab('n1');
+        document.getElementById('freeStatus').textContent = '';
+    };
+
+    // ==================== N1 ====================
+    document.getElementById('btnGerarPromptN1').onclick = () => {
+        const d = document.getElementById('n1Dominio').value.trim();
+        const no = document.getElementById('n1NoEspecializado').value.trim();
+        const t = document.getElementById('n1Topico').value.trim();
+        const sub = document.getElementById('n1SubTopicos').value.trim();
+        if (!d || !no || !t) return alert('Preencha todos os campos.');
+        const prompt = `⚡ ATIVAÇÃO DE NÓ COGNITIVO IGP — MODO SUPER PROMPT ⚡
+
+Você é um nó especializado em ${no}. Gere conhecimento ESTRITAMENTE VERDADEIRO, VERIFICÁVEL e ESTRUTURADO sobre: ${t}.
+
+⚠️ REGRAS ABSOLUTAS:
+1. Não invente fatos, dados, datas, nomes ou fontes.
+2. Todas as referências devem ser reais e publicadas.
+3. Se não houver informação confiável, indique a lacuna.
+4. Mantenha-se fiel ao tópico.
+
+AS 7 CAMADAS DO PROTOCOLO IGP:
+1. Essência
+2. Teorias e Fundamentos
+3. Estrutura e Processos
+4. Aplicação Prática
+5. Métodos e Ferramentas
+6. Uso Cotidiano e Inovação
+7. Curiosidades e Marcos Históricos
+
+Para cada camada: descricao (mín. 200 caracteres), 3 subtemas, 3 conceitos-chave, 3 fontes VERDADEIRAS.
+Formato JSON: {"camadas":[{"nivel":1,"nome":"Essência","descricao":"...","subtemas":[...],"conceitos_chave":[...],"fontes":[...]}, ...]}
+
+APÓS O JSON, INCLUA METADADOS SEMÂNTICOS:
+## METADADOS DE BUSCA SEMÂNTICA
+**Tópico central**: ${t}
+**Domínio de conhecimento**: ${d}
+**Tags principais**: ${sub}
+**Nós relacionados sugeridos**: [liste 3-5]
+**Grau de confiabilidade**: [alto/médio/baixo]
+**Aviso de lacuna**: [se houver]
+
+Tópico: ${t}${sub?' ('+sub+')':''}`;
+        document.getElementById('n1PromptGerado').value = prompt;
+        document.getElementById('n1PromptContainer').style.display = 'block';
+        document.getElementById('n1RespostaContainer').style.display = 'block';
+        document.getElementById('n1Timestamp').textContent = '🕒 ' + agoraBR();
+    };
+    document.getElementById('btnCopiarN1Prompt').onclick = () => copiarTexto(document.getElementById('n1PromptGerado').value, 'n1CopyFeedback');
+    document.getElementById('btnCompilarN1').onclick = async () => {
+        const fb = document.getElementById('n1Feedback'), card = document.getElementById('n1MetadataCard');
+        fb.className = 'redis-feedback'; card.style.display = 'none';
+        try {
+            let resp = document.getElementById('n1RespostaIA').value.trim();
+            if (!resp) throw new Error('Resposta vazia.');
+            const jsonMatch = resp.match(/\{[\s\S]*?\}(?=\s*## METADADOS|\s*$)/);
+            if (!jsonMatch) throw new Error('JSON principal não encontrado.');
+            let json = JSON.parse(jsonMatch[0]);
+            const camadas = json.camadas || [];
+            if (camadas.length !== 7) throw new Error('Precisa de exatamente 7 camadas.');
+
+            const metaMatch = resp.match(/## METADADOS DE BUSCA SEMÂNTICA\s*\*\*Tópico central\*\*:\s*(.*?)\s*\*\*Domínio de conhecimento\*\*:\s*(.*?)\s*\*\*Tags principais\*\*:\s*(.*?)\s*\*\*Nós relacionados sugeridos\*\*:\s*(.*?)\s*\*\*Grau de confiabilidade\*\*:\s*(.*?)\s*\*\*Aviso de lacuna\*\*:\s*(.*?)$/ms);
+            let metadados = {};
+            if (metaMatch) {
+                metadados = {
+                    topico_central: metaMatch[1].trim(),
+                    dominio_conhecimento: metaMatch[2].trim(),
+                    tags_principais: metaMatch[3].split(',').map(s=>s.trim()),
+                    nos_relacionados: metaMatch[4].split(',').map(s=>s.trim()).filter(Boolean),
+                    grau_confiabilidade: metaMatch[5].trim(),
+                    aviso_lacuna: metaMatch[6].trim()
+                };
+            } else {
+                metadados = {
+                    topico_central: document.getElementById('n1Topico').value,
+                    dominio_conhecimento: document.getElementById('n1Dominio').value,
+                    tags_principais: document.getElementById('n1SubTopicos').value.split(',').map(s=>s.trim()),
+                    nos_relacionados: [], grau_confiabilidade: 'médio', aviso_lacuna: 'Nenhuma lacuna detectada'
+                };
+            }
+            const d = document.getElementById('n1Dominio').value.trim();
+            const t = document.getElementById('n1Topico').value.trim();
+            const sub = document.getElementById('n1SubTopicos').value.trim();
+            const cod = `aci.${slugify(d)}.${slugify(t)}.v1`;
+            const cluster = getClusters().find(c=>c.name==='Caixa Preta Oficial');
+            if (!cluster) throw new Error('Cluster Caixa Preta Bruta não encontrado.');
+            const compliance = criarCompliance({
+                autor:'IDEnza System', palavrasChave:sub?sub.split(',').map(s=>s.trim()):[],
+                referencias: camadas.flatMap(c=>c.fontes||[]), nivelMaturidade:'N1', status:'validado', metadadosSemanticos:metadados
+            });
+            const payload = { codigo_universal:cod, camadas, compliance };
+            atualizarHashCompliance(payload);
+            await redisSet(cluster, `idenza:n1:${cod}`, payload);
+            card.innerHTML = montarMetadataCardCompliance(cod, `idenza:n1:${cod}`, cluster.name, JSON.stringify(payload).length, payload.compliance);
+            card.style.display = 'flex'; fb.className = 'redis-feedback show success'; fb.textContent = '✅ N1 compilado com metadados.';
+            document.getElementById('linkAutoN2').style.display = 'inline-flex';
+            document.getElementById('linkAutoN2').onclick = () => { switchTab('n2'); document.getElementById('nivel2Chave').value = `idenza:n1:${cod}`; document.getElementById('nivel2JsonNivel1').value = JSON.stringify(payload,null,2); };
+        } catch(e) { fb.className = 'redis-feedback show error'; fb.textContent = '❌ ' + e.message; }
+    };
+
+    // ==================== N2 ====================
+    document.getElementById('btnGerarPromptExpansao').onclick = () => {
+        const chave = document.getElementById('nivel2Chave').value, json = document.getElementById('nivel2JsonNivel1').value;
+        if (!chave || !json) return alert('Preencha todos os campos.');
+        const prompt = `⚡ EXPANSÃO N2 — APROFUNDAMENTO COGNITIVO ⚡
+Com base no OCI N1 (${chave}), produza 7 camadas complementares (níveis 8 a 14).
+
+⚠️ NÃO INVENTE CONHECIMENTO. Utilize fontes reais.
+
+N1 existente: ${json}
+Gere JSON: {"camadas_n2":[{"nivel":8,"nome":"...","subtemas":[...],"conceitos_chave":[...],"fontes":[...]}, ...]}`;
+        document.getElementById('nivel2SuperPrompt').value = prompt;
+        document.getElementById('nivel2PromptContainer').style.display = 'block';
+        document.getElementById('nivel2RespostaContainer').style.display = 'block';
+        document.getElementById('n2Timestamp').textContent = '🕒 ' + agoraBR();
+    };
+    document.getElementById('btnCopiarNivel2Prompt').onclick = () => copiarTexto(document.getElementById('nivel2SuperPrompt').value, 'n2CopyFeedback');
+    document.getElementById('btnCompilarNivel2').onclick = async () => {
+        const fb = document.getElementById('nivel2Feedback'), card = document.getElementById('n2MetadataCard');
+        fb.className = 'redis-feedback'; card.style.display = 'none';
+        try {
+            let resp = document.getElementById('nivel2RespostaIA').value.trim(); if(!resp) throw new Error('Resposta vazia.');
+            let m = resp.match(/\{[\s\S]*\}/); if(m) resp = m[0];
+            let json = JSON.parse(resp);
+            const camadas_n2 = json.camadas_n2 || []; if(camadas_n2.length !== 7) throw new Error('Precisa de 7 camadas N2.');
+            const chave = document.getElementById('nivel2Chave').value.trim();
+            const cluster = getClusters().find(c=>c.name==='Caixa Preta Oficial'); if(!cluster) throw new Error('Cluster não encontrado.');
+            const raw = await redisGet(cluster, chave); if(!raw) throw new Error('N1 não encontrado.');
+            const doc = typeof raw === 'string' ? JSON.parse(raw) : raw;
+            doc.camadas_n2 = camadas_n2;
+            doc.compliance.nivel_maturidade = 'N2'; doc.compliance.data_modificacao = agoraISO(); doc.compliance.status = 'expandido';
+            doc.compliance.referencias = [...(doc.compliance.referencias||[]), ...camadas_n2.flatMap(c=>c.fontes||[])];
+            atualizarHashCompliance(doc);
+            await redisSet(cluster, chave, doc);
+            card.innerHTML = montarMetadataCardCompliance(doc.codigo_universal, chave, cluster.name, JSON.stringify(doc).length, doc.compliance);
+            card.style.display = 'flex'; fb.className = 'redis-feedback show success'; fb.textContent = '✅ N2 compilado.';
+            document.getElementById('linkAutoN3').style.display = 'inline-flex';
+            document.getElementById('linkAutoN3').onclick = () => { switchTab('n3'); document.getElementById('nivel3Chave').value = chave; document.getElementById('nivel3JsonDocumento').value = JSON.stringify(doc,null,2); };
+        } catch(e) { fb.className = 'redis-feedback show error'; fb.textContent = '❌ ' + e.message; }
+    };
+    document.getElementById('btnLimparNivel2').onclick = () => {
+        document.getElementById('nivel2Chave').value = ''; document.getElementById('nivel2JsonNivel1').value = '';
+        document.getElementById('nivel2PromptContainer').style.display = 'none'; document.getElementById('nivel2RespostaContainer').style.display = 'none';
+    };
+
+    // ==================== N3 (PROMPT ROBUSTO) ====================
+    document.getElementById('btnGerarFortificacao').onclick = () => {
+        const json = document.getElementById('nivel3JsonDocumento').value;
+        if (!json) return alert('JSON completo necessário.');
+        const prompt = `🧠 FORTIFICAÇÃO N3 — VALIDAÇÃO CRUZADA, REFERÊNCIAS REAIS E CONEXÕES INTERDISCIPLINARES 🧠
+
+Você é um revisor acadêmico sênior com acesso a bases de conhecimento verificadas. Com base no documento JSON abaixo (que contém N1 e N2), produza uma fortificação N3 profunda, extensa e de alto valor.
+
+⚠️ REGRAS INEGOCIÁVEIS:
+1. NÃO INVENTE nenhum dado, autor, título, ano, DOI ou instituição.
+2. Todas as referências devem ser REAIS, PUBLICADAS e VERIFICÁVEIS.
+3. Use o MÁXIMO de tokens disponível para fornecer uma análise completa e detalhada.
+4. Se não puder confirmar uma informação, indique claramente a incerteza.
+
+DOCUMENTO BASE (N1+N2):
+${json}
+
+ENTREGUE UM JSON com o campo "nivel_3" contendo:
+
+{
+  "nivel_3": {
+    "validacao": [
+      "Análise 1: verifique convergências e divergências entre as camadas N1 e N2...",
+      "Análise 2: aponte pontos fortes, fracos e lacunas no conhecimento apresentado...",
+      "Análise 3: ... (use quantas forem necessárias, seja minucioso)"
+    ],
+    "referencias": [
+      {
+        "autor": "Sobrenome, Nome",
+        "titulo": "Título completo do artigo ou livro",
+        "periodico": "Nome do periódico (se aplicável)",
+        "ano": 2023,
+        "doi": "10.xxxx/xxxxx (se disponível)",
+        "tipo": "artigo|livro|tese|documento_oficial",
+        "relevancia": "Como esta referência se relaciona com o tema"
+      }
+    ],
+    "conexoes": [
+      "Conexão interdisciplinar 1: relacione com campos afins, aplicações práticas, implicações éticas, etc.",
+      "Conexão interdisciplinar 2: ...",
+      "..."
+    ],
+    "grau_confiabilidade": "ALTO|MÉDIO|BAIXO (com justificativa detalhada baseada nas fontes)",
+    "recomendacoes": "Sugestões para aprofundamento futuro ou correções necessárias"
+  }
+}
+
+Mínimo de 5 referências reais. Seja rigoroso e exaustivo. A excelência está nos detalhes.`;
+        document.getElementById('nivel3SuperPrompt').value = prompt;
+        document.getElementById('nivel3PromptContainer').style.display = 'block';
+        document.getElementById('nivel3RespostaContainer').style.display = 'block';
+        document.getElementById('n3Timestamp').textContent = '🕒 ' + agoraBR();
+    };
+    document.getElementById('btnCopiarNivel3Prompt').onclick = () => copiarTexto(document.getElementById('nivel3SuperPrompt').value, 'n3CopyFeedback');
+    document.getElementById('btnCompilarNivel3').onclick = async () => {
+        const fb = document.getElementById('nivel3Feedback'), card = document.getElementById('n3MetadataCard');
+        fb.className = 'redis-feedback'; card.style.display = 'none';
+        try {
+            let resp = document.getElementById('nivel3RespostaIA').value.trim(); if(!resp) throw new Error('Resposta vazia.');
+            let m = resp.match(/\{[\s\S]*\}/); if(m) resp = m[0];
+            let json = JSON.parse(resp); if(!json.nivel_3) throw new Error('Campo nivel_3 ausente.');
+            const chave = document.getElementById('nivel3Chave').value.trim();
+            const cluster = getClusters().find(c=>c.name==='Caixa Preta Oficial'); if(!cluster) throw new Error('Cluster não encontrado.');
+            const raw = await redisGet(cluster, chave); if(!raw) throw new Error('Documento não encontrado.');
+            const doc = typeof raw === 'string' ? JSON.parse(raw) : raw;
+            doc.nivel_3 = json.nivel_3;
+            doc.compliance.nivel_maturidade = 'N3'; doc.compliance.data_modificacao = agoraISO(); doc.compliance.status = 'fortificado';
+            doc.compliance.referencias = [...(doc.compliance.referencias||[]), ...(json.nivel_3.referencias||[])];
+            atualizarHashCompliance(doc);
+            await redisSet(cluster, chave, doc);
+            card.innerHTML = montarMetadataCardCompliance(doc.codigo_universal, chave, cluster.name, JSON.stringify(doc).length, doc.compliance);
+            card.style.display = 'flex'; fb.className = 'redis-feedback show success'; fb.textContent = '✅ N3 compilado.';
+            window._documentoN3Atual = doc;
+            document.getElementById('linkAutoCientifico').style.display = 'inline-flex';
+            document.getElementById('linkAutoCientifico').onclick = () => {
+                const d = doc; let dominio = 'Geral', topico = 'Tema';
+                if (d.codigo_universal) { const partes = d.codigo_universal.split('.'); if(partes.length>=2) dominio = partes[1].replace(/_/g,' ').replace(/\b\w/g,l=>l.toUpperCase()); if(partes.length>=3) topico = partes[2].replace(/_/g,' ').replace(/\b\w/g,l=>l.toUpperCase()); }
+                const allKeys = new Set(); const extractKeys = (camadas) => { if(Array.isArray(camadas)) camadas.forEach(c=>{ if(Array.isArray(c.conceitos_chave)) c.conceitos_chave.forEach(k=>allKeys.add(k)); }); };
+                extractKeys(d.camadas); extractKeys(d.camadas_n2);
+                document.getElementById('ciArea').value = dominio;
+                document.getElementById('ciSubarea').value = 'Análise N3';
+                document.getElementById('ciTitulo').value = `${topico} — Estudo Científico com Validação Cruzada`;
+                document.getElementById('ciKeywords').value = Array.from(allKeys).slice(0,10).join(', ') || topico.toLowerCase();
+                switchTab('cientifico');
+            };
+        } catch(e) { fb.className = 'redis-feedback show error'; fb.textContent = '❌ ' + e.message; }
+    };
+    document.getElementById('btnLimparNivel3').onclick = () => {
+        document.getElementById('nivel3Chave').value = ''; document.getElementById('nivel3JsonDocumento').value = '';
+        document.getElementById('nivel3PromptContainer').style.display = 'none'; document.getElementById('nivel3RespostaContainer').style.display = 'none';
+    };
+
+    // ==================== CIENTÍFICO (PROMPT ROBUSTO) ====================
+    document.getElementById('btnGerarPromptCientifico').onclick = () => {
+        const area = document.getElementById('ciArea').value.trim();
+        const sub = document.getElementById('ciSubarea').value.trim();
+        const titulo = document.getElementById('ciTitulo').value.trim();
+        const kw = document.getElementById('ciKeywords').value.trim();
+        if(!area||!titulo) return alert('Preencha área e título.');
+        const prompt = `🔬 PROTOCOLO DE GERAÇÃO CIENTÍFICA IDENZA — ARTIGO ACADÊMICO DE ALTO IMPACTO 🔬
+
+Você é um pesquisador sênior com vasta experiência em ${area}${sub?', com foco em '+sub:''}. Produza um ARTIGO CIENTÍFICO COMPLETO, ESTRITAMENTE VERDADEIRO, VERIFICÁVEL e pronto para submissão a um periódico de alto impacto.
+
+TÍTULO: "${titulo}"
+
+⚠️ REGRAS INEGOCIÁVEIS:
+1. NÃO INVENTE fatos, dados, estatísticas, citações ou referências.
+2. Todas as fontes devem ser REAIS, PUBLICADAS e RASTREÁVEIS (preferencialmente com DOI).
+3. Use o MÁXIMO de tokens disponível para aprofundar cada seção.
+4. Se não houver evidência suficiente para uma afirmação, indique claramente a limitação.
+
+ESTRUTURA OBRIGATÓRIA DO ARTIGO:
+
+1. RESUMO (250-300 palavras): Estruturado com contexto, objetivo, método, resultados principais e conclusão. Inclua as palavras-chave ao final.
+
+2. PALAVRAS-CHAVE: 5 a 8 termos relevantes.
+
+3. INTRODUÇÃO: Contextualização do tema, problema de pesquisa, hipótese ou pergunta norteadora, justificativa, objetivos (geral e específicos) e estrutura do artigo. Mínimo 500 palavras.
+
+4. REVISÃO DE LITERATURA: Análise crítica e abrangente do estado da arte. Agrupe por temas, identifique lacunas, contradições e tendências. Todas as afirmações devem ser respaldadas por citações reais. Mínimo 800 palavras.
+
+5. METODOLOGIA: Descreva detalhadamente o método (natureza da pesquisa, abordagem, procedimentos, instrumentos, amostra, critérios de inclusão/exclusão, análise de dados). Justifique cada escolha metodológica com base na literatura. Mínimo 400 palavras.
+
+6. RESULTADOS E DISCUSSÃO: Apresente os achados de forma clara e objetiva, dialogando com a literatura revisada. Destaque implicações teóricas e práticas, limitações do estudo e comparações com pesquisas anteriores. Mínimo 800 palavras.
+
+7. CONCLUSÃO: Síntese dos principais achados, resposta ao problema de pesquisa, contribuições originais, limitações e sugestões para trabalhos futuros. Mínimo 300 palavras.
+
+8. REFERÊNCIAS: Liste TODAS as referências citadas no texto (mínimo 10, idealmente 15-20), em formato ABNT ou APA. Cada referência deve ser REAL e conter: autor(es), título, periódico/livro, volume, número, páginas, ano, DOI (se disponível).
+
+Formato JSON de saída:
+{
+  "artigo_cientifico": {
+    "titulo": "${titulo}",
+    "area": "${area}",
+    "subarea": "${sub}",
+    "resumo": "...",
+    "palavras_chave": ["...", "..."],
+    "introducao": "...",
+    "revisao_literatura": "...",
+    "metodologia": "...",
+    "resultados_discussao": "...",
+    "conclusao": "...",
+    "referencias": [
+      {"autor": "Sobrenome, N.", "titulo": "...", "periodico": "...", "volume": "...", "numero": "...", "paginas": "...", "ano": 2023, "doi": "..."}
+    ],
+    "data_geracao": "${agoraISO()}"
+  }
+}
+
+A excelência acadêmica está na precisão, profundidade e honestidade intelectual. Use todo o espaço disponível.`;
+        document.getElementById('ciPromptGerado').value = prompt;
+        document.getElementById('ciPromptContainer').style.display = 'block';
+        document.getElementById('ciRespostaContainer').style.display = 'block';
+        document.getElementById('ciTimestamp').textContent = '🕒 ' + agoraBR();
+    };
+    document.getElementById('btnCopiarCientificoPrompt').onclick = () => copiarTexto(document.getElementById('ciPromptGerado').value, 'ciCopyFeedback');
+    document.getElementById('btnCompilarCientifico').onclick = async () => {
+        const fb = document.getElementById('ciFeedback'), card = document.getElementById('ciMetadataCard');
+        fb.className = 'redis-feedback'; card.style.display = 'none';
+        try {
+            let resp = document.getElementById('ciRespostaIA').value.trim(); if(!resp) throw new Error('Resposta vazia.');
+            let m = resp.match(/\{[\s\S]*\}/); if(m) resp = m[0];
+            let json = JSON.parse(resp); let artigo = json.artigo_cientifico || json;
+            const cod = `cient.${slugify(artigo.area||'geral')}.${slugify(artigo.titulo).substring(0,40)}.v1`;
+            const cluster = getClusters().find(c=>c.name==='triagem_IDEnza'); if(!cluster) throw new Error('Cluster não encontrado.');
+            const keywords = document.getElementById('ciKeywords').value.split(',').map(s=>s.trim());
+            const compliance = criarCompliance({
+                autor:'IDEnza System', palavrasChave:keywords, referencias:artigo.referencias||[],
+                nivelMaturidade:'Científico', status:'publicado'
+            });
+            const payload = { codigo_universal:cod, artigo_cientifico:{...artigo, data_geracao:agoraISO()}, compliance };
+            atualizarHashCompliance(payload);
+            await redisSet(cluster, `idenza:sci:${cod}`, payload);
+            card.innerHTML = montarMetadataCardCompliance(cod, `idenza:sci:${cod}`, cluster.name, JSON.stringify(payload).length, payload.compliance);
+            card.style.display = 'flex'; fb.className = 'redis-feedback show success'; fb.textContent = '✅ Artigo científico compilado.';
+        } catch(e) { fb.className = 'redis-feedback show error'; fb.textContent = '❌ ' + e.message; }
+    };
+
+    // ==================== REVISTA (NOVO GERADOR HTML) ====================
+    window.handleRevistaImageUpload = function(input) {
+        const file = input.files[0];
+        if (!file) return;
+        if (!file.type.startsWith('image/')) { alert('Selecione uma imagem válida.'); return; }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('revImageUrl').value = e.target.result;
+            document.getElementById('revImagePreview').src = e.target.result;
+            document.getElementById('revImagePreview').style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    };
+
+    document.getElementById('revImageUrl').addEventListener('input', function() {
+        const val = this.value.trim();
+        const preview = document.getElementById('revImagePreview');
+        if (val) {
+            preview.src = val;
+            preview.style.display = 'block';
+        } else {
+            preview.src = '#';
+            preview.style.display = 'none';
+        }
+    });
+
+    document.getElementById('btnGerarHtmlRevista').addEventListener('click', function() {
+        const eixo = document.getElementById('revEixo').value.trim();
+        const tema = document.getElementById('revTema').value.trim();
+        const titulo = document.getElementById('revTitulo').value.trim();
+        const subtitulo = document.getElementById('revSubtitulo').value.trim();
+        const tags = document.getElementById('revTags').value.trim();
+        const autores = document.getElementById('revAutores').value.trim();
+        const licenca = document.getElementById('revLicenca').value;
+        const imageUrl = document.getElementById('revImageUrl').value.trim();
+        const htmlContent = document.getElementById('revHtmlContent').value.trim();
+
+        if (!titulo) { document.getElementById('revStatusMsg').textContent = '⚠️ Preencha ao menos o título.'; return; }
+
+        const complianceBlock = `
+        <div class="compliance-notice" style="font-size: 0.6rem; color: #5a7d91; margin-top: 1.5rem; padding-top: 0.8rem; border-top: 1px solid rgba(184,134,11,0.2);">
+            <details class="compliance-details" style="font-size: inherit;">
+                <summary class="compliance-summary" style="cursor: pointer; font-size: 0.65rem; font-weight: 500; color: var(--aged-gold); list-style: none; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border: 1px solid rgba(184,134,11,0.2); border-radius: 20px; background: rgba(184,134,11,0.04); transition: all 0.3s ease; user-select: none;">
+                    <i class="fas fa-chevron-down" style="font-size:0.5rem; transition: transform 0.3s ease;"></i> Compliance, Transparência e Responsabilidade Editorial
+                </summary>
+                <div class="compliance-text" style="font-size: 0.6rem; background: rgba(184,134,11,0.04); padding: 0.8rem; border-radius: 8px; max-height: 200px; overflow-y: auto; line-height: 1.5; color: #5a7d91; border: 1px solid rgba(184,134,11,0.12); margin-top: 0.5rem;">
+                    <p style="margin-top:0;">O portal Revista IDEnza possui caráter estritamente informativo, opinativo, educacional e cultural. Todo o conteúdo publicado tem como objetivo promover informação, reflexão, debate público e acesso ao conhecimento, respeitando os princípios constitucionais da liberdade de expressão e da liberdade de imprensa previstos na legislação brasileira.</p>
+                    <p>Os artigos, colunas, análises, entrevistas e conteúdos opinativos refletem exclusivamente a interpretação de seus respectivos autores, não constituindo aconselhamento jurídico, financeiro, médico, psicológico, político, religioso ou profissional de qualquer natureza.</p>
+                    <p>A Revista IDEnza não incentiva práticas ilícitas, discurso de ódio, violência, discriminação, desinformação deliberada, manipulação de informações ou qualquer atividade contrária à legislação vigente.</p>
+                    <p>Nos comprometemos com: o respeito à Constituição Federal Brasileira; o cumprimento do Marco Civil da Internet (Lei nº 12.965/2014); a observância da Lei Geral de Proteção de Dados – LGPD (Lei nº 13.709/2018); o respeito aos direitos autorais e à propriedade intelectual; a proteção da privacidade e dos dados pessoais dos usuários; a transparência editorial e responsabilidade digital.</p>
+                    <p>Conteúdos enviados por colaboradores, colunistas, leitores ou terceiros são de responsabilidade exclusiva de seus respectivos autores.</p>
+                    <p>A Revista IDEnza reserva-se o direito de atualizar, corrigir, editar ou remover conteúdos a qualquer momento para adequação legal, editorial, ética ou técnica.</p>
+                    <p>Ao acessar este portal, o usuário declara estar ciente destes termos e concorda com as políticas de uso, privacidade e responsabilidade editorial da plataforma.</p>
+                </div>
+            </details>
+            <p style="font-size:0.55rem; margin-top:0.3rem;">© ${autores || 'IDEnza System'}, ${new Date().getFullYear()}. Licenciado sob ${licenca}. Publicado originalmente na Revista IDEnza.</p>
+        </div>`;
+
+        const imageHTML = imageUrl ? `<figure style="margin: 1.5rem 0; text-align: center;"><img src="${imageUrl}" alt="${titulo}" style="max-width:100%; height:auto; border-radius:8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"><figcaption style="font-size:0.8rem; color: #b8860b; margin-top:0.5rem;">Imagem do artigo</figcaption></figure>` : '';
+
+        const fullHTML = `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${titulo} — Revista IDEnza</title>
+    <meta name="description" content="${subtitulo || titulo}">
+    <meta name="keywords" content="${tags}">
+    <meta name="author" content="${autores}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cinzel:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root { --petroleum: #0a3147; --aged-gold: #b8860b; --text-muted: #5a7d91; --font-serif: 'Cinzel', serif; --font-body: 'Marcellus', serif; --font-sans: 'Inter', sans-serif; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background:#fafbfc; color:var(--petroleum); font-family:var(--font-sans); line-height:1.6; -webkit-font-smoothing:antialiased; padding: 2rem; max-width: 900px; margin: 0 auto; }
+        .article-header { text-align: center; margin-bottom: 2rem; }
+        .article-header h1 { font-family: var(--font-serif); font-size: 2rem; color: var(--petroleum); margin-bottom: 0.5rem; }
+        .article-header .subtitle { font-size: 1rem; color: var(--text-muted); margin-bottom: 1rem; }
+        .article-header .meta { font-size: 0.7rem; color: var(--text-muted); border-top: 1px solid rgba(184,134,11,0.2); padding-top: 0.8rem; display: flex; gap: 1rem; justify-content: center; }
+        .article-content { font-family: var(--font-body); font-size: 1rem; line-height: 1.7; }
+        .article-content h2 { font-family: var(--font-serif); font-size: 1.4rem; color: var(--petroleum); margin-top: 1.5rem; border-left: 3px solid var(--aged-gold); padding-left: 0.8rem; }
+        .article-content h3 { font-family: var(--font-serif); font-size: 1.1rem; color: var(--petroleum); margin-top: 1.2rem; }
+        .article-content p { margin-bottom: 1rem; text-align: justify; }
+        .article-content blockquote { margin: 1.5rem 0; padding: 1rem 1.5rem; background: rgba(184,134,11,0.04); border-left: 4px solid var(--aged-gold); font-style: italic; }
+        .article-content .highlight { background: rgba(184,134,11,0.15); padding: 0.15rem 0.35rem; border-radius: 3px; }
+        .article-content .callout-box { background: linear-gradient(135deg, rgba(184,134,11,0.07) 0%, rgba(184,134,11,0.03) 100%); border: 2px solid var(--aged-gold); border-radius: 16px; padding: 1.5rem 2rem; margin: 2rem 0; position: relative; }
+        .article-content .callout-box::before { content: '★'; position: absolute; top: -14px; left: 20px; font-size: 1.4rem; color: var(--aged-gold); background: #fff; padding: 0 8px; }
+        footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(184,134,11,0.2); font-size: 0.6rem; color: var(--text-muted); text-align: center; }
+        .compliance-notice { margin-top: 1.5rem; }
+        .compliance-summary { cursor: pointer; font-size: 0.65rem; font-weight: 500; color: var(--aged-gold); list-style: none; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border: 1px solid rgba(184,134,11,0.2); border-radius: 20px; background: rgba(184,134,11,0.04); transition: all 0.3s ease; user-select: none; }
+        .compliance-summary::-webkit-details-marker { display: none; }
+        .compliance-summary i { font-size: 0.5rem; transition: transform 0.3s ease; }
+        details[open] .compliance-summary i { transform: rotate(180deg); }
+        .compliance-text { font-size: 0.6rem; background: rgba(184,134,11,0.04); padding: 0.8rem; border-radius: 8px; max-height: 200px; overflow-y: auto; line-height: 1.5; color: #5a7d91; border: 1px solid rgba(184,134,11,0.12); margin-top: 0.5rem; }
+    </style>
+</head>
+<body>
+    <article>
+        <header class="article-header">
+            <h1>${titulo}</h1>
+            ${subtitulo ? `<p class="subtitle">${subtitulo}</p>` : ''}
+            <div class="meta">
+                <span><i class="far fa-calendar-alt"></i> ${new Date().toLocaleDateString('pt-BR')}</span>
+                <span><i class="fas fa-tag"></i> ${tema}</span>
+                <span><i class="fas fa-user"></i> ${autores}</span>
+            </div>
+        </header>
+        ${imageHTML}
+        <div class="article-content">
+            ${htmlContent}
+        </div>
+        ${complianceBlock}
+        <footer>
+            <p>© ${new Date().getFullYear()} Revista IDEnza. Todos os direitos reservados.</p>
+            <p>${tags.split(',').map(t=>t.trim()).join(' · ')}</p>
+        </footer>
+    </article>
+</body>
+</html>`;
+
+        document.getElementById('revHtmlGerado').value = fullHTML;
+        document.getElementById('revHtmlGerado').style.display = 'block';
+        document.getElementById('btnBaixarRevista').disabled = false;
+        document.getElementById('revStatusMsg').textContent = '✅ HTML gerado com sucesso!';
+    });
+
+    document.getElementById('btnBaixarRevista').addEventListener('click', function() {
+        const html = document.getElementById('revHtmlGerado').value;
+        if (!html) return;
+        const slug = slugify(document.getElementById('revTitulo').value || 'artigo') + '.html';
+        const blob = new Blob([html], { type: 'text/html;charset=UTF-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = slug;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        document.getElementById('revStatusMsg').textContent = '📥 HTML baixado!';
+    });
+
+    document.getElementById('btnSalvarRevistaRedis').addEventListener('click', async function() {
+        const html = document.getElementById('revHtmlGerado').value || document.getElementById('revHtmlContent').value;
+        if (!html) { document.getElementById('revStatusMsg').textContent = '⚠️ Gere o HTML primeiro.'; return; }
+        const eixo = document.getElementById('revEixo').value.trim();
+        const titulo = document.getElementById('revTitulo').value.trim();
+        const cod = `revista.${slugify(eixo||'geral')}.${slugify(titulo).substring(0,40)}.v1`;
+        const cluster = getClusters().find(c=>c.name==='Caixa Preta Bruta');
+        if (!cluster) { document.getElementById('revStatusMsg').textContent = '❌ Cluster não encontrado.'; return; }
+        const payload = {
+            codigo_universal: cod,
+            artigo_revista: {
+                eixo, tema: document.getElementById('revTema').value, titulo,
+                subtitulo: document.getElementById('revSubtitulo').value,
+                palavras_chave: document.getElementById('revTags').value.split(',').map(s=>s.trim()),
+                autores: document.getElementById('revAutores').value,
+                licenca: document.getElementById('revLicenca').value,
+                html_completo: html,
+                data_publicacao: agoraISO()
+            },
+            compliance: criarCompliance({ autor: document.getElementById('revAutores').value, licenca: document.getElementById('revLicenca').value, nivelMaturidade:'Revista', status:'publicado' })
+        };
+        atualizarHashCompliance(payload);
+        const ok = await redisSet(cluster, `idenza:revista:${cod}`, payload);
+        document.getElementById('revStatusMsg').textContent = ok ? `✅ Salvo no Redis: idenza:revista:${cod}` : '❌ Falha ao salvar.';
+    });
+
+    // ==================== GOVERNANÇA ====================
+    window._todosACIs = []; window._selectedACI = null;
+    async function carregarTodosACIs() {
+        const clusters = getClusters(); const todos = [];
+        for (const cluster of clusters) {
+            try {
+                let keys = await redisKeys(cluster, 'aci:*'); const keys2 = await redisKeys(cluster, 'idenza:*');
+                keys = [...new Set([...keys, ...keys2])];
+                for (const key of keys) {
+                    const raw = await redisGet(cluster, key);
+                    if (raw) {
+                        let aci; try { aci = typeof raw === 'string' ? JSON.parse(raw) : raw; } catch { aci = { raw, uid:key, titulo:'Dado bruto' }; }
+                        aci._redisKey = key; aci._clusterName = cluster.name; aci._clusterUrl = cluster.url; aci._cluster = cluster;
+                        todos.push(aci);
+                    }
+                }
+            } catch(e) { console.warn(e); }
+        }
+        return todos;
+    }
+    function renderizarTabelaGovernanca(acis, filtro='') {
+        const tbody = document.getElementById('govTabelaBody'), statusMsg = document.getElementById('govStatusMsg');
+        let filtered = acis;
+        if (filtro.trim()) {
+            const term = filtro.trim().toLowerCase();
+            filtered = acis.filter(a => {
+                const uid = (a.uid || a._redisKey || '').toLowerCase();
+                const titulo = (a.titulo || a.nome || '').toLowerCase();
+                const hash = (a.hash || '').toLowerCase();
+                return uid.includes(term) || titulo.includes(term) || hash.includes(term);
+            });
+        }
+        if (filtered.length === 0) { tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;">Nenhum ACI encontrado.</td></tr>'; statusMsg.textContent = `Total: ${acis.length} ACIs.`; atualizarEstatisticas(acis); return; }
+        let html = ''; const agora = new Date();
+        for (const aci of filtered) {
+            const uid = aci.uid || aci._redisKey || 'N/A';
+            const titulo = aci.titulo || aci.nome || 'Sem título';
+            const versao = aci.version || aci.versao || '1.0.0';
+            const hash = aci.hash || aci.compliance?.hash_conteudo?.substring(0,12) || '---';
+            const cluster = aci._clusterName || 'Desconhecido';
+            let statusClass = 'badge-valid', statusText = 'Válido';
+            const validoAte = aci.valido_ate || aci.alertaRevisao;
+            if (validoAte) {
+                const dataValidade = new Date(validoAte);
+                if (dataValidade < agora) { statusClass = 'badge-expired'; statusText = 'Expirado'; }
+                else if (dataValidade - agora < 30*86400000) { statusClass = 'badge-review'; statusText = 'Revisão'; }
+            }
+            if (aci.conflitos && aci.conflitos.length > 0) { statusClass = 'badge-conflict'; statusText = 'Conflito'; }
+            const temN2 = aci.camadas_n2 ? true : false; const temN3 = aci.nivel_3 ? true : false;
+            let maturidadeHtml = temN3 ? '<span class="badge badge-n3">N3</span>' : temN2 ? '<span class="badge badge-n2">N2</span>' : '<span class="badge" style="background:#aaa;">N1</span>';
+            html += `<tr>
+                <td><code>${uid.substring(0,20)}</code></td><td><strong>${titulo}</strong></td>
+                <td><span class="badge" style="background:#6c757d;">v${versao}</span></td>
+                <td><span class="${statusClass}">${statusText}</span></td><td>${maturidadeHtml}</td>
+                <td><code>${hash}</code></td><td>${cluster}</td>
+                <td><div class="action-buttons" style="display:flex;gap:4px;">
+                    <button class="btn btn-outline btn-sm" onclick="verDetalhes('${uid}')">🔍</button>
+                    <button class="btn btn-data btn-sm" onclick="revalidarACI('${uid}')">🔄</button>
+                    <button class="btn btn-gov btn-sm" onclick="abrirN2ViaGovernanca('${uid}')">⚡N2</button>
+                    ${temN2 ? `<button class="btn btn-n3 btn-sm" onclick="abrirN3ViaGovernanca('${uid}')">🧠N3</button>` : ''}
+                    <button class="btn btn-danger btn-sm" onclick="excluirACI('${uid}')">🗑️</button>
+                </div></td></tr>`;
+        }
+        tbody.innerHTML = html; statusMsg.textContent = `Exibindo ${filtered.length} de ${acis.length} ACIs.`;
+        atualizarEstatisticas(acis);
+    }
+    function atualizarEstatisticas(acis) {
+        const agora = new Date(); let ativos=0, expirados=0, revisao=0, conflitos=0, n2=0, n3=0;
+        for (const aci of acis) {
+            const validoAte = aci.valido_ate || aci.alertaRevisao;
+            if (aci.conflitos && aci.conflitos.length > 0) { conflitos++; continue; }
+            if (validoAte) {
+                const dataValidade = new Date(validoAte);
+                if (dataValidade < agora) expirados++;
+                else if (dataValidade - agora < 30*86400000) revisao++;
+                else ativos++;
+            } else ativos++;
+            if (aci.camadas_n2) n2++; if (aci.nivel_3) n3++;
+        }
+        document.getElementById('govTotalAtivos').textContent = ativos;
+        document.getElementById('govTotalExpirados').textContent = expirados;
+        document.getElementById('govTotalRevisao').textContent = revisao;
+        document.getElementById('govTotalConflitos').textContent = conflitos;
+        document.getElementById('govTotalN2').textContent = n2;
+        document.getElementById('govTotalN3').textContent = n3;
+        document.getElementById('govTotalTotal').textContent = acis.length;
+    }
+
+    window.verDetalhes = function(uid) {
+        const aci = window._todosACIs.find(a=>(a.uid||a._redisKey)===uid); if(!aci) return;
+        window._selectedACI = aci;
+        document.getElementById('govModalTitle').textContent = `Detalhes: ${aci.titulo||aci.nome||uid}`;
+        document.getElementById('govModalContent').textContent = JSON.stringify(aci, null, 2);
+        document.getElementById('govModalOverlay').classList.add('open');
+    };
+    window.revalidarACI = async function(uid) {
+        const aci = window._todosACIs.find(a=>(a.uid||a._redisKey)===uid); if(!aci) return;
+        const novaData = new Date(); novaData.setDate(novaData.getDate()+90);
+        aci.valido_ate = novaData.toISOString(); aci.alertaRevisao = novaData.toISOString();
+        if(aci.compliance) { aci.compliance.status = 'revalidado'; aci.compliance.data_modificacao = agoraISO(); }
+        const cluster = getClusters().find(c=>c.name===aci._clusterName);
+        if(cluster) { await redisSet(cluster, aci._redisKey, aci); carregarGovernanca(); }
+    };
+    window.excluirACI = async function(uid) {
+        if(!confirm(`Excluir ACI ${uid}?`)) return;
+        const aci = window._todosACIs.find(a=>(a.uid||a._redisKey)===uid); if(!aci) return;
+        const cluster = getClusters().find(c=>c.name===aci._clusterName);
+        if(cluster) { await redisDel(cluster, aci._redisKey); carregarGovernanca(); }
+    };
+    window.abrirN2ViaGovernanca = function(uid) {
+        const aci = window._todosACIs.find(a=>(a.uid||a._redisKey)===uid); if(!aci) return;
+        document.getElementById('nivel2Chave').value = aci._redisKey;
+        document.getElementById('nivel2JsonNivel1').value = JSON.stringify(aci, null, 2);
+        switchTab('n2');
+    };
+    window.abrirN3ViaGovernanca = function(uid) {
+        const aci = window._todosACIs.find(a=>(a.uid||a._redisKey)===uid); if(!aci) return;
+        document.getElementById('nivel3Chave').value = aci._redisKey;
+        document.getElementById('nivel3JsonDocumento').value = JSON.stringify(aci, null, 2);
+        switchTab('n3');
+    };
+
+    async function renderizarRegistry() {
+        const container = document.getElementById('govRedisRegistry'); const clusters = getClusters(); let html = '';
+        for (const cluster of clusters) {
+            let status='disconnected', dotClass='off', statusText='Desconectado';
+            try { await redisFetch(cluster,'ping'); status='connected'; dotClass='on'; statusText='Conectado'; } catch {}
+            let dbSize='?'; try { const size = await redisFetch(cluster,'dbsize'); dbSize = size||'0'; } catch {}
+            const isOficial = cluster.name === 'Caixa Preta Oficial';
+            html += `<div class="redis-slot-card ${status}" style="${isOficial ? 'border-left:4px solid var(--reestruturar-accent);' : ''}">
+                <div><strong>${cluster.name}</strong> <span class="redis-slot-dot ${dotClass}"></span></div>
+                <div style="font-size:0.6rem;">${cluster.url.replace(/^https?:\/\//,'')} | Chaves: ${dbSize}</div>
+                ${isOficial ? '<span class="badge badge-principal">PRINCIPAL</span>' : ''}
+                ${!cluster.fixed?`<button class="btn btn-outline btn-sm" onclick="removerCluster('${cluster.name}')">🗑️</button>`:''}
+            </div>`;
+        }
+        container.innerHTML = html;
+    }
+    window.removerCluster = function(nome) {
+        if(!confirm(`Remover cluster "${nome}"?`)) return;
+        const clusters = getClusters(); const atualizados = clusters.filter(c=>c.name!==nome);
+        saveClusters(atualizados.filter(c=>!c.fixed)); carregarGovernanca();
+    };
+
+    async function carregarGovernanca() {
+        document.getElementById('govStatusMsg').textContent = '⏳ Carregando ACIs...';
+        try {
+            const acis = await carregarTodosACIs(); window._todosACIs = acis;
+            renderizarTabelaGovernanca(acis, document.getElementById('govSearchInput').value);
+            await renderizarRegistry();
+            document.getElementById('govStatusMsg').textContent = `✅ ${acis.length} ACIs carregados.`;
+        } catch(e) { document.getElementById('govStatusMsg').textContent = `❌ Erro: ${e.message}`; }
+    }
+
+    document.getElementById('govSearchBtn').onclick = () => renderizarTabelaGovernanca(window._todosACIs, document.getElementById('govSearchInput').value);
+    document.getElementById('govRefreshBtn').onclick = carregarGovernanca;
+    document.getElementById('govAddAciBtn').onclick = () => {
+        const clusters = getClusters(); const select = document.getElementById('novoAciCluster'); select.innerHTML = '';
+        clusters.forEach(c=>{ const opt = document.createElement('option'); opt.value=c.name; opt.textContent=c.name; select.appendChild(opt); });
+        document.getElementById('govNovoAciOverlay').classList.add('open');
+    };
+    document.getElementById('novoAciFechar').onclick = () => document.getElementById('govNovoAciOverlay').classList.remove('open');
+    document.getElementById('novoAciSalvar').onclick = async () => {
+        const uid = document.getElementById('novoAciUid').value.trim() || 'aci_'+Date.now().toString(36);
+        const titulo = document.getElementById('novoAciTitulo').value.trim() || 'Novo ACI';
+        const versao = document.getElementById('novoAciVersao').value.trim() || '1.0.0';
+        let conteudo; try { conteudo = JSON.parse(document.getElementById('novoAciConteudo').value); } catch { document.getElementById('novoAciStatus').textContent='❌ JSON inválido.'; return; }
+        const clusterName = document.getElementById('novoAciCluster').value;
+        const cluster = getClusters().find(c=>c.name===clusterName); if(!cluster) { document.getElementById('novoAciStatus').textContent='❌ Cluster não encontrado.'; return; }
+        const compliance = criarCompliance({ autor:'IDEnza Admin', nivelMaturidade:'ACI', status:'criado' });
+        const aci = { uid, titulo, versao, ...conteudo, compliance, valido_ate: new Date(Date.now()+90*86400000).toISOString() };
+        atualizarHashCompliance(aci);
+        const result = await redisSet(cluster, `aci:${uid}`, aci);
+        if(result) { document.getElementById('govNovoAciOverlay').classList.remove('open'); carregarGovernanca(); }
+        else document.getElementById('novoAciStatus').textContent = '❌ Erro ao salvar.';
+    };
+    document.getElementById('govAddClusterBtn').onclick = () => document.getElementById('govAddClusterOverlay').classList.add('open');
+    document.getElementById('novoClusterFechar').onclick = () => document.getElementById('govAddClusterOverlay').classList.remove('open');
+    document.getElementById('novoClusterSalvar').onclick = () => {
+        const nome = document.getElementById('novoClusterNome').value.trim();
+        const url = document.getElementById('novoClusterUrl').value.trim();
+        const token = document.getElementById('novoClusterToken').value.trim();
+        if(!nome||!url||!token) { document.getElementById('novoClusterStatus').textContent='⚠️ Preencha todos os campos.'; return; }
+        const clusters = getClusters(); if(clusters.find(c=>c.name===nome)) { document.getElementById('novoClusterStatus').textContent='⚠️ Nome já existe.'; return; }
+        const novo = { name:nome, url, token, color:'#888', fixed:false };
+        saveClusters([...clusters.filter(c=>!c.fixed), novo]);
+        document.getElementById('govAddClusterOverlay').classList.remove('open'); carregarGovernanca();
+    };
+    document.getElementById('govModalFechar').onclick = () => document.getElementById('govModalOverlay').classList.remove('open');
+    document.getElementById('govModalRevalidar').onclick = () => { if(window._selectedACI) { revalidarACI(window._selectedACI.uid||window._selectedACI._redisKey); document.getElementById('govModalOverlay').classList.remove('open'); } };
+    document.getElementById('govModalRegenerar').onclick = async () => { if(window._selectedACI) { window._selectedACI.requires_regeneration=true; const cluster = getClusters().find(c=>c.name===window._selectedACI._clusterName); if(cluster) { await redisSet(cluster, window._selectedACI._redisKey, window._selectedACI); carregarGovernanca(); } document.getElementById('govModalOverlay').classList.remove('open'); } };
+    document.getElementById('govModalExcluir').onclick = () => { if(window._selectedACI) { excluirACI(window._selectedACI.uid||window._selectedACI._redisKey); document.getElementById('govModalOverlay').classList.remove('open'); } };
+    document.querySelectorAll('.slot-modal-overlay').forEach(overlay => { overlay.addEventListener('click', (e) => { if(e.target===overlay) overlay.classList.remove('open'); }); });
+
+    // ==================== RECICLAGEM ====================
+    function preencherSelectReciclagem() {
+        const clusters = getClusters();
+        ['recClusterSource','recClusterTarget'].forEach(id=>{ const sel=document.getElementById(id); if(sel) sel.innerHTML=clusters.map(c=>`<option>${c.name}</option>`).join(''); });
+    }
+    document.getElementById('btnScanReciclagem').onclick = async () => {
+        const src = document.getElementById('recClusterSource').value, tgt = document.getElementById('recClusterTarget').value;
+        const source = getClusters().find(c=>c.name===src), target = getClusters().find(c=>c.name===tgt);
+        if(!source||!target) return;
+        const srcKeys = await redisKeys(source, 'aci:*'); const tgtKeys = await redisKeys(target, 'aci:*');
+        const novos = srcKeys.filter(k=>!tgtKeys.includes(k));
+        document.getElementById('novosTemasBody').innerHTML = novos.map(k=>`<tr><td><input type="checkbox" class="check-novo" data-key="${k}"></td><td>${k}</td><td>Novo</td></tr>`).join('');
+        document.getElementById('btnIntegrarSelecionados').disabled = novos.length===0;
+        document.getElementById('selecionarTodos').onclick = (e) => document.querySelectorAll('.check-novo').forEach(cb=>cb.checked=e.target.checked);
+    };
+    document.getElementById('btnIntegrarSelecionados').onclick = async () => {
+        const checkboxes = document.querySelectorAll('.check-novo:checked');
+        const target = getClusters().find(c=>c.name===document.getElementById('recClusterTarget').value);
+        let count=0;
+        for(const cb of checkboxes) {
+            const key = cb.dataset.key;
+            const raw = await redisGet(getClusters().find(c=>c.name===document.getElementById('recClusterSource').value), key);
+            if(raw) { await redisSet(target, key, typeof raw==='string'?JSON.parse(raw):raw); count++; }
+        }
+        document.getElementById('recFeedback').className = 'redis-feedback show success';
+        document.getElementById('recFeedback').textContent = `✅ ${count} integrados.`;
+    };
+
+    // ==================== REESTRUTURAR ====================
+    function atualizarSelectReestruturar() {
+        const select = document.getElementById('reestruturarClusterOrigem');
+        if (!select) return;
+        const clusters = getClusters().filter(c => c.name !== 'Caixa Preta Oficial');
+        select.innerHTML = '<option value="">— Manual (cole JSON abaixo) —</option>';
+        const bruta = clusters.find(c => c.name === 'Caixa Preta Bruta');
+        if (bruta) {
+            const opt = document.createElement('option'); opt.value = bruta.name; opt.textContent = bruta.name + ' (origem padrão)';
+            select.appendChild(opt);
+        }
+        clusters.filter(c => c.name !== 'Caixa Preta Bruta').forEach(c => {
+            const opt = document.createElement('option'); opt.value = c.name; opt.textContent = c.name;
+            select.appendChild(opt);
+        });
+    }
+    const reestruturarClusterOrigem = document.getElementById('reestruturarClusterOrigem');
+    const reestruturarChave = document.getElementById('reestruturarChave');
+    const reestruturarJson = document.getElementById('reestruturarJson');
+    const btnAnalisarReestruturar = document.getElementById('btnAnalisarReestruturar');
+    const reestruturarDiagnostico = document.getElementById('reestruturarDiagnostico');
+    const reestruturarResultado = document.getElementById('reestruturarResultado');
+    const btnEnviarCaixaVerde = document.getElementById('btnEnviarParaCaixaVerde');
+    const reestruturarStatus = document.getElementById('reestruturarStatus');
+
+    if (reestruturarClusterOrigem) {
+        reestruturarClusterOrigem.addEventListener('change', async () => {
+            const clusterName = reestruturarClusterOrigem.value;
+            const chave = reestruturarChave.value.trim();
+            if (!clusterName || !chave) return;
+            const cluster = getClusters().find(c => c.name === clusterName);
+            if (!cluster) return;
+            reestruturarStatus.textContent = '⏳ Buscando conteúdo...';
+            try {
+                const raw = await redisGet(cluster, chave);
+                if (raw) { reestruturarJson.value = JSON.stringify(raw, null, 2); reestruturarStatus.textContent = '✅ Conteúdo carregado.'; }
+                else reestruturarStatus.textContent = '❌ Chave não encontrada.';
+            } catch (e) { reestruturarStatus.textContent = '❌ Erro ao buscar.'; }
+        });
+    }
+    function analisarConteudo(jsonObj) {
+        const temCamadas = Array.isArray(jsonObj.camadas);
+        const temCamadasN2 = Array.isArray(jsonObj.camadas_n2);
+        const temNivel3 = jsonObj.nivel_3 && typeof jsonObj.nivel_3 === 'object';
+        const temArtigoCientifico = jsonObj.artigo_cientifico && typeof jsonObj.artigo_cientifico === 'object';
+        const temArtigoRevista = jsonObj.artigo_revista && typeof jsonObj.artigo_revista === 'object';
+        if (temArtigoRevista) return { nivel: 'Revista', descricao: 'Artigo de revista detectado.' };
+        if (temArtigoCientifico) return { nivel: 'Científico', descricao: 'Artigo científico detectado.' };
+        if (temNivel3 && temCamadasN2 && temCamadas) return { nivel: 'N3', descricao: 'Documento completo com N1, N2 e N3.' };
+        if (temCamadasN2 && temCamadas) return { nivel: 'N2', descricao: 'Possui camadas N1 e N2.' };
+        if (temCamadas && jsonObj.camadas.length === 7) return { nivel: 'N1', descricao: 'Possui 7 camadas típicas de N1.' };
+        if (temCamadas) return { nivel: 'N1 (parcial)', descricao: 'Possui camadas, mas não exatamente 7.' };
+        return { nivel: 'Desconhecido', descricao: 'Formato não reconhecido — template N1 será criado a partir dos metadados.' };
+    }
+    if (btnAnalisarReestruturar) {
+        btnAnalisarReestruturar.addEventListener('click', () => {
+            const texto = reestruturarJson.value.trim();
+            if (!texto) { alert('Cole o JSON para análise.'); return; }
+            let json;
+            try { json = JSON.parse(texto); } catch (e) {
+                reestruturarResultado.innerHTML = '<span style="color:red;">JSON inválido.</span>';
+                reestruturarDiagnostico.style.display = 'block'; btnEnviarCaixaVerde.disabled = true; return;
+            }
+            const analise = analisarConteudo(json);
+            reestruturarResultado.innerHTML = `
+                <p><strong>Nível detectado:</strong> <span style="color:var(--reestruturar-accent);">${analise.nivel}</span></p>
+                <p><strong>Descrição:</strong> ${analise.descricao}</p>
+                <p><strong>Título/Identificador:</strong> ${json.codigo_universal || json.uid || 'N/A'}</p>
+            `;
+            reestruturarDiagnostico.style.display = 'block'; btnEnviarCaixaVerde.disabled = false;
+            btnEnviarCaixaVerde._jsonAnalisado = json; btnEnviarCaixaVerde._analise = analise;
+        });
+    }
+    if (btnEnviarCaixaVerde) {
+        btnEnviarCaixaVerde.addEventListener('click', async () => {
+            const jsonOriginal = btnEnviarCaixaVerde._jsonAnalisado;
+            const analise = btnEnviarCaixaVerde._analise;
+            if (!jsonOriginal) return;
+            const clusterOficial = getClusters().find(c => c.name === 'Caixa Preta Oficial');
+            if (!clusterOficial) { reestruturarStatus.textContent = '❌ Cluster Caixa Preta Oficial não encontrado.'; return; }
+            const codigoUniversal = jsonOriginal.codigo_universal || `reestruturado.${slugify(analise.nivel)}.${Date.now().toString(36)}`;
+            const chaveRedis = `idenza:reestruturado:${codigoUniversal}`;
+            let payload;
+            if (analise.nivel === 'Desconhecido') {
+                const palavrasChave = jsonOriginal.indexacao?.palavras_chave || (jsonOriginal.tags ? jsonOriginal.tags.split(',').map(s=>s.trim()) : []);
+                const dominio = jsonOriginal.area || jsonOriginal.dominio || '';
+                const topico = jsonOriginal.topico || jsonOriginal.titulo || codigoUniversal;
+                const nomesCamadas = ['Essência','Teorias e Fundamentos','Estrutura e Processos','Aplicação Prática','Métodos e Ferramentas','Uso Cotidiano e Inovação','Curiosidades e Marcos Históricos'];
+                const camadasTemplate = nomesCamadas.map((nome, i) => ({ nivel:i+1, nome, descricao:'', subtemas:[], conceitos_chave:[], fontes:[] }));
+                payload = {
+                    codigo_universal: codigoUniversal, camadas: camadasTemplate,
+                    compliance: criarCompliance({ autor:'IDEnza Reestruturador', palavrasChave, referencias:[], nivelMaturidade:'N1 (template)', status:'reestruturado_pendente' }),
+                    metadados: { dominio, topico, palavrasChave, origem:'reestruturado a partir de formato desconhecido' }
+                };
+            } else if (analise.nivel.includes('N1') || analise.nivel.includes('N2') || analise.nivel.includes('N3')) {
+                payload = {
+                    codigo_universal: codigoUniversal, camadas: jsonOriginal.camadas || [], camadas_n2: jsonOriginal.camadas_n2 || null, nivel_3: jsonOriginal.nivel_3 || null,
+                    compliance: criarCompliance({ autor:jsonOriginal.compliance?.autor||'IDEnza Reestruturador', palavrasChave:jsonOriginal.indexacao?.palavras_chave||[], referencias:(jsonOriginal.camadas||[]).flatMap(c=>c.fontes||[]), nivelMaturidade:analise.nivel, status:'reestruturado' }),
+                    indexacao: jsonOriginal.indexacao || {}, origem: { ...(jsonOriginal.origem||{}), reestruturado_em:agoraISO() }
+                };
+            } else if (analise.nivel === 'Científico') {
+                payload = {
+                    codigo_universal: codigoUniversal, artigo_cientifico: jsonOriginal.artigo_cientifico,
+                    compliance: criarCompliance({ autor:jsonOriginal.compliance?.autor||'IDEnza Reestruturador', palavrasChave:jsonOriginal.artigo_cientifico?.palavras_chave||[], referencias:jsonOriginal.artigo_cientifico?.referencias||[], nivelMaturidade:'Científico', status:'reestruturado' })
+                };
+            } else if (analise.nivel === 'Revista') {
+                payload = {
+                    codigo_universal: codigoUniversal, artigo_revista: jsonOriginal.artigo_revista,
+                    compliance: criarCompliance({ autor:jsonOriginal.artigo_revista?.autores||'IDEnza Reestruturador', licenca:jsonOriginal.artigo_revista?.licenca||'CC BY 4.0', palavrasChave:jsonOriginal.artigo_revista?.palavras_chave||[], referencias:jsonOriginal.artigo_revista?.referencias||[], nivelMaturidade:'Revista', status:'reestruturado' })
+                };
+            }
+            atualizarHashCompliance(payload);
+            reestruturarStatus.textContent = '⏳ Enviando para Caixa Preta Oficial...';
+            try {
+                const ok = await redisSet(clusterOficial, chaveRedis, payload);
+                reestruturarStatus.textContent = ok ? `✅ Salvo! Chave: ${chaveRedis}` : '❌ Falha ao salvar.';
+            } catch (e) { reestruturarStatus.textContent = '❌ Erro: ' + e.message; }
+        });
+    }
+
+    // Inicialização
+    carregarGovernanca();
+    renderTree();
+    console.log('✅ IDEnza — Revista IDEnza pronta para gerar artigos HTML completos.');
+})();
+</script>
+</body>
+</html>
